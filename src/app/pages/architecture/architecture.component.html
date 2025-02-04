@@ -1,120 +1,131 @@
-<p>architecture works!</p>
 <h2>Architectures possibles</h2>
 <p>Voici une vue d'ensemble des différentes architectures utilisées en génie logiciel. Chaque architecture a ses forces et ses faiblesses. Sélectionnez celle qui convient le mieux en fonction des besoins de votre projet.</p>
 
 <h3>Types d'architectures</h3>
 
-<!-- Architecture : Monolithique -->
-<section>
-  <h4>1. Architecture Monolithique</h4>
-  <p>
-    Une application monolithique est une application unifiée, dont tous les modules sont regroupés dans un unique back-end.
-    Elle est simple à développer, mais peut devenir complexe à maintenir lorsqu'elle grossit.
-  </p>
-  <ul>
-    <li><strong>Avantages :</strong></li>
-    <ul>
-      <li>Simple à développer et déployer.</li>
-      <li>Solutions économiques pour les petites applications.</li>
-    </ul>
-    <li><strong>Inconvénients :</strong></li>
-    <ul>
-      <li>Difficulté de mise à l'échelle (scalabilité).</li>
-      <li>Les déploiements doivent être faits en "bloc" même pour une petite modification.</li>
-    </ul>
-  </ul>
-</section>
+<mat-accordion>
+  <!-- Architecture : Monolithique -->
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>1. Architecture Monolithique</mat-panel-title>
+    </mat-expansion-panel-header>
+    <p>
+      Une application monolithique est une application unifiée, dont tous les modules sont regroupés dans un unique back-end.
+      Elle est simple à développer, mais peut devenir complexe à maintenir lorsqu'elle grossit.
+    </p>
+    <mat-card>
+      <mat-card-title>Avantages</mat-card-title>
+      <mat-list>
+        <mat-list-item>Simple à développer et déployer.</mat-list-item>
+        <mat-list-item>Solutions économiques pour les petites applications.</mat-list-item>
+      </mat-list>
+    </mat-card>
+    <mat-card>
+      <mat-card-title>Inconvénients</mat-card-title>
+      <mat-list>
+        <mat-list-item>Difficulté de mise à l'échelle (scalabilité).</mat-list-item>
+        <mat-list-item>Les déploiements doivent être faits en "bloc" même pour une petite modification.</mat-list-item>
+      </mat-list>
+    </mat-card>
+  </mat-expansion-panel>
 
-<hr />
+  <!-- Architecture : Microservices -->
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>2. Architecture Microservices</mat-panel-title>
+    </mat-expansion-panel-header>
+    <p>
+      Les microservices divisent une application en plusieurs services indépendants qui peuvent être développés, déployés et mis à l'échelle séparément.
+    </p>
+    <mat-card>
+      <mat-card-title>Avantages</mat-card-title>
+      <mat-list>
+        <mat-list-item>Facilité d'évolutivité : chaque service peut être mis à l'échelle indépendamment.</mat-list-item>
+        <mat-list-item>Amélioration de la maintenabilité en séparant les responsabilités.</mat-list-item>
+      </mat-list>
+    </mat-card>
+    <mat-card>
+      <mat-card-title>Inconvénients</mat-card-title>
+      <mat-list>
+        <mat-list-item>Complexité accrue : nécessite un management efficace de communication entre services.</mat-list-item>
+        <mat-list-item>Augmentation des coûts d'infrastructure (multiples instances).</mat-list-item>
+      </mat-list>
+    </mat-card>
+  </mat-expansion-panel>
 
-<!-- Architecture : Microservices -->
-<section>
-  <h4>2. Architecture Microservices</h4>
-  <p>
-    Les microservices divisent une application en plusieurs services indépendants qui peuvent être développés, déployés et mis à l'échelle séparément.
-  </p>
-  <ul>
-    <li><strong>Avantages :</strong></li>
-    <ul>
-      <li>Facilité d'évolutivité : chaque service peut être mis à l'échelle indépendamment.</li>
-      <li>Amélioration de la maintenabilité en séparant les responsabilités.</li>
-    </ul>
-    <li><strong>Inconvénients :</strong></li>
-    <ul>
-      <li>Complexité accrue : nécessite un management efficace de communication entre services.</li>
-      <li>Augmentation des coûts d'infrastructure (multiples instances).</li>
-    </ul>
-  </ul>
-</section>
+  <!-- Architecture : Serverless -->
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>3. Architecture Serverless</mat-panel-title>
+    </mat-expansion-panel-header>
+    <p>
+      Une architecture "serverless" signifie que le développeur ne gère plus directement les serveurs ou les instances. Les tâches sont exécutées sur une infrastructure cloud entièrement gérée par des fournisseurs comme AWS, Google Cloud, ou Azure.
+    </p>
+    <mat-card>
+      <mat-card-title>Avantages</mat-card-title>
+      <mat-list>
+        <mat-list-item>Pas de gestion de serveur/machine.</mat-list-item>
+        <mat-list-item>Facturation à l'usage (économique pour des charges de travail variables).</mat-list-item>
+      </mat-list>
+    </mat-card>
+    <mat-card>
+      <mat-card-title>Inconvénients</mat-card-title>
+      <mat-list>
+        <mat-list-item>Performance parfois limitée par le fournisseur de service.</mat-list-item>
+        <mat-list-item>Dépendance forte vis-à-vis d'un fournisseur cloud.</mat-list-item>
+      </mat-list>
+    </mat-card>
+  </mat-expansion-panel>
 
-<hr />
+  <!-- Architecture : Hexagonale -->
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>4. Architecture Hexagonale</mat-panel-title>
+    </mat-expansion-panel-header>
+    <p>
+      L'architecture hexagonale (ou architecture en ports et adaptateurs) organise une application de manière à séparer son cœur métier de ses dépendances externes comme les bases de données, services externes ou interfaces utilisateur.
+    </p>
+    <mat-card>
+      <mat-card-title>Avantages</mat-card-title>
+      <mat-list>
+        <mat-list-item>Augmente la testabilité du code grâce à l'isolation des dépendances.</mat-list-item>
+        <mat-list-item>Facilite les changements technologiques en limitant les dépendances spécifiques.</mat-list-item>
+      </mat-list>
+    </mat-card>
+    <mat-card>
+      <mat-card-title>Inconvénients</mat-card-title>
+      <mat-list>
+        <mat-list-item>Plus difficile à mettre en place pour les petites applications.</mat-list-item>
+        <mat-list-item>Peut augmenter la complexité du projet au démarrage.</mat-list-item>
+      </mat-list>
+    </mat-card>
+  </mat-expansion-panel>
 
-<!-- Architecture : Serverless -->
-<section>
-  <h4>3. Architecture Serverless</h4>
-  <p>
-    Une architecture "serverless" signifie que le développeur ne gère plus directement les serveurs ou les instances. Les tâches sont exécutées sur une infrastructure cloud entièrement gérée par des fournisseurs comme AWS, Google Cloud, ou Azure.
-  </p>
-  <ul>
-    <li><strong>Avantages :</strong></li>
-    <ul>
-      <li>Pas de gestion de serveur/machine.</li>
-      <li>Facturation à l'usage (économique pour des charges de travail variables).</li>
-    </ul>
-    <li><strong>Inconvénients :</strong></li>
-    <ul>
-      <li>Performance parfois limitée par le fournisseur de service.</li>
-      <li>Dépendance forte vis-à-vis d'un fournisseur cloud.</li>
-    </ul>
-  </ul>
-</section>
-
-<hr />
-
-<!-- Architecture : Hexagonale -->
-<section>
-  <h4>4. Architecture Hexagonale</h4>
-  <p>
-    L'architecture hexagonale (ou architecture en ports et adaptateurs) organise une application de manière à séparer son cœur métier de ses dépendances externes comme les bases de données, services externes ou interfaces utilisateur.
-  </p>
-  <ul>
-    <li><strong>Avantages :</strong></li>
-    <ul>
-      <li>Augmente la testabilité du code grâce à l'isolation des dépendances.</li>
-      <li>Facilite les changements technologiques en limitant les dépendances spécifiques.</li>
-    </ul>
-    <li><strong>Inconvénients :</strong></li>
-    <ul>
-      <li>Plus difficile à mettre en place pour les petites applications.</li>
-      <li>Peut augmenter la complexité du projet au démarrage.</li>
-    </ul>
-  </ul>
-</section>
-
-<hr />
-
-<!-- Architecture : Event-Driven -->
-<section>
-  <h4>5. Architecture Event-Driven</h4>
-  <p>
-    Une architecture orientée événements repose sur l'échange de messages entre composants indépendants via des événements asynchrones. Cette architecture est idéale pour les systèmes nécessitant une haute disponibilité et une communication asynchrone.
-  </p>
-  <p><strong>Exemple applicable à Spring :</strong> Utiliser <code>Spring Cloud Stream</code> pour connecter des producteurs et consommateurs d'événements avec des middlewares tels que Apache Kafka ou RabbitMQ.</p>
-  <ul>
-    <li><strong>Avantages :</strong></li>
-    <ul>
-      <li>Scalabilité accrue grâce à une communication loosely-coupled.</li>
-      <li>Les composants s'exécutent de manière indépendante, ce qui augmente la résilience.</li>
-    </ul>
-    <li><strong>Inconvénients :</strong></li>
-    <ul>
-      <li>Augmente la complexité de gestion des messages et des erreurs.</li>
-      <li>Nécessite un middleware (comme Kafka ou RabbitMQ) et une bonne compréhension des concepts d'asynchronisme.</li>
-    </ul>
-  </ul>
-</section>
-
-<hr />
+  <!-- Architecture : Event-Driven -->
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>5. Architecture Event-Driven</mat-panel-title>
+    </mat-expansion-panel-header>
+    <p>
+      Une architecture orientée événements repose sur l'échange de messages entre composants indépendants via des événements asynchrones. Cette architecture est idéale pour les systèmes nécessitant une haute disponibilité et une communication asynchrone.
+    </p>
+    <p><strong>Exemple applicable à Spring :</strong> Utiliser <code>Spring Cloud Stream</code> pour connecter des producteurs et consommateurs d'événements avec des middlewares tels que Apache Kafka ou RabbitMQ.</p>
+    <mat-card>
+      <mat-card-title>Avantages</mat-card-title>
+      <mat-list>
+        <mat-list-item>Scalabilité accrue grâce à une communication loosely-coupled.</mat-list-item>
+        <mat-list-item>Les composants s'exécutent de manière indépendante, ce qui augmente la résilience.</mat-list-item>
+      </mat-list>
+    </mat-card>
+    <mat-card>
+      <mat-card-title>Inconvénients</mat-card-title>
+      <mat-list>
+        <mat-list-item>Augmente la complexité de gestion des messages et des erreurs.</mat-list-item>
+        <mat-list-item>Nécessite un middleware (comme Kafka ou RabbitMQ) et une bonne compréhension des concepts d'asynchronisme.</mat-list-item>
+      </mat-list>
+    </mat-card>
+  </mat-expansion-panel>
+</mat-accordion>
 
 <h3>Conclusion</h3>
 <p>Le choix d'une architecture dépend fortement des besoins du projet, des contraintes budgétaires et de scalabilité. Avec de nombreuses options disponibles, il est important de bien analyser les avantages et inconvénients avant de s'engager dans une architecture donnée.</p>
