@@ -1,0 +1,29 @@
+/* Hauteur totale de l'application */
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: Roboto, Arial, sans-serif;
+}
+
+.app-container {
+  height: 100%;
+}
+
+.mat-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.content {
+  margin: 20px;
+}
+
+.active {
+  font-weight: bold;
+  color: #1976d2;
+}
+
+mat-sidenav {
+  width: 250px;
+}

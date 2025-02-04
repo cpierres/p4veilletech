@@ -1,0 +1,75 @@
+<p>architecture works!</p>
+<h2>Architectures possibles</h2>
+<p>Voici une vue d'ensemble des différentes architectures utilisées en génie logiciel. Chaque architecture a ses forces et ses faiblesses. Sélectionnez celle qui convient le mieux en fonction des besoins de votre projet.</p>
+
+<h3>Types d'architectures</h3>
+<!-- Architecture : Monolithique -->
+<section>
+  <h4>1. Architecture Monolithique</h4>
+  <p>
+    Une application monolithique est une application unifiée, dont tous les modules sont regroupés dans un unique back-end.
+    Elle est simple à développer, mais peut devenir complexe à maintenir lorsqu'elle grossit.
+  </p>
+  <ul>
+    <li><strong>Avantages :</strong></li>
+    <ul>
+      <li>Simple à développer et déployer.</li>
+      <li>Solutions économiques pour les petites applications.</li>
+    </ul>
+    <li><strong>Inconvénients :</strong></li>
+    <ul>
+      <li>Difficulté de mise à l'échelle (scalabilité).</li>
+      <li>Les déploiements doivent être faits en "bloc" même pour une petite modification.</li>
+    </ul>
+  </ul>
+</section>
+
+<hr />
+
+<!-- Architecture : Microservices -->
+<section>
+  <h4>2. Architecture Microservices</h4>
+  <p>
+    Les microservices divisent une application en plusieurs services indépendants qui peuvent être développés, déployés et mis à l'échelle séparément.
+  </p>
+  <ul>
+    <li><strong>Avantages :</strong></li>
+    <ul>
+      <li>Facilité d'évolutivité : chaque service peut être mis à l'échelle indépendamment.</li>
+      <li>Amélioration de la maintenabilité en séparant les responsabilités.</li>
+    </ul>
+    <li><strong>Inconvénients :</strong></li>
+    <ul>
+      <li>Complexité accrue : nécessite un management efficace de communication entre services.</li>
+      <li>Augmentation des coûts d'infrastructure (multiples instances).</li>
+    </ul>
+  </ul>
+</section>
+
+<hr />
+
+<!-- Architecture : Serverless -->
+<section>
+  <h4>3. Architecture Serverless</h4>
+  <p>
+    Une architecture "serverless" signifie que le développeur ne gère plus directement les serveurs ou les instances. Les tâches sont exécutées sur une infrastructure cloud entièrement gérée par des fournisseurs comme AWS, Google Cloud, ou Azure.
+  </p>
+  <ul>
+    <li><strong>Avantages :</strong></li>
+    <ul>
+      <li>Pas de gestion de serveur/machine.</li>
+      <li>Facturation à l'usage (économique pour des charges de travail variables).</li>
+    </ul>
+    <li><strong>Inconvénients :</strong></li>
+    <ul>
+      <li>Performance parfois limitée par le fournisseur de service.</li>
+      <li>Dépendance forte vis-à-vis d'un fournisseur cloud.</li>
+    </ul>
+  </ul>
+</section>
+
+<hr />
+
+<h3>Conclusion</h3>
+<p>Le choix d'une architecture dépend fortement des besoins du projet, des contraintes budgétaires et de scalabilité. Une petite application pourrait bénéficier d'une architecture monolithique, tandis que des architectes privilégieraient les microservices ou serverless pour des projets complexes ou à grande échelle.</p>
+
