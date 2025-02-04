@@ -3,6 +3,7 @@
 <p>Voici une vue d'ensemble des différentes architectures utilisées en génie logiciel. Chaque architecture a ses forces et ses faiblesses. Sélectionnez celle qui convient le mieux en fonction des besoins de votre projet.</p>
 
 <h3>Types d'architectures</h3>
+
 <!-- Architecture : Monolithique -->
 <section>
   <h4>1. Architecture Monolithique</h4>
@@ -70,6 +71,50 @@
 
 <hr />
 
-<h3>Conclusion</h3>
-<p>Le choix d'une architecture dépend fortement des besoins du projet, des contraintes budgétaires et de scalabilité. Une petite application pourrait bénéficier d'une architecture monolithique, tandis que des architectes privilégieraient les microservices ou serverless pour des projets complexes ou à grande échelle.</p>
+<!-- Architecture : Hexagonale -->
+<section>
+  <h4>4. Architecture Hexagonale</h4>
+  <p>
+    L'architecture hexagonale (ou architecture en ports et adaptateurs) organise une application de manière à séparer son cœur métier de ses dépendances externes comme les bases de données, services externes ou interfaces utilisateur.
+  </p>
+  <ul>
+    <li><strong>Avantages :</strong></li>
+    <ul>
+      <li>Augmente la testabilité du code grâce à l'isolation des dépendances.</li>
+      <li>Facilite les changements technologiques en limitant les dépendances spécifiques.</li>
+    </ul>
+    <li><strong>Inconvénients :</strong></li>
+    <ul>
+      <li>Plus difficile à mettre en place pour les petites applications.</li>
+      <li>Peut augmenter la complexité du projet au démarrage.</li>
+    </ul>
+  </ul>
+</section>
 
+<hr />
+
+<!-- Architecture : Event-Driven -->
+<section>
+  <h4>5. Architecture Event-Driven</h4>
+  <p>
+    Une architecture orientée événements repose sur l'échange de messages entre composants indépendants via des événements asynchrones. Cette architecture est idéale pour les systèmes nécessitant une haute disponibilité et une communication asynchrone.
+  </p>
+  <p><strong>Exemple applicable à Spring :</strong> Utiliser <code>Spring Cloud Stream</code> pour connecter des producteurs et consommateurs d'événements avec des middlewares tels que Apache Kafka ou RabbitMQ.</p>
+  <ul>
+    <li><strong>Avantages :</strong></li>
+    <ul>
+      <li>Scalabilité accrue grâce à une communication loosely-coupled.</li>
+      <li>Les composants s'exécutent de manière indépendante, ce qui augmente la résilience.</li>
+    </ul>
+    <li><strong>Inconvénients :</strong></li>
+    <ul>
+      <li>Augmente la complexité de gestion des messages et des erreurs.</li>
+      <li>Nécessite un middleware (comme Kafka ou RabbitMQ) et une bonne compréhension des concepts d'asynchronisme.</li>
+    </ul>
+  </ul>
+</section>
+
+<hr />
+
+<h3>Conclusion</h3>
+<p>Le choix d'une architecture dépend fortement des besoins du projet, des contraintes budgétaires et de scalabilité. Avec de nombreuses options disponibles, il est important de bien analyser les avantages et inconvénients avant de s'engager dans une architecture donnée.</p>
