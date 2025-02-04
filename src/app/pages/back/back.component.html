@@ -1,47 +1,8 @@
 <p>back works!</p>
-<h2>Spring Boot 3.4.2 - Possibilités Back-End</h2>
-<table>
-  <thead>
-  <tr>
-    <th>Possibilité</th>
-    <th>Description</th>
-    <th>Avantages</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr>
-    <td>REST API</td>
-    <td>Permet de créer facilement des APIs RESTful pour répondre aux besoins des clients.</td>
-    <td>Facilité de configuration, flexibilité, et support JSON natif.</td>
-  </tr>
-  <tr>
-    <td>Spring Data JPA</td>
-    <td>Framework pour gérer les opérations sur la base de données grâce à JPA/Hibernate.</td>
-    <td>Évite d'écrire beaucoup de code pour les DAO ; support des bases SQL et NoSQL.</td>
-  </tr>
-  <tr>
-    <td>Spring WebFlux</td>
-    <td>Framework réactif pour construire des applications asynchrones non-bloquantes.</td>
-    <td>Performances accrues pour les systèmes ayant un trafic élevé et nécessitant une gestion optimisée des ressources. ; support des bases ORDB</td>
-  </tr>
-  <tr>
-    <td>Spring Security</td>
-    <td>Framework pour gérer la sécurité des applications (Authentification, OAuth, JWT, etc.).</td>
-    <td>Support natif pour les standards de sécurité, extensibilité.</td>
-  </tr>
-  <tr>
-    <td>Spring Cloud</td>
-    <td>Outils pour développer des systèmes distribués et des microservices.</td>
-    <td>Support natif pour Netflix Eureka, Ribbon, Hystrix, etc.</td>
-  </tr>
-  </tbody>
-</table>
-
-<h3>Documentation Officielle</h3>
+<h2>Spring Boot 3.4.2 - Technologies Back-End</h2>
 <ul>
-  <li><a href="https://spring.io/projects/spring-boot" target="_blank">Spring Boot</a></li>
-  <li><a href="https://spring.io/projects/spring-data" target="_blank">Spring Data</a></li>
-  <li><a href="https://docs.spring.io/spring-framework/reference/web/webflux.html" target="_blank">Spring Webflux</a></li>
-  <li><a href="https://spring.io/projects/spring-security" target="_blank">Spring Security</a></li>
-  <li><a href="https://spring.io/projects/spring-cloud" target="_blank">Spring Cloud</a></li>
+  <li><a routerLink="/back/back-fwk">Comparatif des frameworks Spring</a></li>
+  <li><a routerLink="/back/back-testing-fwk">Frameworks de tests</a></li>
+  <li><a routerLink="/back/back-paradigms">Paradigmes de programmation</a></li>
 </ul>
+<router-outlet></router-outlet>
