@@ -1,21 +1,12 @@
-<!-- nav>
-  <ul>
-    <li><a routerLink="/">Accueil</a></li>
-    <li><a routerLink="/front">Front (Angular)</a></li>
-    <li><a routerLink="/back">Back (Spring)</a></li>
-    <li><a routerLink="/architecture">Architectures</a></li>
-  </ul>
-</nav -->
-
 <mat-sidenav-container class="app-container">
   <!-- Menu latéral (sidenav) -->
   <mat-sidenav #drawer mode="side" opened>
     <mat-toolbar color="primary">Navigation</mat-toolbar>
     <mat-nav-list>
       <a mat-list-item routerLink="/" routerLinkActive="active">Accueil</a>
+      <a mat-list-item routerLink="/architecture" routerLinkActive="active">Architectures</a>
       <a mat-list-item routerLink="/front" routerLinkActive="active">Front (Angular)</a>
       <a mat-list-item routerLink="/back" routerLinkActive="active">Back (Spring)</a>
-      <a mat-list-item routerLink="/architecture" routerLinkActive="active">Architectures</a>
     </mat-nav-list>
   </mat-sidenav>
 
@@ -25,7 +16,7 @@
       <button mat-icon-button (click)="drawer.toggle()">
         <mat-icon>menu</mat-icon>
       </button>
-      <span>Blog Technologique</span>
+      <span>Veille Technologique</span>
     </mat-toolbar>
     <!-- Zone où sera affiché le contenu au changement de page -->
     <div class="content">

@@ -1,0 +1,23 @@
+.card-container {
+  display: flex;                    /* Active le mode Flexbox */
+  flex-wrap: wrap;                  /* Permet aux cartes de passer en colonne si l'espace est insuffisant */
+  justify-content: space-between;   /* Espace égal entre les cartes */
+  align-items: flex-start;          /* Aligne les cartes sur le haut */
+  gap: 10px;                        /* Espace entre les cartes pour éviter qu'elles soient collées */
+}
+
+mat-card {
+  flex: 1 1 calc(45% - 16px);       /* Définit une largeur relative pour les cartes */
+  box-sizing: border-box;           /* Gère les marges/paddings correctement dans Flexbox */
+  margin: 8px 0;                    /* Espacement optionnel en haut et en bas des cartes */
+  max-width: 100%;
+}
+
+.center-image {
+  display: block;
+  margin: 0 auto;
+}
+
+.text-center {
+  text-align: center;
+}

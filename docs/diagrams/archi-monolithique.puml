@@ -1,9 +1,6 @@
 @startuml
-package "Application Monolithique" {
-  [Frontend]
-  [Backend]
-  [Base de Données]
-}
-Frontend --> Backend
-Backend --> "Base de Données"
+     package "Application Monolithique" {
+       [Frontend] -right-> [Backend]
+       [Backend] -right-> [Base de Données]
+     }
 @enduml

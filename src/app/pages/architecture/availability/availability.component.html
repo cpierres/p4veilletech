@@ -1,41 +1,63 @@
 <div class="availability-section">
     <h1>Disponibilité et Robustesse : Stateless et Conteneurs</h1>
 
-    <h2>L'approche Stateless</h2>
-    <p>
-        Un système <strong>stateless</strong> est conçu pour traiter chaque requête indépendamment, sans se baser sur
-        l'état de session storable côté serveur. Cela améliore la résilience en permettant un basculement simple vers
-        d'autres nœuds en cas de défaillance d'un serveur.
-    </p>
-    <ul>
-        <li><strong>Avantage 1 :</strong> Facilite la scalabilité horizontale : ajoutez ou retirez des serveurs sans
-            impact.
-        </li>
-        <li><strong>Avantage 2 :</strong> Meilleure résilience : pas de perte d'état si un serveur tombe.</li>
-        <li><strong>Avantage 3 :</strong> Compatible avec des systèmes de load-balancing intelligents.</li>
-    </ul>
+    <mat-accordion>
+        <!-- Section 1: L'approche Stateless -->
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    L'approche Stateless
+                </mat-panel-title>
+            </mat-expansion-panel-header>
 
-    <h2>Les conteneurs : Docker et Kubernetes</h2>
-    <p>
-        L'utilisation de conteneurs comme <strong>Docker</strong>, orchestrés par des outils comme
-        <strong>Kubernetes</strong>, permet d'assurer une haute disponibilité de vos applications en facilitant la
-        réplication, la gestion des pannes, et la mise à l'échelle.
-    </p>
-    <h3>Principes clés avec Docker :</h3>
-    <ul>
-        <li>Chaque microservice ou application est encapsulé dans un conteneur avec toutes ses dépendances.</li>
-        <li>Les conteneurs peuvent être facilement stoppés ou redémarrés en cas de défaillance.</li>
-    </ul>
+            <p>
+                Un système <strong>stateless</strong> est conçu pour traiter chaque requête indépendamment, sans se baser
+                sur un état de session stocké côté serveur. Cela améliore la résilience en permettant un basculement simple
+                vers d'autres noeuds en cas de défaillance d'un serveur.
+            </p>
+            <ul>
+                <li><strong>Avantage 1 :</strong> Facilite la scalabilité horizontale : ajoutez ou retirez des serveurs sans impact.</li>
+                <li><strong>Avantage 2 :</strong> Meilleure résilience : pas de perte d'état si un serveur tombe.</li>
+                <li><strong>Avantage 3 :</strong> Compatible avec des systèmes de load-balancing intelligents.</li>
+            </ul>
+        </mat-expansion-panel>
 
-    <h3>Rôle de Kubernetes:</h3>
-    <ul>
-        <li><strong>Scalabilité automatique :</strong> Ajout ou suppression de conteneurs en fonction des besoins.</li>
-        <li><strong>Redémarrage automatique :</strong> Kubernetes surveille les conteneurs et relance ceux qui tombent
-            en panne.
-        </li>
-        <li><strong>Répartition de charge :</strong> Routage des requêtes vers des conteneurs disponibles.</li>
-    </ul>
+        <!-- Section 2: Les conteneurs : Docker et Kubernetes -->
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Les conteneurs : Docker et Kubernetes
+                </mat-panel-title>
+            </mat-expansion-panel-header>
 
-    <h2>Schéma conceptuel : Disponibilité avec Kubernetes</h2>
-    <img src="assets/img/kubernetes-availability.png" alt="Schéma de Disponibilité avec Kubernetes">
+            <p>
+                L'utilisation de conteneurs comme <strong>Docker</strong>, orchestrés par des outils comme
+                <strong>Kubernetes</strong>, permet d'assurer une haute disponibilité de vos applications en facilitant la
+                réplication, la gestion des pannes, et la mise à l'échelle.
+            </p>
+            <h3>Principes clés avec Docker :</h3>
+            <ul>
+                <li>Chaque microservice ou application est encapsulé dans un conteneur avec toutes ses dépendances.</li>
+                <li>Les conteneurs peuvent être facilement stoppés ou redémarrés en cas de défaillance.</li>
+            </ul>
+
+            <h3>Rôle de Kubernetes :</h3>
+            <ul>
+                <li><strong>Scalabilité automatique :</strong> Ajout ou suppression de conteneurs en fonction des besoins.</li>
+                <li><strong>Redémarrage automatique :</strong> Kubernetes surveille les conteneurs et relance ceux qui tombent en panne.</li>
+                <li><strong>Répartition de charge :</strong> Routage des requêtes vers des conteneurs disponibles.</li>
+            </ul>
+        </mat-expansion-panel>
+
+        <!-- Section 3: Schéma conceptuel -->
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Schéma conceptuel : Disponibilité avec Kubernetes
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <img src="assets/img/kubernetes-availability.png" alt="Schéma de Disponibilité avec Kubernetes" width="600" height="400">
+        </mat-expansion-panel>
+    </mat-accordion>
 </div>
