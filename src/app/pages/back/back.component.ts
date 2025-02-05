@@ -1,12 +1,17 @@
 import { Component } from '@angular/core';
-import {MatTable} from '@angular/material/table';
-import {RouterLink, RouterOutlet} from '@angular/router';
+import {MatTab, MatTabGroup} from '@angular/material/tabs';
+import {BackFwkComponent} from './back-fwk/back-fwk.component';
+import {BackTestingFwkComponent} from './back-testing-fwk/back-testing-fwk.component';
+import {BackParadigmsComponent} from './back-paradigms/back-paradigms.component';
 
 @Component({
   selector: 'app-back',
   imports: [
-    RouterLink,
-    RouterOutlet
+    MatTab,
+    MatTabGroup,
+    BackFwkComponent,
+    BackTestingFwkComponent,
+    BackParadigmsComponent
   ],
   templateUrl: './back.component.html',
   styleUrl: './back.component.css'

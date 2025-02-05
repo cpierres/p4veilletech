@@ -1,7 +1,13 @@
-<h2>Veille techno sur Angular</h2>
-<ul>
-  <li><a routerLink="/front/ui-libraries">Comparatif des librairies de composants (UI)</a></li>
-  <li><a routerLink="/front/testing-libraries">Librairies de tests</a></li>
-  <li><a routerLink="/front/paradigms">Paradigmes de programmation</a></li>
-</ul>
-<router-outlet></router-outlet>
+<h2>Front-end (Angular)</h2>
+<mat-tab-group>
+  <mat-tab label="Librairies de composants (UI)">
+    <app-ui-libraries></app-ui-libraries>
+  </mat-tab>
+  <mat-tab label="Tests IHM">
+    <app-testing-libraries></app-testing-libraries>
+  </mat-tab>
+  <mat-tab label="Paradigmes de programmation">
+    <app-paradigms></app-paradigms>
+  </mat-tab>
+</mat-tab-group>
+

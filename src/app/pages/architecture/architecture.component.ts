@@ -7,7 +7,6 @@ import {
 } from '@angular/material/expansion';
 import {MatCard, MatCardTitle} from '@angular/material/card';
 import {MatList, MatListItem} from '@angular/material/list';
-import {RouterLink, RouterOutlet} from '@angular/router';
 import {MatTab, MatTabGroup} from '@angular/material/tabs';
 import {AvailabilityComponent} from './availability/availability.component';
 

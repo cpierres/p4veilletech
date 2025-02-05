@@ -1,7 +1,12 @@
-<h2>Spring Boot 3.4.2 - Technologies Back-End</h2>
-<ul>
-  <li><a routerLink="/back/back-fwk">Comparatif des frameworks Spring</a></li>
-  <li><a routerLink="/back/back-testing-fwk">Frameworks de tests</a></li>
-  <li><a routerLink="/back/back-paradigms">Paradigmes de programmation</a></li>
-</ul>
-<router-outlet></router-outlet>
+<h2>Back-End (Spring)</h2>
+<mat-tab-group>
+  <mat-tab label="Frameworks Spring">
+    <app-back-fwk></app-back-fwk>
+  </mat-tab>
+  <mat-tab label="Tests (unitaires, intégration)">
+    <app-back-testing-fwk></app-back-testing-fwk>
+  </mat-tab>
+  <mat-tab label="Paradigmes de programmation">
+    <app-back-paradigms></app-back-paradigms>
+  </mat-tab>
+</mat-tab-group>
