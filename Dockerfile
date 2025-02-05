@@ -1,5 +1,5 @@
 # Étape 1 : Construction de l'application Angular
-FROM node:22.12.0 AS build
+:FROM node:22-alpine AS build
 
 # Définir le répertoire de travail dans le conteneur
 WORKDIR /app
@@ -14,7 +14,7 @@ RUN npm install
 COPY . .
 
 # Construire l'application Angular
-RUN npm run build
+RUN npm run build -- --configuration=production
 
 # Étape 2 : Préparation pour le déploiement (serveur nginx)
 FROM nginx:stable-alpine
