@@ -1,0 +1,10 @@
+{"/blogangulardevfeed": {
+    "target": "https://blog.angular.dev",
+    "secure": true,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/blogangulardevfeed": "/feed"
+    },
+    "logLevel": "debug"
+  }
+}

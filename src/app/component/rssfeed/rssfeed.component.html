@@ -1,0 +1,12 @@
+<div *ngIf="(feedItems$ | async) as feedItems; else noData">
+  <ul>
+    <li *ngFor="let item of feedItems">
+      <a [href]="item.link" target="_blank">{{ item.title }}</a>
+      <p>{{ item.description }}</p>
+    </li>
+  </ul>
+</div>
+
+<ng-template #noData>
+  <p>Aucun flux disponible à afficher.</p>
+</ng-template>

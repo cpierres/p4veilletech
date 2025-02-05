@@ -10,6 +10,8 @@ import {BackFwkComponent} from './pages/back/back-fwk/back-fwk.component';
 import {BackParadigmsComponent} from './pages/back/back-paradigms/back-paradigms.component';
 import {BackTestingFwkComponent} from './pages/back/back-testing-fwk/back-testing-fwk.component';
 import {AvailabilityComponent} from './pages/architecture/availability/availability.component';
+import {RssFrontComponent} from './pages/front/rss-front/rss-front.component';
+import {RssBackComponent} from './pages/back/rss-back/rss-back.component';
 
 export const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -18,6 +20,7 @@ export const routes: Routes = [
       {path: 'ui-libraries', component: UiLibrariesComponent},
       {path: 'testing-libraries', component: TestingLibrariesComponent},
       {path: 'paradigms', component: ParadigmsComponent},
+      {path: 'rss-front', component: RssFrontComponent},
     ]
   },
   {
@@ -25,6 +28,7 @@ export const routes: Routes = [
       {path: 'back-fwk', component: BackFwkComponent},
       {path: 'back-testing-fwk', component: BackTestingFwkComponent},
       {path: 'back-paradigms', component: BackParadigmsComponent},
+      {path: 'rss-back', component: RssBackComponent},
     ]
   },
   {

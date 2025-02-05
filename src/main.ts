@@ -10,6 +10,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {MatListModule} from '@angular/material/list';
+import {HttpClientModule} from '@angular/common/http';
 
 // bootstrapApplication(AppComponent, appConfig)
 //   .catch((err) => console.error(err));
@@ -23,7 +24,8 @@ bootstrapApplication(AppComponent, {
       MatToolbarModule,
       MatButtonModule,
       MatIconModule,
-      MatListModule
+      MatListModule,
+      HttpClientModule
     )
   ]
 }).catch((err) => console.error(err));
