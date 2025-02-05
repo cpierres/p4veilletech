@@ -6,9 +6,10 @@ import {BackComponent} from './pages/back/back.component';
 import {ArchitectureComponent} from './pages/architecture/architecture.component';
 import {TestingLibrariesComponent} from './pages/front/testing-libraries/testing-libraries.component';
 import {ParadigmsComponent} from './pages/front/paradigms/paradigms.component';
-import { BackFwkComponent } from './pages/back/back-fwk/back-fwk.component';
-import { BackParadigmsComponent } from './pages/back/back-paradigms/back-paradigms.component';
+import {BackFwkComponent} from './pages/back/back-fwk/back-fwk.component';
+import {BackParadigmsComponent} from './pages/back/back-paradigms/back-paradigms.component';
 import {BackTestingFwkComponent} from './pages/back/back-testing-fwk/back-testing-fwk.component';
+import {AvailabilityComponent} from './pages/architecture/availability/availability.component';
 
 export const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -26,5 +27,9 @@ export const routes: Routes = [
       {path: 'back-paradigms', component: BackParadigmsComponent},
     ]
   },
-  {path: 'architecture', component: ArchitectureComponent},
+  {
+    path: 'architecture', component: ArchitectureComponent, children: [
+      {path: 'availability', component: AvailabilityComponent},
+    ]
+  },
 ];

@@ -1,0 +1,26 @@
+@startuml
+title Disponibilité avec Kubenetes
+
+node "Kubernetes Cluster" {
+  frame "Node 1" {
+    component "Application Instance A"
+  }
+  frame "Node 2" {
+    component "Application Instance B"
+  }
+  frame "Node 3" {
+    component "Application Instance C"
+  }
+}
+
+queue "Load Balancer" as LB
+database "Base de Données" as DB
+
+LB --> "Application Instance A"
+LB --> "Application Instance B"
+LB --> "Application Instance C"
+
+"Application Instance A" --> DB
+"Application Instance B" --> DB
+"Application Instance C" --> DB
+@enduml

@@ -7,6 +7,9 @@ import {
 } from '@angular/material/expansion';
 import {MatCard, MatCardTitle} from '@angular/material/card';
 import {MatList, MatListItem} from '@angular/material/list';
+import {RouterLink, RouterOutlet} from '@angular/router';
+import {MatTab, MatTabGroup} from '@angular/material/tabs';
+import {AvailabilityComponent} from './availability/availability.component';
 
 @Component({
   selector: 'app-architecture',
@@ -18,7 +21,10 @@ import {MatList, MatListItem} from '@angular/material/list';
     MatCard,
     MatCardTitle,
     MatList,
-    MatListItem
+    MatListItem,
+    MatTabGroup,
+    MatTab,
+    AvailabilityComponent
   ],
   templateUrl: './architecture.component.html',
   styleUrl: './architecture.component.css'
