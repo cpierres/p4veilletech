@@ -1,0 +1,11 @@
+@startuml
+queue "Event Bus" {
+  [Publisher]
+  [Subscriber A]
+  [Subscriber B]
+}
+
+Publisher --> "Event Bus"
+"Event Bus" --> "Subscriber A"
+"Event Bus" --> "Subscriber B"
+@enduml

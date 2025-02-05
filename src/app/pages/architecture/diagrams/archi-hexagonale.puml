@@ -1,0 +1,14 @@
+@startuml
+hexagon "Domaine" {
+  interface "Port Interface"
+  [Business Logic]
+}
+
+rectangle "Application/Adapters" {
+  [REST Adapter]
+  [Database Adapter]
+}
+
+[REST Adapter] --> "Port Interface"
+[Database Adapter] --> "Port Interface"
+@enduml

@@ -1,0 +1,17 @@
+@startuml
+rectangle "API Gateway" {
+  interface "Client"
+  component "Microservice A" as A
+  component "Microservice B" as B
+  component "Microservice C" as C
+}
+
+Client --> "API Gateway"
+"API Gateway" --> A
+"API Gateway" --> B
+"API Gateway" --> C
+
+A --> "Base de Données A"
+B --> "Base de Données B"
+C --> "Base de Données C"
+@enduml

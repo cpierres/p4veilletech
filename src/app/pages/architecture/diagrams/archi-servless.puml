@@ -1,0 +1,18 @@
+@startuml
+cloud "Cloud Provider" {
+  [Client]
+  [Function A]
+  [Function B]
+  [Function C]
+  [Database]
+}
+
+Client --> "Function A"
+"Function A" --> "Database"
+
+Client --> "Function B"
+"Function B" --> "Database"
+
+Client --> "Function C"
+"Function C" --> "Database"
+@enduml
