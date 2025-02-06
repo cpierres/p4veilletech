@@ -1,38 +1,62 @@
-<p>testing-libraries works!</p>
-<h3>Comparatif des librairies de tests pour Angular</h3>
-<table>
-  <thead>
-  <tr>
-    <th>Librairie</th>
-    <th>Type de Test</th>
-    <th>Caractéristiques</th>
-    <th>Site Officiel</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr>
-    <td>Jasmine</td>
-    <td>Unitaires</td>
-    <td>Framework de test par défaut pour Angular ; syntaxe simple ; riche en fonctionnalités.</td>
-    <td><a href="https://jasmine.github.io/" target="_blank">Jasmine</a></td>
-  </tr>
-  <tr>
-    <td>Karma</td>
-    <td>Lancement de tests</td>
-    <td>Outil pour exécuter des tests dans différents navigateurs ; intégré à Angular CLI.</td>
-    <td><a href="https://karma-runner.github.io/" target="_blank">Karma</a></td>
-  </tr>
-  <tr>
-    <td>Protractor</td>
-    <td>End-to-End</td>
-    <td>Framework pour tests E2E ; souvent utilisé avec Angular ; nécessite des configurations spécifiques.</td>
-    <td><a href="https://www.protractortest.org/" target="_blank">Protractor</a></td>
-  </tr>
-  <tr>
-    <td>Cypress</td>
-    <td>End-to-End</td>
-    <td>Framework moderne pour les tests E2E ; rapide et facile à utiliser.</td>
-    <td><a href="https://www.cypress.io/" target="_blank">Cypress</a></td>
-  </tr>
-  </tbody>
-</table>
+<mat-card>
+  <h3>Comparatif des bibliothèques de test</h3>
+  <mat-divider></mat-divider>
+  <table mat-table [dataSource]="testLibraries" class="mat-elevation-z8">
+
+    <ng-container matColumnDef="nom">
+      <th mat-header-cell *matHeaderCellDef> Nom </th>
+      <td mat-cell *matCellDef="let library"> {{ library.nom }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="typeDeTest">
+      <th mat-header-cell *matHeaderCellDef> Type de Test </th>
+      <td mat-cell *matCellDef="let library"> {{ library.typeDeTest }} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="caracteristiques">
+      <th mat-header-cell *matHeaderCellDef> Caractéristiques </th>
+      <td mat-cell *matCellDef="let library">
+        <ul>
+          <li *ngFor="let item of library.caracteristiques">{{ item }}</li>
+        </ul>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="pointsForts">
+      <th mat-header-cell *matHeaderCellDef> Points forts </th>
+      <td mat-cell *matCellDef="let library">
+        <ul>
+          <li *ngFor="let point of library.pointsForts">{{ point }}</li>
+        </ul>
+      </td>
+    </ng-container>
+
+    <!-- Points Faibles -->
+    <ng-container matColumnDef="pointsFaibles">
+      <th mat-header-cell *matHeaderCellDef> Points faibles </th>
+      <td mat-cell *matCellDef="let library">
+        <ul>
+          <li *ngFor="let point of library.pointsFaibles">{{ point }}</li>
+        </ul>
+      </td>
+    </ng-container>
+
+    <!-- Références -->
+    <ng-container matColumnDef="references">
+      <th mat-header-cell *matHeaderCellDef> Références </th>
+      <td mat-cell *matCellDef="let library">
+        <ul>
+          <li><a href="{{ library.references.siteOfficiel }}" target="_blank">Site Officiel</a></li>
+          <li><a href="{{ library.references.github }}" target="_blank">GitHub</a></li>
+          <li><a href="{{ library.references.siteAvis }}" target="_blank">Avis</a></li>
+        </ul>
+      </td>
+    </ng-container>
+
+    <!-- Header des colonnes -->
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <!-- Données des colonnes -->
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+</mat-card>
+
