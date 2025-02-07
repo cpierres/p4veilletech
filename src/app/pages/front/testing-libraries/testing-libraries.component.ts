@@ -37,22 +37,22 @@ import { TestLibraryUi } from '../../../core/models/TestLibraryUi';
 
 export class TestingLibrariesComponent {
   displayedColumns: string[] = [
-    'nom',
+    'name',
     'typeDeTest',
     'caracteristiques',
     'pointsForts',
     'pointsFaibles',
     'references',
   ];
-
   testLibraries: TestLibraryUi[] = [
     {
-      nom: 'Jasmine',
+      name: 'Jasmine',
+      link: 'https://jasmine.github.io/',
       typeDeTest: 'Unit Testing',
       caracteristiques: [
         'Framework de test unitaire populaire',
         'Écrit en JavaScript',
-        'Approche BDD (Behavior Driven Development)',
+        'Approche BDD (Behavior Driven Development)'
       ],
       pointsForts: [
         'Syntaxe simple et facile à comprendre',
@@ -62,106 +62,81 @@ export class TestingLibrariesComponent {
       ],
       pointsFaibles: [
         'Pas conçu pour exécuter les tests dans les navigateurs ou directement avec Node.js',
-        'Pas conçu pour gérer les rythmes de test asynchrone avancés',
+        'Pas conçu pour gérer les rythmes de test asynchrone avancés'
       ],
       references: {
-        siteOfficiel: 'https://jasmine.github.io/',
         github: 'https://github.com/jasmine/jasmine',
-        siteAvis: 'https://stackshare.io/jasmine',
-      },
+        siteAvis: 'https://stackshare.io/jasmine'
+      }
     },
     {
-      nom: 'Karma',
+      name: 'Karma',
+      link: 'https://karma-runner.github.io/',
       typeDeTest: 'Test Runner',
       caracteristiques: [
         'Permet l’exécution des tests dans des navigateurs réels',
         'Compatible avec plusieurs frameworks (Jasmine, Mocha, etc.)',
-        'Intégration avec CI/CD (Continuous Integration)',
+        'Intégration avec CI/CD (Continuous Integration)'
       ],
       pointsForts: [
         'S’exécute sur plusieurs navigateurs',
         'Prend en charge de nombreux frameworks de test',
-        'S’intègre facilement dans Angular CLI',
+        'S’intègre facilement dans Angular CLI'
       ],
       pointsFaibles: [
         'Configuration complexe pour certains projets',
-        'Performance plus lente par rapport aux solutions modernes comme Jest',
+        'Performance plus lente par rapport aux solutions modernes comme Jest'
       ],
       references: {
-        siteOfficiel: 'https://karma-runner.github.io/',
         github: 'https://github.com/karma-runner/karma',
-        siteAvis: 'https://stackshare.io/karma',
-      },
+        siteAvis: 'https://stackshare.io/karma'
+      }
     },
     {
-      nom: 'Jest',
+      name: 'Jest',
+      link: 'https://jestjs.io/',
       typeDeTest: 'Unit Testing / Integration Testing',
       caracteristiques: [
         'Framework tout-en-un : assertion, mocking, backend intégrés',
         'Compatible avec JavaScript, TypeScript, React, Angular, Vue.js',
-        'Approche moderne avec tests parallèles automatiques',
+        'Approche moderne avec tests parallèles automatiques'
       ],
       pointsForts: [
         'Exécution des tests rapide grâce au parallélisme',
         'Le meilleur choix pour les projets modernes utilisant React ou Angular',
-        'Excellent support des tests d’instantanés (snapshot testing)',
+        'Excellent support des tests d’instantanés (snapshot testing)'
       ],
       pointsFaibles: [
         'Léger apprentissage requis pour les développeurs habitués à Jasmine/Karma',
-        'Plus difficile à configurer pour les environnements multi-navigateurs',
+        'Plus difficile à configurer pour les environnements multi-navigateurs'
       ],
       references: {
-        siteOfficiel: 'https://jestjs.io/',
         github: 'https://github.com/facebook/jest',
-        siteAvis: 'https://stackshare.io/jest',
-      },
+        siteAvis: 'https://stackshare.io/jest'
+      }
     },
     {
-      nom: 'Cypress',
+      name: 'Cypress',
+      link: 'https://www.cypress.io/',
       typeDeTest: 'End-to-End Testing',
       caracteristiques: [
         'Framework moderne dédié aux tests end-to-end',
         'Conçu pour écrire rapidement des tests lisibles',
-        'Debugging intuitif avec capture vidéo/screenshot par défaut',
+        'Debugging intuitif avec capture vidéo/screenshot par défaut'
       ],
       pointsForts: [
-        'Excellente expérience développeur grâce à son interface graphique intuitive',
-        'Exécution rapide des tests avec un retour en temps réel',
-        'Support natif de JavaScript, aucune configuration complexe requise',
+        'Configuration simple et rapide',
+        'Tests rapides et fiables',
+        'Idéal pour les tests end-to-end modernes'
       ],
       pointsFaibles: [
-        'Pas conçu pour les tests unitaires classiques, uniquement end-to-end',
-        'Limitation aux navigateurs supportés par Chromium, pas de support complet pour tous les navigateurs',
+        'Pas conçu pour les tests unitaires',
+        'Limité à Chromium-based pour l’exécution locale'
       ],
       references: {
-        siteOfficiel: 'https://www.cypress.io/',
         github: 'https://github.com/cypress-io/cypress',
-        siteAvis: 'https://stackshare.io/cypress',
-      },
-    },
-    {
-      nom: 'Protractor',
-      typeDeTest: 'End-to-End Testing',
-      caracteristiques: [
-        'Framework de test end-to-end conçu pour Angular',
-        'Intégration directe avec Angular CLI',
-        'Utilise WebDriverJS pour communiquer avec des navigateurs',
-      ],
-      pointsForts: [
-        'Excellent choix pour les projets Angular basés sur les versions antérieures',
-        'Support natif pour les tests asynchrones d’Angular grâce à WebDriverJS',
-        'Prise en charge multi-navigateur',
-      ],
-      pointsFaibles: [
-        'Moins adapté aux frameworks modernes non Angular',
-        'Un peu obsolète par rapport à Cypress ou Playwright',
-        'Angular abandonnera bientôt son support officiel',
-      ],
-      references: {
-        siteOfficiel: 'https://www.protractortest.org/',
-        github: 'https://github.com/angular/protractor',
-        siteAvis: 'https://stackshare.io/protractor',
-      },
-    },
+        siteAvis: 'https://stackshare.io/cypress'
+      }
+    }
   ];
 }

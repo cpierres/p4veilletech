@@ -3,10 +3,13 @@
   <mat-divider></mat-divider>
   <table mat-table [dataSource]="testLibraries" class="mat-elevation-z8">
 
-    <ng-container matColumnDef="nom">
+    <ng-container matColumnDef="name">
       <th mat-header-cell *matHeaderCellDef> Nom </th>
-      <td mat-cell *matCellDef="let library"> {{ library.nom }} </td>
+      <td mat-cell *matCellDef="let library">
+        <a href="{{ library.link }}" target="_blank">{{ library.name }}</a>
+      </td>
     </ng-container>
+
 
     <ng-container matColumnDef="typeDeTest">
       <th mat-header-cell *matHeaderCellDef> Type de Test </th>
@@ -46,7 +49,6 @@
       <th mat-header-cell *matHeaderCellDef> Références </th>
       <td mat-cell *matCellDef="let library">
         <ul>
-          <li><a href="{{ library.references.siteOfficiel }}" target="_blank">Site Officiel</a></li>
           <li><a href="{{ library.references.github }}" target="_blank">GitHub</a></li>
           <li><a href="{{ library.references.siteAvis }}" target="_blank">Avis</a></li>
         </ul>

@@ -1,11 +1,11 @@
-export interface TestLibraryUi {
-  nom: string;
+import {ToolInfo} from './ToolInfo';
+
+export interface TestLibraryUi extends ToolInfo {
   typeDeTest: string;
   caracteristiques: string[];
   pointsForts: string[];
   pointsFaibles: string[];
   references: {
-    siteOfficiel: string;
     github: string;
     siteAvis: string;
   };
