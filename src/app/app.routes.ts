@@ -12,6 +12,7 @@ import {BackTestingFwkComponent} from './pages/back/back-testing-fwk/back-testin
 import {AvailabilityComponent} from './pages/architecture/availability/availability.component';
 import {RssFrontComponent} from './pages/front/rss-front/rss-front.component';
 import {RssBackComponent} from './pages/back/rss-back/rss-back.component';
+import {TestOverviewComponent} from './pages/test-overview/test-overview.component';
 
 export const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -36,4 +37,5 @@ export const routes: Routes = [
       {path: 'availability', component: AvailabilityComponent},
     ]
   },
+  {path: 'test-overview', component: TestOverviewComponent}
 ];

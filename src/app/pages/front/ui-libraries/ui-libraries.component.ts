@@ -9,6 +9,7 @@ import {
   MatTable
 } from '@angular/material/table';
 import {NgForOf} from '@angular/common';
+import {MatDivider} from '@angular/material/divider';
 
 @Component({
   selector: 'app-ui-libraries',
@@ -23,7 +24,8 @@ import {NgForOf} from '@angular/common';
     MatHeaderCellDef,
     MatHeaderRow,
     MatColumnDef,
-    MatHeaderRowDef
+    MatHeaderRowDef,
+    MatDivider
   ],
   templateUrl: './ui-libraries.component.html',
   styleUrl: './ui-libraries.component.css'
