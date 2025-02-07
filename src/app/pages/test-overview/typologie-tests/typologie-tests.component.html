@@ -12,14 +12,27 @@
   </ng-container>
 
   <ng-container matColumnDef="frontendTools">
-    <th mat-header-cell *matHeaderCellDef> Solutions Frontend</th>
-    <td mat-cell *matCellDef="let typo"> {{ typo.frontendTools }}</td>
+    <th mat-header-cell *matHeaderCellDef> Solutions Frontend </th>
+    <td mat-cell *matCellDef="let test">
+      <ul>
+        <li *ngFor="let tool of test.frontendTools">
+          <a [href]="tool.link" target="_blank" rel="noopener noreferrer">{{ tool.name }}</a>
+        </li>
+      </ul>
+    </td>
   </ng-container>
 
   <ng-container matColumnDef="backendTools">
-    <th mat-header-cell *matHeaderCellDef> Solutions Backend</th>
-    <td mat-cell *matCellDef="let typo"> {{ typo.backendTools }}</td>
+    <th mat-header-cell *matHeaderCellDef> Solutions Backend </th>
+    <td mat-cell *matCellDef="let test">
+      <ul>
+        <li *ngFor="let tool of test.backendTools">
+          <a [href]="tool.link" target="_blank" rel="noopener noreferrer">{{ tool.name }}</a>
+        </li>
+      </ul>
+    </td>
   </ng-container>
+
 
   <ng-container matColumnDef="angularExample">
     <th mat-header-cell *matHeaderCellDef> Exemple Angular</th>
