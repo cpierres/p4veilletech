@@ -1,10 +1,12 @@
-<h3>Comparatif des librairies de composants UI pour Angular</h3>
+<h3>Comparatif des librairies</h3>
 <mat-divider></mat-divider>
 <table mat-table [dataSource]="libraries" class="mat-elevation-z8">
 
   <ng-container matColumnDef="name">
     <th mat-header-cell *matHeaderCellDef> Nom </th>
-    <td mat-cell *matCellDef="let lib"> {{ lib.name }} </td>
+    <td mat-cell *matCellDef="let library">
+      <a href="{{ library.link }}" target="_blank">{{ library.name }}</a>
+    </td>
   </ng-container>
 
   <ng-container matColumnDef="advantages">
@@ -27,10 +29,9 @@
     <td mat-cell *matCellDef="let lib"> {{ lib.useCases }} </td>
   </ng-container>
 
-  <ng-container matColumnDef="links">
+  <ng-container matColumnDef="sources">
     <th mat-header-cell *matHeaderCellDef> Liens utiles </th>
     <td mat-cell *matCellDef="let lib">
-      <a href="{{ lib.link }}" target="_blank">Lien Officiel</a>
       <ul>
         <li *ngFor="let source of lib.sources">
           <a href="{{ source }}" target="_blank">Source</a>
