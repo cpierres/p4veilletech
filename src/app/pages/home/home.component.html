@@ -1,13 +1,20 @@
 <div class="home-page">
-  <p>Ceci est une plateforme pour explorer des solutions autour de <strong>Angular</strong> et <strong>Spring</strong>.</p>
+  <mat-tab-group>
+    <mat-tab label="Objectifs">
+      <p>Ceci est une plateforme pour explorer des solutions autour de <strong>Angular</strong> et
+        <strong>Spring</strong>.</p>
 
-  <h2>Objectifs :</h2>
-  <ul>
-    <li><strong>Disponibilité :</strong> Assurer un site performant et fiable.</li>
-    <li><strong>Rapidité :</strong> Minimiser les temps de chargement et offrir une UX agréable.</li>
-    <li><strong>Coûts :</strong> Réutiliser des solutions existantes.</li>
-    <li><strong>Évolutivité :</strong> S'appuyer sur des technologies solides et documentées.</li>
-  </ul>
+      <ul>
+        <li><strong>Disponibilité :</strong> Assurer un site performant et fiable.</li>
+        <li><strong>Rapidité :</strong> Minimiser les temps de chargement et offrir une UX agréable.</li>
+        <li><strong>Coûts :</strong> Réutiliser des solutions existantes.</li>
+        <li><strong>Évolutivité :</strong> S'appuyer sur des technologies solides et documentées.</li>
+      </ul>
+    </mat-tab>
+    <mat-tab label="Sites de veille pour Spring">
+      <app-back-veille></app-back-veille>
+    </mat-tab>
+  </mat-tab-group>
 
   <nav>
     <a routerLink="/architecture">Architectures</a> |
