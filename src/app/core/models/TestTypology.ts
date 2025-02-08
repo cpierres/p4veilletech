@@ -1,10 +1,10 @@
-import {ToolInfo} from './ToolInfo';
+import {LinkInfo} from './LinkInfo';
 
 export interface TestTypology {
   typeTest: string;
   description: string;
-  frontendTools: ToolInfo[];
-  backendTools: ToolInfo[];
+  frontendTools: LinkInfo[];
+  backendTools: LinkInfo[];
   angularExample: string;
   springExample: string;
 }

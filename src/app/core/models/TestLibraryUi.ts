@@ -1,6 +1,6 @@
-import {ToolInfo} from './ToolInfo';
+import {LinkInfo} from './LinkInfo';
 
-export interface TestLibraryUi extends ToolInfo {
+export interface TestLibraryUi extends LinkInfo {
   typeDeTest: string;
   caracteristiques: string[];
   pointsForts: string[];

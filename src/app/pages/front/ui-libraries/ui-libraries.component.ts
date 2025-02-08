@@ -45,6 +45,7 @@ export class UiLibrariesComponent {
     {
       name: 'Angular Material',
       link: 'https://material.angular.io/',
+      title: 'Site officiel Material Design',
       advantages: 'Intégration native avec Angular, fiable, communauté active.',
       disadvantages: 'Manque parfois de personnalisation comparée à d’autres librairies.',
       features: 'Prise en charge des bonnes pratiques Material Design, mise à jour régulière.',
@@ -58,6 +59,7 @@ export class UiLibrariesComponent {
     {
       name: 'PrimeNG',
       link: 'https://www.primefaces.org/primeng/',
+      title: 'Site officiel de PrimeNG',
       advantages: 'Large éventail de composants riches en fonctionnalités, composants premium.',
       disadvantages: 'Plus complexe à personnaliser, la qualité esthétique dépend des thèmes.',
       features: 'Plus de 80 composants, thèmes prêts à l’emploi, support d’accessibilité.',

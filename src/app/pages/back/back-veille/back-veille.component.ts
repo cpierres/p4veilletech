@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {ToolInfo} from '../../../core/models/ToolInfo';
+import {LinkInfo} from '../../../core/models/LinkInfo';
 import {NgForOf} from '@angular/common';
 
 @Component({
@@ -11,7 +11,7 @@ import {NgForOf} from '@angular/common';
   styleUrl: './back-veille.component.css'
 })
 export class BackVeilleComponent {
-   sitesVeille: ToolInfo[] = [
+   sitesVeille: LinkInfo[] = [
     {name: 'Spring Official', link: 'https://spring.io/'},
     {name: 'Reddit (flux cpierresspring)', link: 'https://www.reddit.com/user/feisty-bluebird3824/m/cpierresspring/'},
     {name: 'Baeldung', link: 'https://www.baeldung.com/'},

@@ -1,6 +1,6 @@
-import {ToolInfo} from './ToolInfo';
+import {LinkInfo} from './LinkInfo';
 
-export interface UiLibrary extends ToolInfo {
+export interface UiLibrary extends LinkInfo {
   advantages: string;
   disadvantages: string;
   features: string;
