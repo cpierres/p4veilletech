@@ -4,20 +4,24 @@
   <table mat-table [dataSource]="testLibraries" class="mat-elevation-z8">
 
     <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef> Nom </th>
+      <th mat-header-cell *matHeaderCellDef> Nom</th>
       <td mat-cell *matCellDef="let library">
-        <a href="{{ library.link }}" target="_blank">{{ library.name }}</a>
+        <a href="{{ library.link }}" target="_blank" title="Site officiel">{{ library.name }}</a>
+        <span *ngIf="library.choice === '1'" class="gold-medal">🏅</span>
+        <span *ngIf="library.choice === '2'" class="silver-medal">🥈</span>
+        <span *ngIf="library.choice === '0'" class="no-choice">❌</span>
+
       </td>
     </ng-container>
 
 
     <ng-container matColumnDef="typeDeTest">
-      <th mat-header-cell *matHeaderCellDef> Type de Test </th>
-      <td mat-cell *matCellDef="let library"> {{ library.typeDeTest }} </td>
+      <th mat-header-cell *matHeaderCellDef> Type de Test</th>
+      <td mat-cell *matCellDef="let library"> {{ library.typeDeTest }}</td>
     </ng-container>
 
     <ng-container matColumnDef="caracteristiques">
-      <th mat-header-cell *matHeaderCellDef> Caractéristiques </th>
+      <th mat-header-cell *matHeaderCellDef> Caractéristiques</th>
       <td mat-cell *matCellDef="let library">
         <ul>
           <li *ngFor="let item of library.caracteristiques">{{ item }}</li>
@@ -26,7 +30,7 @@
     </ng-container>
 
     <ng-container matColumnDef="pointsForts">
-      <th mat-header-cell *matHeaderCellDef> Points forts </th>
+      <th mat-header-cell *matHeaderCellDef> Points forts</th>
       <td mat-cell *matCellDef="let library">
         <ul>
           <li *ngFor="let point of library.pointsForts">{{ point }}</li>
@@ -34,9 +38,8 @@
       </td>
     </ng-container>
 
-    <!-- Points Faibles -->
     <ng-container matColumnDef="pointsFaibles">
-      <th mat-header-cell *matHeaderCellDef> Points faibles </th>
+      <th mat-header-cell *matHeaderCellDef> Points faibles</th>
       <td mat-cell *matCellDef="let library">
         <ul>
           <li *ngFor="let point of library.pointsFaibles">{{ point }}</li>
@@ -44,20 +47,23 @@
       </td>
     </ng-container>
 
-    <!-- Références -->
     <ng-container matColumnDef="references">
-      <th mat-header-cell *matHeaderCellDef> Références </th>
+      <th mat-header-cell *matHeaderCellDef> Références</th>
       <td mat-cell *matCellDef="let library">
         <ul>
-          <li><a href="{{ library.references.github }}" target="_blank">GitHub</a></li>
-          <li><a href="{{ library.references.siteAvis }}" target="_blank">Avis</a></li>
+          <li><a href="{{ library.references.github.repo }}" target="_blank"
+                 title="{{library.references.github.title}}">GitHub</a>
+            <span *ngIf="library.references.github.stars > 0">: {{ library.references.github.stars | number }}★</span>
+          </li>
+          <li *ngFor="let avis of library.references.siteAvis">
+            <a href="{{ avis.link }}" target="_blank">{{ avis.name }}</a>
+          </li>
+
         </ul>
       </td>
     </ng-container>
 
-    <!-- Header des colonnes -->
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <!-- Données des colonnes -->
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
 </mat-card>

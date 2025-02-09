@@ -2,7 +2,7 @@
 
 <ul>
   <li *ngFor="let site of sitesVeille">
-    <a [href]="site.link" target="_blank" rel="noopener">
+    <a [href]="site.link" target="_blank" rel="noopener" [title]="site.title">
       {{ site.name }}
     </a>
   </li>

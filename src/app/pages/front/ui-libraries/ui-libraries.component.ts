@@ -26,7 +26,7 @@ import {UiLibrary} from '../../../core/models/UiLibrary';
     MatHeaderRow,
     MatColumnDef,
     MatHeaderRowDef,
-    MatDivider
+    MatDivider,
   ],
   templateUrl: './ui-libraries.component.html',
   styleUrl: './ui-libraries.component.css'

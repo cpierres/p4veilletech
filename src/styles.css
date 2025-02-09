@@ -2,3 +2,25 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.gold-medal, .silver-medal, .bronze-medal {
+  font-size: 1.5rem; /* Augmente la taille à 1.5 fois la taille normale */
+  align-items: center;
+  display: flex;
+}
+
+.gold-medal {
+  color: gold;
+}
+
+.silver-medal {
+  color: silver;
+}
+
+.bronze-medal {
+  color: peru;
+}
+
+.no-choice {
+  color: red;
+}

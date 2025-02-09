@@ -1,3 +1,4 @@
+import { GithubInfo } from './GithubInfo';
 import {LinkInfo} from './LinkInfo';
 
 export interface TestLibraryUi extends LinkInfo {
@@ -6,7 +7,7 @@ export interface TestLibraryUi extends LinkInfo {
   pointsForts: string[];
   pointsFaibles: string[];
   references: {
-    github: string;
-    siteAvis: string;
+    github: GithubInfo;
+    siteAvis: LinkInfo[];
   };
 }
