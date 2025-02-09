@@ -4,6 +4,7 @@ import {UiLibrariesComponent} from './ui-libraries/ui-libraries.component';
 import {TestingLibrariesComponent} from './testing-libraries/testing-libraries.component';
 import {ParadigmsComponent} from './paradigms/paradigms.component';
 import {RssFrontComponent} from './rss-front/rss-front.component';
+import {FrontVeilleComponent} from './front-veille/front-veille.component';
 
 @Component({
   selector: 'app-front',
@@ -13,7 +14,8 @@ import {RssFrontComponent} from './rss-front/rss-front.component';
     UiLibrariesComponent,
     TestingLibrariesComponent,
     ParadigmsComponent,
-    RssFrontComponent
+    RssFrontComponent,
+    FrontVeilleComponent
   ],
   templateUrl: './front.component.html',
   styleUrl: './front.component.css'
