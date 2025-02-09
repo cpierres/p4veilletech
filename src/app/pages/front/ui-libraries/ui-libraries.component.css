@@ -12,3 +12,29 @@ mat-header-row {
 mat-row:hover {
   background-color: #f5f5f5;
 }
+
+.container {
+  display: flex; /* Utilisation de Flexbox pour disposer les éléments horizontalement */
+  justify-content: space-between; /* Espace entre la liste et le cadre */
+  align-items: flex-start; /* Aligner en haut */
+  gap: 20px; /* Espacement entre la liste et le cadre */
+}
+
+.list-container {
+  flex: 2; /* Largeur plus importante pour la liste */
+}
+
+.image-frame {
+  flex: 1; /* Réduit la largeur pour le cadre */
+  border: 2px solid #ccc; /* Bordure du cadre */
+  padding: 10px; /* Espacement interne */
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1); /* Ombre pour styliser */
+  background-color: #f9f9f9; /* Couleur d'arrière-plan du cadre */
+}
+
+.frame-image {
+  display: block; /* Bloque l’image pour éviter les espaces blanc indésirables */
+  max-width: 100%; /* Assure que l’image ne dépasse pas le cadre */
+  height: auto; /* Garde les proportions de l’image */
+  margin: 0 auto; /* Centre l’image horizontalement */
+}
