@@ -9,7 +9,6 @@ import {
   MatHeaderRow, MatHeaderRowDef, MatRow, MatRowDef,
   MatTable
 } from '@angular/material/table';
-import {MatSort} from '@angular/material/sort';
 import {DecimalPipe, NgForOf, NgIf} from '@angular/common';
 import {MatCard} from '@angular/material/card';
 import {MatDivider} from '@angular/material/divider';
@@ -19,7 +18,6 @@ import {LinkInfo} from '../../../core/models/LinkInfo';
   selector: 'app-back-persistence',
   imports: [
     MatTable,
-    MatSort,
     MatColumnDef,
     MatHeaderCell,
     MatHeaderCellDef,

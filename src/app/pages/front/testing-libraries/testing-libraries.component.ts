@@ -11,7 +11,6 @@ import {
   MatTable
 } from '@angular/material/table';
 import {DecimalPipe, NgForOf, NgIf} from '@angular/common';
-import {TestLibraryUi} from '../../../core/models/TestLibraryUi';
 import {LinkInfo} from '../../../core/models/LinkInfo';
 import {ComparatifSolution} from '../../../core/models/ComparatifSolution';
 
