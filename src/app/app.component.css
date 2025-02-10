@@ -40,5 +40,10 @@ mat-sidenav {
   height: 90px;
   border-radius: 50%; /* Cercle parfait pour la photo */
   cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+}
+
+.profile-photo:hover {
+  transform: scale(1.1); /* Zoom léger au survol */
 }
 

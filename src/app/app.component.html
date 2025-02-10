@@ -3,12 +3,14 @@
   <mat-sidenav #drawer mode="side" opened>
     <mat-toolbar color="primary" class="user-toolbar">
       <img
-        src="/assets/img/photo_cpierres.png"
+        [src]="profileImage"
         alt="Christophe Pierrès"
         class="profile-photo"
-        matTooltip="Christophe Pierrès"
-        matTooltipPosition="below" />
+        matTooltip="Christophe Pierrès (clic !)"
+        matTooltipPosition="below"
+        (click)="toggleImage()" />
     </mat-toolbar>
+
 
     <mat-nav-list>
       <a mat-list-item routerLink="/" routerLinkActive="active">Accueil</a>
