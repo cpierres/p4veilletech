@@ -1,71 +1,73 @@
-<h3>Comparatif des librairies</h3>
-<mat-divider></mat-divider>
-<table mat-table [dataSource]="libraries" class="mat-elevation-z8">
+<mat-card>
+  <h3>Comparatif des librairies</h3>
+  <mat-divider></mat-divider>
+  <table mat-table [dataSource]="libraries" class="mat-elevation-z8">
 
-  <ng-container matColumnDef="name">
-    <th mat-header-cell *matHeaderCellDef> Nom</th>
-    <td mat-cell *matCellDef="let library">
-      <a href="{{ library.link }}" target="_blank" title="{{ library.title }}">{{ library.name }}</a>
-      <span *ngIf="library.choice === '1'" class="gold-medal">🏅</span>
-      <span *ngIf="library.choice === '2'" class="silver-medal">🥈</span>
-      <span *ngIf="library.choice === '0'" class="no-choice">❌</span>
-    </td>
-  </ng-container>
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef> Nom</th>
+      <td mat-cell *matCellDef="let library">
+        <a href="{{ library.link }}" target="_blank" title="{{ library.title }}">{{ library.name }}</a>
+        <span *ngIf="library.choice === '1'" class="gold-medal">🏅</span>
+        <span *ngIf="library.choice === '2'" class="silver-medal">🥈</span>
+        <span *ngIf="library.choice === '0'" class="no-choice">❌</span>
+      </td>
+    </ng-container>
 
-  <ng-container matColumnDef="advantages">
-    <th mat-header-cell *matHeaderCellDef> Avantages</th>
-    <td mat-cell *matCellDef="let lib"> {{ lib.advantages }}</td>
-  </ng-container>
+    <ng-container matColumnDef="advantages">
+      <th mat-header-cell *matHeaderCellDef class="centered-header">Avantages</th>
+      <td mat-cell *matCellDef="let lib"> {{ lib.advantages }}</td>
+    </ng-container>
 
-  <ng-container matColumnDef="disadvantages">
-    <th mat-header-cell *matHeaderCellDef> Inconvénients</th>
-    <td mat-cell *matCellDef="let lib"> {{ lib.disadvantages }}</td>
-  </ng-container>
+    <ng-container matColumnDef="disadvantages">
+      <th mat-header-cell *matHeaderCellDef class="centered-header">Inconvénients</th>
+      <td mat-cell *matCellDef="let lib"> {{ lib.disadvantages }}</td>
+    </ng-container>
 
-  <ng-container matColumnDef="features">
-    <th mat-header-cell *matHeaderCellDef> Caractéristiques principales</th>
-    <td mat-cell *matCellDef="let lib"> {{ lib.features }}</td>
-  </ng-container>
+    <ng-container matColumnDef="features">
+      <th mat-header-cell *matHeaderCellDef class="centered-header">Caractéristiques principales</th>
+      <td mat-cell *matCellDef="let lib"> {{ lib.features }}</td>
+    </ng-container>
 
-  <ng-container matColumnDef="useCases">
-    <th mat-header-cell *matHeaderCellDef> Cas d'utilisation</th>
-    <td mat-cell *matCellDef="let lib"> {{ lib.useCases }}</td>
-  </ng-container>
+    <ng-container matColumnDef="useCases">
+      <th mat-header-cell *matHeaderCellDef class="centered-header">Cas d'utilisation</th>
+      <td mat-cell *matCellDef="let lib"> {{ lib.useCases }}</td>
+    </ng-container>
 
-  <ng-container matColumnDef="references">
-    <th mat-header-cell *matHeaderCellDef> Références</th>
-    <td mat-cell *matCellDef="let lib">
+    <ng-container matColumnDef="references">
+      <th mat-header-cell *matHeaderCellDef class="centered-header" title="Autres avis comparatifs en bas du tableau">Références<br>(Autres comparatifs en bas du tableau)</th>
+      <td mat-cell *matCellDef="let lib">
+        <ul>
+          <li><a href="{{ lib.references.github.repo }}" target="_blank"
+                 title="{{lib.references.github.title}}">GitHub</a>
+            <span *ngIf="lib.references.github.stars > 0">: {{ lib.references.github.stars | number }}★</span>
+          </li>
+          <li *ngFor="let site of lib.references.siteAvis">
+            <a href="{{ site.link }}" target="_blank" title="{{ site.title || site.name }}">{{ site.name }}</a>
+          </li>
+        </ul>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns" class="centered-header"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-divider></mat-divider>
+  <h3>Autres comparatifs</h3>
+  <mat-divider></mat-divider>
+  <div class="container">
+    <div class="list-container">
       <ul>
-        <li><a href="{{ lib.references.github.repo }}" target="_blank"
-               title="{{lib.references.github.title}}">GitHub</a>
-          <span *ngIf="lib.references.github.stars > 0">: {{ lib.references.github.stars | number }}★</span>
-        </li>
-        <li *ngFor="let site of lib.references.siteAvis">
-          <a href="{{ site.link }}" target="_blank" title="{{ site.title || site.name }}">{{ site.name }}</a>
+        <li *ngFor="let comparatif of comparatifsUi">
+          <a href="{{ comparatif.link }}" target="_blank" title="{{ comparatif.title || comparatif.name }}">
+            {{ comparatif.name }}
+          </a>
         </li>
       </ul>
-    </td>
-  </ng-container>
+    </div>
+    <div class="image-frame">
+      <img src="../../../../assets/img/star-history-202529.png" height="654" width="916"/>
+    </div>
 
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table>
-
-<mat-divider></mat-divider>
-<h3>Autres comparatifs</h3>
-<mat-divider></mat-divider>
-<div class="container">
-  <div class="list-container">
-    <ul>
-      <li *ngFor="let comparatif of comparatifsUi">
-        <a href="{{ comparatif.link }}" target="_blank" title="{{ comparatif.title || comparatif.name }}">
-          {{ comparatif.name }}
-        </a>
-      </li>
-    </ul>
   </div>
-  <div class="image-frame">
-    <img src="../../../../assets/img/star-history-202529.png" height="654" width="916"/>
-  </div>
-
-</div>
+</mat-card>

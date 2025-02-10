@@ -12,6 +12,7 @@ import {DecimalPipe, NgForOf, NgIf} from '@angular/common';
 import {MatDivider} from '@angular/material/divider';
 import {UiLibrary} from '../../../core/models/UiLibrary';
 import {LinkInfo} from '../../../core/models/LinkInfo';
+import {MatCard} from '@angular/material/card';
 
 @Component({
   selector: 'app-ui-libraries',
@@ -30,6 +31,7 @@ import {LinkInfo} from '../../../core/models/LinkInfo';
     MatDivider,
     NgIf,
     DecimalPipe,
+    MatCard,
   ],
   templateUrl: './ui-libraries.component.html',
   styleUrl: './ui-libraries.component.css'
@@ -65,7 +67,7 @@ export class UiLibrariesComponent {
         siteAvis: [
           {name: 'Angular Blog', link: 'https://blog.angular.io/', title: 'Angular Blog'},
           {
-            name: 'Material Table',
+            name: 'Composants Material',
             link: 'https://material.angular.io/components/table/overview',
             title: 'Table Overview'
           }
@@ -75,10 +77,10 @@ export class UiLibrariesComponent {
     {
       name: 'PrimeNG',
       link: 'https://www.primefaces.org/category/primeng/',
-      title: 'Médaille d\'or pour application complexité moyenne (pas de coût de licence)',
+      title: 'Médaille d\'or pour application complexité moyenne (pas de coût de licence sauf si Primetek pour premium)',
       choice: '1',
       advantages: 'Large éventail de composants riches en fonctionnalités, composants premium.',
-      disadvantages: 'Plus complexe à personnaliser (sauf depuis v18), la qualité esthétique dépend des thèmes. Réputé assez buggé (reddit) ?',
+      disadvantages: 'Plus complexe à personnaliser (sauf depuis v18), la qualité esthétique dépend des thèmes. Semble assez buggé et parfois mal optimisée (reddit - amélioration depuis v18 ?)',
       features: 'Plus de 80 composants gratuits, thèmes prêts à l’emploi, support d’accessibilité. PrimeTek propose version payante avec support.',
       useCases: 'Lorsque vous nécessitez un large choix de fonctionnalités et des thèmes prédéfinis.',
       references: {
@@ -89,8 +91,8 @@ export class UiLibrariesComponent {
           forks: 4700
         },
         siteAvis: [
-          {name: 'Site officiel', link: 'https://primeng.org/', title: 'PrimeNG Official Site'},
-          {name: 'Medium Article', link: 'https://medium.com/search?q=primeng', title: 'PrimeNG on Medium'}
+          {name: 'Site officiel', link: 'https://primeng.org/', title: 'Site officiel PrimeNG'},
+          {name: 'Article Medium', link: 'https://medium.com/search?q=primeng', title: 'PrimeNG sur Medium'}
         ]
       }
     },
@@ -112,7 +114,16 @@ export class UiLibrariesComponent {
         },
         siteAvis: [
           {name: 'Documentation', link: 'https://ng.ant.design/docs/introduce/en/', title: 'NG Zorro Docs'},
-          {name: 'Medium Articles', link: 'https://medium.com/ng-zorro/', title: 'NG Zorro Blog'}
+          {
+            name: 'Avis reddit',
+            link: 'https://www.reddit.com/r/angular/comments/1h5pirb/angular_material_of_ngzorro/',
+            title: 'Avis reddit intéressant'
+          },
+          {
+            name: 'Comparatif reddit',
+            link: 'https://www.reddit.com/r/Angular2/comments/ovvnug/which_is_the_best_primeng_vs_material_vs_ngzorro/',
+            title: 'Comparatif reddit intéressant entre PrimeNG, Material et NG Zorro'
+          },
         ]
       }
     },
@@ -134,14 +145,19 @@ export class UiLibrariesComponent {
         },
         siteAvis: [
           {
-            name: 'Documentations et composants',
+            name: 'Documentation',
             link: 'https://taiga-ui.dev/components',
             title: 'Explore Taiga UI Components'
           },
           {
-            name: 'Comparaison avec Angular Material',
-            link: 'https://blog.example.com/taiga-vs-material/',
-            title: 'Blog: Taiga UI vs Angular Material'
+            name: 'Avis reddit',
+            link: 'https://www.reddit.com/r/Angular2/comments/15hga8h/opinion_on_taiga_ui_component_library/',
+            title: 'Taiga UI vs Angular Material'
+          },
+          {
+            name: 'Avis reddit',
+            link: 'https://www.reddit.com/r/Angular2/comments/1cpvbho/material_vs_primeng_vs_tailwind_vs_taiga_ui_which/',
+            title: 'material vs primeng vs tailwind vs taiga'
           }
         ]
       }
@@ -149,10 +165,10 @@ export class UiLibrariesComponent {
     {
       name: 'AG-Grid',
       link: 'https://www.ag-grid.com/',
-      title: 'Médaille d\'or pour application complexe et avec gros volumes. Licence payante, pas de support communautaire.',
+      title: 'Médaille d\'or pour application complexe et avec gros volumes. Licence payante.',
       choice: '1',
-      advantages: 'Performances élevées pour le rendu de données volumineuses, fonctionnalités avancées pour les tableaux (tri, filtrage, édition).',
-      disadvantages: 'Licence payante nécessaire pour les fonctionnalités avancées, apprentissage assez difficile.',
+      advantages: 'Performances élevées pour le rendu de données volumineuses, fonctionnalités avancées pour les tableaux (tri, filtrage, édition) et les graphes.',
+      disadvantages: 'Composants communautaires peu nombreux. Licence payante nécessaire pour les fonctionnalités avancées, apprentissage assez difficile.',
       features: 'Composants de tableaux dynamiques et hautement personnalisables, idéal pour des applications data-centric.',
       useCases: 'Applications nécessitant des tableaux complexes et interactifs manipulant de larges volumes de données.',
       references: {
@@ -164,7 +180,8 @@ export class UiLibrariesComponent {
         },
         siteAvis: [
           {name: 'Documentation officielle', link: 'https://www.ag-grid.com/documentation/', title: 'AG-Grid Docs'},
-          {name: 'Medium Articles', link: 'https://medium.com/ag-grid/', title: 'AG-Grid Blog'}
+          {name: 'Tarifs', link: 'https://www.ag-grid.com/license-pricing/', title: 'Tarifs par composant'},
+          {name: 'Articles Medium', link: 'https://medium.com/ag-grid/', title: 'AG-Grid Blog'}
         ]
       }
     },
@@ -183,7 +200,11 @@ export class UiLibrariesComponent {
           forks: 1600
         },
         siteAvis: [
-          {name: 'NG Bootstrap Site', link: 'https://ng-bootstrap.github.io/', title: 'Official Site'}
+          {
+            name: 'Comparatif',
+            link: 'https://www.reddit.com/r/angular/comments/181eiv9/ngbootstrap_vs_ngxbootstrap/',
+            title: 'Comparatif ngbootstrap vs ngxbootstrap'
+          },
         ]
       }
     },
@@ -204,11 +225,6 @@ export class UiLibrariesComponent {
         },
         siteAvis: [
           {
-            name: 'Site officiel',
-            link: 'https://valor-software.com/ngx-bootstrap/',
-            title: 'ngx-bootstrap Official Documentation'
-          },
-          {
             name: 'Github Issues',
             link: 'https://github.com/valor-software/ngx-bootstrap/issues',
             title: 'Issues (ngx-bootstrap)'
@@ -225,19 +241,24 @@ export class UiLibrariesComponent {
       title: 'Historique des étoiles des librairies',
     },
     {
-      name: 'Reddit : Comparaison des meilleures librairies UI pour Angular',
+      name: 'Comparatif reddit intéressant entre PrimeNG, Material et NG Zorro',
+      link: 'https://www.reddit.com/r/Angular2/comments/ovvnug/which_is_the_best_primeng_vs_material_vs_ngzorro/',
+      title: 'Comparatif reddit intéressant entre PrimeNG, Material et NG Zorro'
+    },
+    {
+      name: 'Reddit : Comparaison de librairies UI pour Angular',
       link: 'https://www.reddit.com/r/Angular2/comments/1gku1jh/the_best_ui_libraries_for_angular/?tl=fr',
-      title: 'Guide complet des librairies pour Angular',
+      title: 'Comparatif des librairies Angular',
     },
     {
       name: '10 Angular UI Libraries to Create a World-Class User Experience',
       link: 'https://geekflare.com/dev/angular-ui-libraries/',
-      title: 'Guide complet des librairies pour Angular',
+      title: 'Comparatif des librairies Angular',
     },
     {
       name: '9 bibliothèques de composants Angular',
       link: 'https://kinsta.com/fr/blog/bibliotheques-composants-angular/',
-      title: 'Guide complet des librairies pour Angular',
+      title: 'Comparatif des librairies Angular',
     },
     {
       name: 'PrimeNg vs NgBootstrap vs NgxBootstrap',
@@ -245,6 +266,5 @@ export class UiLibrariesComponent {
       title: 'Comparatif youtube sur ces 3 librairies populaires',
     },
   ];
-
 
 }
