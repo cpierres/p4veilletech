@@ -12,6 +12,7 @@ import {
 } from '@angular/material/table';
 import {DecimalPipe, NgForOf, NgIf} from '@angular/common';
 import {TestLibraryUi} from '../../../core/models/TestLibraryUi';
+import {LinkInfo} from '../../../core/models/LinkInfo';
 
 @Component({
   selector: 'app-testing-libraries',
@@ -79,13 +80,10 @@ export class TestingLibrariesComponent {
             link: 'https://stackshare.io/jasmine'
           },
           {
-            name: 'reddit: jasmine vs jest',
-            link: 'https://www.reddit.com/r/Angular2/comments/oa800b/which_one_is_better_for_unit_test_jest_or_jasmine/'
+            name: 'Comparatifs en bas du tableau',
+            link: '#',
+            title: 'Autres avis comparatifs en bas du tableau'
           },
-          {
-            name: 'SoftwareTestingHelp',
-            link: 'https://www.softwaretestinghelp.com/jasmine/'
-          }
         ]
       }
     },
@@ -120,19 +118,21 @@ export class TestingLibrariesComponent {
             link: 'https://stackshare.io/karma'
           },
           {
-            name: 'TestProject',
-            link: 'https://blog.testproject.io/karma/'
+            name: 'Reddit :  Avis et comparatif',
+            link: 'https://www.reddit.com/r/angular/comments/17t085u/have_you_switched_away_from_karma_and_what_did/',
+            title: 'Have you switched away from Karma? And what did you settle on'
           },
           {
-            name: 'Guru99',
-            link: 'https://www.guru99.com/introduction-to-karma-runner.html'
-          }
+            name: 'Comparatifs en bas du tableau',
+            link: '#',
+            title: 'Autres avis comparatifs en bas du tableau'
+          },
         ]
       }
     },
     {
       name: 'TestBed',
-      link: 'https://angular.io/guide/testing-components-basics',
+      link: 'https://angular.dev/guide/testing/components-basics',
       choice: '2',
       typeDeTest: 'Unit Testing (Angular Test Framework)',
       caracteristiques: [
@@ -152,11 +152,16 @@ export class TestingLibrariesComponent {
       references: {
         github: {
           repo: 'https://github.com/angular/angular',
-          title: '(sous-ensemble de Angular)',
+          title: '(TestBed est un sous-ensemble de Angular)',
           stars: 97000,
           forks: 25800
         },
         siteAvis: [
+          {
+            name: 'Github issues',
+            link: 'https://github.com/search?q=repo%3Aangular%2Fangular%20test%20bed&type=issues',
+            title: 'Problèmes en cours sur TestBed'
+          },
           {
             name: 'StackShare',
             link: 'https://stackshare.io/angular-testbed'
@@ -166,8 +171,9 @@ export class TestingLibrariesComponent {
             link: 'https://testing-angular.com/'
           },
           {
-            name: 'Angular Official Docs',
-            link: 'https://angular.io/guide/testing-components-basics'
+            name: 'Tutoriel intéressant',
+            link: 'https://danywalls.com/how-to-test-components-in-angular-using-testbed',
+            title: 'Tutoriel permettant de se faire un avis'
           }
         ]
       }
@@ -184,7 +190,7 @@ export class TestingLibrariesComponent {
       ],
       pointsForts: [
         'Exécution des tests rapide grâce au parallélisme',
-        'Le meilleur choix pour les projets modernes utilisant React ou Angular',
+        'Le meilleur choix pour les projets modernes utilisant Angular ou React',
         'Excellent support des tests d’instantanés (snapshot testing)'
       ],
       pointsFaibles: [
@@ -193,7 +199,7 @@ export class TestingLibrariesComponent {
       ],
       references: {
         github: {
-          repo: 'https://github.com/facebook/jest',
+          repo: 'https://github.com/jestjs/jest',
           stars: 44500,
           forks: 6500
         },
@@ -203,13 +209,10 @@ export class TestingLibrariesComponent {
             link: 'https://stackshare.io/jest'
           },
           {
-            name: 'JavaScriptInfo',
-            link: 'https://javascript.info/testing-jest'
+            name: 'Comparatifs en bas du tableau',
+            link: '#',
+            title: 'Autres avis comparatifs en bas du tableau'
           },
-          {
-            name: 'BetterDev',
-            link: 'https://betterdev.blog/why-jest-framework/'
-          }
         ]
       }
     },
@@ -242,14 +245,6 @@ export class TestingLibrariesComponent {
           {
             name: 'StackShare',
             link: 'https://stackshare.io/protractor'
-          },
-          {
-            name: 'Guru99',
-            link: 'https://www.guru99.com/introduction-protractor-angular-js.html'
-          },
-          {
-            name: 'TestAutomationGuru',
-            link: 'https://testautomationguru.com/using-protractor/'
           }
         ]
       }
@@ -284,15 +279,87 @@ export class TestingLibrariesComponent {
             link: 'https://stackshare.io/cypress'
           },
           {
-            name: 'TestAutomationGuru',
-            link: 'https://testautomationguru.com/introduction-to-cypress/'
+            name: 'Avis sur Reddit (vs playwright)',
+            link: 'https://www.reddit.com/r/angular/comments/1h7lk81/opinions_on_playwright_and_cypress/',
+            title: 'Opinions on playwright and cypress'
           },
           {
-            name: 'SoftwareTestingHelp',
-            link: 'https://www.softwaretestinghelp.com/cypress-tutorial/'
+            name: 'Autre avis sur Reddit',
+            link: 'https://www.reddit.com/r/Angular2/comments/184enjb/angular_component_testing_with_cypress/'
+          }
+        ]
+      }
+    },
+    {
+      name: 'Playwright',
+      link: 'https://playwright.dev/',
+      choice: '3', // Vous pouvez modifier ce champ en fonction des catégories
+      typeDeTest: 'End-to-End (E2E)',
+      caracteristiques: [
+        'Framework moderne pour le test E2E',
+        'Compatible avec les navigateurs modernes (Chromium, Firefox, WebKit)',
+        'Supporte les tests via plusieurs langages (JavaScript, TypeScript, Python, Java, C#)'
+      ],
+      pointsForts: [
+        'Performances rapides grâce à des sessions de navigateur headless',
+        'Fonctionnalités avancées comme les tests parallèles, les fixtures et les traces interactives',
+        'Documentation riche et exemples faciles à suivre',
+        'Automatisation multiplateforme (Windows, macOS, Linux)'
+      ],
+      pointsFaibles: [
+        'Pas conçu pour les tests unitaires',
+        'Configuration initiale plus complexe pour les débutants',
+        'Maîtrise requise des promesses pour gérer les tests asynchrones'
+      ],
+      references: {
+        github: {
+          repo: 'https://github.com/microsoft/playwright',
+          stars: 69200,
+          forks: 3800
+        },
+        siteAvis: [
+          {
+            name: 'StackShare',
+            link: 'https://stackshare.io/playwright'
+          },
+          {
+            name: 'Reddit : avis Playwright (vs cypress et selenium)',
+            link: 'https://www.reddit.com/r/Playwright/comments/14oaegw/a_comparative_analysis_of_playwright_adoption_vs/',
+            title: 'Analyse comparative de l\'adoption de Playwright par rapport à Cypress et Selenium'
           }
         ]
       }
     }
+  ];
+
+  comparatifsTest: LinkInfo[] = [
+    {
+      name: 'Reddit : Discussion intéressante',
+      link: 'https://www.reddit.com/r/Angular2/comments/u7w0q0/is_unit_testing_in_angular_overrated/?tl=fr',
+      title: 'Les tests unitaires dans Angular sont-ils surfaits ?',
+    },
+    {
+      name: 'reddit: jasmine vs jest',
+      link: 'https://www.reddit.com/r/Angular2/comments/oa800b/which_one_is_better_for_unit_test_jest_or_jasmine/'
+    },
+    {
+      name: 'reddit: avis jasmine, karma vs jest',
+      link: 'https://www.reddit.com/r/Angular2/comments/eix8lw/opinions_on_jasmine_karma_vs_jest_others/?tl=fr',
+    },
+    {
+      name: 'Reddit : Comparatif JEST / Jasmine',
+      link: 'https://www.reddit.com/r/Angular2/comments/oa800b/which_one_is_better_for_unit_test_jest_or_jasmine/',
+      title: 'Which one is better for unit test? JEST or Jasmine ?',
+    },
+    {
+      name: 'Reddit : Autre comparatif JEST / Jasmine',
+      link: 'https://www.reddit.com/r/Angular2/comments/yc7as1/jest_vs_karmajasmine_which_testing_library_you/',
+      title: 'Which one is better for unit test? JEST or Jasmine ?',
+    },
+    {
+      name: 'lemagit : comparatif Cypress / Playwright',
+      link: 'https://www.lemagit.fr/conseil/Cypress-et-Playwright-Quand-utiliser-lun-ou-lautre',
+      title: 'Quand utiliser l\'un ou l\'autre',
+    },
   ];
 }
