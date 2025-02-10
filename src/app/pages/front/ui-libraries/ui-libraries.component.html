@@ -15,26 +15,45 @@
 
     <ng-container matColumnDef="advantages">
       <th mat-header-cell *matHeaderCellDef class="centered-header">Avantages</th>
-      <td mat-cell *matCellDef="let lib"> {{ lib.advantages }}</td>
+      <td mat-cell *matCellDef="let lib">
+        <ul>
+          <li *ngFor="let advantage of lib.advantages">{{ advantage }}</li>
+        </ul>
+
+      </td>
     </ng-container>
 
     <ng-container matColumnDef="disadvantages">
       <th mat-header-cell *matHeaderCellDef class="centered-header">Inconvénients</th>
-      <td mat-cell *matCellDef="let lib"> {{ lib.disadvantages }}</td>
+      <td mat-cell *matCellDef="let lib">
+        <ul>
+          <li *ngFor="let disadvantage of lib.disadvantages">{{ disadvantage }}</li>
+        </ul>
+      </td>
     </ng-container>
 
     <ng-container matColumnDef="features">
       <th mat-header-cell *matHeaderCellDef class="centered-header">Caractéristiques principales</th>
-      <td mat-cell *matCellDef="let lib"> {{ lib.features }}</td>
+      <td mat-cell *matCellDef="let lib">
+        <ul>
+          <li *ngFor="let feature of lib.features">{{ feature }}</li>
+        </ul>
+      </td>
     </ng-container>
 
     <ng-container matColumnDef="useCases">
       <th mat-header-cell *matHeaderCellDef class="centered-header">Cas d'utilisation</th>
-      <td mat-cell *matCellDef="let lib"> {{ lib.useCases }}</td>
+      <td mat-cell *matCellDef="let lib">
+        <ul>
+          <li *ngFor="let useCase of lib.useCases">{{ useCase }}</li>
+        </ul>
+      </td>
     </ng-container>
 
     <ng-container matColumnDef="references">
-      <th mat-header-cell *matHeaderCellDef class="centered-header" title="Autres avis comparatifs en bas du tableau">Références<br>(Autres comparatifs en bas du tableau)</th>
+      <th mat-header-cell *matHeaderCellDef class="centered-header" title="Autres avis comparatifs en bas du tableau">
+        Références<br>(Autres comparatifs en bas du tableau)
+      </th>
       <td mat-cell *matCellDef="let lib">
         <ul>
           <li><a href="{{ lib.references.github.repo }}" target="_blank"

@@ -13,6 +13,7 @@ import {
 import {DecimalPipe, NgForOf, NgIf} from '@angular/common';
 import {TestLibraryUi} from '../../../core/models/TestLibraryUi';
 import {LinkInfo} from '../../../core/models/LinkInfo';
+import {ComparatifSolution} from '../../../core/models/ComparatifSolution';
 
 @Component({
   selector: 'app-testing-libraries',
@@ -41,30 +42,30 @@ import {LinkInfo} from '../../../core/models/LinkInfo';
 export class TestingLibrariesComponent {
   displayedColumns: string[] = [
     'name',
-    'typeDeTest',
-    'caracteristiques',
-    'pointsForts',
-    'pointsFaibles',
+    'useCases',
+    'features',
+    'advantages',
+    'disadvantages',
     'references',
   ];
-  testLibraries: TestLibraryUi[] = [
+  testLibraries: ComparatifSolution[] = [
     {
       name: 'Jasmine',
       link: 'https://jasmine.github.io/',
       choice: '2',
-      typeDeTest: 'Unit Testing',
-      caracteristiques: [
+      useCases: ['Unit Testing'],
+      features: [
         'Framework de test unitaire populaire',
         'Écrit en JavaScript',
         'Approche BDD (Behavior Driven Development)'
       ],
-      pointsForts: [
+      advantages: [
         'Syntaxe simple et facile à comprendre',
         'Bien adapté aux tests frontend',
         'Écosystème mature et bien documenté',
         'Intégré par défaut dans Angular'
       ],
-      pointsFaibles: [
+      disadvantages: [
         'Pas conçu pour exécuter les tests dans les navigateurs ou directement avec Node.js',
         'Pas conçu pour gérer les rythmes de test asynchrone avancés'
       ],
@@ -91,18 +92,18 @@ export class TestingLibrariesComponent {
       name: 'Karma',
       link: 'https://karma-runner.github.io/',
       choice: '2',
-      typeDeTest: 'Test Runner',
-      caracteristiques: [
+      useCases: ['Test Runner'],
+      features: [
         'Permet l’exécution des tests dans des navigateurs réels',
         'Compatible avec plusieurs frameworks (Jasmine, Mocha, etc.)',
         'Intégration avec CI/CD (Continuous Integration)'
       ],
-      pointsForts: [
+      advantages: [
         'S’exécute sur plusieurs navigateurs',
         'Prend en charge de nombreux frameworks de test',
         'Intégré par défaut dans Angular'
       ],
-      pointsFaibles: [
+      disadvantages: [
         'Configuration complexe pour certains projets',
         'Performance plus lente par rapport aux solutions modernes comme Jest'
       ],
@@ -134,18 +135,18 @@ export class TestingLibrariesComponent {
       name: 'TestBed',
       link: 'https://angular.dev/guide/testing/components-basics',
       choice: '2',
-      typeDeTest: 'Unit Testing (Angular Test Framework)',
-      caracteristiques: [
+      useCases: ['Unit Testing (Angular Test Framework)'],
+      features: [
         'Solution native pour le test unitaire dans Angular',
         'Permet de tester les composants, modules et services Angular',
         'S’appuie sur Jasmine et Karma pour l’exécution'
       ],
-      pointsForts: [
+      advantages: [
         'Solution introduite et maintenue directement par Angular',
         'Excellente intégration avec le framework Angular',
         'Prend en charge les tests unitaires et semi-intégrés'
       ],
-      pointsFaibles: [
+      disadvantages: [
         'Dépend de Karma pour l’exécution, ce qui peut être lent',
         'Limité aux tests d’unités ou composés liés à Angular'
       ],
@@ -182,18 +183,18 @@ export class TestingLibrariesComponent {
       name: 'Jest',
       link: 'https://jestjs.io/',
       choice: '1',
-      typeDeTest: 'Unit Testing / Integration Testing',
-      caracteristiques: [
+      useCases: ['Unit Testing','Integration Testing'],
+      features: [
         'Framework tout-en-un : assertion, mocking, backend intégrés',
         'Compatible avec JavaScript, TypeScript, Angular, React, Vue.js',
         'Approche moderne avec tests parallèles automatiques'
       ],
-      pointsForts: [
+      advantages: [
         'Exécution des tests rapide grâce au parallélisme',
         'Le meilleur choix pour les projets modernes utilisant Angular ou React',
         'Excellent support des tests d’instantanés (snapshot testing)'
       ],
-      pointsFaibles: [
+      disadvantages: [
         'Léger apprentissage requis pour les développeurs habitués à Jasmine/Karma',
         'Plus difficile à configurer pour les environnements multi-navigateurs'
       ],
@@ -220,18 +221,18 @@ export class TestingLibrariesComponent {
       name: 'Protractor',
       link: 'https://www.protractortest.org/',
       choice: '0',
-      typeDeTest: 'E2E Testing',
-      caracteristiques: [
+      useCases: ['End-to-end (E2E) Testing' ],
+      features: [
         'Framework de test automatisé pour les applications Angular',
         'Support natif des synchronisations Angular',
         'Compatible avec Selenium et WebDriver'
       ],
-      pointsForts: [
+      advantages: [
         'Conçu spécifiquement pour Angular',
         'Large support grâce aux API Selenium',
         'Bonne documentation officielle'
       ],
-      pointsFaibles: [
+      disadvantages: [
         'Déprécié depuis 2020 (recherche d’alternatives nécessaire)',
         'Capacité limitée pour les applications non-Angular'
       ],
@@ -253,18 +254,18 @@ export class TestingLibrariesComponent {
       name: 'Cypress',
       link: 'https://www.cypress.io/',
       choice: '1',
-      typeDeTest: 'E2E Testing',
-      caracteristiques: [
+      useCases: ['E2E Testing'],
+      features: [
         'Tests end-to-end interactifs pour les applications web modernes',
         'Rapports intégrés et faciles à configurer',
         'Moins dépendant d’environnements externes par rapport à d’autres outils'
       ],
-      pointsForts: [
+      advantages: [
         'Excellente expérience utilisateur pour les tests frontend',
         'Facile à intégrer avec CI/CD',
         'Documentation bien écrite et claire'
       ],
-      pointsFaibles: [
+      disadvantages: [
         'Principalement conçu pour tester les navigateurs (pas d’autre type d’applications)'
       ],
       references: {
@@ -294,19 +295,19 @@ export class TestingLibrariesComponent {
       name: 'Playwright',
       link: 'https://playwright.dev/',
       choice: '3', // Vous pouvez modifier ce champ en fonction des catégories
-      typeDeTest: 'End-to-End (E2E)',
-      caracteristiques: [
+      useCases: ['E2E Testing'],
+      features: [
         'Framework moderne pour le test E2E',
         'Compatible avec les navigateurs modernes (Chromium, Firefox, WebKit)',
         'Supporte les tests via plusieurs langages (JavaScript, TypeScript, Python, Java, C#)'
       ],
-      pointsForts: [
+      advantages: [
         'Performances rapides grâce à des sessions de navigateur headless',
         'Fonctionnalités avancées comme les tests parallèles, les fixtures et les traces interactives',
         'Documentation riche et exemples faciles à suivre',
         'Automatisation multiplateforme (Windows, macOS, Linux)'
       ],
-      pointsFaibles: [
+      disadvantages: [
         'Pas conçu pour les tests unitaires',
         'Configuration initiale plus complexe pour les débutants',
         'Maîtrise requise des promesses pour gérer les tests asynchrones'

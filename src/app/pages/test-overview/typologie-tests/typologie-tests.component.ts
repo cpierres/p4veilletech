@@ -52,7 +52,8 @@ testTypologies: TestTypology[] = [
     backendTools: [
       {name: 'JUnit', link: 'https://junit.org/junit5/docs/current/user-guide/'},
       {name: 'Mockito', link: 'https://site.mockito.org'},
-      {name: 'Spring Test', link: 'https://docs.spring.io/spring-framework/docs/current/reference/html/testing.html'},
+      {name: 'Spring Mock MVC', link: 'https://docs.spring.io/spring-framework/reference/testing/mockmvc.html'},
+      {name: 'Spring Test', link: 'https://docs.spring.io/spring-framework/reference/testing.html'},
     ],
     angularExample: 'Tester une méthode de service ou composant avec Jasmine.',
     springExample: 'Tester les méthodes d’un service avec JUnit dans Spring.',
