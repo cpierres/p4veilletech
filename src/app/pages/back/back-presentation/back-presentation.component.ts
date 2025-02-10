@@ -10,7 +10,7 @@ import {
 } from '@angular/material/table';
 
 @Component({
-  selector: 'app-back-fwk',
+  selector: 'app-back-presentation',
   imports: [
     MatTable,
     MatColumnDef,
@@ -23,10 +23,10 @@ import {
     MatRow,
     MatRowDef
   ],
-  templateUrl: './back-fwk.component.html',
-  styleUrl: './back-fwk.component.css'
+  templateUrl: './back-presentation.component.html',
+  styleUrl: './back-presentation.component.css'
 })
-export class BackFwkComponent {
+export class BackPresentationComponent {
   // Données du tableau
   backTableData = [
     {

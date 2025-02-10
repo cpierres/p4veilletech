@@ -1,21 +1,23 @@
 import { Component } from '@angular/core';
 import {MatTab, MatTabGroup} from '@angular/material/tabs';
-import {BackFwkComponent} from './back-fwk/back-fwk.component';
+import {BackPresentationComponent} from './back-presentation/back-presentation.component';
 import {BackTestingFwkComponent} from './back-testing-fwk/back-testing-fwk.component';
 import {BackParadigmsComponent} from './back-paradigms/back-paradigms.component';
 import {RssBackComponent} from './rss-back/rss-back.component';
 import {BackVeilleComponent} from './back-veille/back-veille.component';
+import {BackPersistenceComponent} from './back-persistence/back-persistence.component';
 
 @Component({
   selector: 'app-back',
   imports: [
     MatTab,
     MatTabGroup,
-    BackFwkComponent,
+    BackPresentationComponent,
     BackTestingFwkComponent,
     BackParadigmsComponent,
     RssBackComponent,
-    BackVeilleComponent
+    BackVeilleComponent,
+    BackPersistenceComponent
   ],
   templateUrl: './back.component.html',
   styleUrl: './back.component.css'
