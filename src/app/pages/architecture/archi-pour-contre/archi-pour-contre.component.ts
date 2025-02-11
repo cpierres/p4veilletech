@@ -5,7 +5,6 @@ import {
     MatExpansionPanelHeader,
     MatExpansionPanelTitle
 } from "@angular/material/expansion";
-import {MatTab, MatTabGroup} from "@angular/material/tabs";
 import {ClassementComponent} from '../../../component/classement/classement.component';
 
 @Component({
