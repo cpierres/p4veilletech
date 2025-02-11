@@ -1,53 +1,22 @@
-<div class="page-container">
-    <h2>Modules de Spring et Spring Boot pour les microservices</h2>
-  <table>
-    <thead>
-    <tr>
-      <th>Module</th>
-      <th>Rôle</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-      <td><strong>Spring Boot Starter Web</strong></td>
-      <td>Permet de créer des APIs REST en exposant des endpoints HTTP.</td>
-    </tr>
-    <tr>
-      <td><strong>Spring Boot Starter Actuator</strong></td>
-      <td>Fournit des endpoints de monitoring (santé, métriques, etc.) pour gérer chaque microservice.</td>
-    </tr>
-    <tr>
-      <td><strong>Spring Cloud Netflix Eureka</strong></td>
-      <td>Met en place un service de découverte pour que les microservices puissent s'enregistrer et se découvrir dynamiquement.</td>
-    </tr>
-    <tr>
-      <td><strong>Spring Cloud Gateway</strong></td>
-      <td>Agit comme un point d'entrée unique (API Gateway) pour router les requêtes vers les différents microservices.</td>
-    </tr>
-    <tr>
-      <td><strong>Spring Cloud Config</strong></td>
-      <td>Permet une gestion centralisée de la configuration pour tous les microservices.</td>
-    </tr>
-    <tr>
-      <td><strong>Spring Security</strong></td>
-      <td>Implémente des mécanismes de sécurité comme l'authentification et l'autorisation pour chaque microservice.</td>
-    </tr>
-    <tr>
-      <td><strong>Spring Cloud Sleuth</strong></td>
-      <td>Fournit des outils pour le traçage distribué afin de suivre les requêtes à travers différents microservices.</td>
-    </tr>
-    <tr>
-      <td><strong>Spring Boot DevTools</strong></td>
-      <td>Facilite le développement avec un redémarrage automatique et un flux de travail simplifié.</td>
-    </tr>
-    <tr>
-      <td><strong>Spring Data</strong></td>
-      <td>Fournit des abstractions pour accéder aux bases de données dans chaque microservice.</td>
-    </tr>
-    <tr>
-      <td><strong>Spring Cloud OpenFeign</strong></td>
-      <td>Permet de configurer des clients HTTP pour la communication entre microservices de manière déclarative.</td>
-    </tr>
-    </tbody>
+<mat-card>
+  <h3>Modules de Spring et Spring Boot pour les microservices</h3>
+  <mat-divider></mat-divider>
+  <table mat-table [dataSource]="modules" class="mat-elevation-z8">
+    <ng-container matColumnDef="module">
+      <th mat-header-cell *matHeaderCellDef> Module</th>
+      <td mat-cell *matCellDef="let element">
+        <a [href]="element.link" target="_blank" title="{{ element.title }}">
+          {{ element.name }}
+        </a>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="role">
+      <th mat-header-cell *matHeaderCellDef> Rôle</th>
+      <td mat-cell *matCellDef="let element"> {{ element.role }}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
-</div>
+</mat-card>

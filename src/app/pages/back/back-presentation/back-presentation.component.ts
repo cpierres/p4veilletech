@@ -11,7 +11,7 @@ import {
 import {ComparatifSolution} from '../../../core/models/ComparatifSolution';
 import {MatCard} from '@angular/material/card';
 import {MatDivider} from '@angular/material/divider';
-import {NgForOf, NgIf} from '@angular/common';
+import {NgForOf} from '@angular/common';
 import {ClassementComponent} from '../../../component/classement/classement.component';
 
 @Component({
