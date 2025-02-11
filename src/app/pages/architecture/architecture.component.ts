@@ -9,6 +9,8 @@ import {MatCard, MatCardTitle} from '@angular/material/card';
 import {MatList, MatListItem} from '@angular/material/list';
 import {MatTab, MatTabGroup} from '@angular/material/tabs';
 import {AvailabilityComponent} from './availability/availability.component';
+import {ArchiPourContreComponent} from './archi-pour-contre/archi-pour-contre.component';
+import {ParadigmsComponent} from './paradigms/paradigms.component';
 
 @Component({
   selector: 'app-architecture',
@@ -23,7 +25,9 @@ import {AvailabilityComponent} from './availability/availability.component';
     MatListItem,
     MatTabGroup,
     MatTab,
-    AvailabilityComponent
+    AvailabilityComponent,
+    ArchiPourContreComponent,
+    ParadigmsComponent
   ],
   templateUrl: './architecture.component.html',
   styleUrl: './architecture.component.css'

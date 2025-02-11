@@ -13,6 +13,7 @@ import {
 import {DecimalPipe, NgForOf, NgIf} from '@angular/common';
 import {LinkInfo} from '../../../core/models/LinkInfo';
 import {ComparatifSolution} from '../../../core/models/ComparatifSolution';
+import {ClassementComponent} from '../../../component/classement/classement.component';
 
 @Component({
   selector: 'app-testing-libraries',
@@ -31,7 +32,8 @@ import {ComparatifSolution} from '../../../core/models/ComparatifSolution';
     MatRowDef,
     MatHeaderRowDef,
     NgIf,
-    DecimalPipe
+    DecimalPipe,
+    ClassementComponent
   ],
   templateUrl: './testing-libraries.component.html',
   styleUrl: './testing-libraries.component.css',

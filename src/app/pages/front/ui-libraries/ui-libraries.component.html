@@ -4,18 +4,17 @@
   <table mat-table [dataSource]="libraries" class="mat-elevation-z8">
 
     <ng-container matColumnDef="name">
-      <th mat-header-cell *matHeaderCellDef> Nom</th>
-      <td mat-cell *matCellDef="let library">
+      <th mat-header-cell *matHeaderCellDef class="centered-header"> Nom</th>
+      <td mat-cell *matCellDef="let library" class="centered-header">
         <a href="{{ library.link }}" target="_blank" title="{{ library.title }}">{{ library.name }}</a>
-        <span *ngIf="library.choice === '1'" class="gold-medal">🏅</span>
-        <span *ngIf="library.choice === '2'" class="silver-medal">🥈</span>
-        <span *ngIf="library.choice === '0'" class="no-choice">❌</span>
+        <br>
+        <app-classement [classement]="library.choice"></app-classement>
       </td>
     </ng-container>
 
     <ng-container matColumnDef="advantages">
       <th mat-header-cell *matHeaderCellDef class="centered-header">Avantages</th>
-      <td mat-cell *matCellDef="let lib">
+      <td mat-cell *matCellDef="let lib" >
         <ul>
           <li *ngFor="let advantage of lib.advantages">{{ advantage }}</li>
         </ul>

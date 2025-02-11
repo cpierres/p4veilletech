@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BackParadigmsComponent } from './back-paradigms.component';
+import { ClassementComponent } from './classement.component';
 
-describe('BackParadigmsComponent', () => {
-  let component: BackParadigmsComponent;
-  let fixture: ComponentFixture<BackParadigmsComponent>;
+describe('ClassementComponent', () => {
+  let component: ClassementComponent;
+  let fixture: ComponentFixture<ClassementComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [BackParadigmsComponent]
+      imports: [ClassementComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(BackParadigmsComponent);
+    fixture = TestBed.createComponent(ClassementComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

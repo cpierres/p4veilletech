@@ -12,6 +12,7 @@ import {ComparatifSolution} from '../../../core/models/ComparatifSolution';
 import {MatCard} from '@angular/material/card';
 import {MatDivider} from '@angular/material/divider';
 import {NgForOf, NgIf} from '@angular/common';
+import {ClassementComponent} from '../../../component/classement/classement.component';
 
 @Component({
   selector: 'app-back-presentation',
@@ -29,7 +30,7 @@ import {NgForOf, NgIf} from '@angular/common';
     MatCard,
     MatDivider,
     NgForOf,
-    NgIf
+    ClassementComponent
   ],
   templateUrl: './back-presentation.component.html',
   styleUrl: './back-presentation.component.css'

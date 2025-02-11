@@ -1,55 +1,69 @@
-<h3>Tableau de synthèse des tests</h3>
-<table mat-table [dataSource]="testTypologies" class="mat-elevation-z8">
+<mat-card>
+  <h3>Tableau de synthèse des tests</h3>
+  <mat-divider></mat-divider>
+  <table mat-table [dataSource]="testTypologies" class="mat-elevation-z8">
 
-  <ng-container matColumnDef="typeTest">
-    <th mat-header-cell *matHeaderCellDef> Type test</th>
-    <td mat-cell *matCellDef="let typo"> {{ typo.typeTest }}</td>
-  </ng-container>
+    <ng-container matColumnDef="typeTest">
+      <th mat-header-cell *matHeaderCellDef> Type test</th>
+      <td mat-cell *matCellDef="let typo"> {{ typo.typeTest }}</td>
+    </ng-container>
 
-  <ng-container matColumnDef="description">
-    <th mat-header-cell *matHeaderCellDef> Description</th>
-    <td mat-cell *matCellDef="let typo"> {{ typo.description }}</td>
-  </ng-container>
+    <ng-container matColumnDef="description">
+      <th mat-header-cell *matHeaderCellDef> Description</th>
+      <td mat-cell *matCellDef="let typo"> {{ typo.description }}</td>
+    </ng-container>
 
-  <ng-container matColumnDef="frontendTools">
-    <th mat-header-cell *matHeaderCellDef> ComparatifSolution Frontend </th>
-    <td mat-cell *matCellDef="let test">
-      <ul>
-        <li *ngFor="let tool of test.frontendTools">
-          <a [href]="tool.link" target="_blank" rel="noopener noreferrer">{{ tool.name }}</a>
-        </li>
-      </ul>
-    </td>
-  </ng-container>
+    <ng-container matColumnDef="frontendTools">
+      <th mat-header-cell *matHeaderCellDef> Comparatif Frontend</th>
+      <td mat-cell *matCellDef="let test">
+        <ul>
+          <li *ngFor="let tool of test.frontendTools">
+            <span *ngIf="tool.link.startsWith('#'); else externalLink" title="{{ tool.title }}">
+              {{ tool.name }}
+            </span>
+            <ng-template #externalLink>
+              <a href="{{ tool.link }}" target="_blank" rel="noopener noreferrer">{{ tool.name }}</a>
+            </ng-template>
+            <app-classement [classement]="tool.choice"></app-classement>
+          </li>
+        </ul>
+      </td>
+    </ng-container>
 
-  <ng-container matColumnDef="backendTools">
-    <th mat-header-cell *matHeaderCellDef> ComparatifSolution Backend </th>
-    <td mat-cell *matCellDef="let test">
-      <ul>
-        <li *ngFor="let tool of test.backendTools">
-          <a [href]="tool.link" target="_blank" rel="noopener noreferrer">{{ tool.name }}</a>
-        </li>
-      </ul>
-    </td>
-  </ng-container>
+    <ng-container matColumnDef="backendTools">
+      <th mat-header-cell *matHeaderCellDef> Comparatif Backend</th>
+      <td mat-cell *matCellDef="let test">
+        <ul>
+          <li *ngFor="let tool of test.backendTools">
+            <span *ngIf="tool.link.startsWith('#'); else externalLink" title="{{ tool.title }}">
+              {{ tool.name }}
+            </span>
+            <ng-template #externalLink>
+              <a href="{{ tool.link }}" target="_blank" rel="noopener noreferrer">{{ tool.name }}</a>
+            </ng-template>
+            <app-classement [classement]="tool.choice"></app-classement>
+          </li>
+        </ul>
+      </td>
+    </ng-container>
 
+    <ng-container matColumnDef="angularExample">
+      <th mat-header-cell *matHeaderCellDef> Exemple Angular</th>
+      <td mat-cell *matCellDef="let typo"> {{ typo.angularExample }}</td>
+    </ng-container>
 
-  <ng-container matColumnDef="angularExample">
-    <th mat-header-cell *matHeaderCellDef> Exemple Angular</th>
-    <td mat-cell *matCellDef="let typo"> {{ typo.angularExample }}</td>
-  </ng-container>
+    <ng-container matColumnDef="springExample">
+      <th mat-header-cell *matHeaderCellDef> Exemple Spring</th>
+      <td mat-cell *matCellDef="let typo"> {{ typo.springExample }}</td>
+    </ng-container>
 
-  <ng-container matColumnDef="springExample">
-    <th mat-header-cell *matHeaderCellDef> Exemple Spring</th>
-    <td mat-cell *matCellDef="let typo"> {{ typo.springExample }}</td>
-  </ng-container>
+    <ng-container matColumnDef="cible">
+      <th mat-header-cell *matHeaderCellDef> Cible</th>
+      <td mat-cell *matCellDef="let typo"> {{ typo.cible }}</td>
+    </ng-container>
 
-  <ng-container matColumnDef="cible">
-    <th mat-header-cell *matHeaderCellDef> Cible</th>
-    <td mat-cell *matCellDef="let typo"> {{ typo.cible }}</td>
-  </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-
-</table>
+  </table>
+</mat-card>

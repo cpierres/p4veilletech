@@ -13,6 +13,7 @@ import {DecimalPipe, NgForOf, NgIf} from '@angular/common';
 import {MatCard} from '@angular/material/card';
 import {MatDivider} from '@angular/material/divider';
 import {LinkInfo} from '../../../core/models/LinkInfo';
+import {ClassementComponent} from '../../../component/classement/classement.component';
 
 @Component({
   selector: 'app-back-persistence',
@@ -31,7 +32,8 @@ import {LinkInfo} from '../../../core/models/LinkInfo';
     NgIf,
     MatCard,
     MatDivider,
-    DecimalPipe
+    DecimalPipe,
+    ClassementComponent
   ],
   templateUrl: './back-persistence.component.html',
   styleUrl: './back-persistence.component.css'

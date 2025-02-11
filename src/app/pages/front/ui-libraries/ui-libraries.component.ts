@@ -13,6 +13,7 @@ import {MatDivider} from '@angular/material/divider';
 import {ComparatifSolution} from '../../../core/models/ComparatifSolution';
 import {LinkInfo} from '../../../core/models/LinkInfo';
 import {MatCard} from '@angular/material/card';
+import {ClassementComponent} from '../../../component/classement/classement.component';
 
 @Component({
   selector: 'app-ui-libraries',
@@ -32,6 +33,7 @@ import {MatCard} from '@angular/material/card';
     NgIf,
     DecimalPipe,
     MatCard,
+    ClassementComponent,
   ],
   templateUrl: './ui-libraries.component.html',
   styleUrl: './ui-libraries.component.css'

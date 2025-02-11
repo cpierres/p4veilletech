@@ -4,6 +4,8 @@ import {TypologieTestsComponent} from '../test-overview/typologie-tests/typologi
 import {MatTab, MatTabGroup} from "@angular/material/tabs";
 import {BackVeilleComponent} from '../back/back-veille/back-veille.component';
 import {FrontVeilleComponent} from '../front/front-veille/front-veille.component';
+import {ClassementComponent} from '../../component/classement/classement.component';
+import {MatDivider} from '@angular/material/divider';
 
 @Component({
   selector: 'app-home',
@@ -13,6 +15,8 @@ import {FrontVeilleComponent} from '../front/front-veille/front-veille.component
     MatTabGroup,
     BackVeilleComponent,
     FrontVeilleComponent,
+    ClassementComponent,
+    MatDivider,
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'

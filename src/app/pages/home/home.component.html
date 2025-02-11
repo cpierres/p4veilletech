@@ -2,14 +2,40 @@
   <mat-tab-group>
     <mat-tab label="Objectifs">
       <p>Ceci est une plateforme pour explorer des solutions autour de <strong>Angular</strong> et
-        <strong>Spring</strong>.</p>
-
+        <strong>Spring</strong> et fournir des points d'entrée pour la veille technologique.</p>
+      <p>
+        L'autre objectif est de déterminer les solutions adaptées au projet du client Knesh dans le cadre
+        du projet 4 d'OpenClassrooms.
+      </p>
+      <p>
+        Les spécifications de l'application ne sont pas connues.
+        Seules les exigences suivantes ont été indiquées :</p>
       <ul>
         <li><strong>Disponibilité :</strong> Assurer un site performant et fiable.</li>
         <li><strong>Rapidité :</strong> Minimiser les temps de chargement et offrir une UX agréable.</li>
         <li><strong>Coûts :</strong> Réutiliser des solutions existantes.</li>
         <li><strong>Évolutivité :</strong> S'appuyer sur des technologies solides et documentées.</li>
       </ul>
+      <p>
+        Il s'agit de trouver le bon compromis pour y répondre.
+      </p>
+      <mat-divider></mat-divider>
+      <p>
+        Ainsi, vous trouverez dans les pages de ce portail des <u>médailles d'Or</u> pour :
+      </p>
+      <ul>
+        <li>
+          L'architecture
+          <app-classement [classement]="'1'"></app-classement>
+        </li>
+        <li>
+          Les éléments logiciel recommandés
+          <app-classement [classement]="'1'"></app-classement>
+        </li>
+      </ul>
+      <p>
+        destiné au projet du client Knesh.
+      </p>
     </mat-tab>
     <mat-tab label="Sites de veille pour Spring">
       <app-back-veille></app-back-veille>

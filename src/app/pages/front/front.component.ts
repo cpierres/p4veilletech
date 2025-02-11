@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import {MatTab, MatTabGroup} from '@angular/material/tabs';
 import {UiLibrariesComponent} from './ui-libraries/ui-libraries.component';
 import {TestingLibrariesComponent} from './testing-libraries/testing-libraries.component';
-import {ParadigmsComponent} from './paradigms/paradigms.component';
+import {ParadigmsComponent} from '../architecture/paradigms/paradigms.component';
 import {RssFrontComponent} from './rss-front/rss-front.component';
 import {FrontVeilleComponent} from './front-veille/front-veille.component';
 
@@ -13,7 +13,6 @@ import {FrontVeilleComponent} from './front-veille/front-veille.component';
     MatTabGroup,
     UiLibrariesComponent,
     TestingLibrariesComponent,
-    ParadigmsComponent,
     RssFrontComponent,
     FrontVeilleComponent
   ],

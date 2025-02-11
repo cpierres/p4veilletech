@@ -1,0 +1,154 @@
+<p>Dans un développement moderne réactif, les paradigmes suivants doivent être utilisés, aussi bien côté Frontend que
+  côté Backend :</p>
+<mat-accordion>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>Programmation Orientée Objet
+        <app-classement [classement]="'1'"/>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <p>
+      La programmation orientée objet (POO) est basée sur l'organisation du code autour des objets,
+      qui contiennent des données (« propriétés ») et des comportements (« méthodes »).
+      Elle repose sur quatre concepts clés :
+    </p>
+    <ul>
+      <li><strong>Encapsulation</strong> : Protéger les données et fournir des accès via des méthodes.</li>
+      <li><strong>Héritage</strong> : Réutiliser ou spécialiser des comportements en dérivant des classes.</li>
+      <li><strong>Polymorphisme</strong> : Capacité à traiter différents objets au travers d'une interface commune.</li>
+      <li><strong>Abstraction</strong> : Cacher les détails de l'implémentation pour se focaliser sur les
+        fonctionnalités.
+      </li>
+    </ul>
+    <p>
+      En Angular et Spring, la POO est prépondérante, utilisée sous forme de composants, services, et beans (en Spring).
+    </p>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>Programmation Fonctionnelle
+        <app-classement [classement]="'1'"/>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <p>
+      La programmation fonctionnelle repose sur des fonctions pures pour manipuler des données.
+      Elle privilégie la <strong>déclarativité</strong>, l'<strong>immutabilité</strong>, ainsi que des fonctions
+      d'ordre supérieur.
+    </p>
+    <p>Grâce aux <strong>Streams</strong> (comme en Java ou RxJS dans Angular), ce paradigme devient extrêmement concis
+      et efficace :</p>
+    <ul>
+      <li>
+        <strong>Concision :</strong> Les Streams réduisent considérablement le code requis par rapport à des boucles
+        impératives.
+      </li>
+      <li>
+        <strong>Efficacité :</strong> Approche basée sur l'exécution paresseuse (lazy evaluation), ne calculant que ce
+        qui est nécessaire.
+      </li>
+      <li>
+        <strong>Chaînage :</strong> Les opérations comme <code>map</code>, <code>filter</code>, <code>reduce</code>
+        clarifient la logique.
+      </li>
+    </ul>
+    <p>
+      Utilisation typique avec Angular et Spring :
+    </p>
+    <ul>
+      <li>
+        En Angular, RxJS permet un chaînage clair des actions sur des Observables, parfait pour traiter des données
+        dynamiques.
+      </li>
+      <li>
+        En Spring, depuis Java 8, les Streams permettent de filtrer et transformer les collections de manière concise et
+        performante.
+      </li>
+    </ul>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>Programmation Réactive
+        <app-classement [classement]="'1'"/>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <p>
+      La programmation réactive met l'accent sur la gestion des flux de données <strong>asynchrones</strong>.
+      Ce paradigme est particulièrement utile pour traiter des événements, ou des flux en temps réel.
+    </p>
+    <ul>
+      <li>
+        Les Observables (côté Angular via RxJS) et les Publishers/Flux (côté Spring via Reactor) permettent de manipuler
+        et transformer des flux dynamiques
+        de manière similaire aux Streams, mais avec une gestion automatique de l'asynchronisme.
+      </li>
+      <li>
+        <strong>Exemple pratique Angular :</strong> Utiliser RxJS pour filtrer, regrouper ou transformer des événements
+        utilisateurs avant de les afficher.
+      </li>
+      <li>
+        <strong>Exemple pratique Spring :</strong> Spring WebFlux propose une gestion réactive des requêtes et des
+        réponses HTTP.
+      </li>
+    </ul>
+    <p>
+      La combinaison des paradigmes fonctionnels et réactifs est particulièrement puissante pour optimiser les
+      performances des applications modernes.
+    </p>
+  </mat-expansion-panel>
+</mat-accordion>
+
+<p>
+  La
+  <a href="https://fr.wikipedia.org/wiki/Programmation_imp%C3%A9rative" target="_blank" rel="noopener noreferrer">
+    programmation impérative
+  </a>
+  doit être éviter sauf pour des cas simples.
+  <app-classement [classement]="'0'"></app-classement>
+</p>
+
+<mat-accordion>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>Programmation Impérative</mat-panel-title>
+    </mat-expansion-panel-header>
+    <p>
+      La programmation impérative repose sur des instructions et des structures de contrôle comme les boucles,
+      conditions, etc.
+      Elle est souvent inefficace et difficile à maintenir dans un contexte moderne :
+    </p>
+    <ul>
+      <li>
+        <strong>Moins concise :</strong> Nécessite souvent plus de lignes de code en manipulant directement les
+        structures de données.
+      </li>
+      <li>
+        <strong>Mutable :</strong> Conduit souvent à des erreurs dues à la modification de l'état des variables.
+      </li>
+    </ul>
+    <p>
+      Toutefois, elle peut être utile pour des scripts ou des tâches simples mais doit être évitée dans des applications
+      professionnelles modernes.
+    </p>
+  </mat-expansion-panel>
+</mat-accordion>
+<p>
+  Les projets OpenClassrooms suivants ont été développés selon ces trois paradigmes :
+</p>
+<ul>
+  <li>
+    Le projet OpenClassrooms n°2 (<a href="https://cpierres.dscloud.me:9022/" target="_blank" rel="noopener noreferrer">Démo Frontend</a>):
+    <a href="https://github.com/cpierres/Opencr-Projet02-Angular" target="_blank" rel="noopener noreferrer">
+      Github
+    </a>
+  </li>
+  <li>
+    Le projet OpenClassrooms n°3 (BackEnd) :
+    <a href="https://github.com/cpierres/P3-back-spring" target="_blank" rel="noopener noreferrer">
+    Github
+  </a>
+  </li>
+</ul>
+
+
