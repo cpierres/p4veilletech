@@ -57,7 +57,7 @@ export class RssfeedService {
         const rssData: RssData[] = items.map((item: any) => ({
           title: item.title,
           link: item.link,
-          description: item.description,
+          //description: item.description,
         }));
 
         return rssData;
