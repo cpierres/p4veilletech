@@ -3,6 +3,7 @@
   On sélectionnera celle qui convient le mieux en fonction des besoins du projet.</p>
 
 <mat-tab-group>
+  <mat-card>
   <mat-tab label="Types d'architectures">
     <mat-accordion>
       <mat-expansion-panel>
@@ -186,11 +187,15 @@
       </mat-expansion-panel>
     </mat-accordion>
   </mat-tab>
+    </mat-card>
   <mat-tab label="Disponibilité">
     <app-availability></app-availability>
   </mat-tab>
   <mat-tab label="Contextes applicatifs des Types d'architectures">
     <app-archi-pour-contre></app-archi-pour-contre>
+  </mat-tab>
+  <mat-tab label="Sites de référence sur les architectures">
+    <app-archi-veille></app-archi-veille>
   </mat-tab>
   <mat-tab label="Paradigmes de programmation">
     <app-paradigms></app-paradigms>

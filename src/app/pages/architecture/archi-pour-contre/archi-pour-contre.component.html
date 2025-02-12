@@ -1,48 +1,55 @@
 <mat-accordion>
   <mat-expansion-panel>
     <mat-expansion-panel-header>
-      <mat-panel-title>1. Architecture Monolithique <app-classement [classement]="'1'"/> </mat-panel-title>
+      <mat-panel-title>1. Architecture Monolithique
+        <app-classement [classement]="'1'"/>
+      </mat-panel-title>
     </mat-expansion-panel-header>
-    <h3>Intérêts   </h3>
-    <ul>
-      <li><strong>Simplicité :</strong> Une seule application regroupant toutes les fonctionnalités.</li>
-      <li><strong>Facilité de développement initial :</strong> Moins de complexité pour commencer à coder.</li>
-      <li><strong>Performance :</strong> Pas de surcoût de communication entre services.</li>
-      <li><strong>Gestion simplifiée des déploiements :</strong> Un seul artefact (JAR/WAR) à déployer dans
-        l'environnement cible.
-      </li>
-      <li><strong>Facilité de tests :</strong> Tout le code est dans une seule base, ce qui facilite les tests
-        end-to-end.
-      </li>
-    </ul>
+    <mat-card>
+      <h3>Intérêts </h3>
+      <ul>
+        <li><strong>Simplicité :</strong> Une seule application regroupant toutes les fonctionnalités.</li>
+        <li><strong>Facilité de développement initial :</strong> Moins de complexité pour commencer à coder.</li>
+        <li><strong>Performance :</strong> Pas de surcoût de communication entre services.</li>
+        <li><strong>Gestion simplifiée des déploiements :</strong> Un seul artefact (JAR/WAR) à déployer dans
+          l'environnement cible.
+        </li>
+        <li><strong>Facilité de tests :</strong> Tout le code est dans une seule base, ce qui facilite les tests
+          end-to-end.
+        </li>
+      </ul>
 
-    <h3>Inconvénients</h3>
-    <ul>
-      <li><strong>Évolutivité limitée :</strong> Toute l'application doit être mise à l'échelle, même si un seul
-        composant nécessite plus de ressources.
-      </li>
-      <li><strong>Maintenance difficile :</strong> Une grande base de code devient rapidement difficile à gérer et à
-        comprendre à mesure qu'elle grandit.
-      </li>
-      <li><strong>Couplage fort :</strong> Les différentes parties de l'application sont souvent étroitement liées.</li>
-      <li><strong>Temps de déploiement long :</strong> Une modification nécessite un déploiement complet, même pour de
-        petites corrections.
-      </li>
-    </ul>
+      <h3>Inconvénients</h3>
+      <ul>
+        <li><strong>Évolutivité limitée :</strong> Toute l'application doit être mise à l'échelle, même si un seul
+          composant nécessite plus de ressources.
+        </li>
+        <li><strong>Maintenance difficile :</strong> Une grande base de code devient rapidement difficile à gérer et à
+          comprendre à mesure qu'elle grandit.
+        </li>
+        <li><strong>Couplage fort :</strong> Les différentes parties de l'application sont souvent étroitement liées.
+        </li>
+        <li><strong>Temps de déploiement long :</strong> Une modification nécessite un déploiement complet, même pour de
+          petites corrections.
+        </li>
+      </ul>
 
-    <h3>Contexte applicatif</h3>
-    <p>L'architecture monolithique est idéale dans les contextes suivants :</p>
-    <ul>
-      <li><strong>Applications simples ou petites :</strong> Lorsque le projet a une portée limitée.</li>
-      <li><strong>Début de projet :</strong> Lorsque les besoins ne sont pas encore bien définis et que l'équipe veut un
-        démarrage rapide.
-      </li>
-      <li><strong>Petite équipe :</strong> Avec une équipe restreinte, une architecture monolithique réduit la charge
-        technique.
-      </li>
-      <li><strong>Pas ou peu de scalabilité requise :</strong> Si les besoins en performances sont modestes ou stables.
-      </li>
-    </ul>
+      <h3>Contexte applicatif</h3>
+      <p>L'architecture monolithique est idéale dans les contextes suivants :</p>
+      <ul>
+        <li><strong>Applications simples ou petites :</strong> Lorsque le projet a une portée limitée.</li>
+        <li><strong>Début de projet :</strong> Lorsque les besoins ne sont pas encore bien définis et que l'équipe veut
+          un
+          démarrage rapide.
+        </li>
+        <li><strong>Petite équipe :</strong> Avec une équipe restreinte, une architecture monolithique réduit la charge
+          technique.
+        </li>
+        <li><strong>Pas ou peu de scalabilité requise :</strong> Si les besoins en performances sont modestes ou
+          stables.
+        </li>
+      </ul>
+    </mat-card>
   </mat-expansion-panel>
 </mat-accordion>
 <mat-accordion>
@@ -50,60 +57,65 @@
     <mat-expansion-panel-header>
       <mat-panel-title>2. Micro-services</mat-panel-title>
     </mat-expansion-panel-header>
-    <h3>Intérêts</h3>
-    <ul>
-      <li><strong>Évolutivité indépendante :</strong> Chaque microservice peut être mis à l'échelle de manière autonome
-        selon ses besoins.
-      </li>
-      <li><strong>Flexibilité technologique :</strong> Chaque microservice peut être développé avec des technologies
-        différentes selon les besoins.
-      </li>
-      <li><strong>Déploiement indépendant :</strong> Les changements dans un microservice n'affectent pas les autres
-        services.
-      </li>
-      <li><strong>Résilience :</strong> Si un service tombe en panne, les autres peuvent continuer à fonctionner.</li>
-      <li><strong>Maintenance facilitée :</strong> Les équipes peuvent travailler indépendamment sur différents
-        microservices, ce qui rend le développement plus agile.
-      </li>
-    </ul>
+    <mat-card>
+      <h3>Intérêts</h3>
+      <ul>
+        <li><strong>Évolutivité indépendante :</strong> Chaque microservice peut être mis à l'échelle de manière
+          autonome
+          selon ses besoins.
+        </li>
+        <li><strong>Flexibilité technologique :</strong> Chaque microservice peut être développé avec des technologies
+          différentes selon les besoins.
+        </li>
+        <li><strong>Déploiement indépendant :</strong> Les changements dans un microservice n'affectent pas les autres
+          services.
+        </li>
+        <li><strong>Résilience :</strong> Si un service tombe en panne, les autres peuvent continuer à fonctionner.</li>
+        <li><strong>Maintenance facilitée :</strong> Les équipes peuvent travailler indépendamment sur différents
+          microservices, ce qui rend le développement plus agile.
+        </li>
+      </ul>
 
-    <h3>Inconvénients</h3>
-    <ul>
-      <li><strong>Complexité accrue :</strong> La gestion de plusieurs services introduit des défis liés à
-        l'orchestration, à la communication et à la surveillance.
-      </li>
-      <li><strong>Coût opérationnel :</strong> L'exécution de plusieurs instances de microservices entraîne des
-        ressources et coûts supplémentaires.
-      </li>
-      <li><strong>Latence :</strong> Les communications inter-services (souvent sur HTTP ou gRPC) peuvent ajouter de la
-        latence.
-      </li>
-      <li><strong>Gestion des transactions distribuées :</strong> Il est plus complexe de gérer des transactions
-        impliquant plusieurs microservices (notamment via des motifs comme Saga).
-      </li>
-      <li><strong>Débogage complexe :</strong> Le traçage d'erreurs entre plusieurs microservices est plus difficile.
-      </li>
-    </ul>
+      <h3>Inconvénients</h3>
+      <ul>
+        <li><strong>Complexité accrue :</strong> La gestion de plusieurs services introduit des défis liés à
+          l'orchestration, à la communication et à la surveillance.
+        </li>
+        <li><strong>Coût opérationnel :</strong> L'exécution de plusieurs instances de microservices entraîne des
+          ressources et coûts supplémentaires.
+        </li>
+        <li><strong>Latence :</strong> Les communications inter-services (souvent sur HTTP ou gRPC) peuvent ajouter de
+          la
+          latence.
+        </li>
+        <li><strong>Gestion des transactions distribuées :</strong> Il est plus complexe de gérer des transactions
+          impliquant plusieurs microservices (notamment via des motifs comme Saga).
+        </li>
+        <li><strong>Débogage complexe :</strong> Le traçage d'erreurs entre plusieurs microservices est plus difficile.
+        </li>
+      </ul>
 
-    <h3>Contexte applicatif adapté</h3>
-    <p>Les microservices sont particulièrement adaptés dans les contextes suivants :</p>
-    <ul>
-      <li><strong>Grandes applications complexes :</strong> Lorsque le projet se divise naturellement en domaines
-        fonctionnels indépendants (bounded contexts).
-      </li>
-      <li><strong>Besoins d'évolutivité :</strong> Lorsque certaines parties de l'application nécessitent des ressources
-        significativement différentes.
-      </li>
-      <li><strong>Développement par multiples équipes :</strong> Pour permettre à diverses équipes de développer,
-        déployer et maintenir des parties de l'application en autonomie.
-      </li>
-      <li><strong>Approche DevOps et CI/CD :</strong> Pour bénéficier d'un déploiement rapide et agile avec des
-        pipelines CI/CD indépendants.
-      </li>
-    </ul>
-    <p>Ils sont à éviter pour des petites applications simples ou celles qui n'ont pas besoin de déploiement fréquent ou
-      de ressources spécifiques pour des parties différentes.</p>
-
+      <h3>Contexte applicatif adapté</h3>
+      <p>Les microservices sont particulièrement adaptés dans les contextes suivants :</p>
+      <ul>
+        <li><strong>Grandes applications complexes :</strong> Lorsque le projet se divise naturellement en domaines
+          fonctionnels indépendants (bounded contexts).
+        </li>
+        <li><strong>Besoins d'évolutivité :</strong> Lorsque certaines parties de l'application nécessitent des
+          ressources
+          significativement différentes.
+        </li>
+        <li><strong>Développement par multiples équipes :</strong> Pour permettre à diverses équipes de développer,
+          déployer et maintenir des parties de l'application en autonomie.
+        </li>
+        <li><strong>Approche DevOps et CI/CD :</strong> Pour bénéficier d'un déploiement rapide et agile avec des
+          pipelines CI/CD indépendants.
+        </li>
+      </ul>
+      <p>Ils sont à éviter pour des petites applications simples ou celles qui n'ont pas besoin de déploiement fréquent
+        ou
+        de ressources spécifiques pour des parties différentes.</p>
+    </mat-card>
   </mat-expansion-panel>
 </mat-accordion>
 <mat-accordion>
@@ -111,48 +123,54 @@
     <mat-expansion-panel-header>
       <mat-panel-title>3. Architecture Serverless</mat-panel-title>
     </mat-expansion-panel-header>
-    <h3>Intérêts de l'architecture Serverless</h3>
-    <ul>
-      <li><strong>Aucun serveur à gérer :</strong> L'infrastructure est gérée par des fournisseurs cloud (AWS, Google
-        Cloud, Azure, etc.).
-      </li>
-      <li><strong>Évolutivité automatique :</strong> Les ressources augmentent et diminuent en fonction de la charge.
-      </li>
-      <li><strong>Coût basé sur l'utilisation :</strong> Vous ne payez que pour le temps d'exécution des fonctions.</li>
-      <li><strong>Rapidité de mise en œuvre :</strong> Focus uniquement sur l'écriture du code métier sans se soucier de
-        l'infrastructure.
-      </li>
-    </ul>
+    <mat-card>
+      <h3>Intérêts de l'architecture Serverless</h3>
+      <ul>
+        <li><strong>Aucun serveur à gérer :</strong> L'infrastructure est gérée par des fournisseurs cloud (AWS, Google
+          Cloud, Azure, etc.).
+        </li>
+        <li><strong>Évolutivité automatique :</strong> Les ressources augmentent et diminuent en fonction de la charge.
+        </li>
+        <li><strong>Coût basé sur l'utilisation :</strong> Vous ne payez que pour le temps d'exécution des fonctions.
+        </li>
+        <li><strong>Rapidité de mise en œuvre :</strong> Focus uniquement sur l'écriture du code métier sans se soucier
+          de
+          l'infrastructure.
+        </li>
+      </ul>
 
-    <h3>Inconvénients de l'architecture Serverless</h3>
-    <ul>
-      <li><strong>Limites dans la durée d'exécution :</strong> Les fonctions serverless sont souvent limitées en temps
-        d'exécution (par exemple : 15 minutes sur AWS Lambda).
-      </li>
-      <li><strong>Latence de démarrage à froid :</strong> Les nouveaux conteneurs peuvent prendre du temps à se lancer.
-      </li>
-      <li><strong>Dépendance au fournisseur :</strong> Les applications sont étroitement liées aux services cloud du
-        fournisseur choisi.
-      </li>
-      <li><strong>Debugging complexe :</strong> Il est plus difficile de déboguer et simuler des environnements cloud
-        localement.
-      </li>
-    </ul>
+      <h3>Inconvénients de l'architecture Serverless</h3>
+      <ul>
+        <li><strong>Limites dans la durée d'exécution :</strong> Les fonctions serverless sont souvent limitées en temps
+          d'exécution (par exemple : 15 minutes sur AWS Lambda).
+        </li>
+        <li><strong>Latence de démarrage à froid :</strong> Les nouveaux conteneurs peuvent prendre du temps à se
+          lancer.
+        </li>
+        <li><strong>Dépendance au fournisseur :</strong> Les applications sont étroitement liées aux services cloud du
+          fournisseur choisi.
+        </li>
+        <li><strong>Debugging complexe :</strong> Il est plus difficile de déboguer et simuler des environnements cloud
+          localement.
+        </li>
+      </ul>
 
-    <h3>Contexte applicatif</h3>
-    <p>L'architecture serverless convient dans les contextes suivants :</p>
-    <ul>
-      <li><strong>Applications légères ou événementielles :</strong> Les applications déclenchées par des événements
-        spécifiques comme des tâches planifiées ou des webhooks.
-      </li>
-      <li><strong>Développement rapide de prototypes :</strong> Idéal pour construire rapidement des POC ou MVP.</li>
-      <li><strong>Besoins d'évolutivité massive :</strong> Lorsque le trafic est imprévisible ou très variable (e.g.,
-        apps utilisées pour des campagnes marketing).
-      </li>
-      <li><strong>Travail par fonctions unitaires :</strong> Lorsque l'application peut être divisée en petits blocs de
-        fonctionnalités indépendants (ex : calculs, transferts, saisies).
-      </li>
-    </ul>
+      <h3>Contexte applicatif</h3>
+      <p>L'architecture serverless convient dans les contextes suivants :</p>
+      <ul>
+        <li><strong>Applications légères ou événementielles :</strong> Les applications déclenchées par des événements
+          spécifiques comme des tâches planifiées ou des webhooks.
+        </li>
+        <li><strong>Développement rapide de prototypes :</strong> Idéal pour construire rapidement des POC ou MVP.</li>
+        <li><strong>Besoins d'évolutivité massive :</strong> Lorsque le trafic est imprévisible ou très variable (e.g.,
+          apps utilisées pour des campagnes marketing).
+        </li>
+        <li><strong>Travail par fonctions unitaires :</strong> Lorsque l'application peut être divisée en petits blocs
+          de
+          fonctionnalités indépendants (ex : calculs, transferts, saisies).
+        </li>
+      </ul>
+    </mat-card>
   </mat-expansion-panel>
 </mat-accordion>
 <mat-accordion>
@@ -160,75 +178,81 @@
     <mat-expansion-panel-header>
       <mat-panel-title>4. Architecture Hexagonale</mat-panel-title>
     </mat-expansion-panel-header>
-    <h3>Intérêts de l'architecture hexagonale</h3>
-    <ul>
-      <li><strong>Séparation claire des préoccupations :</strong> Distinction entre les règles métiers (core business
-        logic) et les détails liés à l'infrastructure.
-      </li>
-      <li><strong>Extensibilité :</strong> Facile d'ajouter de nouveaux canaux d'entrée (API REST, interface
-        utilisateur, batch, etc.) et de sortie (bases de données, services externes) sans toucher au coeur métier.
-      </li>
-      <li><strong>Indépendance technologique :</strong> Le domaine métier (core) est découplé des frameworks ou
-        technologies spécifiques.
-      </li>
-      <li><strong>Testabilité accrue :</strong> Le coeur métier peut être testé isolément, sans dépendances à des
-        composants externes comme les bases de données.
-      </li>
-      <li><strong>Maintenance facilitée :</strong> L'architecture encourage un code organisé et modulaire, simplifiant
-        les évolutions.
-      </li>
-    </ul>
+    <mat-card>
+      <h3>Intérêts de l'architecture hexagonale</h3>
+      <ul>
+        <li><strong>Séparation claire des préoccupations :</strong> Distinction entre les règles métiers (core business
+          logic) et les détails liés à l'infrastructure.
+        </li>
+        <li><strong>Extensibilité :</strong> Facile d'ajouter de nouveaux canaux d'entrée (API REST, interface
+          utilisateur, batch, etc.) et de sortie (bases de données, services externes) sans toucher au coeur métier.
+        </li>
+        <li><strong>Indépendance technologique :</strong> Le domaine métier (core) est découplé des frameworks ou
+          technologies spécifiques.
+        </li>
+        <li><strong>Testabilité accrue :</strong> Le coeur métier peut être testé isolément, sans dépendances à des
+          composants externes comme les bases de données.
+        </li>
+        <li><strong>Maintenance facilitée :</strong> L'architecture encourage un code organisé et modulaire, simplifiant
+          les évolutions.
+        </li>
+      </ul>
 
-    <h3>Inconvénients de l'architecture hexagonale</h3>
-    <ul>
-      <li><strong>Complexité initiale :</strong> Nécessite une compréhension avancée des concepts pour être bien mise en
-        œuvre.
-      </li>
-      <li><strong>Temps de développement :</strong> Demande plus de travail au départ pour structurer convenablement le
-        projet.
-      </li>
-      <li><strong>Overhead pour les petites applications :</strong> Peut être surdimensionnée pour des cas simples ou
-        des projets de petite envergure.
-      </li>
-    </ul>
+      <h3>Inconvénients de l'architecture hexagonale</h3>
+      <ul>
+        <li><strong>Complexité initiale :</strong> Nécessite une compréhension avancée des concepts pour être bien mise
+          en
+          œuvre.
+        </li>
+        <li><strong>Temps de développement :</strong> Demande plus de travail au départ pour structurer convenablement
+          le
+          projet.
+        </li>
+        <li><strong>Overhead pour les petites applications :</strong> Peut être surdimensionnée pour des cas simples ou
+          des projets de petite envergure.
+        </li>
+      </ul>
 
-    <h3>Contexte applicatif</h3>
-    <p>L'architecture hexagonale est particulièrement adaptée aux contextes suivants :</p>
-    <ul>
-      <li><strong>Applications avec une logique métier complexe :</strong> Utile lorsque la séparation entre logique
-        métier et détails techniques est cruciale.
-      </li>
-      <li><strong>Projets évolutifs :</strong> Lorsque l'application est destinée à évoluer sur le long terme (ajout de
-        nouvelles interfaces, canaux d'intégration, etc.).
-      </li>
-      <li><strong>Tests unitaires critiques :</strong> Utile lorsque des tests précis sur la logique métier sont une
-        priorité.
-      </li>
-      <li><strong>Applications multi-canal :</strong> Convient aux applications qui doivent fonctionner via plusieurs
-        canaux (API REST, CLI, front-end, etc.).
-      </li>
-    </ul>
+      <h3>Contexte applicatif</h3>
+      <p>L'architecture hexagonale est particulièrement adaptée aux contextes suivants :</p>
+      <ul>
+        <li><strong>Applications avec une logique métier complexe :</strong> Utile lorsque la séparation entre logique
+          métier et détails techniques est cruciale.
+        </li>
+        <li><strong>Projets évolutifs :</strong> Lorsque l'application est destinée à évoluer sur le long terme (ajout
+          de
+          nouvelles interfaces, canaux d'intégration, etc.).
+        </li>
+        <li><strong>Tests unitaires critiques :</strong> Utile lorsque des tests précis sur la logique métier sont une
+          priorité.
+        </li>
+        <li><strong>Applications multi-canal :</strong> Convient aux applications qui doivent fonctionner via plusieurs
+          canaux (API REST, CLI, front-end, etc.).
+        </li>
+      </ul>
 
-    <h3>Principes de l'architecture hexagonale</h3>
-    <ul>
-      <li><strong>Ports :</strong> Interfaces exposées par le domaine (ex. interaction utilisateur, systèmes externes).
-      </li>
-      <li><strong>Adapters :</strong> Implémentations concrètes qui connectent les ports à des technologies spécifiques
-        (ex. bases de données, API REST).
-      </li>
-      <li><strong>Core métier :</strong> Le noyau contenant la logique métier indépendante de toute technologie.</li>
-    </ul>
+      <h3>Principes de l'architecture hexagonale</h3>
+      <ul>
+        <li><strong>Ports :</strong> Interfaces exposées par le domaine (ex. interaction utilisateur, systèmes
+          externes).
+        </li>
+        <li><strong>Adapters :</strong> Implémentations concrètes qui connectent les ports à des technologies
+          spécifiques
+          (ex. bases de données, API REST).
+        </li>
+        <li><strong>Core métier :</strong> Le noyau contenant la logique métier indépendante de toute technologie.</li>
+      </ul>
 
-    <h3>Illustration simplifiée</h3>
-    <p>
-      L'architecture hexagonale peut être représentée comme un hexagone avec, au centre, la logique métier, et des
-      **ports** connectés à des **adapters** en périphérie. Par exemple :
-    </p>
-    <ul>
-      <li><strong>Port entrant :</strong> Reçoit des appels via une API REST (adapter HTTP).</li>
-      <li><strong>Port sortant :</strong> Sauvegarde des données dans une base (adapter base de données).</li>
-    </ul>
-
+      <h3>Illustration simplifiée</h3>
+      <p>
+        L'architecture hexagonale peut être représentée comme un hexagone avec, au centre, la logique métier, et des
+        **ports** connectés à des **adapters** en périphérie. Par exemple :
+      </p>
+      <ul>
+        <li><strong>Port entrant :</strong> Reçoit des appels via une API REST (adapter HTTP).</li>
+        <li><strong>Port sortant :</strong> Sauvegarde des données dans une base (adapter base de données).</li>
+      </ul>
+    </mat-card>
   </mat-expansion-panel>
 </mat-accordion>
 <mat-accordion>
@@ -236,52 +260,96 @@
     <mat-expansion-panel-header>
       <mat-panel-title>5. Architecture Event-Driven</mat-panel-title>
     </mat-expansion-panel-header>
-    <h3>Intérêts</h3>
-    <ul>
-      <li><strong>Asynchronisme :</strong> Les composants peuvent communiquer sans attendre les réponses, ce qui améliore les performances et la réactivité de l'application.</li>
-      <li><strong>Découplage des composants :</strong> Les producteurs (sources d'événements) et les consommateurs (qui réagissent aux événements) sont faiblement couplés, facilitant leur évolution indépendante.</li>
-      <li><strong>Extensibilité :</strong> Facile d'ajouter de nouveaux consommateurs d'événements, sans perturber l'ensemble du système.</li>
-      <li><strong>Résilience accrue :</strong> Les composants peuvent fonctionner de manière autonome, même si d'autres parties du système sont temporairement indisponibles.</li>
-      <li><strong>Adapté aux flux de données complexes :</strong> Gestion native des événements en temps réel, idéale pour des systèmes comme les IoT (Internet of Things), le traitement de logs ou les plateformes analytiques.</li>
-    </ul>
+    <mat-card>
+      <h3>Intérêts</h3>
+      <ul>
+        <li><strong>Asynchronisme :</strong> Les composants peuvent communiquer sans attendre les réponses, ce qui
+          améliore les performances et la réactivité de l'application.
+        </li>
+        <li><strong>Découplage des composants :</strong> Les producteurs (sources d'événements) et les consommateurs
+          (qui
+          réagissent aux événements) sont faiblement couplés, facilitant leur évolution indépendante.
+        </li>
+        <li><strong>Extensibilité :</strong> Facile d'ajouter de nouveaux consommateurs d'événements, sans perturber
+          l'ensemble du système.
+        </li>
+        <li><strong>Résilience accrue :</strong> Les composants peuvent fonctionner de manière autonome, même si
+          d'autres
+          parties du système sont temporairement indisponibles.
+        </li>
+        <li><strong>Adapté aux flux de données complexes :</strong> Gestion native des événements en temps réel, idéale
+          pour des systèmes comme les IoT (Internet of Things), le traitement de logs ou les plateformes analytiques.
+        </li>
+      </ul>
 
-    <h3>Inconvénients</h3>
-    <ul>
-      <li><strong>Complexité accrue :</strong> L'implémentation, la gestion des événements et le suivi des flux d'exécution peuvent devenir difficiles à maintenir.</li>
-      <li><strong>Debugging plus complexe :</strong> Dans un système asynchrone, il peut être difficile de tracer le chemin d'exécution d'une action ou de reconstituer les erreurs.</li>
-      <li><strong>Surcharge de l'infrastructure :</strong> Requiert des outils supplémentaires pour gérer les files d'attente (queues), les brokers (Kafka, RabbitMQ, etc.) et les messages.</li>
-      <li><strong>Latence potentielle :</strong> La communication asynchrone peut introduire une latence si des composants sont surchargés ou si les messages sont mis en file d'attente.</li>
-    </ul>
+      <h3>Inconvénients</h3>
+      <ul>
+        <li><strong>Complexité accrue :</strong> L'implémentation, la gestion des événements et le suivi des flux
+          d'exécution peuvent devenir difficiles à maintenir.
+        </li>
+        <li><strong>Debugging plus complexe :</strong> Dans un système asynchrone, il peut être difficile de tracer le
+          chemin d'exécution d'une action ou de reconstituer les erreurs.
+        </li>
+        <li><strong>Surcharge de l'infrastructure :</strong> Requiert des outils supplémentaires pour gérer les files
+          d'attente (queues), les brokers (Kafka, RabbitMQ, etc.) et les messages.
+        </li>
+        <li><strong>Latence potentielle :</strong> La communication asynchrone peut introduire une latence si des
+          composants sont surchargés ou si les messages sont mis en file d'attente.
+        </li>
+      </ul>
 
-    <h3>Contexte applicatif</h3>
-    <p>L'architecture Event-Driven est idéale dans les contextes suivants :</p>
-    <ul>
-      <li><strong>Systèmes réactifs :</strong> Applications nécessitant une réactivité élevée, par exemple des systèmes en temps réel.</li>
-      <li><strong>Traitement intensif d'événements :</strong> Applications IoT, analyses de logs ou systèmes de monitoring.</li>
-      <li><strong>Applications distribuées :</strong> Où il est nécessaire de coordonner l'activité entre plusieurs services indépendants.</li>
-      <li><strong>Ecosystèmes scalables :</strong> Les plateformes comme des systèmes e-commerce ou des services à demande fluctuante (exemple : marketplaces, commandes clients, etc.).</li>
-    </ul>
+      <h3>Contexte applicatif</h3>
+      <p>L'architecture Event-Driven est idéale dans les contextes suivants :</p>
+      <ul>
+        <li><strong>Systèmes réactifs :</strong> Applications nécessitant une réactivité élevée, par exemple des
+          systèmes
+          en temps réel.
+        </li>
+        <li><strong>Traitement intensif d'événements :</strong> Applications IoT, analyses de logs ou systèmes de
+          monitoring.
+        </li>
+        <li><strong>Applications distribuées :</strong> Où il est nécessaire de coordonner l'activité entre plusieurs
+          services indépendants.
+        </li>
+        <li><strong>Ecosystèmes scalables :</strong> Les plateformes comme des systèmes e-commerce ou des services à
+          demande fluctuante (exemple : marketplaces, commandes clients, etc.).
+        </li>
+      </ul>
 
-    <h3>Principes de l'architecture Event-Driven</h3>
-    <ul>
-      <li><strong>Producteurs d'événements :</strong> Les services ou composants générant les événements lorsqu'une action ou un changement se produit.</li>
-      <li><strong>Consumers (consommateurs) :</strong> Les systèmes qui écoutent et réagissent aux événements diffusés.</li>
-      <li><strong>Event Broker :</strong> Un système central (comme Kafka, RabbitMQ ou un message broker) qui transmet les événements entre les producteurs et les consommateurs.</li>
-      <li><strong>Asynchronisme :</strong> La communication se fait via des messages qui peuvent être traités à différents moments, selon les priorités et les ressources disponibles.</li>
-    </ul>
+      <h3>Principes de l'architecture Event-Driven</h3>
+      <ul>
+        <li><strong>Producteurs d'événements :</strong> Les services ou composants générant les événements lorsqu'une
+          action ou un changement se produit.
+        </li>
+        <li><strong>Consumers (consommateurs) :</strong> Les systèmes qui écoutent et réagissent aux événements
+          diffusés.
+        </li>
+        <li><strong>Event Broker :</strong> Un système central (comme Kafka, RabbitMQ ou un message broker) qui transmet
+          les événements entre les producteurs et les consommateurs.
+        </li>
+        <li><strong>Asynchronisme :</strong> La communication se fait via des messages qui peuvent être traités à
+          différents moments, selon les priorités et les ressources disponibles.
+        </li>
+      </ul>
 
-    <h3>Illustration simplifiée</h3>
-    <p>Dans une architecture Event-Driven :</p>
-    <ul>
-      <li>Un événement représente un fait ou un changement d'état, comme une commande placée ou une mise à jour d'inventaire.</li>
-      <li>Les événements sont publiés par les producteurs dans un broker centralisé, où ils sont stockés temporairement.</li>
-      <li>Les consommateurs abonnés (listeners) reçoivent et traitent ces événements lorsqu'ils sont disponibles.</li>
-    </ul>
-    <p>Exemple : Dans une plateforme e-commerce :</p>
-    <ul>
-      <li>Un service de gestion de commandes produit un événement lorsqu'une commande est passée.</li>
-      <li>Un service de gestion de stocks consomme cet événement pour réduire la quantité disponible.</li>
-      <li>Un service de notifications déclenche un message pour informer le client.</li>
-    </ul>
+      <h3>Illustration simplifiée</h3>
+      <p>Dans une architecture Event-Driven :</p>
+      <ul>
+        <li>Un événement représente un fait ou un changement d'état, comme une commande placée ou une mise à jour
+          d'inventaire.
+        </li>
+        <li>Les événements sont publiés par les producteurs dans un broker centralisé, où ils sont stockés
+          temporairement.
+        </li>
+        <li>Les consommateurs abonnés (listeners) reçoivent et traitent ces événements lorsqu'ils sont disponibles.</li>
+      </ul>
+      <p>Exemple : Dans une plateforme e-commerce :</p>
+      <ul>
+        <li>Un service de gestion de commandes produit un événement lorsqu'une commande est passée.</li>
+        <li>Un service de gestion de stocks consomme cet événement pour réduire la quantité disponible.</li>
+        <li>Un service de notifications déclenche un message pour informer le client.</li>
+      </ul>
+    </mat-card>
   </mat-expansion-panel>
 </mat-accordion>
+

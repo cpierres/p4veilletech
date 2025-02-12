@@ -1,12 +1,14 @@
 import { Component } from '@angular/core';
 import {LinkInfo} from '../../../core/models/LinkInfo';
 import {NgForOf} from '@angular/common';
+import {MatCard} from "@angular/material/card";
 
 @Component({
   selector: 'app-back-veille',
-  imports: [
-    NgForOf
-  ],
+    imports: [
+        NgForOf,
+        MatCard
+    ],
   templateUrl: './back-veille.component.html',
   styleUrl: './back-veille.component.css'
 })

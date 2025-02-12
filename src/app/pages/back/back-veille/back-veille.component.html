@@ -1,9 +1,11 @@
-<p>Voici une liste de sites pour la veille technologique autour de Spring :</p>
+<mat-card>
+  <p>Voici une liste de sites pour la veille technologique autour de Spring :</p>
 
-<ul>
-  <li *ngFor="let site of sitesVeille">
-    <a [href]="site.link" target="_blank" rel="noopener" [title]="site.title">
-      {{ site.name }}
-    </a>
-  </li>
-</ul>
+  <ul>
+    <li *ngFor="let site of sitesVeille">
+      <a [href]="site.link" target="_blank" rel="noopener" [title]="site.title">
+        {{ site.name }}
+      </a>
+    </li>
+  </ul>
+</mat-card>

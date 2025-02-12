@@ -5,6 +5,8 @@ import {BackVeilleComponent} from '../back/back-veille/back-veille.component';
 import {FrontVeilleComponent} from '../front/front-veille/front-veille.component';
 import {ClassementComponent} from '../../component/classement/classement.component';
 import {MatDivider} from '@angular/material/divider';
+import {MatCard} from '@angular/material/card';
+import {ArchiVeilleComponent} from '../architecture/archi-veille/archi-veille.component';
 
 @Component({
   selector: 'app-home',
@@ -16,6 +18,8 @@ import {MatDivider} from '@angular/material/divider';
     FrontVeilleComponent,
     ClassementComponent,
     MatDivider,
+    MatCard,
+    ArchiVeilleComponent,
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'

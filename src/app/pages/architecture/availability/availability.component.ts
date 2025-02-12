@@ -6,6 +6,7 @@ import {
   MatExpansionPanelTitle
 } from '@angular/material/expansion';
 import {ClassementComponent} from '../../../component/classement/classement.component';
+import {MatCard} from '@angular/material/card';
 
 @Component({
   selector: 'app-availability',
@@ -14,7 +15,8 @@ import {ClassementComponent} from '../../../component/classement/classement.comp
     MatExpansionPanel,
     MatExpansionPanelTitle,
     MatExpansionPanelHeader,
-    ClassementComponent
+    ClassementComponent,
+    MatCard
   ],
   templateUrl: './availability.component.html',
   styleUrl: './availability.component.css'

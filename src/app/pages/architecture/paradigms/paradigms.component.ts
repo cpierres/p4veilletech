@@ -6,6 +6,7 @@ import {
   MatExpansionPanelHeader,
   MatExpansionPanelTitle
 } from '@angular/material/expansion';
+import {MatCard} from '@angular/material/card';
 
 @Component({
   selector: 'app-paradigms',
@@ -15,6 +16,7 @@ import {
     MatExpansionPanel,
     MatExpansionPanelTitle,
     MatExpansionPanelHeader,
+    MatCard,
   ],
   templateUrl: './paradigms.component.html',
   styleUrl: './paradigms.component.css'

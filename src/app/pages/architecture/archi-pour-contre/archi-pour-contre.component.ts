@@ -6,6 +6,7 @@ import {
     MatExpansionPanelTitle
 } from "@angular/material/expansion";
 import {ClassementComponent} from '../../../component/classement/classement.component';
+import {MatCard} from '@angular/material/card';
 
 @Component({
   selector: 'app-archi-pour-contre',
@@ -14,7 +15,8 @@ import {ClassementComponent} from '../../../component/classement/classement.comp
     MatExpansionPanel,
     MatExpansionPanelHeader,
     MatExpansionPanelTitle,
-    ClassementComponent
+    ClassementComponent,
+    MatCard
   ],
   templateUrl: './archi-pour-contre.component.html',
   styleUrl: './archi-pour-contre.component.css'
