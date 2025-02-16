@@ -1,0 +1,8 @@
+<h3 id="autres-comparatifs">{{ title }}</h3>
+<ul>
+  <li *ngFor="let linkInfo of links">
+    <a href="{{ linkInfo.link }}" target="_blank" title="{{ linkInfo.title || linkInfo.name }}">
+      {{ linkInfo.name }}
+    </a>
+  </li>
+</ul>

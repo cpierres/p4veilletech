@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map, Observable, BehaviorSubject } from 'rxjs';
-import { RssData } from '../models/RssData';
+import { RssData } from '../../models/RssData';
 import { XMLParser } from 'fast-xml-parser';
 
 @Injectable({

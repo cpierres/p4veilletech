@@ -118,7 +118,7 @@ export class TestingLibrariesComponent {
             link: 'https://stackshare.io/karma'
           },
           {
-            name: 'Reddit :  Avis et comparatif',
+            name: 'Reddit :  Avis et linkInfo',
             link: 'https://www.reddit.com/r/angular/comments/17t085u/have_you_switched_away_from_karma_and_what_did/',
             title: 'Have you switched away from Karma? And what did you settle on'
           },
@@ -352,12 +352,12 @@ export class TestingLibrariesComponent {
       title: 'Which one is better for unit test? JEST or Jasmine ?',
     },
     {
-      name: 'Reddit : Autre comparatif JEST / Jasmine',
+      name: 'Reddit : Autre linkInfo JEST / Jasmine',
       link: 'https://www.reddit.com/r/Angular2/comments/yc7as1/jest_vs_karmajasmine_which_testing_library_you/',
       title: 'Which one is better for unit test? JEST or Jasmine ?',
     },
     {
-      name: 'lemagit : comparatif Cypress / Playwright',
+      name: 'lemagit : linkInfo Cypress / Playwright',
       link: 'https://www.lemagit.fr/conseil/Cypress-et-Playwright-Quand-utiliser-lun-ou-lautre',
       title: 'Quand utiliser l\'un ou l\'autre',
     },

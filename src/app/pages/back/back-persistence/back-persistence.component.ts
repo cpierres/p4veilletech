@@ -14,6 +14,7 @@ import {MatCard} from '@angular/material/card';
 import {MatDivider} from '@angular/material/divider';
 import {LinkInfo} from '../../../core/models/LinkInfo';
 import {ClassementComponent} from '../../../component/classement/classement.component';
+import {LinkInfoComponent} from '../../../component/link-info/link-info.component';
 
 @Component({
   selector: 'app-back-persistence',
@@ -33,7 +34,8 @@ import {ClassementComponent} from '../../../component/classement/classement.comp
     MatCard,
     MatDivider,
     DecimalPipe,
-    ClassementComponent
+    ClassementComponent,
+    LinkInfoComponent
   ],
   templateUrl: './back-persistence.component.html',
   styleUrl: './back-persistence.component.css'
@@ -194,11 +196,12 @@ export class BackPersistenceComponent {
 
   ];
 
+  titleLinks: string = 'Autres comparatifs et sites de références';
   comparatifsInfo: LinkInfo[] = [
     {
       name: 'De technology.amis.nl : Spring - Blocking vs non-blocking: R2DBC vs JDBC and WebFlux vs Web MVC',
       link: 'https://technology.amis.nl/software-development/performance-and-tuning/spring-blocking-vs-non-blocking-r2dbc-vs-jdbc-and-webflux-vs-web-mvc/',
-      title: 'Excellent comparatif de technology.amis.nl '
+      title: 'Excellent comparatif/benckmark de technology.amis.nl '
     },
     {
       name: 'Différences Spring Data JPA et Spring Data JDBC (reddit)',
@@ -208,5 +211,10 @@ export class BackPersistenceComponent {
       name: 'Comparatif Spring Data JPA et Spring Data JDBC (medium)',
       link: 'https://medium.com/walmartglobaltech/a-cruncher-choice-jpa-or-jdbc-85c589f584a9#id_token=eyJhbGciOiJSUzI1NiIsImtpZCI6ImVlYzUzNGZhNWI4Y2FjYTIwMWNhOGQwZmY5NmI1NGM1NjIyMTBkMWUiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2FjY291bnRzLmdvb2dsZS5jb20iLCJhenAiOiIyMTYyOTYwMzU4MzQtazFrNnFlMDYwczJ0cDJhMmphbTRsamRjbXMwMHN0dGcuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJhdWQiOiIyMTYyOTYwMzU4MzQtazFrNnFlMDYwczJ0cDJhMmphbTRsamRjbXMwMHN0dGcuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJzdWIiOiIxMDk2NDMzNzMyODE5MjQ4NDEwNzYiLCJlbWFpbCI6ImNocmlzdG9waGUucGllcnJlc0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwibmJmIjoxNzM5MjE4NTE1LCJuYW1lIjoiQ2hyaXN0b3BoZSBQaWVycsOocyIsInBpY3R1cmUiOiJodHRwczovL2xoMy5nb29nbGV1c2VyY29udGVudC5jb20vYS9BQ2c4b2NLd1lORklZX1EyRUVhZ0thVEttYTM0M2I3Q3FQVml6SE8za0xyZ25mbU03U3hpb25FZD1zOTYtYyIsImdpdmVuX25hbWUiOiJDaHJpc3RvcGhlIiwiZmFtaWx5X25hbWUiOiJQaWVycsOocyIsImlhdCI6MTczOTIxODgxNSwiZXhwIjoxNzM5MjIyNDE1LCJqdGkiOiIyY2M3NmNmODdlODVjMzUzNTFmMWM2OTE3YmU0ZjNjODBlYjM3M2Y2In0.2phUULWYAW8o3zS7gBMc-iJCJh2dtJp77KT2pgfJg96Pz-wDb4EjqLe6m21ewnPt5QBgh5yECo4EAOPus_Fa4Gz2IWaibkB5AX7nT1evycUeKlsGtlizexRxsylYXotPf1B6tnQdq_mRTynABgBA74V0a0S14cuoeluo6ItMf5BtrAY_CatBjekqMmCLpJPxJsrYykbgMgNLU7z-XuDXsVQeBzafvc1bVqIKS5uC4z0zw-cDBn6dKb1jiSuV7rNckXtqO5RsDQmSqrsJ_wM0ezs-8b8hh7l32JPkMqwh6o1JBE_n9j6gBqtVNeY5yL4IXJKjdi1VqHhtbyhEAHQtRw'
     },
+    {
+      name: 'udemy : hibernate and Spring Data Jpa beginner to guru',
+      link: 'https://www.udemy.com/course/hibernate-and-spring-data-jpa-beginner-to-guru/'
+    },
+
   ]
 }

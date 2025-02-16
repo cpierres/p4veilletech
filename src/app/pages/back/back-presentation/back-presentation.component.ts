@@ -22,6 +22,8 @@ import {
   MatExpansionPanelTitle
 } from '@angular/material/expansion';
 import {MatTab, MatTabGroup} from '@angular/material/tabs';
+import {LinkInfo} from '../../../core/models/LinkInfo';
+import {LinkInfoComponent} from '../../../component/link-info/link-info.component';
 
 @Component({
   selector: 'app-back-presentation',
@@ -47,7 +49,8 @@ import {MatTab, MatTabGroup} from '@angular/material/tabs';
     MatExpansionPanelHeader,
     MatExpansionPanelTitle,
     MatTab,
-    MatTabGroup
+    MatTabGroup,
+    LinkInfoComponent
   ],
   templateUrl: './back-presentation.component.html',
   styleUrl: './back-presentation.component.css'
@@ -284,5 +287,18 @@ export class BackPresentationComponent {
         ]
       }
     }
+  ];
+
+  titleLink:string = 'Sites de référence :';
+  sites:LinkInfo[] = [
+    {
+      name: 'udemy : spring framework 6 beginner to guru',
+      link:'https://www.udemy.com/course/spring-framework-6-beginner-to-guru/'
+    }
+    ,{
+      name: 'udemy : reactive programming with spring framework 5',
+      link:'https://www.udemy.com/course/reactive-programming-with-spring-framework-5/'
+    }
+
   ];
 }

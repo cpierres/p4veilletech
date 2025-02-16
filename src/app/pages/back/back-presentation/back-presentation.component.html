@@ -76,8 +76,11 @@
   <mat-divider></mat-divider>
 </mat-card>
 <mat-tab-group>
-  <mat-card >
-    <mat-tab label="En savoir plus : comparatifs détaillés entre Spring Web MVC et Spring WebFlux" class="custom-tab-label" >
+  <mat-card>
+    <mat-tab label="Sites de formation et d'expertises">
+      <app-link-info [title]="titleLink" [links]="sites"></app-link-info>
+    </mat-tab>
+    <mat-tab label="En savoir plus : comparatifs détaillés entre Spring Web MVC et Spring WebFlux">
       <mat-accordion>
         <mat-expansion-panel>
           <mat-expansion-panel-header>
@@ -93,6 +96,7 @@
         </mat-expansion-panel>
       </mat-accordion>
     </mat-tab>
+
   </mat-card>
 
 </mat-tab-group>

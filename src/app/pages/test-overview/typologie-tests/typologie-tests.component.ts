@@ -54,7 +54,7 @@ export class TypologieTestsComponent {
       description: 'Vérifie une fonction ou un module de manière isolée.',
       frontendTools: [
         {name: 'Jasmine', link: 'https://jasmine.github.io'},
-        {name: 'Jest', link: 'https://jestjs.io', choice: '1'},
+        {name: 'Jest (avec TestBed)', link: 'https://jestjs.io', choice: '1'},
       ],
       backendTools: [
         {name: 'JUnit', link: 'https://junit.org/junit5/docs/current/user-guide/', choice: '1'},
@@ -67,7 +67,7 @@ export class TypologieTestsComponent {
       typeTest: "Test d'Intégration",
       description: "Valide que les différentes parties communiquent correctement.",
       frontendTools: [
-        {name: 'Jest', link: 'https://jestjs.io', choice: '1'},
+        {name: 'Jest (avec TestBed)', link: 'https://jestjs.io', choice: '1'},
         {name: 'Cypress', link: 'https://docs.cypress.io', choice: '1'},
         {name: 'Playwright', link: 'https://playwright.dev'},
         {name: 'Selenium', link: 'https://www.selenium.dev/documentation/'},

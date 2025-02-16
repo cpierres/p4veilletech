@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {RssfeedService} from '../../core/services/rssfeed.service';
+import {RssfeedService} from '../../core/services/rssfeed/rssfeed.service';
 import {RssData} from '../../core/models/RssData';
 import {Observable} from 'rxjs';
 import {AsyncPipe, NgForOf, NgIf} from "@angular/common";
