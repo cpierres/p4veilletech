@@ -1,3 +1,10 @@
 .centered-header {
   text-align: center;
 }
+
+.custom-tab-label .mat-tab-label {
+  justify-content: flex-start; /* Aligne le texte à gauche */
+  font-size: 18px; /* Augmente la taille de la police */
+  font-weight: bold; /* Facultatif : rend le texte en gras */
+}
+

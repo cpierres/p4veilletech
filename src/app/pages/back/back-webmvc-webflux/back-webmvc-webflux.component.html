@@ -1,0 +1,25 @@
+<mat-card class="mat-elevation-z4">
+  <!-- mat-card-title>Automatismes communs entre Spring Web MVC et Spring WebFlux</mat-card-title -->
+  <mat-divider></mat-divider>
+
+  <mat-table [dataSource]="automatismes" class="mat-elevation-z8">
+    <ng-container matColumnDef="automatisme">
+      <mat-header-cell *matHeaderCellDef> Automatisme </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{ row.automatisme }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="springWebMvc">
+      <mat-header-cell *matHeaderCellDef> Spring Web MVC </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{ row.springWebMvc }} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="springWebFlux">
+      <mat-header-cell *matHeaderCellDef> Spring WebFlux </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{ row.springWebFlux }} </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+</mat-card>

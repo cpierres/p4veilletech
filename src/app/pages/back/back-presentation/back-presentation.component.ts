@@ -13,6 +13,15 @@ import {MatCard} from '@angular/material/card';
 import {MatDivider} from '@angular/material/divider';
 import {NgForOf} from '@angular/common';
 import {ClassementComponent} from '../../../component/classement/classement.component';
+import {BackWebmvcVsWebfluxComponent} from '../back-webmvc-vs-webflux/back-webmvc-vs-webflux.component';
+import {BackWebmvcWebfluxComponent} from '../back-webmvc-webflux/back-webmvc-webflux.component';
+import {
+  MatAccordion,
+  MatExpansionPanel,
+  MatExpansionPanelHeader,
+  MatExpansionPanelTitle
+} from '@angular/material/expansion';
+import {MatTab, MatTabGroup} from '@angular/material/tabs';
 
 @Component({
   selector: 'app-back-presentation',
@@ -30,7 +39,15 @@ import {ClassementComponent} from '../../../component/classement/classement.comp
     MatCard,
     MatDivider,
     NgForOf,
-    ClassementComponent
+    ClassementComponent,
+    BackWebmvcVsWebfluxComponent,
+    BackWebmvcWebfluxComponent,
+    MatAccordion,
+    MatExpansionPanel,
+    MatExpansionPanelHeader,
+    MatExpansionPanelTitle,
+    MatTab,
+    MatTabGroup
   ],
   templateUrl: './back-presentation.component.html',
   styleUrl: './back-presentation.component.css'
@@ -252,8 +269,6 @@ export class BackPresentationComponent {
         github: {
           repo: 'https://github.com/spring-projects/spring-framework',
           title: 'Dépôt officiel de Spring Framework',
-          stars: 1000,
-          forks: 1000
         },
         siteAvis: [
           {
@@ -270,8 +285,4 @@ export class BackPresentationComponent {
       }
     }
   ];
-
-  comparatifSpringWebVsSpringWebFlux() {
-
-  }
 }

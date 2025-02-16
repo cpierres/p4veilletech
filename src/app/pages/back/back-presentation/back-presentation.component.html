@@ -1,5 +1,5 @@
 <mat-card>
-  <h3>Comparatif des solutions Spring Boot pour les services REST</h3>
+  <h3>Comparatif global des solutions Spring Boot pour les services REST</h3>
   <mat-divider></mat-divider>
   <div class="table-container">
     <table mat-table [dataSource]="solutions" class="mat-elevation-z8">
@@ -55,7 +55,8 @@
         <td mat-cell *matCellDef="let solution">
           <ul>
             <li>
-              <a href="{{ solution.references.github.repo }}" target="_blank" title="{{ solution.references.github.title }}">
+              <a href="{{ solution.references.github.repo }}" target="_blank"
+                 title="{{ solution.references.github.title }}">
                 GitHub
               </a>
             </li>
@@ -74,3 +75,24 @@
   </div>
   <mat-divider></mat-divider>
 </mat-card>
+<mat-tab-group>
+  <mat-card >
+    <mat-tab label="En savoir plus : comparatifs détaillés entre Spring Web MVC et Spring WebFlux" class="custom-tab-label" >
+      <mat-accordion>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>Points communs concernant les automatismes</mat-panel-title>
+          </mat-expansion-panel-header>
+          <app-back-webmvc-webflux></app-back-webmvc-webflux>
+        </mat-expansion-panel>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>Différences concernant les fonctionnalités</mat-panel-title>
+          </mat-expansion-panel-header>
+          <app-back-webmvc-vs-webflux></app-back-webmvc-vs-webflux>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </mat-tab>
+  </mat-card>
+
+</mat-tab-group>
