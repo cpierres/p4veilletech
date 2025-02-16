@@ -181,6 +181,93 @@ export class BackPresentationComponent {
           }
         ]
       }
+    },
+    {
+      name: 'Spring WebClient',
+      link: 'https://docs.spring.io/spring-framework/docs/current/reference/html/web-reactive.html#webflux-client',
+      advantages: [
+        'Support réactif non bloquant pour les appels HTTP sortants.',
+        'Idéal pour les architectures microservices et les systèmes réactifs.',
+        'Flexibilité dans la gestion des appels asynchrones.'
+      ],
+      disadvantages: [
+        'Complexité légèrement supérieure à RestTemplate.',
+        'Nécessite d\'être familier avec la programmation réactive.'
+      ],
+      features: [
+        'Prise en charge des protocoles HTTP réactifs via Project Reactor.',
+        'Compatible avec Mono et Flux pour les flux de données réactifs.',
+        'Support des paradigmes modernes et des APIs réactives.'
+      ],
+      useCases: [
+        'Consommation d’APIs tierces dans un backend sécurisé.',
+        'Appels entre microservices dans des architectures backend complexes.',
+        'Gestion d’appels asynchrones ou parallèles pour haute performance.'
+      ],
+      references: {
+        github: {
+          repo: 'https://github.com/spring-projects/spring-framework',
+          title: 'Dépôt officiel de Spring Framework',
+        },
+        siteAvis: [
+          {
+            name: 'Guides Spring WebClient',
+            link: 'https://www.baeldung.com/spring-webclient',
+            title: 'Tutoriels Baeldung pour Spring WebClient'
+          },
+          {
+            name: 'Spring Documentation',
+            link: 'https://docs.spring.io/spring-framework/docs/current/reference/html/web-reactive.html',
+            title: 'Documentation officielle Spring WebFlux Client'
+          }
+        ]
+      }
+    },
+    {
+      name: 'Spring RestTemplate',
+      link: 'https://docs.spring.io/spring-framework/docs/current/reference/html/web.html#spring-web',
+      title: 'deprécié depuis Spring 5',
+      choice: '0',
+      advantages: [
+        'Client REST simple et facile à configurer.',
+        'Idéal pour les services REST synchrones dans des architectures simples.',
+        'Documentation bien établie avec de nombreux exemples et ressources.'
+      ],
+      disadvantages: [
+        'Déprécié dans Spring 5, remplacé par WebClient pour les nouvelles applications.',
+        'Bloquant, ce qui le rend peu performant dans des contextes nécessitant une forte scalabilité.'
+      ],
+      features: [
+        'Support des requêtes HTTP synchrones (GET, POST, PUT, DELETE).',
+        'Transformations automatiques des réponses JSON via Jackson.',
+        'Facilité d’utilisation pour des scénarios rapides/scenarios prototypes.'
+      ],
+      useCases: [
+        'Applications monolithiques ne nécessitant pas d’approche réactive.',
+        'Consommation d’API tierces de manière simple dans des infrastructures existantes.',
+        'Requêtes synchrones dans des applications où le modèle bloquant est acceptable.'
+      ],
+      references: {
+        github: {
+          repo: 'https://github.com/spring-projects/spring-framework',
+          title: 'Dépôt officiel de Spring Framework',
+          stars: 1000,
+          forks: 1000
+        },
+        siteAvis: [
+          {
+            name: 'Baeldung RestTemplate',
+            link: 'https://www.baeldung.com/rest-template',
+            title: 'Guide d’utilisation de RestTemplate'
+          },
+          {
+            name: 'Spring Documentation',
+            link: 'https://docs.spring.io/spring-framework/reference/web.html',
+            title: 'Documentation officielle de Spring RestTemplate'
+          }
+        ]
+      }
     }
+
   ];
 }
