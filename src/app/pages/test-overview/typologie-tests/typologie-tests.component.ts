@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {
   MatCell,
   MatCellDef,
@@ -13,6 +13,9 @@ import {NgForOf, NgIf} from '@angular/common';
 import {MatDivider} from '@angular/material/divider';
 import {MatCard} from '@angular/material/card';
 import {ClassementComponent} from '../../../component/classement/classement.component';
+import {LinksInfoService} from '../../../core/services/links-info/links-info.service';
+import {LinkInfo} from '../../../core/models/LinkInfo';
+import {LinkInfoComponent} from '../../../component/link-info/link-info.component';
 
 @Component({
   selector: 'app-typologie-tests',
@@ -32,13 +35,27 @@ import {ClassementComponent} from '../../../component/classement/classement.comp
     MatDivider,
     MatCard,
     ClassementComponent,
-    NgIf
+    NgIf,
+    LinkInfoComponent
   ],
   templateUrl: './typologie-tests.component.html',
   styleUrl: './typologie-tests.component.css',
   standalone: true,
 })
-export class TypologieTestsComponent {
+export class TypologieTestsComponent implements OnInit {
+  sitesBackTestTitle: string = 'Sites de tests Backend';
+  sitesFrontTestTitle: string = 'Sites de tests Frontend';
+  sitesBackTest: LinkInfo[] = [];
+  sitesFrontTest: LinkInfo[] = [];
+
+  constructor(private linksInfoService: LinksInfoService) {
+  }
+
+  ngOnInit(): void {
+    this.sitesBackTest = this.linksInfoService.getSitesBackTest();
+    this.sitesFrontTest = this.linksInfoService.getSitesFrontTest();
+  }
+
   displayedColumns: string[] = [
     'typeTest',
     'description',

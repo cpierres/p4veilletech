@@ -77,16 +77,8 @@
   </table>
 
   <mat-divider></mat-divider>
-  <h3 id="autres-comparatifs">Autres comparatifs</h3>
-  <mat-divider></mat-divider>
 
-  <ul>
-    <li *ngFor ="let comparatif of comparatifsTest">
-      <a href="{{ comparatif.link }}" target="_blank" title="{{ comparatif.title || comparatif.name }}">
-        {{ comparatif.name }}
-      </a>
-    </li>
-  </ul>
+  <app-link-info [title]="sitesFrontTestTitle" [links]="sitesFrontTest"></app-link-info>
 
 </mat-card>
 

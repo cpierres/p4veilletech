@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {MatCard} from '@angular/material/card';
 import {MatDivider} from '@angular/material/divider';
 import {
@@ -14,6 +14,8 @@ import {DecimalPipe, NgForOf, NgIf} from '@angular/common';
 import {LinkInfo} from '../../../core/models/LinkInfo';
 import {ComparatifSolution} from '../../../core/models/ComparatifSolution';
 import {ClassementComponent} from '../../../component/classement/classement.component';
+import {LinksInfoService} from '../../../core/services/links-info/links-info.service';
+import {LinkInfoComponent} from '../../../component/link-info/link-info.component';
 
 @Component({
   selector: 'app-testing-libraries',
@@ -33,14 +35,25 @@ import {ClassementComponent} from '../../../component/classement/classement.comp
     MatHeaderRowDef,
     NgIf,
     DecimalPipe,
-    ClassementComponent
+    ClassementComponent,
+    LinkInfoComponent
   ],
   templateUrl: './testing-libraries.component.html',
   styleUrl: './testing-libraries.component.css',
   standalone: true
 })
 
-export class TestingLibrariesComponent {
+export class TestingLibrariesComponent implements OnInit {
+  sitesFrontTestTitle: string = 'Autres comparatifs et sites de référence';
+  sitesFrontTest: LinkInfo[] = [];
+
+  constructor(private linksInfoService: LinksInfoService) {
+  }
+
+  ngOnInit(): void {
+    this.sitesFrontTest = this.linksInfoService.getSitesFrontTest();
+  }
+
   displayedColumns: string[] = [
     'name',
     'useCases',
@@ -332,34 +345,4 @@ export class TestingLibrariesComponent {
     }
   ];
 
-  comparatifsTest: LinkInfo[] = [
-    {
-      name: 'Reddit : Discussion intéressante',
-      link: 'https://www.reddit.com/r/Angular2/comments/u7w0q0/is_unit_testing_in_angular_overrated/?tl=fr',
-      title: 'Les tests unitaires dans Angular sont-ils surfaits ?',
-    },
-    {
-      name: 'reddit: jasmine vs jest',
-      link: 'https://www.reddit.com/r/Angular2/comments/oa800b/which_one_is_better_for_unit_test_jest_or_jasmine/'
-    },
-    {
-      name: 'reddit: avis jasmine, karma vs jest',
-      link: 'https://www.reddit.com/r/Angular2/comments/eix8lw/opinions_on_jasmine_karma_vs_jest_others/?tl=fr',
-    },
-    {
-      name: 'Reddit : Comparatif JEST / Jasmine',
-      link: 'https://www.reddit.com/r/Angular2/comments/oa800b/which_one_is_better_for_unit_test_jest_or_jasmine/',
-      title: 'Which one is better for unit test? JEST or Jasmine ?',
-    },
-    {
-      name: 'Reddit : Autre linkInfo JEST / Jasmine',
-      link: 'https://www.reddit.com/r/Angular2/comments/yc7as1/jest_vs_karmajasmine_which_testing_library_you/',
-      title: 'Which one is better for unit test? JEST or Jasmine ?',
-    },
-    {
-      name: 'lemagit : linkInfo Cypress / Playwright',
-      link: 'https://www.lemagit.fr/conseil/Cypress-et-Playwright-Quand-utiliser-lun-ou-lautre',
-      title: 'Quand utiliser l\'un ou l\'autre',
-    },
-  ];
 }
