@@ -52,7 +52,7 @@ export class BackPersistenceComponent {
     {
       name: 'Spring Data JPA',
       link: 'https://spring.io/projects/spring-data-jpa',
-      choice: '1',
+      choice: '2',
       title: 'A choisir pour application flexible',
       advantages: [
         'Facilité d’utilisation grâce aux abstractions de Spring',
@@ -96,6 +96,7 @@ export class BackPersistenceComponent {
     {
       name: 'Spring Data JDBC',
       link: 'https://spring.io/projects/spring-data-jdbc',
+      choice: '3',
       advantages: [
         'Performance brute la plus rapide',
         'Contrôle total sur les interactions avec la base',
@@ -158,7 +159,7 @@ export class BackPersistenceComponent {
     {
       name: 'Spring Data R2DBC',
       link: 'https://spring.io/projects/spring-data-r2dbc',
-      choice: '2',
+      choice: '1',
       title: 'Cohérent avec choix Spring Webflux pour forte montée en charge et rapidité',
       advantages: [
         'Support des interactions non-bloquantes avec les bases relationnelles',
@@ -191,17 +192,17 @@ export class BackPersistenceComponent {
 
   comparatifsInfo: LinkInfo[] = [
     {
+      name: 'De technology.amis.nl : Spring - Blocking vs non-blocking: R2DBC vs JDBC and WebFlux vs Web MVC',
+      link: 'https://technology.amis.nl/software-development/performance-and-tuning/spring-blocking-vs-non-blocking-r2dbc-vs-jdbc-and-webflux-vs-web-mvc/',
+      title: 'Excellent comparatif de technology.amis.nl '
+    },
+    {
       name: 'Différences Spring Data JPA et Spring Data JDBC (reddit)',
       link: 'https://www.reddit.com/r/java/comments/kr4tnx/what_are_the_differences_between_spring_jpa/?tl=fr'
     },
     {
       name: 'Comparatif Spring Data JPA et Spring Data JDBC (medium)',
       link: 'https://medium.com/walmartglobaltech/a-cruncher-choice-jpa-or-jdbc-85c589f584a9#id_token=eyJhbGciOiJSUzI1NiIsImtpZCI6ImVlYzUzNGZhNWI4Y2FjYTIwMWNhOGQwZmY5NmI1NGM1NjIyMTBkMWUiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL2FjY291bnRzLmdvb2dsZS5jb20iLCJhenAiOiIyMTYyOTYwMzU4MzQtazFrNnFlMDYwczJ0cDJhMmphbTRsamRjbXMwMHN0dGcuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJhdWQiOiIyMTYyOTYwMzU4MzQtazFrNnFlMDYwczJ0cDJhMmphbTRsamRjbXMwMHN0dGcuYXBwcy5nb29nbGV1c2VyY29udGVudC5jb20iLCJzdWIiOiIxMDk2NDMzNzMyODE5MjQ4NDEwNzYiLCJlbWFpbCI6ImNocmlzdG9waGUucGllcnJlc0BnbWFpbC5jb20iLCJlbWFpbF92ZXJpZmllZCI6dHJ1ZSwibmJmIjoxNzM5MjE4NTE1LCJuYW1lIjoiQ2hyaXN0b3BoZSBQaWVycsOocyIsInBpY3R1cmUiOiJodHRwczovL2xoMy5nb29nbGV1c2VyY29udGVudC5jb20vYS9BQ2c4b2NLd1lORklZX1EyRUVhZ0thVEttYTM0M2I3Q3FQVml6SE8za0xyZ25mbU03U3hpb25FZD1zOTYtYyIsImdpdmVuX25hbWUiOiJDaHJpc3RvcGhlIiwiZmFtaWx5X25hbWUiOiJQaWVycsOocyIsImlhdCI6MTczOTIxODgxNSwiZXhwIjoxNzM5MjIyNDE1LCJqdGkiOiIyY2M3NmNmODdlODVjMzUzNTFmMWM2OTE3YmU0ZjNjODBlYjM3M2Y2In0.2phUULWYAW8o3zS7gBMc-iJCJh2dtJp77KT2pgfJg96Pz-wDb4EjqLe6m21ewnPt5QBgh5yECo4EAOPus_Fa4Gz2IWaibkB5AX7nT1evycUeKlsGtlizexRxsylYXotPf1B6tnQdq_mRTynABgBA74V0a0S14cuoeluo6ItMf5BtrAY_CatBjekqMmCLpJPxJsrYykbgMgNLU7z-XuDXsVQeBzafvc1bVqIKS5uC4z0zw-cDBn6dKb1jiSuV7rNckXtqO5RsDQmSqrsJ_wM0ezs-8b8hh7l32JPkMqwh6o1JBE_n9j6gBqtVNeY5yL4IXJKjdi1VqHhtbyhEAHQtRw'
-    },
-    {
-      name: 'Spring: Blocking vs non-blocking: R2DBC vs JDBC and WebFlux vs Web MVC',
-      link: 'https://technology.amis.nl/software-development/performance-and-tuning/spring-blocking-vs-non-blocking-r2dbc-vs-jdbc-and-webflux-vs-web-mvc/',
-      title: 'Excellent comparatif de technology.amis.nl '
     },
   ]
 }

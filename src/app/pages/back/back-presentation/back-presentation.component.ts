@@ -48,9 +48,9 @@ export class BackPresentationComponent {
 
   solutions: ComparatifSolution[] = [
     {
-      name: 'Spring Web (Spring Boot starter Web)',
+      name: 'Spring Web / Spring MVC (Spring Boot starter Web)',
       link: 'https://docs.spring.io/spring-framework/reference/web.html',
-      choice: '1',
+      choice: '2',
       advantages: [
         'Prise en charge robuste pour la création de services REST.',
         'Documentation complète et active.',
@@ -94,6 +94,7 @@ export class BackPresentationComponent {
     {
       name: 'Spring WebFlux',
       link: 'https://docs.spring.io/spring-framework/reference/web-reactive.html',
+      choice: '1',
       advantages: [
         'Prend en charge la programmation réactive (non bloquante).',
         'Idéal pour les applications à haute performance nécessitant un grand nombre de connexions simultanées.',
@@ -125,10 +126,16 @@ export class BackPresentationComponent {
             title: 'Doc de référence'
           },
           {
+            name: 'De technology.amis.nl : Blocking vs non-blocking: R2DBC vs JDBC and WebFlux vs Web MVC',
+            link: 'https://technology.amis.nl/software-development/performance-and-tuning/spring-blocking-vs-non-blocking-r2dbc-vs-jdbc-and-webflux-vs-web-mvc/',
+            title: 'Excellent comparatif et benchmark de technology.amis.nl '
+          },
+          {
             name: 'baeldung.com/spring-webflux',
             link: 'https://www.baeldung.com/spring-webflux',
             title: 'Tutoriels Spring WebFlux sur Baeldung'
-          }
+          },
+
         ]
       }
     },

@@ -61,10 +61,10 @@ export class TestingLibrariesComponent {
         'Approche BDD (Behavior Driven Development)'
       ],
       advantages: [
+        'Intégré par défaut dans Angular',
         'Syntaxe simple et facile à comprendre',
         'Bien adapté aux tests frontend',
         'Écosystème mature et bien documenté',
-        'Intégré par défaut dans Angular'
       ],
       disadvantages: [
         'Pas conçu pour exécuter les tests dans les navigateurs ou directement avec Node.js',
@@ -100,9 +100,9 @@ export class TestingLibrariesComponent {
         'Intégration avec CI/CD (Continuous Integration)'
       ],
       advantages: [
+        'Intégré par défaut dans Angular',
         'S’exécute sur plusieurs navigateurs',
         'Prend en charge de nombreux frameworks de test',
-        'Intégré par défaut dans Angular'
       ],
       disadvantages: [
         'Configuration complexe pour certains projets',
@@ -135,7 +135,7 @@ export class TestingLibrariesComponent {
     {
       name: 'TestBed',
       link: 'https://angular.dev/guide/testing/components-basics',
-      choice: '2',
+      choice: '1',
       useCases: ['Unit Testing (Angular Test Framework)'],
       features: [
         'Solution native pour le test unitaire dans Angular',
@@ -148,7 +148,7 @@ export class TestingLibrariesComponent {
         'Prend en charge les tests unitaires et semi-intégrés'
       ],
       disadvantages: [
-        'Dépend de Karma pour l’exécution, ce qui peut être lent',
+        'Dépend de Karma pour l’exécution, ce qui peut être lent (mais Jest peut remplacer Karma)',
         'Limité aux tests d’unités ou composés liés à Angular'
       ],
       references: {
