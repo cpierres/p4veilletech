@@ -57,8 +57,7 @@ export class BackPresentationComponent {
         'Facilité d’intégration avec d’autres modules de Spring Framework.'
       ],
       disadvantages: [
-        'Peut être lourd pour des applications simples où une solution légère est suffisante.',
-        'L’apprentissage peut être complexe pour les débutants.'
+        'Utilise un modèle bloquant basé sur un thread par requête, ce qui peut entraîner une consommation élevée de ressources et limiter la performance ainsi que la scalabilité dans des applications à forte charge ou nécessitant des appels longs ou non bloquants. (pourrait s\'améliorer dans le futur grâce aux Virtual Thread, sans atteindre les capacités de Webflux)'
       ],
       features: [
         'Annotations REST telles que @RestController, @RequestMapping.',
@@ -101,7 +100,9 @@ export class BackPresentationComponent {
         'Meilleure performance avec moins de ressources pour les applications asynchrones.'
       ],
       disadvantages: [
-        'Complexité accrue comparée à Spring Web.',
+        'Complexité accrue comparée à Spring Web/MVC.',
+        'Moins d\'automatismes qu\'avec Spring Web/MVC.',
+        'Plus récent que Spring Web/MVC, moins mature, moins utilisé',
         'Moins adapté pour les applications qui ne nécessitent pas un modèle réactif.'
       ],
       features: [
@@ -268,6 +269,9 @@ export class BackPresentationComponent {
         ]
       }
     }
-
   ];
+
+  comparatifSpringWebVsSpringWebFlux() {
+
+  }
 }
