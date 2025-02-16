@@ -50,6 +50,42 @@ export class BackPersistenceComponent {
 
   solutions: ComparatifSolution[] = [
     {
+      name: 'Spring Data R2DBC',
+      link: 'https://spring.io/projects/spring-data-r2dbc',
+      choice: '1',
+      title: 'Cohérent avec choix Spring Webflux pour forte montée en charge et rapidité',
+      advantages: [
+        'Support des interactions non-bloquantes avec les bases relationnelles',
+        'Facilité d’intégration avec Spring WebFlux pour la programmation réactive',
+        'Compatible avec des bases populaires comme Postgres, MySQL, etc.'
+      ],
+      disadvantages: [
+        'Fonctionnalités limitées comparées à JPA/Hibernate',
+        'Ne prend pas en charge les relations complexes comme les ORM',
+        'Peut être difficile à appréhender pour les débutants',
+        'Moins mature que Spring Data JPA, JDBC etc.'
+      ],
+      features: ['Programmation réactive', 'Modèle non-bloquant', 'Repositories réactifs'],
+      useCases: [
+        'Applications réactives avec interface utilisateur en temps réel',
+        'Projets utilisant Spring WebFlux pour la scalabilité',
+        'Microservices nécessitant des performances élevées et une faible empreinte mémoire'
+      ],
+      references: {
+        github: {repo: 'https://github.com/spring-projects/spring-data-r2dbc', stars: 708, forks: 132},
+        siteAvis: [
+          {
+            name: 'Avis reddit',
+            link: 'https://www.reddit.com/r/SpringBoot/comments/18qtvut/why_are_docs_for_spring_data_r2dbc_so/?tl=fr'
+          },
+          {
+            name: 'Comparatifs en bas du tableau',
+            link: '#'
+          }
+        ]
+      }
+    },
+    {
       name: 'Spring Data JPA',
       link: 'https://spring.io/projects/spring-data-jpa',
       choice: '2',
@@ -96,7 +132,6 @@ export class BackPersistenceComponent {
     {
       name: 'Spring Data JDBC',
       link: 'https://spring.io/projects/spring-data-jdbc',
-      choice: '3',
       advantages: [
         'Performance brute la plus rapide',
         'Contrôle total sur les interactions avec la base',
@@ -156,38 +191,7 @@ export class BackPersistenceComponent {
         ]
       }
     },
-    {
-      name: 'Spring Data R2DBC',
-      link: 'https://spring.io/projects/spring-data-r2dbc',
-      choice: '1',
-      title: 'Cohérent avec choix Spring Webflux pour forte montée en charge et rapidité',
-      advantages: [
-        'Support des interactions non-bloquantes avec les bases relationnelles',
-        'Facilité d’intégration avec Spring WebFlux pour la programmation réactive',
-        'Compatible avec des bases populaires comme Postgres, MySQL, etc.'
-      ],
-      disadvantages: [
-        'Fonctionnalités limitées comparées à JPA/Hibernate',
-        'Ne prend pas en charge les relations complexes comme les ORM',
-        'Peut être difficile à appréhender pour les débutants',
-        'Moins mature que Spring Data JPA, JDBC etc.'
-      ],
-      features: ['Programmation réactive', 'Modèle non-bloquant', 'Repositories réactifs'],
-      useCases: [
-        'Applications réactives avec interface utilisateur en temps réel',
-        'Projets utilisant Spring WebFlux pour la scalabilité',
-        'Microservices nécessitant des performances élevées et une faible empreinte mémoire'
-      ],
-      references: {
-        github: {repo: 'https://github.com/spring-projects/spring-data-r2dbc', stars: 708, forks: 132},
-        siteAvis: [
-          {
-            name: 'Avis reddit',
-            link: 'https://www.reddit.com/r/SpringBoot/comments/18qtvut/why_are_docs_for_spring_data_r2dbc_so/?tl=fr'
-          }
-        ]
-      }
-    },
+
   ];
 
   comparatifsInfo: LinkInfo[] = [
