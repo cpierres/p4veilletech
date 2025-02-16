@@ -43,8 +43,8 @@ import {LinkInfoComponent} from '../../../component/link-info/link-info.componen
   standalone: true,
 })
 export class TypologieTestsComponent implements OnInit {
-  sitesBackTestTitle: string = 'Sites de tests Backend';
-  sitesFrontTestTitle: string = 'Sites de tests Frontend';
+  sitesBackTestTitle: string = 'Sites pour tests Backend';
+  sitesFrontTestTitle: string = 'Sites pour tests Frontend';
   sitesBackTest: LinkInfo[] = [];
   sitesFrontTest: LinkInfo[] = [];
 
