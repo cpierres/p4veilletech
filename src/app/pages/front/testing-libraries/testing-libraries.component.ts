@@ -53,7 +53,6 @@ export class TestingLibrariesComponent {
     {
       name: 'Jasmine',
       link: 'https://jasmine.github.io/',
-      choice: '2',
       useCases: ['Unit Testing'],
       features: [
         'Framework de test unitaire populaire',
@@ -92,7 +91,6 @@ export class TestingLibrariesComponent {
     {
       name: 'Karma',
       link: 'https://karma-runner.github.io/',
-      choice: '2',
       useCases: ['Test Runner'],
       features: [
         'Permet l’exécution des tests dans des navigateurs réels',
@@ -140,11 +138,12 @@ export class TestingLibrariesComponent {
       features: [
         'Solution native pour le test unitaire dans Angular',
         'Permet de tester les composants, modules et services Angular',
-        'S’appuie sur Jasmine et Karma pour l’exécution'
+        'Par défaut a besoin de Jasmine et Karma pour l’exécution',
+        'Ou bien de Jest'
       ],
       advantages: [
         'Solution introduite et maintenue directement par Angular',
-        'Excellente intégration avec le framework Angular',
+        'Excellente intégration avec Angular',
         'Prend en charge les tests unitaires et semi-intégrés'
       ],
       disadvantages: [
@@ -295,7 +294,6 @@ export class TestingLibrariesComponent {
     {
       name: 'Playwright',
       link: 'https://playwright.dev/',
-      choice: '3', // Vous pouvez modifier ce champ en fonction des catégories
       useCases: ['E2E Testing'],
       features: [
         'Framework moderne pour le test E2E',
