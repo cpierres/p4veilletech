@@ -156,7 +156,6 @@ export class BackPresentationComponent {
             link: 'https://www.baeldung.com/spring-webflux',
             title: 'Tutoriels Spring WebFlux sur Baeldung'
           },
-
         ]
       }
     },

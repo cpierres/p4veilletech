@@ -102,7 +102,6 @@ export class UiLibrariesComponent {
       name: 'NG Zorro',
       link: 'https://ng.ant.design/',
       title: 'Pour application complexe, bonne réputation, + de 60 composants',
-      choice: '2',
       advantages: ['Basé sur Ant Design, dispose de composants élégants et modernes.'],
       disadvantages: ['Moins connu que d’autres librairies comme Angular Material','Moindre communauté francophone.'],
       features: ['Prise en charge d’Ant Design','Système de composants riche pour des interfaces complexes.'],
