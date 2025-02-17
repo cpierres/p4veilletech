@@ -87,6 +87,22 @@ export class LinksInfoService {
     },
   ];
 
+  getSitesArchiMonolith(): LinkInfo[] {
+    return this.sitesArchiMonolith;
+  }
+
+  sitesArchiMonolith: LinkInfo[] = [
+    {
+      name: 'Martin Fowler: Monolithic Architecture',
+      link: 'https://martinfowler.com/bliki/MonolithFirst.html'
+    },
+    {
+      name: 'Martin Fowler: stratégie de migration du Monolithe aux Microservices',
+      link: 'https://martinfowler.com/articles/break-monolith-into-microservices.html',
+      title: 'Lorsque cela devient nécessaire !'
+    }
+  ];
+
   getSitesBackTest(): LinkInfo[] {
     return this.sitesBackTest;
   }

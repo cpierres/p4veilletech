@@ -20,6 +20,8 @@ export class ArchiVeilleComponent {
   sitesMicroServices: LinkInfo[] = [];
   sitesEventDrivenTitle = 'Architecture Event Driven';
   sitesEventDriven: LinkInfo[] = [];
+  sitesArchiMonolithTitle = 'Architecture Monolithique';
+  sitesArchiMonolith: LinkInfo[] = [];
 
   constructor(
     private linksInfoService: LinksInfoService) {
@@ -28,6 +30,7 @@ export class ArchiVeilleComponent {
   ngOnInit(): void {
     this.sitesDockerKubernetes = this.linksInfoService.getSitesDockerKubernetes();
     this.sitesMicroServices = this.linksInfoService.getSitesMicroServices();
+    this.sitesArchiMonolith = this.linksInfoService.getSitesArchiMonolith();
     this.sitesEventDriven = this.linksInfoService.getSitesEventDriven();
 
   }
