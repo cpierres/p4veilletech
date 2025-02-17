@@ -140,4 +140,91 @@ export class LinksInfoService {
       link: 'https://www.udemy.com/course/angular-with-test-driven-development/'
     },
   ];
+
+  getSitesPrgReactiveFront(): LinkInfo[] {
+    return this.sitesPrgReactiveFront;
+  }
+
+  sitesPrgReactiveFront: LinkInfo[] = [
+    {
+      name: 'RxJS Marbles : Interactive diagrams of Rx Observables',
+      link: 'https://rxmarbles.com/'
+    },
+    {
+      name: 'RxJS : Operator Decision Tree',
+      link: 'https://rxjs.dev/operator-decision-tree'
+    },
+    {
+      name: 'Learn RxJS',
+      link: 'https://www.learnrxjs.io/'
+    },
+    {
+      name: 'RxJS : API Reference',
+      link: 'https://rxjs.dev/api'
+    },
+    {
+      name: 'udemy : Reactive Angular Course (with RxJs, Angular 19)',
+      link: 'https://www.udemy.com/course/rxjs-reactive-angular-course/'
+    },
+    {
+      name: 'udemy : RXjs7',
+      link: 'https://www.udemy.com/course/rxjs-and-observables/'
+    },
+    {
+      name: 'udemy : Angular 6, Angular Material et RxJS 6 par la pratique',
+      link: 'https://www.udemy.com/course/angular-6-angular-material-et-rxjs-6-par-la-pratique/'
+    },
+  ];
+
+  getSitesPrgFonctionnelleEtReactiveBack(): LinkInfo[] {
+    return this.sitesPrgFonctionnelleEtReactiveBack;
+  }
+
+  sitesPrgFonctionnelleEtReactiveBack: LinkInfo[] = [
+    {
+      name: 'Mon doudou(x) préféré : chapitre 22 - Streams',
+      link: 'https://www.jmdoudoux.fr/java/dej/indexavecframes.htm'
+    },
+    {
+      name: 'Mon doudou(x) préféré : chapitre 12 - Expressions lambda - Interfaces fonctionnelles - Références de méthodes',
+      link: 'https://www.jmdoudoux.fr/java/dej/indexavecframes.htm'
+    },
+    {
+      name: 'udemy : Java 21, Java 17, Java 11, Java 8 (advanced) and Spring Boot 3 - préparation certification OCP',
+      link: 'https://www.udemy.com/course/ocp11_from_oca8/'
+    },
+    {
+      name: 'Spring Web stack pour la programmation réactive (Spring WebFlux, WebClient)',
+      link: 'https://docs.spring.io/spring-framework/reference/web-reactive.html'
+    },
+    {
+      name: 'Projet Reactor',
+      link: 'https://projectreactor.io/'
+    },
+    {
+      name: 'Blog VinsGuru : spécialisé dans les tutoriels sur Project Reactor, Spring WebFlux, et API réactives',
+      link: 'https://www.vinsguru.com/category/spring/spring-webflux/'
+    },
+    {
+      name: 'StackOverflow (questions) : tag java',
+      link: 'https://stackoverflow.com/questions/tagged/java'
+    },
+    {
+      name: 'Medium : tag java',
+      link: 'https://medium.com/javarevisited/tagged/java'
+    },
+    {
+      name: 'Librairie ReactiveX',
+      link: 'https://reactivex.io/intro.html'
+    },
+    {
+      name: 'Github : ReactiveX/RxJava',
+      link: 'https://github.com/ReactiveX/RxJava'
+    },
+    {
+      name: 'Baeldung : Programmation Java Fonctionnelle ... combinée à POO',
+      link: 'https://www.baeldung.com/java-functional-programming'
+    },
+  ];
+
 }
