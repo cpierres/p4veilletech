@@ -9,9 +9,9 @@
           L'autre objectif est de déterminer les solutions adaptées au projet du client Knesh dans le cadre
           du projet 4 d'OpenClassrooms.
         </p>
-        <p>
-          Les spécifications de l'application ne sont pas connues.
-          Seules les exigences suivantes ont été indiquées :</p>
+        <p style="margin-bottom: 0">
+          Les <u>spécifications</u> de l'application ne sont <u>pas connues</u>.
+          Seules les <u>exigences techniques</u> suivantes ont été indiquées :</p>
         <ul>
           <li><strong>Disponibilité :</strong> Assurer un site performant et fiable.</li>
           <li><strong>Rapidité :</strong> Minimiser les temps de chargement et offrir une UX agréable.</li>
@@ -19,11 +19,14 @@
           <li><strong>Évolutivité :</strong> S'appuyer sur des technologies solides et documentées.</li>
         </ul>
         <p>
-          Il s'agit de trouver le bon compromis pour y répondre.
+          Il s'agit de trouver le bon compromis pour y répondre, sachant que les spécifications fonctionnelles ne sont
+          pas connues et qu'il faudra de ce fait affiner avec l'expression des besoins du client.<br>
+          Téléchargez le dossier d'architecture provisoire de Knesh:
+          <a href="/assets/pdf/DossierArchitectureKnesh.pdf" target="_blank">ici</a>.
         </p>
         <mat-divider></mat-divider>
-        <p>
-          Ainsi, vous trouverez dans les pages de ce portail des <u>médailles d'Or</u> (nos préconisations) pour Knesh :
+        <p style="margin-bottom: 0">
+          Ainsi, vous trouverez dans les pages de ce site des <u>médailles d'Or</u> (nos préconisations) pour Knesh concernant :
         </p>
         <ul>
           <li>
@@ -35,10 +38,10 @@
             <app-classement [classement]="'1'"/>
           </li>
         </ul>
-        <p>
-          Parfois, une médaille d'argent <app-classement [classement]="'2'"/> peut être proposée, soit parce que la solution est également bonne
-          pour le client (meilleure adéquation au budget), soit parce qu'il s'agit d'une solution qui peut
-          être une bonne alternative (à affiner avec le client).
+        <p style="margin-top: 0">Lorsqu'il y a plusieurs <app-classement [classement]="'1'"/>, c'est que les choix peuvent se combiner.<br>
+          Parfois, une médaille d'argent <app-classement [classement]="'2'"/> est proposée, soit parce que la
+          solution est une bonne alternative (meilleure adéquation au budget), soit parce qu'il s'agit d'une solution
+          d'intérêt à envisager selon les besoins.
         </p>
       </mat-card>
     </mat-tab>
