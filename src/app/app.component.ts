@@ -15,13 +15,12 @@ import {MatTooltip} from '@angular/material/tooltip';
 })
 export class AppComponent {
   private readonly profileImageDefault: string = '/assets/img/cpierres-photo.png';
-  private readonly profileImageAvatar: string = '/assets/img/cpierres-avatar.png';
+  private readonly profileImageAvatar: string = '/assets/img/cpierres-avatar2.png';
   profileImage: string = this.profileImageDefault;
-  private readonly tooltipMessageDefault: string = 'Sénior ou Dinosaure ?';
-  private readonly tooltipMessageAvatar: string = 'Dinosaure Reactor !';
+  private readonly tooltipMessageDefault: string = 'Sénior ? Clic pour voir';
+  private readonly tooltipMessageAvatar: string = 'non... Dinosaure Reactorus ! (réactif de bout en bout)';
   tooltipMessage: string = this.tooltipMessageDefault;
 
-  // Méthode appelée au clic pour alterner entre les images
   toggleImage(): void {
     this.profileImage = this.profileImage === this.profileImageDefault
       ? this.profileImageAvatar
