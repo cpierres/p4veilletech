@@ -10,5 +10,6 @@ export const routes: Routes = [
   {path: 'front', component: FrontComponent},
   {path: 'back', component: BackComponent},
   {path: 'architecture', component: ArchitectureComponent},
-  {path: 'test-overview', component: TestOverviewComponent}
+  {path: 'test-overview', component: TestOverviewComponent},
+  {path: '**', redirectTo: '', pathMatch: 'full'}
 ];
