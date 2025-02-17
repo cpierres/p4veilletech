@@ -6,7 +6,6 @@ import {MatListItem, MatNavList} from '@angular/material/list';
 import {MatIcon} from '@angular/material/icon';
 import {MatIconButton} from '@angular/material/button';
 import {MatTooltip} from '@angular/material/tooltip';
-import {NgOptimizedImage} from '@angular/common';
 
 @Component({
   selector: 'app-root',

@@ -6,7 +6,7 @@
       </mat-panel-title>
     </mat-expansion-panel-header>
     <mat-card>
-      <h3>Intérêts </h3>
+      <h3 style="margin-bottom: 0;">Intérêts </h3>
       <ul>
         <li><strong>Simplicité :</strong> Une seule application regroupant toutes les fonctionnalités.</li>
         <li><strong>Facilité de développement initial :</strong> Moins de complexité pour commencer à coder.</li>
@@ -19,7 +19,7 @@
         </li>
       </ul>
 
-      <h3>Inconvénients</h3>
+      <h3 style="margin-bottom: 0;">Inconvénients</h3>
       <ul>
         <li><strong>Évolutivité limitée :</strong> Toute l'application doit être mise à l'échelle, même si un seul
           composant nécessite plus de ressources.
@@ -34,10 +34,13 @@
         </li>
       </ul>
 
-      <h3>Contexte applicatif</h3>
-      <p>L'architecture monolithique est idéale dans les contextes suivants :</p>
+      <h3 style="margin-bottom: 0;">Contexte applicatif</h3>
+      <p style="margin-bottom: 0;">L'architecture monolithique convient dans les contextes suivants
+        (sachant qu'il serait possible de
+        <a href="https://martinfowler.com/articles/break-monolith-into-microservices.html" target="_blank">
+          migrer vers une architecture microservices</a> <app-classement [classement]="'2'"/> si nécessaire) :</p>
       <ul>
-        <li><strong>Applications simples ou petites :</strong> Lorsque le projet a une portée limitée.</li>
+        <li><strong>Applications simples (petites à moyennes) :</strong> Lorsque le projet a une portée limitée.</li>
         <li><strong>Début de projet :</strong> Lorsque les besoins ne sont pas encore bien définis et que l'équipe veut
           un
           démarrage rapide.
@@ -46,7 +49,8 @@
           technique.
         </li>
         <li><strong>Pas ou peu de scalabilité requise :</strong> Si les besoins en performances sont modestes ou
-          stables.
+          stables. Toutefois, grâce à Kubernetes <app-classement [classement]="'1'"/>, on peut parvenir à une
+          meilleure disponibilité et scalabilité (horizontale).
         </li>
       </ul>
     </mat-card>
