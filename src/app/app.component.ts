@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {RouterLink, RouterLinkActive, RouterOutlet} from '@angular/router';
 import {MatSidenav, MatSidenavContainer, MatSidenavContent} from '@angular/material/sidenav';
 import {MatToolbar} from '@angular/material/toolbar';
@@ -15,13 +15,36 @@ import {NgOptimizedImage} from '@angular/common';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  profileImage: string = '/assets/img/cpierres-photo.png';
+  private readonly profileImageDefault: string = '/assets/img/cpierres-photo.png';
+  private readonly profileImageAvatar: string = '/assets/img/cpierres-avatar.png';
+  profileImage: string = this.profileImageDefault;
+  private readonly tooltipMessageDefault: string = 'Sénior ou Dinosaure ?';
+  private readonly tooltipMessageAvatar: string = 'Dinosaure Reactor !';
+  tooltipMessage: string = this.tooltipMessageDefault;
 
   // Méthode appelée au clic pour alterner entre les images
   toggleImage(): void {
-    this.profileImage = this.profileImage === '/assets/img/cpierres-photo.png'
-      ? '/assets/img/cpierres-avatar.png'
-      : '/assets/img/cpierres-photo.png';
+    this.profileImage = this.profileImage === this.profileImageDefault
+      ? this.profileImageAvatar
+      : this.profileImageDefault;
+    this.tooltipMessage = this.tooltipMessage === this.tooltipMessageDefault
+      ? this.tooltipMessageAvatar
+      : this.tooltipMessageDefault;
   }
+
+  updateTooltipOnHover(): void {
+    this.tooltipMessage =
+      this.profileImage === this.profileImageDefault
+        ? this.tooltipMessageDefault
+        : this.tooltipMessageAvatar;
+  }
+
+  resetTooltip(): void {
+    this.tooltipMessage =
+      this.profileImage === this.profileImageDefault
+        ? this.tooltipMessageDefault
+        : this.tooltipMessageAvatar;
+  }
+
 }
 

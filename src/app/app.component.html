@@ -6,9 +6,22 @@
         [src]="profileImage"
         alt="Christophe Pierrès"
         class="profile-photo"
-        matTooltip="Christophe Pierrès (clic !)"
+        [matTooltip]="tooltipMessage"
         matTooltipPosition="below"
+        (mouseenter)="updateTooltipOnHover()"
+        (mouseleave)="resetTooltip()"
         (click)="toggleImage()" />
+      <div class="user-info">
+        <div class="user-name">Christophe Pierrès</div>
+        <div class="user-cert">Certifié Java et JEE depuis 24 ans</div>
+        <div class="user-contact">
+          <a href="tel:+33781425406">+33 (0) 781 425 406</a>
+        </div>
+        <div class="user-contact">
+          <a href="mailto:cpierres@hotmail.com">cpierres&#64;hotmail.com</a>
+        </div>
+      </div>
+
     </mat-toolbar>
 
 
