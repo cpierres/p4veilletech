@@ -4,3 +4,13 @@
   align-items: center;
   height: 100%; /* Si nécessaire pour gérer la hauteur */
 }
+
+.containerSites {
+  display: flex; /* Flexbox pour aligner les cartes côte à côte */
+  gap: 16px; /* Espacement entre les cartes */
+}
+
+.cardSite {
+  flex: 1; /* Les cartes prennent une largeur égale */
+  min-width: 300px; /* Largeur minimale de chaque carte */
+}

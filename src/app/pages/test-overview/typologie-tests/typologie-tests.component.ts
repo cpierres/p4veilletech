@@ -11,7 +11,7 @@ import {
 import {TestTypology} from '../../../core/models/TestTypology';
 import {NgForOf, NgIf} from '@angular/common';
 import {MatDivider} from '@angular/material/divider';
-import {MatCard} from '@angular/material/card';
+import {MatCard, MatCardContent} from '@angular/material/card';
 import {ClassementComponent} from '../../../component/classement/classement.component';
 import {LinksInfoService} from '../../../core/services/links-info/links-info.service';
 import {LinkInfo} from '../../../core/models/LinkInfo';
@@ -36,15 +36,16 @@ import {LinkInfoComponent} from '../../../component/link-info/link-info.componen
     MatCard,
     ClassementComponent,
     NgIf,
-    LinkInfoComponent
+    LinkInfoComponent,
+    MatCardContent
   ],
   templateUrl: './typologie-tests.component.html',
   styleUrl: './typologie-tests.component.css',
   standalone: true,
 })
 export class TypologieTestsComponent implements OnInit {
-  sitesBackTestTitle: string = 'Sites pour tests Backend';
-  sitesFrontTestTitle: string = 'Sites pour tests Frontend';
+  sitesBackTestTitle: string = 'Sites de référence pour avis tests Backend';
+  sitesFrontTestTitle: string = 'Sites de référence pour avis pour tests Frontend';
   sitesBackTest: LinkInfo[] = [];
   sitesFrontTest: LinkInfo[] = [];
 
@@ -94,7 +95,7 @@ export class TypologieTestsComponent implements OnInit {
       backendTools: [
         {name: 'Postman', link: 'https://www.postman.com'},
         {
-          name: 'Spring Test, JUnit, Mockito, SpringMVC',
+          name: 'Spring Test, JUnit, Mockito',
           link: 'https://docs.spring.io/spring-framework/docs/current/reference/html/testing.html',
           choice: '1'
         },
@@ -118,7 +119,7 @@ export class TypologieTestsComponent implements OnInit {
       backendTools: [
         {name: 'Playwright', link: 'https://playwright.dev'},
         {
-          name: 'Spring Test, JUnit, Mockito, SpringMVC',
+          name: 'Spring Test, JUnit, Mockito',
           link: 'https://docs.spring.io/spring-framework/docs/current/reference/html/testing.html',
           choice: '1'
         },

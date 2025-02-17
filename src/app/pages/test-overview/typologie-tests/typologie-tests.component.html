@@ -67,6 +67,16 @@
 
   </table>
   <mat-divider></mat-divider>
-  <app-link-info [title]="sitesBackTestTitle" [links]="sitesBackTest"></app-link-info>
-  <app-link-info [title]="sitesFrontTestTitle" [links]="sitesFrontTest"></app-link-info>
+  <div class="containerSites">
+    <mat-card class="cardSite">
+      <mat-card-content>
+        <app-link-info [title]="sitesFrontTestTitle" [links]="sitesFrontTest"/>
+      </mat-card-content>
+    </mat-card>
+    <mat-card class="cardSite">
+      <mat-card-content>
+        <app-link-info [title]="sitesBackTestTitle" [links]="sitesBackTest"/>
+      </mat-card-content>
+    </mat-card>
+  </div>
 </mat-card>
