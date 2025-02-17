@@ -28,17 +28,10 @@ mat-sidenav {
   width: 180px;
 }
 
-.user-toolbar {
-  display: flex;
-  justify-content: left;
-  align-items: center;
-  height: 100px; /* Ajustez la hauteur si nécessaire */
-}
-
 .profile-photo {
   width: 90px;
   height: 90px;
-  border-radius: 50%; /* Cercle parfait pour la photo */
+  border-radius: 50%; /* Cercle pour la photo */
   cursor: pointer;
   transition: transform 0.2s ease-in-out;
 }
@@ -47,3 +40,32 @@ mat-sidenav {
   transform: scale(1.1); /* Zoom léger au survol */
 }
 
+.user-toolbar {
+  margin-top: 5px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  height: 200px;
+}
+
+.user-info {
+  text-align: center;
+}
+
+.user-name {
+  font-size: 14px;
+  font-weight: bold;
+  /*margin-top: 5px;*/
+}
+
+.user-cert {
+  font-size: 10px;
+  color: grey;
+}
+
+.user-contact {
+  font-size: 10px;
+  font-style: italic;
+  /*margin-top: 5px;*/
+}
