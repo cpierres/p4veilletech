@@ -300,6 +300,11 @@ export class TestingLibrariesComponent implements OnInit {
           {
             name: 'Autre avis sur Reddit',
             link: 'https://www.reddit.com/r/Angular2/comments/184enjb/angular_component_testing_with_cypress/'
+          },
+          {
+            name: 'OpenClassrooms : Cypress',
+            link: 'https://openclassrooms.com/fr/courses/8157231-automatisez-des-tests-fonctionnels-pour-le-web-avec-cypress',
+            title: 'Excellent tutoriel et avis d\'une experte'
           }
         ]
       }
