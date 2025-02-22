@@ -56,12 +56,12 @@ export class FrontVeilleComponent {
     },
     {
       name: 'Expert Angular : Alain Chautard',
-      link: 'https://www.angulartraining.com',
+      link: 'https://blog.angulartraining.com/',
       title: 'Expertise Angular'
     },
     {
       name: 'Expert Angular : Manfred Steyer',
-      link: 'https://www.angulararchitects.io/en/',
+      link: 'https://www.angulararchitects.io/en/blog/',
       title: 'Expertise Angular'
     },
     {
