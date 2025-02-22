@@ -190,6 +190,14 @@ export class LinksInfoService {
       name: 'udemy : Angular 6, Angular Material et RxJS 6 par la pratique',
       link: 'https://www.udemy.com/course/angular-6-angular-material-et-rxjs-6-par-la-pratique/'
     },
+    {
+      name: 'Simon Dieny : 23 Design Patterns',
+      link: 'https://www.youtube.com/playlist?list=PLhVogk7htzNhf1sPcvTQzHV_Jv6-LOmLi'
+    },
+    {
+      name: 'Simon Dieny : 5 principes de code SOLID',
+      link: 'https://www.youtube.com/playlist?list=PLhVogk7htzNibKTGFx1tJLSa-_cEZMcbZs'
+    },
   ];
 
   getSitesPrgFonctionnelleEtReactiveBack(): LinkInfo[] {
