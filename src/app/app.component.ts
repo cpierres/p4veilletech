@@ -11,11 +11,12 @@ import {MatTooltip} from '@angular/material/tooltip';
   selector: 'app-root',
   imports: [RouterOutlet, MatSidenavContainer, MatSidenav, MatSidenavContent, MatToolbar, MatNavList, MatIcon, MatListItem, RouterLink, RouterLinkActive, MatIconButton, MatTooltip],
   templateUrl: './app.component.html',
+  standalone: true,
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  private readonly profileImageDefault: string = '/assets/img/cpierres-photo.png';
-  private readonly profileImageAvatar: string = '/assets/img/cpierres-avatar2.png';
+  private readonly profileImageDefault: string = 'assets/img/cpierres-photo.png';
+  private readonly profileImageAvatar: string = 'assets/img/cpierres-avatar2.png';
   profileImage: string = this.profileImageDefault;
   private readonly tooltipMessageDefault: string = 'Sénior ? Clic pour voir';
   private readonly tooltipMessageAvatar: string = 'non... Dinosaure Reactorus ! (réactif de bout en bout)';

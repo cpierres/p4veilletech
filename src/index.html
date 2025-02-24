@@ -3,16 +3,37 @@
 <head>
   <meta charset="utf-8">
   <title>Christophe Pierrès - Veille technologique Angular et Spring</title>
-  <base href="/">
+  <base id="baseHref" href="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Christophe Pierrès. Expert java, JEE et fullstack (solutions web). Veille technologique Angular et Spring.">
   <meta name="robots" content="index,follow">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
-  <link rel="canonical" href="https://veille.cpierres.dscloud.me/">
+  <link rel="canonical" href="https://cpierres.dscloud.me">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body class="mat-typography">
   <app-root></app-root>
 </body>
+<script>
+  (function () {
+    var baseTag = document.getElementById('baseHref');
+    // On récupère automatiquement le chemin base courant
+    baseTag.setAttribute('href', window.location.pathname);
+    console.log('baseTag: ', baseTag);
+  })();
+  (function () {
+    const canonicalTag = document.querySelector('link[rel="canonical"]');
+    const currentUrl = `${window.location.origin}${window.location.pathname}`;
+
+    if (canonicalTag) {
+      canonicalTag.setAttribute('href', currentUrl);
+    } else {
+      const link = document.createElement('link');
+      link.setAttribute('rel', 'canonical');
+      link.setAttribute('href', currentUrl);
+      document.head.appendChild(link);
+    }
+  })();
+</script>
 </html>
