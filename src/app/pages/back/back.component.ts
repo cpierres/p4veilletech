@@ -5,6 +5,7 @@ import {RssBackComponent} from './rss-back/rss-back.component';
 import {BackVeilleComponent} from './back-veille/back-veille.component';
 import {BackPersistenceComponent} from './back-persistence/back-persistence.component';
 import {BackMicroservicesComponent} from './back-microservices/back-microservices.component';
+import {BackSecurityComponent} from './back-security/back-security.component';
 
 @Component({
   selector: 'app-back',
@@ -15,7 +16,8 @@ import {BackMicroservicesComponent} from './back-microservices/back-microservice
     RssBackComponent,
     BackVeilleComponent,
     BackPersistenceComponent,
-    BackMicroservicesComponent
+    BackMicroservicesComponent,
+    BackSecurityComponent
   ],
   templateUrl: './back.component.html',
   styleUrl: './back.component.css'

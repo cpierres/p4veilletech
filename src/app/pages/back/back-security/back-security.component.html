@@ -1,0 +1,85 @@
+<mat-card>
+  <h3>Comparatif des principales solutions de sécurité Spring</h3>
+  <mat-divider></mat-divider>
+  <div class="table-container">
+    <table mat-table [dataSource]="securitySolutions" class="mat-elevation-z8">
+
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Nom</th>
+        <td mat-cell *matCellDef="let solution" class="centered-header">
+          <a [href]="solution.link" target="_blank" title="{{ solution.title }}">
+            {{ solution.name }}
+          </a><br>
+          <span class="module-name">{{ solution.title }}</span><br>
+          <app-classement [classement]="solution.choice"></app-classement>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="principles">
+        <th mat-header-cell *matHeaderCellDef class="centered-header"> Principes</th>
+        <td mat-cell *matCellDef="let solution">
+          <ul>
+            <li *ngFor="let feature of solution.features">{{ feature }}</li>
+          </ul>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="useCases">
+        <th mat-header-cell *matHeaderCellDef class="centered-header"> Cas d'utilisation</th>
+        <td mat-cell *matCellDef="let solution">
+          <ul>
+            <li *ngFor="let useCase of solution.useCases">{{ useCase }}</li>
+          </ul>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="advantages">
+        <th mat-header-cell *matHeaderCellDef class="centered-header"> Avantages</th>
+        <td mat-cell *matCellDef="let solution">
+          <ul>
+            <li *ngFor="let advantage of solution.advantages">{{ advantage }}</li>
+          </ul>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="disadvantages">
+        <th mat-header-cell *matHeaderCellDef class="centered-header"> Inconvénients</th>
+        <td mat-cell *matCellDef="let solution">
+          <ul>
+            <li *ngFor="let disadvantage of solution.disadvantages">{{ disadvantage }}</li>
+          </ul>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="references">
+        <th mat-header-cell *matHeaderCellDef class="centered-header"> Références</th>
+        <td mat-cell *matCellDef="let solution">
+          <ul>
+            <li>
+              <a href="{{ solution.references.github.repo }}" target="_blank"
+                 title="{{ solution.references.github.title }}">
+                GitHub
+              </a>
+            </li>
+            <li *ngFor="let site of solution.references.siteAvis">
+              <a href="{{ site.link }}" target="_blank" title="{{ site.title }}">
+                {{ site.name }}
+              </a>
+            </li>
+          </ul>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+  <mat-divider></mat-divider>
+</mat-card>
+<mat-tab-group>
+  <mat-card>
+    <mat-tab label="Sites de référence sur la sécurité Spring">
+      <app-link-info [title]="titleLink" [links]="sites"></app-link-info>
+    </mat-tab>
+  </mat-card>
+</mat-tab-group>

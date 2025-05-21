@@ -7,6 +7,7 @@ import {ClassementComponent} from '../../component/classement/classement.compone
 import {MatDivider} from '@angular/material/divider';
 import {MatCard} from '@angular/material/card';
 import {ArchiVeilleComponent} from '../architecture/archi-veille/archi-veille.component';
+import {MatAccordion, MatExpansionModule, MatExpansionPanel, MatExpansionPanelTitle} from '@angular/material/expansion';
 
 @Component({
   selector: 'app-home',
@@ -20,6 +21,10 @@ import {ArchiVeilleComponent} from '../architecture/archi-veille/archi-veille.co
     MatDivider,
     MatCard,
     ArchiVeilleComponent,
+    MatExpansionModule,
+    MatExpansionPanel,
+    MatExpansionPanelTitle,
+    MatAccordion,
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'

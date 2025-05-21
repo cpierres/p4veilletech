@@ -1,0 +1,23 @@
+.table-container {
+  width: 100%;
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+}
+
+.centered-header {
+  text-align: center;
+}
+
+.module-name {
+  font-size: 0.9em;
+  color: #666;
+  font-style: italic;
+}
+
+ul {
+  margin: 0;
+  padding-left: 20px;
+}
