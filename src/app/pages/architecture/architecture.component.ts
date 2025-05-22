@@ -12,6 +12,7 @@ import {AvailabilityComponent} from './availability/availability.component';
 import {ArchiPourContreComponent} from './archi-pour-contre/archi-pour-contre.component';
 import {ParadigmsComponent} from './paradigms/paradigms.component';
 import {ArchiVeilleComponent} from './archi-veille/archi-veille.component';
+import {ArchiSecuComponent} from './archi-secu/archi-secu.component';
 
 @Component({
   selector: 'app-architecture',
@@ -29,7 +30,8 @@ import {ArchiVeilleComponent} from './archi-veille/archi-veille.component';
     AvailabilityComponent,
     ArchiPourContreComponent,
     ParadigmsComponent,
-    ArchiVeilleComponent
+    ArchiVeilleComponent,
+    ArchiSecuComponent
   ],
   templateUrl: './architecture.component.html',
   styleUrl: './architecture.component.css'

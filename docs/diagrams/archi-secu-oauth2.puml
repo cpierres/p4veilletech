@@ -1,0 +1,31 @@
+@startuml OAuth2 Flow
+!theme plain
+skinparam handwritten false
+skinparam backgroundColor white
+skinparam defaultFontName Arial
+
+actor "Utilisateur" as user
+participant "Application\nClient" as client
+participant "Serveur\nd'Autorisation" as auth
+participant "Serveur de\nRessources (API)" as api
+database "Base de données" as db
+
+== Phase d'authentification ==
+user -> client: 1. Demande d'accès
+client -> auth: 2. Redirection vers login
+user -> auth: 3. Authentification
+auth -> db: 4. Vérification des identifiants
+db --> auth: Identifiants valides
+auth -> user: 5. Demande de consentement
+user -> auth: 6. Accepte le consentement
+auth -> client: 7. Code d'autorisation
+client -> auth: 8. Échange code contre token
+auth -> client: 9. Access token + Refresh token
+
+== Phase d'utilisation ==
+client -> api: 10. Requête avec Access token
+api -> api: 11. Validation du token
+api --> client: 12. Réponse avec données
+note right: Si token expiré, utiliser\nle refresh token pour\nen obtenir un nouveau
+
+@enduml

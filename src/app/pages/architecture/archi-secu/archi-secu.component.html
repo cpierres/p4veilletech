@@ -1,0 +1,75 @@
+<mat-accordion>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>1. Architecture d'authentification OAuth2/OpenID Connect</mat-panel-title>
+    </mat-expansion-panel-header>
+    <strong>OAuth2</strong> est considéré comme un "must-have" pour plusieurs raisons fondamentales :<br>
+    <ol>
+      <li><strong>Standard industriel</strong> : OAuth2 est devenu le standard de facto pour l'autorisation, adopté par les géants du web
+        (Google, Microsoft, Facebook) et des milliers d'entreprises.
+      </li>
+      <li><strong>Séparation des préoccupations</strong> : Il permet de déléguer l'authentification à un service spécialisé, permettant à
+        votre application de se concentrer sur ses fonctionnalités métier.
+      </li>
+      <li><strong>Sécurité renforcée</strong> : Il évite de stocker et gérer les mots de passe des utilisateurs, réduisant
+        considérablement les risques de fuites de données sensibles.
+      </li>
+      <li><strong>Expérience utilisateur améliorée</strong> : Les utilisateurs peuvent se connecter via des comptes existants (Single
+        Sign-On), évitant de créer et mémoriser de nouveaux identifiants.
+      </li>
+      <li><strong>Granularité des autorisations</strong> : Le système de "scopes" permet un contrôle fin des permissions accordées aux
+        applications tierces.
+      </li>
+      <li><strong>Interopérabilité</strong> : Facilite l'intégration avec d'autres services et APIs, créant un écosystème connecté.</li>
+      <li><strong>Évolutivité</strong> : Supporte naturellement les architectures distribuées et microservices.</li>
+      <li><strong>Conformité réglementaire</strong> : Aide à respecter les exigences de sécurité (normes comme GDPR, PCI-DSS)</li>
+    </ol>
+    <mat-card>
+      <img src="assets/img/archi-secu-OAuth2.png" height="593" width="753" class="center-image"/>
+    </mat-card>
+
+  </mat-expansion-panel>
+
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>2. Architecture de sécurité avec Spring Security</mat-panel-title>
+    </mat-expansion-panel-header>
+    <!-- p>
+    </p -->
+    <mat-card>
+      <img src="assets/img/archi-spring-security1.png" height="763" width="873" class="center-image"/>
+    </mat-card>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>3. Architecture de sécurité avec JWT (JSON Web Tokens)</mat-panel-title>
+    </mat-expansion-panel-header>
+    <!-- p>
+    </p -->
+    <mat-card>
+      <img src="assets/img/archi-secu-jwt.png" height="763" width="711" class="center-image"/>
+    </mat-card>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>4. Architecture de sécurité pour microservices</mat-panel-title>
+    </mat-expansion-panel-header>
+    <!-- p>
+    </p -->
+    <mat-card>
+      <img src="assets/img/archi-secu-microservices.png" height="796" width="1135" class="center-image"/>
+    </mat-card>
+  </mat-expansion-panel>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>5. Architecture SAML pour Single Sign-On (SSO)</mat-panel-title>
+    </mat-expansion-panel-header>
+    <!-- p>
+    </p -->
+    <mat-card>
+      <img src="assets/img/archi-secu-sso.png" height="773" width="655" class="center-image"/>
+    </mat-card>
+  </mat-expansion-panel>
+</mat-accordion>

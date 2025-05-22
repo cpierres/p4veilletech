@@ -1,0 +1,36 @@
+@startuml Spring Security Architecture
+!theme plain
+skinparam handwritten false
+skinparam backgroundColor white
+skinparam defaultFontName Arial
+
+package "Spring Security" {
+  [Authentication Filter] as AF
+  [Authentication Manager] as AM
+  [Authentication Provider] as AP
+  [User Details Service] as UDS
+  [Access Decision Manager] as ADM
+  [Security Context] as SC
+}
+
+database "Base de données" as DB
+[Controller] as CTRL
+[Service Layer] as SL
+actor "Utilisateur" as user
+
+user --> AF : HTTP Request
+AF --> AM : Délègue l'authentification
+AM --> AP : Utilise
+AP --> UDS : Récupère les informations utilisateur
+UDS --> DB : Interroge
+AP --> SC : Stocke l'authentification
+AF --> ADM : Vérifie les autorisations
+ADM --> SC : Consulte le contexte
+AF --> CTRL : Transmet la requête si autorisée
+CTRL --> SL : Appelle les services métier
+
+note right of AF : Intercepte toutes les requêtes
+note right of SC : Stocke les informations\nd'authentification
+note right of ADM : Vérifie les autorisations\nbasées sur les rôles
+
+@enduml

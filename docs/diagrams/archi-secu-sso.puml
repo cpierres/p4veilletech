@@ -1,0 +1,37 @@
+@startuml SAML SSO
+!theme plain
+skinparam handwritten false
+skinparam backgroundColor white
+skinparam defaultFontName Arial
+
+actor "Utilisateur" as user
+participant "Service Provider\n(Application)" as sp
+participant "Identity Provider\n(IdP)" as idp
+database "User Directory\n(LDAP/AD)" as db
+
+== Flux SAML ==
+user -> sp: 1. Accès à l'application
+sp -> sp: 2. Vérifie si session existe
+sp -> user: 3. Redirection vers IdP\navec SAML Request
+user -> idp: 4. Transmet SAML Request
+idp -> idp: 5. Vérifie si session IdP existe
+idp -> user: 6. Page de login (si pas de session)
+user -> idp: 7. Soumet identifiants
+idp -> db: 8. Vérifie identifiants
+db --> idp: 9. Identifiants valides
+idp -> idp: 10. Génère SAML Assertion\n(identité + attributs)
+idp -> user: 11. Redirection vers SP\navec SAML Response
+user -> sp: 12. Transmet SAML Response
+sp -> sp: 13. Valide SAML Response\n(signature, conditions)
+sp -> sp: 14. Crée session locale
+sp -> user: 15. Accès à l'application
+
+note right of idp
+  L'assertion SAML contient:
+  - Identité de l'utilisateur
+  - Attributs (rôles, etc.)
+  - Conditions (validité)
+  - Signature numérique
+end note
+
+@enduml

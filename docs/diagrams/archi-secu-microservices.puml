@@ -1,0 +1,50 @@
+@startuml Microservices Security
+!theme plain
+skinparam handwritten false
+skinparam backgroundColor white
+skinparam defaultFontName Arial
+
+actor "Utilisateur" as user
+node "API Gateway" as gateway
+node "Service d'identité" as identity
+node "Service d'autorisation" as authz
+
+package "Microservices" {
+  [Service A] as svcA
+  [Service B] as svcB
+  [Service C] as svcC
+}
+
+database "Base de données A" as dbA
+database "Base de données B" as dbB
+database "Base de données C" as dbC
+
+user --> gateway: Requêtes
+gateway --> identity: Authentification
+gateway --> authz: Vérification des autorisations
+gateway --> svcA: Requêtes authentifiées
+gateway --> svcB: Requêtes authentifiées
+gateway --> svcC: Requêtes authentifiées
+
+svcA --> dbA: Accès données
+svcB --> dbB: Accès données
+svcC --> dbC: Accès données
+
+svcA <--> svcB: Communication sécurisée\n(mTLS)
+svcB <--> svcC: Communication sécurisée\n(mTLS)
+
+note right of gateway
+  - Rate limiting
+  - Filtrage des requêtes
+  - Validation des tokens
+  - Logging de sécurité
+end note
+
+note right of identity
+  - Gestion des identités
+  - Émission de tokens
+  - SSO
+  - MFA
+end note
+
+@enduml

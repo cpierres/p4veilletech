@@ -1,0 +1,36 @@
+@startuml JWT Authentication
+!theme plain
+skinparam handwritten false
+skinparam backgroundColor white
+skinparam defaultFontName Arial
+
+actor "Utilisateur" as user
+participant "Frontend\n(SPA/Mobile)" as client
+participant "Backend API" as api
+database "Base de données" as db
+
+== Authentification ==
+user -> client: 1. Saisie identifiants
+client -> api: 2. POST /login (credentials)
+api -> db: 3. Vérification des identifiants
+db --> api: Utilisateur valide
+api -> api: 4. Génération JWT\n(avec payload, signature)
+api --> client: 5. Retourne JWT
+client -> client: 6. Stocke JWT\n(localStorage, sessionStorage)
+
+== Requêtes sécurisées ==
+user -> client: 7. Action nécessitant API
+client -> api: 8. Requête avec\nAuthorization: Bearer {JWT}
+api -> api: 9. Validation JWT\n(signature, expiration)
+api -> api: 10. Extraction des claims\n(rôles, permissions)
+api -> api: 11. Vérification des autorisations
+api --> client: 12. Réponse (données ou 401/403)
+
+note right of api
+  Le JWT contient:
+  - Header (algo, type)
+  - Payload (claims)
+  - Signature
+end note
+
+@enduml
