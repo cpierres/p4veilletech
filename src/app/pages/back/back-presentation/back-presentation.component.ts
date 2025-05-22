@@ -122,11 +122,11 @@ export class BackPresentationComponent {
       disadvantages: [
         'Complexité accrue comparée à Spring Web/MVC.',
         'Moins d\'automatismes qu\'avec Spring Web/MVC.',
-        'Plus récent que Spring Web/MVC, moins mature, moins utilisé',
+        'Plus récent que Spring Web/MVC (sorti en 2017), moins utilisé',
         'Moins adapté pour les applications qui ne nécessitent pas un modèle réactif.'
       ],
       features: [
-        'Basé sur Project Reactor pour la programmation réactive.',
+        'Basé sur Reactor pour la programmation réactive.',
         'Support des annotations similaires à Spring Web, telles que @RestController.',
         'Support des flux non bloquants avec Mono et Flux.'
       ],
