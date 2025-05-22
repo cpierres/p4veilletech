@@ -37,21 +37,6 @@ export class BackMicroservicesComponent {
   // Liste des modules avec URL de documentation et description
   modules: ModuleRole[] = [
     {
-      name: 'Spring Boot Starter Web',
-      role: 'Permet de créer des APIs REST en exposant des endpoints HTTP.',
-      link: 'https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#web',
-    },
-    {
-      name: 'Spring Boot Starter Actuator',
-      role: 'Fournit des endpoints de monitoring (santé, métriques, etc.) pour gérer chaque microservice.',
-      link: 'https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#actuator',
-    },
-    {
-      name: 'Spring Cloud Netflix Eureka',
-      role: 'Met en place un service de découverte pour que les microservices puissent s\'enregistrer et se découvrir dynamiquement.',
-      link: 'https://cloud.spring.io/spring-cloud-netflix/reference/html/#spring-cloud-eureka-server',
-    },
-    {
       name: 'Spring Cloud Gateway',
       role: 'Agit comme un point d\'entrée unique (API Gateway) pour router les requêtes vers les différents microservices.',
       link: 'https://docs.spring.io/spring-cloud-gateway/docs/current/reference/html/',
@@ -72,14 +57,14 @@ export class BackMicroservicesComponent {
       link: 'https://spring.io/projects/spring-cloud-sleuth',
     },
     {
-      name: 'Spring Boot DevTools',
-      role: 'Facilite le développement avec un redémarrage automatique et un flux de travail simplifié.',
-      link: 'https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#using.devtools',
+      name: 'Spring Boot Starter Actuator',
+      role: 'Fournit des endpoints de monitoring (santé, métriques, etc.) pour gérer chaque microservice.',
+      link: 'https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#actuator',
     },
     {
-      name: 'Spring Data',
-      role: 'Fournit des abstractions pour accéder aux bases de données dans chaque microservice.',
-      link: 'https://spring.io/projects/spring-data',
+      name: 'Spring Cloud Netflix Eureka',
+      role: 'Met en place un service de découverte pour que les microservices puissent s\'enregistrer et se découvrir dynamiquement.',
+      link: 'https://cloud.spring.io/spring-cloud-netflix/reference/html/#spring-cloud-eureka-server',
     },
     {
       name: 'Spring Cloud OpenFeign',
@@ -87,5 +72,4 @@ export class BackMicroservicesComponent {
       link: 'https://spring.io/projects/spring-cloud-openfeign',
     },
   ];
-
 }
