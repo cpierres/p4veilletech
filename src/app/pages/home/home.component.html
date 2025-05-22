@@ -2,11 +2,14 @@
   <mat-tab-group>
     <mat-tab label="Objectifs">
       <mat-card>
-
-        <p>Ceci est une plateforme pour explorer des solutions autour des <strong>Architectures</strong>, de <strong>Angular</strong> et
-          <strong>Spring</strong> et fournir des points d'entrée pour la veille technologique.</p>
-        <p>L'autre objectif est de déterminer les solutions adaptées aux projets clients.
-          Cliquez sur votre projet ci-dessous afin d'obtenir votre document personnalisé :</p>
+        <p>
+          Le but de cette plateforme est d'<b>accompagner les clients dans la lecture de leur dossier d'architecture</b>.<br>
+          Vous pourrez ainsi être éclairé sur les choix qui ont été pressentis en fonction de vos besoins.<br>
+          En exposant les solutions autour des <strong>Architectures</strong>, d'<strong>Angular</strong> et
+          <strong>Spring</strong>, nous gagnons du temps. Cela vous offre une vue synthétique et l'opportunité
+          d'en savoir plus.<br>
+          Cliquez sur votre projet ci-dessous (droit requis) afin d'obtenir votre dossier d'architecture :
+        </p>
         <div class="home-page">
           <mat-accordion>
             <!-- Panneau Projet P4 - Client Knesh -->
@@ -31,8 +34,8 @@
                   <li><strong>Évolutivité :</strong> S'appuyer sur des technologies solides et documentées.</li>
                 </ul>
                 <p>
-                  Il s'agit de trouver le bon compromis pour y répondre, sachant que les spécifications fonctionnelles ne sont
-                  pas connues et qu'il faudra de ce fait affiner avec l'expression des besoins du client.<br>
+                  Il s'agit de trouver le bon compromis pour y répondre, sachant que les spécifications fonctionnelles
+                  ne sont pas connues et qu'il faudra de ce fait affiner avec l'expression des besoins du client.<br>
                   Téléchargez le dossier d'architecture provisoire de Knesh:
                   <a href="/assets/pdf/DossierArchitectureKnesh.pdf" target="_blank">ici</a>.
                 </p>
@@ -55,7 +58,8 @@
 
         <mat-divider></mat-divider>
         <p style="margin-bottom: 0">
-          Ainsi, vous trouverez dans les pages de ce site des <u>médailles d'Or</u> (nos préconisations) pour Knesh concernant :
+          Ainsi, vous trouverez dans les pages de ce site des <u>médailles d'Or</u> (nos préconisations) pour Knesh
+          concernant :
         </p>
         <ul>
           <li>
@@ -67,8 +71,12 @@
             <app-classement [classement]="'1'"/>
           </li>
         </ul>
-        <p style="margin-top: 0">Lorsqu'il y a plusieurs <app-classement [classement]="'1'"/>, c'est que les choix peuvent se combiner.<br>
-          Parfois, une médaille d'argent <app-classement [classement]="'2'"/> est proposée, soit parce que la
+        <p style="margin-top: 0">Lorsqu'il y a plusieurs
+          <app-classement [classement]="'1'"/>
+          , c'est que les choix peuvent se combiner.<br>
+          Parfois, une médaille d'argent
+          <app-classement [classement]="'2'"/>
+          est proposée, soit parce que la
           solution est une bonne alternative (meilleure adéquation au budget), soit parce qu'il s'agit d'une solution
           d'intérêt à envisager selon les besoins.
         </p>
