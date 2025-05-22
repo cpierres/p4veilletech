@@ -100,6 +100,50 @@ export class BackSecurityComponent {
       }
     },
     {
+      name: 'OAuth2 Authorization Server',
+      link: 'https://docs.spring.io/spring-authorization-server/docs/current/reference/html/index.html',
+      title: 'Module pour implémenter un serveur d\'autorisation OAuth2/OIDC (spring-boot-starter-oauth2-authorization-server)',
+      choice: '',
+      advantages: [
+        'Implémentation officielle du standard OAuth2 et OpenID Connect (OIDC)',
+        'Permet de créer un serveur d\'autorisation complet et conforme aux spécifications',
+        'Intégration native avec l\'écosystème Spring Security',
+        'Support pour différents types de grants OAuth2 (authorization code, client credentials, etc.)'
+      ],
+      disadvantages: [
+        'Configuration plus complexe que les autres modules de sécurité',
+        'Nécessite une bonne compréhension des concepts OAuth2/OIDC',
+        'Responsabilité importante en matière de sécurité des tokens et des données d\'authentification',
+        'Courbe d\'apprentissage importante pour une utilisation avancée'
+      ],
+      features: [
+        'Émission de tokens JWT et opaques',
+        'Support complet pour les flux OAuth2 et OIDC',
+        'Gestion des clients, des scopes et des consentements',
+        'Endpoints conformes aux spécifications OAuth2/OIDC',
+        'Personnalisation des processus d\'authentification et d\'autorisation'
+      ],
+      useCases: [
+        'Centralisation de l\'authentification pour un écosystème d\'applications',
+        'Implémentation d\'une solution SSO (Single Sign-On)',
+        'Sécurisation d\'APIs avec une gestion fine des autorisations',
+        'Systèmes nécessitant une séparation entre authentification et ressources'
+      ],
+      references: {
+        github: {
+          repo: 'https://github.com/spring-projects/spring-authorization-server',
+          title: 'Dépôt officiel de Spring Authorization Server',
+        },
+        siteAvis: [
+          {
+            name: 'Baeldung Authorization Server',
+            link: 'https://www.baeldung.com/spring-security-oauth-auth-server',
+            title: 'Guide d\'implémentation d\'un serveur d\'autorisation OAuth2'
+          },
+        ]
+      }
+    },
+    {
       name: 'OAuth2 Resource Server',
       link: 'https://docs.spring.io/spring-security/reference/servlet/oauth2/resource-server/index.html',
       title: 'Module pour sécuriser les API REST (spring-boot-starter-oauth2-resource-server)',
@@ -165,7 +209,7 @@ export class BackSecurityComponent {
       features: [
         'Authentification et autorisation réactives',
         'Support pour les flux de données réactifs',
-        'Intégration avec WebFlux et Project Reactor',
+        'Intégration avec WebFlux et Reactor',
         'Sécurité au niveau des méthodes avec annotations réactives'
       ],
       useCases: [
@@ -181,12 +225,7 @@ export class BackSecurityComponent {
         },
         siteAvis: [
           {
-            name: 'Baeldung Reactive Security',
-            link: 'https://www.baeldung.com/spring-security-webflux',
-            title: 'Guide Spring Security avec WebFlux'
-          },
-          {
-            name: 'Documentation officielle',
+            name: 'Documentation officielle Spring Security Reactive',
             link: 'https://docs.spring.io/spring-security/reference/reactive/index.html',
             title: 'Documentation Spring Security Reactive'
           }
@@ -194,7 +233,56 @@ export class BackSecurityComponent {
       }
     },
     {
-      name: 'Application autonome incluant serveur de ressources OAuth2',
+      name: 'Spring Security OAuth2 JOSE (JSON Object Signing and Encryption)',
+      link: 'https://docs.spring.io/spring-security/reference/servlet/oauth2/resource-server/jwt.html',
+      title: 'Module pour le support des standards JOSE (JWT, JWS, JWE) (spring-security-oauth2-jose)',
+      choice: '',
+      advantages: [
+        'Support complet pour les standards JOSE (JWT, JWS, JWE)',
+        'Facilite la création, validation et manipulation des tokens JWT',
+        'Intégration native avec Spring Security et les serveurs de ressources OAuth2',
+        'Implémentation conforme aux spécifications RFC pour JWT'
+      ],
+      disadvantages: [
+        'Nécessite une bonne compréhension des concepts JWT et de cryptographie',
+        'Configuration parfois complexe pour les cas d\'utilisation avancés',
+        'Dépendance à des bibliothèques cryptographiques qui peuvent évoluer',
+        'Responsabilité importante dans la gestion des clés de signature et de chiffrement'
+      ],
+      features: [
+        'Encodage et décodage des tokens JWT',
+        'Support pour la signature (JWS) et le chiffrement (JWE) des tokens',
+        'Validation des claims JWT (expiration, émetteur, audience, etc.)',
+        'Intégration avec différents algorithmes cryptographiques (RSA, HMAC, etc.)',
+        'Conversion entre formats JWT et objets Java'
+      ],
+      useCases: [
+        'Applications utilisant JWT comme mécanisme d\'authentification',
+        'Microservices nécessitant une validation avancée des tokens',
+        'Systèmes avec échange sécurisé d\'informations via tokens',
+        'Implémentations personnalisées de flux OAuth2/OIDC'
+      ],
+      references: {
+        github: {
+          repo: 'https://github.com/spring-projects/spring-security',
+          title: 'Dépôt officiel de Spring Security',
+        },
+        siteAvis: [
+          {
+            name: 'Baeldung JWT',
+            link: 'https://www.baeldung.com/spring-security-oauth-2-jws-jwk',
+            title: 'Guide d\'utilisation de JWS et JWK avec Spring Security'
+          },
+          {
+            name: 'Documentation officielle',
+            link: 'https://docs.spring.io/spring-security/reference/servlet/oauth2/resource-server/jwt.html',
+            title: 'Documentation JWT avec Spring Security'
+          }
+        ]
+      }
+    },
+    {
+      name: 'Application autonome incluant serveur de ressources OAuth2+JOSE',
       link: 'https://docs.spring.io/spring-security/reference/servlet/oauth2/resource-server/index.html',
       title: 'Le projet implémente sa propre logique de génération et validation des tokens JWT',
       choice: '4',
