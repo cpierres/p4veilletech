@@ -1,0 +1,410 @@
+<div class="home-page">
+  <p>
+    Cette page vise à répondre au projet 7 qui est un "point d'étapes" par rapport aux 5 projets techniques précédents
+    et au fait d'appréhender les projets à venir.
+  </p>
+
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Projet P1 : objectifs et planification des projets
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div>
+        <p>
+          Le projet P1 était un projet "non technique" dont le but était d'avoir une vision globale des projets à
+          réaliser et de fixer ses propres objectifs attendus, suite à cette formation d'expertise en développement
+          logiciel.<br>
+          J'avais indiqué un objectif clair : être capable du faire de l'asynchrone sur la totalité de l'architecture
+          (du frontend jusqu'au backend ET la base de données) alors que beaucoup aujourd'hui se contente de le faire
+          uniquement côté frontend.<br>
+          D'autre part, mon intention était d'adopter les meilleures pratiques de développement sur chacun des projets,
+          en atteignant a minima ce que je faisais avant et tant qu'à faire d'aller plus loin.
+        </p>
+        <p>
+          Les mois précédents, j'avais commencé à étudier les excellentes formation Udemy de John Thompson pour m'ouvrir
+          rapidement et concrètement l'esprit sur l'ensemble de l'éco-système de Spring.<br>
+          Il y a beaucoup de formations intéressantes (IA, sécurité, ...) mais citons en particulier celle concernant
+          <a href="https://www.udemy.com/course/spring-framework-6-beginner-to-guru/" target="_blank">Spring 6</a>.<br>
+          Cette formation permet d'avoir une bonne vision comparative des modules de Spring. Les capacités de Spring
+          WebFlux et de R2DBC m'ont tout de suite interpellées.<br>
+          Après des recherches, j'ai trouvé cet <a
+          href="https://technology.amis.nl/software-development/performance-and-tuning/spring-blocking-vs-non-blocking-r2dbc-vs-jdbc-and-webflux-vs-web-mvc/"
+          target="_blank">excellent
+          benchmark comparatif :</a>
+          qui m'a convaincu que c'était la technologie que je devais approfondir.
+        </p>
+
+      </div>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Projet P2 : frontend Angular v18 (avec starter code classique basé sur des ngModules)
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div>
+        <p>
+          Ce projet est un frontend (avec un backend minimaliste) devant respecter scrupuleusement des maquettes d'écran
+          responsive.<br>
+          Il s'agissait aussi de choisir et d'intégrer une librairie de gestion de graphes.<br>
+          Le projet est accessible ici : <a href="https://ocrp2.cpierres.dscloud.me/" target="_blank">https://ocrp2.cpierres.dscloud.me/</a><br>
+          Angular m'a rapidement démontré sa capacité à bien gérer l'asynchronisme et la programmation réactive.<br>
+          Dépôt github : <a href="https://github.com/cpierres/Opencr-Projet02-Angular" target="_blank">
+          https://github.com/cpierres/Opencr-Projet02-Angular</a><br>
+        </p>
+        <p>
+          Le README vous indiquera un lien pour une compodoc complète diffusée sur github : <a
+          href="https://cpierres.github.io/Opencr-Projet02-Angular/" target="_blank">https://cpierres.github.io/Opencr-Projet02-Angular/</a><br>
+          <br>
+          Il s'agissait d'utiliser Angular en partant d'un starter code avec des paradigmes "anciens" (ngModules) mais
+          avec une version d'Angular migrée en v18.<br>
+          Cela m'a permis de me mettre dans le moule d'une organisation de développement habituelle/classique que l'on
+          trouve encore beaucoup dans les développements du marché, tout en goûtant aux apports de la nouvelle version
+          (standalone components, Signal).<br>
+          Je suis allé plus loin que ce qui était demandé pour ce projet car mon objectif n'était pas simplement de
+          terminer un projet "fonctionnel"
+          mais de mettre en oeuvre les meilleures pratiques et de structurer le projet de telle manière qu'il soit
+          facilement évolutif.<br>
+          Je me suis permis d'intégrer des fonctions "cachées" (non demandées dans les spécifications) pour démontrer
+          l'évolutivité permise par mon design :<br>
+          composants qui s'adaptent en cas d'ajout de série statiques, changement de types de graphes.
+        </p>
+      </div>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Projet P3 : backend Spring pour un frontend Angular existant
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div>
+        <p>
+          Le projet backend P3 (dépôt git : <a href="https://github.com/cpierres/P3-back-spring" target="_blank">https://github.com/cpierres/P3-back-spring</a>)
+          m'a permis de mettre en pratique SpringBoot et notamment le module classique `Spring Data JPA/MVC`<br>
+          J'ai trouvé intéressant la facilité de mise en oeuvre et la productivité mais j'ai aussi constaté qu'on
+          restait dans les paradigmes bloquant de JEE.<br>
+        </p>
+      </div>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Projet P4 : mise en place d'un site public de veille technologique concernant les types d'architectures, ainsi
+          que Angular et Spring.
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div>
+        <p>
+          La préconisation était de se reposer sur un outil existant tel que Wordpress ou encore des blogs.<br>
+          En tant que professionnel du développement, j'ai trouvé plus opportun et efficace de créer mon propre site
+          avec Angular 19.<br>
+          Mon idée est de m'en servir plus tard lors de présentations clients. Je voulais maitriser complétement la
+          présentation.<br>
+          Cela m'a permis d'utiliser librement des composants Angular Materials.<br>
+          J'ai voulu être sobre dans la présentation de ce site que voici : <a
+          href=" https://veille.cpierres.dscloud.me/" target="_blank">https://veille.cpierres.dscloud.me/</a><br>
+          <br>
+          A signaler aussi que j'ai intégré des flux RSS pour les fils d'actualité sur des sites d'intérêts.<br>
+          Le fait de créer mon propre site m'a permis d'organiser facilement mes idées et mes liens, sans avoir à
+          bidouiller dans un outil tierce.<br>
+          D'après mon mentor et mon évaluateur de soutenance, je suis le premier "étudiant" à avoir réalisé un site
+          complet pour ce projet.
+        </p>
+      </div>
+    </mat-expansion-panel>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Projet P5 : testing complet du frontend et du backend
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div>
+        <p>
+          Les techniques de testing étaient un sujet que je connaissais déjà.<br>
+          J'ai trouvé qu'Angular et Spring permettent une mise en oeuvre absolument <b>excellente</b> en intégrant
+          les besoins de testing au coeur de leur architecture !
+        <p>
+        <p>
+          L'objectif était le testing complet sur une application fullstack existante :</p>
+        <ul>
+          <li>tests unitaires</li>
+          <li>tests d'intégration</li>
+          <li>tests end-to-end avec Cypress</li>
+        </ul>
+        <p>
+          avec un taux de couverture d'au moins 80% sur les deux couches.
+        </p>
+        <p>
+          Les technologies et rapports de couverture sont présentés dans le README sur github : <a
+          href="https://github.com/cpierres/P5-Test-full-stack" target="_blank">https://github.com/cpierres/P5-Test-full-stack</a><br>
+          Accessoirement, le fait de devoir effectuer les tests sur cet existant m'a permis de découvrir en profondeur
+          des techniques intéressantes côté backend et frontend.<br>
+          J'ai trouvé la démarche intéressante au niveau pédagogique de la part d'OpenClassrooms.
+        </p>
+      </div>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Projet P6 : développement full-stack (Backend : SpringBoot 3.4.4 avec Spring WebFlux et R2DBC | Frontend :
+          Angular 19.2)
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div>
+        <p>
+          C'est le projet qui m'a motivé le plus car le besoin étant un réseau social, cela suppose :
+        </p>
+        <ul>
+          <li>une très forte capacité de montée en charge</li>
+          <li>être capable de gérer potentiellement tous les canaux de communication modernes, tels que des dialogues
+            vidéos entre développeurs par exemple
+          </li>
+          <li>pourquoi pas, télécharger des grosses vidéos et de les diffuser en streaming, sans scotcher les threads
+            ...
+          </li>
+          <li>de réaliser facilement des chats en temps réel.</li>
+        </ul>
+        <p>
+          C'est d'ailleurs ce que j'ai fait dans ce projet puisque les ajouts d'articles et commentaires étant vus par
+          tous les utilisateurs en temps réel, on peut se servir des commentaires comme d'un chat entre tous les
+          utilisateurs !
+        </p>
+        <p>
+        <p>
+          J'allais donc pouvoir mettre en oeuvre Spring WebFlux ainsi qu'une base de données au standard R2DBC, tous
+          basés sur des paradigmes non bloquants.<br>
+          <strong>D'après mon mentor, je suis encore une fois le premier "étudiant" connaissance à avoir mis en oeuvre
+            ces technologies avancées !</strong>
+        </p>
+        <p>
+          Bien entendu, il était impératif de respecter strictement les maquettes (critère d'évaluation).<br>
+          J'ai néanmoins proposé d'ajouter certains éléments pour mieux démontrer les avantages de l'architecture
+          choisie (statistiques de popularité en temps réel par exemple).<br>
+          J'ai respecté les spécifications fonctionnelles tout en offrant de la souplesse grâce à des capacités de
+          filtrages et de tris (pour faciliter la démo de certains scénarios).<br>
+          Le temps réel n'est certes pas une nouveauté puisqu'on sait déjà le faire depuis longtemps avec des Websockets
+          en bidirectionnel (ou d'une manière moins élégante avec du polling).<br>
+          L'aspect intéressant désormais est qu'on peut le faire avec des SSE (Server Side Events), un canal
+          unidirectionnel qui, associé à Spring WebFlux autorise la montée en charge !<br>
+          Par ailleurs, Angular lui-même a beaucoup travaillé l'aspect performance grâce aux "Signal" (signaux ...)
+          lesquels permettent de cibler d'une manière précise les éléments à mettre à jour dans l'arbre des
+          composants.<br>
+        </p>
+        <p>
+          J'ai donc mis en oeuvre les dernières technologies disponibles pour Angular et Spring, sachant qu'elles sont
+          mûres pour de la production puisqu'elles existent depuis un certains temps :
+        </p>
+        <ul>
+          <li>Spring Webflux a été introduit avec <strong>Spring Framework 5.0</strong>, qui est sorti en <strong>septembre
+            2017</strong>. Donc déjà 5 années de maturité !
+          </li>
+          <li>L'API Signal d'Angular a été introduite officiellement à partir de la version <strong>16</strong>
+            d'Angular, publiée en <strong>mai 2023</strong>.
+          </li>
+        </ul>
+        <p>
+          En terme de complexité de développement avec WebFlux, il y a pas mal de similarités de concepts avec Spring
+          Data JPA/MVC concernant :
+        <p>
+        <ul>
+          <li>le principe de fonctionnement des controllers</li>
+          <li>les repository de base</li>
+          <li>et c'est bien entendu du Spring ...</li>
+        </ul>
+        <p>
+          cependant, il faut savoir qu'il y a moins d'automatismes :
+        </p>
+        <ul>
+          <li>pas de gestion déclarative/automatique des relations</li>
+          <li>les repository réactifs sont uniquement mono-table</li>
+        </ul>
+        <p>
+          Personnellement, cela ne me pose pas de problèmes et je dirais même au contraire !<br>
+          Ainsi, on peut mettre en oeuvre librement ses connaissances Java et SQL pour des situations complexes.<br>
+          Certes, on perd une certaine capacité à rendre le backend agnostique par rapport à la base de données, ce que
+          permet JPA.<br>
+          Mais une base comme Postgresql est très standard en terme de norme SQL.<br>
+          Avoir la capacité de changer de base de données n'a pas vraiment d'intérêt à partir du moment où celle-ci est
+          solide et gratuite.<br>
+        </p>
+        <p>
+          Il faut prendre le temps de maitriser les fonctionnalités de gestion des flux de Reactor.<br>
+          Ceci dit, Spring WebFlux automatise et simplifie beaucoup d'aspects de la programmation réactive
+          (backpressure).<br>
+          C'est une architecture particulièrement adaptée aux Micro-services pour absorber les latences potentielles et
+          aussi synchroniser les résultats.<br>
+        </p>
+        <p>
+          Il n'y a jamais de blocage au niveau de l'IHM, en cas d'attente, on informe avec un message mais on ne bloque
+          rien et on ne monopolise pas des threads.
+          On peut aussi facilement intégrer du messaging ou streaming Kafka.
+        </p>
+        <p>
+          Les threads virtuels permettront certainement d'améliorer la capacité de montée en charge de Spring Data
+          JPA/MVC
+          mais cela demeurera du "paradigme bloquant optimisé".</p>
+        <p>
+          <strong>En 2025, je préconiserais vraiment l'architecture de Spring WebFlux associé à Angular 19 pour les
+            développements modernes.</strong><br>
+          J'espère me faire une spécialité pour migrer des développements JEE (de type Oracle ADF en particulier) vers
+          cette architecture "full-stack ET full-réactive", nettement plus performante et résiliente que mes pratiques
+          passées avec JEE.<br>
+          Ou encore mieux : pas de migration mais un tout nouveau projet chez un éditeur de logiciels !
+        </p>
+      </div>
+    </mat-expansion-panel>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Projet 7 : Point d'étapes (projets passés et projet à venir)
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div>
+        <p>
+          Projets passés commentés dans les sections ci-dessus.
+        </p>
+        <p>
+          Projets à venir :
+        </p>
+        <p>
+          Question posée : vous semblent-ils difficiles ?
+        </p>
+        <p>
+          Réponse : non ! Ce sont des sujets que je pratique depuis des années.
+        </p>
+        <ul>
+          <li>Projet 8 Audit et cahier des charges : en cours - facile (je maitrise bien UML)</li>
+          <li>Projet 9 Cadrage :</li>
+          <li>Projet 10 Intégration et CI/CD (Maven, Jenkins, Docker) : j'ai déjà montré ma maitrise de maven et de
+            Docker dans le projet 6 (ce n'était pas demandé mais c'est pour moi indispensable de l'avoir fait ; j'ai
+            juste omis le passage du maven en jenkins - que je connais également)
+          </li>
+          <li>Projet 11 Encadrer : j'ai été directeur d'un pôle de Business Intelligence avec 15 personnes et team lead
+            à plusieurs reprise. Je connais les pratiques Agile.
+          </li>
+          <li>Projet 12 Planification :</li>
+          <li>Projet 13 Proposition d'architecture et de solutions : j'ai déjà démontré mes capacités dans le projet 4
+            et le projet 6
+          </li>
+        </ul>
+
+      </div>
+    </mat-expansion-panel>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Projet 8 : Audit et cahier des charges (Spéc. fonctionnelles et techniques)
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div>
+        <p></p>
+      </div>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Projet 9 : Cadrage
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div>
+        <p></p>
+      </div>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Projet 10 : Intégration et CI/CD (Maven, Jenkins, Docker)
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div>
+        <p></p>
+      </div>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Projet 11 : Encadrer
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div>
+        <p></p>
+      </div>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Projet 12 : Planification
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div>
+        <p></p>
+      </div>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Projet 13 : Proposition d'architecture et de solutions
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div>
+        <p></p>
+      </div>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Conclusion
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div>
+        <p>
+          La démarche d'OpenClassrooms est de réclamer une grande autonomie dans la recherche et développement pour
+          aboutir aux différents objectifs.<br>
+          Cela m'a parfaitement convenu puisque c'est ce que j'ai toujours fait.<br>
+          Ma curiosité et ma volonté d'adopter les meilleures bonnes pratiques m'ont fait passer plus de temps sur les
+          projets techniques par rapport aux projets non-techniques à venir qu'il me reste encore à faire.<br>
+          L'essentiel pour moi est d'avoir atteint mes propres objectifs techniques.<br>
+          Je me devais de retrouver un niveau d'expertise correspondant à mon niveau d'expérience, ce qui est chose
+          faite.<br>
+          les projets non-techniques à venir n'ont pas de complexité et je pense les réaliser très rapidement pour les
+          terminer d'ici fin août.<br>
+        </p>
+        <p>
+          Vous aurez noté que mes projets sont gérés avec Docker et Docker-compose.
+          Le projet 6 a prévu un profil de déploiement pour la "prodlocal" et la "prodnas"
+          Je les ai déployé sur un NAS Synology Linux pour rendre publiques en https via un reverse proxy.
+        </p>
+        <p>
+          Ces projets pédagogiques m'ont permis :
+        </p>
+        <ul>
+          <li>de maitriser les bonnes pratiques et de retrouver un niveau d'expertise sur les technologies les plus
+            récentes,
+          </li>
+          <li>de mettre en ligne des projets consultables par des directions techniques afin de montrer mon
+            savoir-faire.
+          </li>
+        </ul>
+        <p>
+          Par le passé, j'avais une obligation de confidentialité dans mes contrats de travail, ce qui m'interdisait de
+          diffuser mon savoir faire sur internet.<br>
+          Donc pour moi, ces petits projets suffisants et bien pensés en termes techniques, sont satisfaisants pour
+          faire connaitre mon savoir-faire général et sur les dernières technologies.
+        </p>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+
+</div>

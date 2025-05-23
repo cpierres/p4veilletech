@@ -1,0 +1,89 @@
+<div class="home-page">
+  <mat-tab-group>
+    <mat-tab label="Qui suis-je ?">
+      <mat-card>
+        <p>
+          Je suis certifié java et JEE (et JSF) depuis 25 ans (+ d'autres certifications CCNA1, Oracle ADF, anglais
+          ...).<br>
+          Je connais donc les atoûts de JEE mais aussi les faiblesses (notamment concernant l'aspect bloquant des
+          Threads lors des fortes montées en charge).
+        </p>
+        <p>
+          Depuis 2008, j'ai occupé des postes dans des cellules d'Architecture et de Recherche et Développement pour la
+          mise en oeuvre des bonnes pratiques et le suivi d'équipes (team lead).<br>
+          J'ai développé des frameworks personnalisés au-dessus de solutions JEE (comme Oracle ADF par exemple).<br>
+          Le problème d'avoir le statut d'expert est qu'on vous scotche sur les solutions que vous maitrisez
+          parfaitement !<br>
+          Mais voilà, à force de rester scotcher, j'étais devenu expert d'une technologie passée de mode !
+        </p>
+        <p>
+          Ma précédente société avait décidé, à raison, d'effectuer un virage technologique vers Spring et Angular
+          (que j'avais étudié et contribué à sélectionner).<br>
+          Pour aller plus vite, elle est passée par un partenaire technologique qui maitrisait parfaitement ces
+          technologiques.<br>
+          Dans ce cadre, j'ai suivi plus de 21 jours de formation avec ce partenaire.<br>
+          Evidemment, étant donné que je devais m'occuper encore des anciens projets, je n'avais pas eu le temps de
+          pratiquer !<br>
+          Et lorsque les anciens projets ont été abandonnés, je n'avais plus le statut d'expert attendu évidemment.
+          Le partenaire technologique ayant coûté très cher, ma société m'a alors "remercié" !<br>
+          Ce genre de choses ne m'est pas arrivé souvent dans ma carrière mais bon voilà ... et c'était surtout
+          l'occasion de rebondir !
+        </p>
+        <p>
+          Pendant quelques temps, j'ai ouvert mon champ de vision grâce à d'excellentes formations udemy (citées dans ce
+          site de veille)<br>
+          Ensuite, j'ai vu la <a
+          href="https://openclassrooms.com/fr/paths/533-developpeur-full-stack-java-et-angular" target="_blank">formation
+          d'expertise en développement logiciel axée sur Angular et Spring, proposée par OpenClassrooms</a> .<br>
+          Formation d'état certifiante de niveau 7 - BAC+5 : <a
+          href="https://www.francecompetences.fr/recherche/rncp/36912/">Plus d'info ici</a><br>
+
+          Il y avait <u>13 projets à réaliser</u> dont la moitié de projets techniques.<br>
+          J'y ai vu l'occasion d'avoir des <u>objectifs concrets</u> et de pouvoir fournir des <u>projets publics sur
+          github</u> afin
+          que des employeurs puissent constater mes compétences, non seulement sur Spring et Angular mais aussi sur uml,
+          maven, docker, kafka etc...<br>
+        </p>
+        <p>
+          Mon objectif était de convertir mon expertise java (et autres sujets) en expertise Spring et Angular mais
+          surtout :
+        </p>
+        <p>de <strong>faire BEAUCOUP PLUS en terme de montée en charge et d'expérience utilisateur par rapport à ce que
+          ce que je savais déjà faire !</strong></p>
+        <p>Pas seulement de me contenter de suivre le cursus "scolaire" d'OpenClassrooms.<br>
+          J'ai donc été beaucoup plus loin que ce qui était demandé dans le cadre de la formation.<br>
+          Egalement, je connaissais déjà <b>Spring Data JPA/MVC</b> et j'avais l'impression de refaire différemment la
+          même chose qu'avant (en mieux certes).<br>
+          Mais je regrettais qu'au niveau performance, on était toujours dans le paradigme bloquant des servlets.<br>
+          Lors de mes formations UDEMY, j'avais repéré l'intérêt de <b>Spring Webflux</b> et je n'ai pas été déçu !<br>
+          Je l'ai mis en oeuvre dans le projet P6 MDD. Pour moi, c'est l'avenir de Spring et opérationnel dès
+          aujourd'hui !
+        </p>
+        <p>
+          Dans l'onglet suivant, vous découvrirez mes projets Openclassrooms.<br>
+          A ce propos, le site que vous êtes en train de consulter, c'est le projet P4 qui consistait à réaliser un site
+          de veille technos !<br>
+          J'ai trouvé leur démarche pédagogique judicieuse et j'ai aussi bien pu m'exprimer <u>sur mes propres
+          objectifs</u> !
+        </p>
+      </mat-card>
+    </mat-tab>
+    <mat-tab label="Projets Openclassrooms">
+      <app-projets-ocr></app-projets-ocr>
+    </mat-tab>
+    <mat-tab label="Formations UDEMY">
+      <app-udemy></app-udemy>
+    </mat-tab>
+    <mat-tab label="Formations/certif en présentiel">
+      <app-training></app-training>
+    </mat-tab>
+  </mat-tab-group>
+
+  <nav>
+    <a routerLink="/architecture">Architectures</a> |
+    <a routerLink="/test-overview">Typologies de test</a> |
+    <a routerLink="/back">Technologies pour le Back (Spring)</a> |
+    <a routerLink="/front">Technologies pour le Front (Angular)</a> |
+    <a routerLink="/about">About me !</a>
+  </nav>
+</div>

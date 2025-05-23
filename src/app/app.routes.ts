@@ -4,6 +4,7 @@ import {FrontComponent} from './pages/front/front.component';
 import {BackComponent} from './pages/back/back.component';
 import {ArchitectureComponent} from './pages/architecture/architecture.component';
 import {TestOverviewComponent} from './pages/test-overview/test-overview.component';
+import {MeComponent} from './pages/about/me/me.component';
 
 export const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -11,5 +12,6 @@ export const routes: Routes = [
   {path: 'back', component: BackComponent},
   {path: 'architecture', component: ArchitectureComponent},
   {path: 'test-overview', component: TestOverviewComponent},
+  {path: 'about', component: MeComponent},
   {path: '**', redirectTo: '', pathMatch: 'full'}
 ];
