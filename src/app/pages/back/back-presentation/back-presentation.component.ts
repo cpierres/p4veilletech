@@ -120,10 +120,11 @@ export class BackPresentationComponent {
         'Meilleure performance avec moins de ressources pour les applications asynchrones.'
       ],
       disadvantages: [
-        'Complexité accrue comparée à Spring Web/MVC.',
-        'Moins d\'automatismes qu\'avec Spring Web/MVC.',
-        'Plus récent que Spring Web/MVC (sorti en 2017), moins utilisé',
-        'Moins adapté pour les applications qui ne nécessitent pas un modèle réactif.'
+        'Complexité accrue comparée à Spring Data JPA/MVC',
+        'Moins d\'automatismes qu\'avec Spring Data JPA/MVC',
+        'Plus récent que Spring Web/MVC (sorti en 2017 avec Spring 5, nouvelle version majeure en Spring 6)',
+        'Moins utilisé (surtout par le fait qu\'il faut des séniors pour l\'équipe de développement)',
+        'Moins adapté pour les applications ne nécessitant pas un modèle réactif.'
       ],
       features: [
         'Basé sur Reactor pour la programmation réactive.',
