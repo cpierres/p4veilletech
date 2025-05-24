@@ -20,6 +20,21 @@ export class FrontVeilleComponent {
       title: 'Documentation officielle d’Angular'
     },
     {
+      name: 'Angular Can I use ? IMPORTANT pour choisir la version Angular',
+      link: 'https://www.angular.courses/caniuse',
+      title: 'Excellent tableau de suivi des fonctionnalités et de leur maturité'
+    },
+    {
+      name: 'Angular courses. Excellent site pour suivre les dernières fonctionnalités',
+      link: 'https://www.angular.courses/',
+      title: 'Excellent site avec fonctionnalités AI pour poser ses questions (Angular Docs AI)'
+    },
+    {
+      name: 'Angular dev',
+      link: 'https://angular.dev/',
+      title: 'Site officiel très bien fait, tant pour apprendre que pour rester à jour sur les nouvelles fonctionnalités'
+    },
+    {
       name: 'Angular Blog',
       link: 'https://blog.angular.io',
       title: 'Blog officiel avec les nouveautés et annonces Angular'
