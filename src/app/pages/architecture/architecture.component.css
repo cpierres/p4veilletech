@@ -21,3 +21,8 @@ mat-card {
 .text-center {
   text-align: center;
 }
+
+.tab-content {
+  padding: 3px; /* Ajoute un espacement intérieur pour un décalage visuel */
+  box-sizing: border-box; /* Pour que le padding n'affecte pas la largeur globale */
+}

@@ -1,0 +1,4 @@
+.home-page {
+  padding: 0 2px; /* Ajoute un espacement interne sur les côtés sans augmenter la marge du contenu */
+  box-sizing: border-box; /* S'assure que le padding n'affecte pas la largeur globale */
+}

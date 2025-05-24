@@ -4,204 +4,221 @@
 
 <mat-tab-group>
   <mat-card>
-  <mat-tab label="Types d'architectures">
-    <mat-accordion>
-      <mat-expansion-panel>
-        <mat-expansion-panel-header>
-          <mat-panel-title>1. Architecture Monolithique</mat-panel-title>
-        </mat-expansion-panel-header>
-        <p>
-          Une application monolithique est une application unifiée, dont tous les modules sont regroupés dans un unique
-          back-end.
-          Elle est simple à développer, mais peut devenir complexe à maintenir lorsqu'elle grossit.
-        </p>
-        <div class="card-container">
-          <mat-card>
-            <mat-card-title>Avantages</mat-card-title>
-            <mat-list>
-              <mat-list-item>Simple à développer et déployer.</mat-list-item>
-              <mat-list-item>Solutions économiques pour les petites applications.</mat-list-item>
-            </mat-list>
-          </mat-card>
-          <mat-card>
-            <mat-card-title>Inconvénients</mat-card-title>
-            <mat-list>
-              <mat-list-item>Difficulté de mise à l'échelle (scalabilité).</mat-list-item>
-              <mat-list-item>Les déploiements doivent être faits en "bloc" même pour une petite modification.
-              </mat-list-item>
-            </mat-list>
-          </mat-card>
-        </div>
-        <mat-card>
-          <img src="assets/img/archi-monolithique.png" alt="Diagramme de l'architecture monolithique" width="456"
-               height="114" class="center-image">
-          <div class="text-center">Le schéma visualise une application avec une partie Frontend, un Backend, et une Base
-            de Données qui sont étroitement couplés.
-          </div>
-        </mat-card>
+    <mat-tab label="Types d'architectures">
+      <div class="tab-content">
+        <mat-accordion>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>1. Architecture Monolithique</mat-panel-title>
+            </mat-expansion-panel-header>
+            <p>
+              Une application monolithique est une application unifiée, dont tous les modules sont regroupés dans un
+              unique
+              back-end.
+              Elle est simple à développer, mais peut devenir complexe à maintenir lorsqu'elle grossit.
+            </p>
+            <div class="card-container">
+              <mat-card>
+                <mat-card-title>Avantages</mat-card-title>
+                <mat-list>
+                  <mat-list-item>Simple à développer et déployer.</mat-list-item>
+                  <mat-list-item>Solutions économiques pour les petites applications.</mat-list-item>
+                </mat-list>
+              </mat-card>
+              <mat-card>
+                <mat-card-title>Inconvénients</mat-card-title>
+                <mat-list>
+                  <mat-list-item>Difficulté de mise à l'échelle (scalabilité).</mat-list-item>
+                  <mat-list-item>Les déploiements doivent être faits en "bloc" même pour une petite modification.
+                  </mat-list-item>
+                </mat-list>
+              </mat-card>
+            </div>
+            <mat-card>
+              <img src="assets/img/archi-monolithique.png" alt="Diagramme de l'architecture monolithique" width="456"
+                   height="114" class="center-image">
+              <div class="text-center">Le schéma visualise une application avec une partie Frontend, un Backend, et une
+                Base
+                de Données qui sont étroitement couplés.
+              </div>
+            </mat-card>
 
-      </mat-expansion-panel>
+          </mat-expansion-panel>
 
-      <mat-expansion-panel>
-        <mat-expansion-panel-header>
-          <mat-panel-title>2. Architecture Microservices</mat-panel-title>
-        </mat-expansion-panel-header>
-        <p>
-          Les microservices divisent une application en plusieurs services indépendants qui peuvent être développés,
-          déployés et mis à l'échelle séparément.
-        </p>
-        <div class="card-container">
-          <mat-card>
-            <mat-card-title>Avantages</mat-card-title>
-            <mat-list>
-              <mat-list-item>Facilité d'évolutivité : chaque service peut être mis à l'échelle indépendamment.
-              </mat-list-item>
-              <mat-list-item>Amélioration de la maintenabilité en séparant les responsabilités.</mat-list-item>
-            </mat-list>
-          </mat-card>
-          <mat-card>
-            <mat-card-title>Inconvénients</mat-card-title>
-            <mat-list>
-              <mat-list-item>Complexité accrue : nécessite un management efficace de communication entre services.
-              </mat-list-item>
-              <mat-list-item>Augmentation des coûts d'infrastructure (multiples instances).</mat-list-item>
-            </mat-list>
-          </mat-card>
-        </div>
-        <mat-card>
-          <img src="assets/img/archi-microservices.png" alt="Diagramme de l'architecture micro-services" width="617"
-               height="289" class="center-image">
-          <div class="text-center">Le schéma montre une API Gateway qui joue le rôle d’intermédiaire entre le client
-            et les différents microservices (chacun ayant sa propre base de données).
-          </div>
-        </mat-card>
-      </mat-expansion-panel>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>2. Architecture Microservices</mat-panel-title>
+            </mat-expansion-panel-header>
+            <p>
+              Les microservices divisent une application en plusieurs services indépendants qui peuvent être développés,
+              déployés et mis à l'échelle séparément.
+            </p>
+            <div class="card-container">
+              <mat-card>
+                <mat-card-title>Avantages</mat-card-title>
+                <mat-list>
+                  <mat-list-item>Facilité d'évolutivité : chaque service peut être mis à l'échelle indépendamment.
+                  </mat-list-item>
+                  <mat-list-item>Amélioration de la maintenabilité en séparant les responsabilités.</mat-list-item>
+                </mat-list>
+              </mat-card>
+              <mat-card>
+                <mat-card-title>Inconvénients</mat-card-title>
+                <mat-list>
+                  <mat-list-item>Complexité accrue : nécessite un management efficace de communication entre services.
+                  </mat-list-item>
+                  <mat-list-item>Augmentation des coûts d'infrastructure (multiples instances).</mat-list-item>
+                </mat-list>
+              </mat-card>
+            </div>
+            <mat-card>
+              <img src="assets/img/archi-microservices.png" alt="Diagramme de l'architecture micro-services" width="617"
+                   height="289" class="center-image">
+              <div class="text-center">Le schéma montre une API Gateway qui joue le rôle d’intermédiaire entre le client
+                et les différents microservices (chacun ayant sa propre base de données).
+              </div>
+            </mat-card>
+          </mat-expansion-panel>
 
-      <mat-expansion-panel>
-        <mat-expansion-panel-header>
-          <mat-panel-title>3. Architecture Serverless</mat-panel-title>
-        </mat-expansion-panel-header>
-        <p>
-          Une architecture "serverless" signifie que le développeur ne gère plus directement les serveurs ou les
-          instances. Les tâches sont exécutées sur une infrastructure cloud entièrement gérée par des fournisseurs comme
-          AWS, Google Cloud, ou Azure.
-        </p>
-        <div class="card-container">
-          <mat-card>
-            <mat-card-title>Avantages</mat-card-title>
-            <mat-list>
-              <mat-list-item>Pas de gestion de serveur/machine.</mat-list-item>
-              <mat-list-item>Facturation à l'usage (économique pour des charges de travail variables).</mat-list-item>
-            </mat-list>
-          </mat-card>
-          <mat-card>
-            <mat-card-title>Inconvénients</mat-card-title>
-            <mat-list>
-              <mat-list-item>Performance parfois limitée par le fournisseur de service.</mat-list-item>
-              <mat-list-item>Dépendance forte vis-à-vis d'un fournisseur cloud.</mat-list-item>
-            </mat-list>
-          </mat-card>
-        </div>
-        <mat-card>
-          <img src="assets/img/archi-servless.png" alt="Diagramme de l'architecture monolithique" width="464"
-               height="362" class="center-image">
-          <div class="text-center">Le schéma illustre un schéma où le Client appelle des Fonctions qui traitent les
-            requêtes de manière isolée et accèdent à une base de données partagée
-          </div>
-        </mat-card>
-      </mat-expansion-panel>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>3. Architecture Serverless</mat-panel-title>
+            </mat-expansion-panel-header>
+            <p>
+              Une architecture "serverless" signifie que le développeur ne gère plus directement les serveurs ou les
+              instances. Les tâches sont exécutées sur une infrastructure cloud entièrement gérée par des fournisseurs
+              comme
+              AWS, Google Cloud, ou Azure.
+            </p>
+            <div class="card-container">
+              <mat-card>
+                <mat-card-title>Avantages</mat-card-title>
+                <mat-list>
+                  <mat-list-item>Pas de gestion de serveur/machine.</mat-list-item>
+                  <mat-list-item>Facturation à l'usage (économique pour des charges de travail variables).
+                  </mat-list-item>
+                </mat-list>
+              </mat-card>
+              <mat-card>
+                <mat-card-title>Inconvénients</mat-card-title>
+                <mat-list>
+                  <mat-list-item>Performance parfois limitée par le fournisseur de service.</mat-list-item>
+                  <mat-list-item>Dépendance forte vis-à-vis d'un fournisseur cloud.</mat-list-item>
+                </mat-list>
+              </mat-card>
+            </div>
+            <mat-card>
+              <img src="assets/img/archi-servless.png" alt="Diagramme de l'architecture monolithique" width="464"
+                   height="362" class="center-image">
+              <div class="text-center">Le schéma illustre un schéma où le Client appelle des Fonctions qui traitent les
+                requêtes de manière isolée et accèdent à une base de données partagée
+              </div>
+            </mat-card>
+          </mat-expansion-panel>
 
-      <mat-expansion-panel>
-        <mat-expansion-panel-header>
-          <mat-panel-title>4. Architecture Hexagonale</mat-panel-title>
-        </mat-expansion-panel-header>
-        <p>
-          L'architecture hexagonale (ou architecture en ports et adaptateurs) organise une application de manière à
-          séparer son coeur métier de ses dépendances externes comme les bases de données, services externes ou
-          interfaces utilisateur.
-        </p>
-        <div class="card-container">
-          <mat-card>
-            <mat-card-title>Avantages</mat-card-title>
-            <mat-list>
-              <mat-list-item>Augmente la testabilité du code grâce à l'isolation des dépendances.</mat-list-item>
-              <mat-list-item>Facilite les changements technologiques en limitant les dépendances spécifiques.
-              </mat-list-item>
-            </mat-list>
-          </mat-card>
-          <mat-card>
-            <mat-card-title>Inconvénients</mat-card-title>
-            <mat-list>
-              <mat-list-item>Plus difficile à mettre en place pour les petites applications.</mat-list-item>
-              <mat-list-item>Peut augmenter la complexité du projet au démarrage.</mat-list-item>
-            </mat-list>
-          </mat-card>
-        </div>
-        <mat-card>
-          <img src="assets/img/archi-hexagonale.png" alt="Diagramme de l'architecture hexagonale" width="380"
-               height="254" class="center-image">
-          <div class="text-center">
-            Le schéma représente une architecture hexagonale, mettant l’accent sur un coeur métier isolé (Domain) avec
-            des Adapters pour communiquer avec le monde extérieur.
-          </div>
-        </mat-card>
-      </mat-expansion-panel>
-      <mat-expansion-panel>
-        <mat-expansion-panel-header>
-          <mat-panel-title>5. Architecture Event-Driven</mat-panel-title>
-        </mat-expansion-panel-header>
-        <p>
-          Une architecture orientée événements repose sur l'échange de messages entre composants indépendants via des
-          événements asynchrones. Cette architecture est idéale pour les systèmes nécessitant une haute disponibilité et
-          une communication asynchrone.
-          <strong>Exemple applicable à Spring :</strong> Utiliser <code>Spring Cloud Stream</code> pour connecter
-          producteurs et consommateurs d'événements avec des middlewares tels que Apache Kafka ou RabbitMQ.
-        </p>
-        <div class="card-container">
-          <mat-card>
-            <mat-card-title>Avantages</mat-card-title>
-            <mat-list>
-              <mat-list-item>Scalabilité accrue grâce à une communication loosely-coupled.</mat-list-item>
-              <mat-list-item>Les composants s'exécutent de manière indépendante, ce qui augmente la résilience.
-              </mat-list-item>
-            </mat-list>
-          </mat-card>
-          <mat-card>
-            <mat-card-title>Inconvénients</mat-card-title>
-            <mat-list>
-              <mat-list-item>Augmente la complexité de gestion des messages et des erreurs.</mat-list-item>
-              <mat-list-item>Nécessite un middleware et une bonne compréhension des concepts
-                d'asynchronisme.
-              </mat-list-item>
-            </mat-list>
-          </mat-card>
-        </div>
-        <mat-card>
-          <img src="assets/img/archi-event-driven.png" alt="Diagramme de l'architecture monolithique" width="468"
-               height="174" class="center-image">
-          <div class="text-center">
-            Un producteur (Publisher) publie des événements sur un bus central, tandis que des abonnés (Subscribers)
-            réagissent en temps réel aux événements reçus.
-          </div>
-        </mat-card>
-      </mat-expansion-panel>
-    </mat-accordion>
-  </mat-tab>
-    </mat-card>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>4. Architecture Hexagonale</mat-panel-title>
+            </mat-expansion-panel-header>
+            <p>
+              L'architecture hexagonale (ou architecture en ports et adaptateurs) organise une application de manière à
+              séparer son coeur métier de ses dépendances externes comme les bases de données, services externes ou
+              interfaces utilisateur.
+            </p>
+            <div class="card-container">
+              <mat-card>
+                <mat-card-title>Avantages</mat-card-title>
+                <mat-list>
+                  <mat-list-item>Augmente la testabilité du code grâce à l'isolation des dépendances.</mat-list-item>
+                  <mat-list-item>Facilite les changements technologiques en limitant les dépendances spécifiques.
+                  </mat-list-item>
+                </mat-list>
+              </mat-card>
+              <mat-card>
+                <mat-card-title>Inconvénients</mat-card-title>
+                <mat-list>
+                  <mat-list-item>Plus difficile à mettre en place pour les petites applications.</mat-list-item>
+                  <mat-list-item>Peut augmenter la complexité du projet au démarrage.</mat-list-item>
+                </mat-list>
+              </mat-card>
+            </div>
+            <mat-card>
+              <img src="assets/img/archi-hexagonale.png" alt="Diagramme de l'architecture hexagonale" width="380"
+                   height="254" class="center-image">
+              <div class="text-center">
+                Le schéma représente une architecture hexagonale, mettant l’accent sur un coeur métier isolé (Domain)
+                avec
+                des Adapters pour communiquer avec le monde extérieur.
+              </div>
+            </mat-card>
+          </mat-expansion-panel>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>5. Architecture Event-Driven</mat-panel-title>
+            </mat-expansion-panel-header>
+            <p>
+              Une architecture orientée événements repose sur l'échange de messages entre composants indépendants via
+              des
+              événements asynchrones. Cette architecture est idéale pour les systèmes nécessitant une haute
+              disponibilité et
+              une communication asynchrone.
+              <strong>Exemple applicable à Spring :</strong> Utiliser <code>Spring Cloud Stream</code> pour connecter
+              producteurs et consommateurs d'événements avec des middlewares tels que Apache Kafka ou RabbitMQ.
+            </p>
+            <div class="card-container">
+              <mat-card>
+                <mat-card-title>Avantages</mat-card-title>
+                <mat-list>
+                  <mat-list-item>Scalabilité accrue grâce à une communication loosely-coupled.</mat-list-item>
+                  <mat-list-item>Les composants s'exécutent de manière indépendante, ce qui augmente la résilience.
+                  </mat-list-item>
+                </mat-list>
+              </mat-card>
+              <mat-card>
+                <mat-card-title>Inconvénients</mat-card-title>
+                <mat-list>
+                  <mat-list-item>Augmente la complexité de gestion des messages et des erreurs.</mat-list-item>
+                  <mat-list-item>Nécessite un middleware et une bonne compréhension des concepts
+                    d'asynchronisme.
+                  </mat-list-item>
+                </mat-list>
+              </mat-card>
+            </div>
+            <mat-card>
+              <img src="assets/img/archi-event-driven.png" alt="Diagramme de l'architecture monolithique" width="468"
+                   height="174" class="center-image">
+              <div class="text-center">
+                Un producteur (Publisher) publie des événements sur un bus central, tandis que des abonnés (Subscribers)
+                réagissent en temps réel aux événements reçus.
+              </div>
+            </mat-card>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </div>
+    </mat-tab>
+  </mat-card>
   <mat-tab label="Disponibilité">
-    <app-availability></app-availability>
+    <div class="tab-content">
+      <app-availability></app-availability>
+    </div>
   </mat-tab>
   <mat-tab label="Contextes applicatifs des Types d'architectures">
-    <app-archi-pour-contre></app-archi-pour-contre>
+    <div class="tab-content">
+      <app-archi-pour-contre></app-archi-pour-contre>
+    </div>
   </mat-tab>
   <mat-tab label="Sites de référence sur les architectures">
-    <app-archi-veille></app-archi-veille>
+      <app-archi-veille></app-archi-veille>
   </mat-tab>
   <mat-tab label="Paradigmes de programmation">
-    <app-paradigms></app-paradigms>
+    <div class="tab-content">
+      <app-paradigms></app-paradigms>
+    </div>
   </mat-tab>
   <mat-tab label="Sécurité">
-    <app-archi-secu></app-archi-secu>
+    <div class="tab-content">
+      <app-archi-secu></app-archi-secu>
+    </div>
   </mat-tab>
 </mat-tab-group>
 <h3>Conclusion</h3>
