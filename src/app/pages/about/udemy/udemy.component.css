@@ -1,0 +1,63 @@
+:host {
+  display: block;
+  background-color: #f0f0f0; /* Fond gris clair */
+  padding: 4px; /* Espacement pour un meilleur rendu */
+}
+
+.mat-mdc-table {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.mat-mdc-header-cell {
+  font-weight: bold;
+  color: #3f51b5;
+}
+
+td.mat-mdc-cell {
+  padding: 8px 4px;
+}
+
+/* Ajustement pour le titre qui peut être long */
+.mat-column-titre {
+  max-width: 300px;
+  padding-right: 12px;
+  white-space: normal;
+  word-wrap: break-word;
+}
+
+/* Styles pour les différentes catégories */
+.row-back {
+  background-color: rgba(232, 244, 248, 0.5); /* Bleu clair */
+}
+
+.row-front {
+  background-color: rgba(243, 239, 248, 0.5); /* Violet clair */
+}
+
+.row-devops {
+  background-color: rgba(232, 248, 239, 0.5); /* Vert clair */
+}
+
+.row-ia {
+  background-color: rgba(248, 243, 232, 0.5); /* Orange clair */
+}
+
+/* Effet de survol pour améliorer l'expérience utilisateur */
+.row-back:hover,
+.row-front:hover,
+.row-devops:hover,
+.row-ia:hover {
+  opacity: 0.9;
+  cursor: pointer;
+}
+
+/* Légère bordure pour délimiter les sections */
+.row-back + .row-front,
+.row-front + .row-devops,
+.row-devops + .row-ia,
+.row-back + .row-devops,
+.row-back + .row-ia,
+.row-front + .row-ia {
+  border-top: 2px solid #f0f0f0;
+}
