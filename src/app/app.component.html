@@ -10,7 +10,7 @@
         matTooltipPosition="below"
         (mouseenter)="updateTooltipOnHover()"
         (mouseleave)="resetTooltip()"
-        (click)="toggleImage()" />
+        (click)="toggleImage()"/>
       <div class="user-info">
         <div class="user-name">Christophe Pierrès</div>
         <div class="user-cert">Certifié Java et JEE depuis 25 ans</div>
@@ -32,6 +32,16 @@
       <a mat-list-item routerLink="/back" routerLinkActive="active">Back (Spring)</a>
       <a mat-list-item routerLink="/front" routerLinkActive="active">Front (Angular)</a>
       <a mat-list-item routerLink="/about" routerLinkActive="active">About me !</a>
+      <a
+        mat-list-item
+        href="https://mdd.cpierres.dscloud.me/"
+        matTooltip="Réseau social le Monde des Développeurs"
+        target="_blank"
+      rel="noopener noreferrer"
+      >
+      MDD-Discutons !
+      </a>
+
     </mat-nav-list>
   </mat-sidenav>
 
