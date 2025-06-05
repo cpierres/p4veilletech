@@ -85,15 +85,24 @@
         </p>
         <p>
           Le dépôt git, son README, ainsi que la compodoc permettent de voir les bonnes pratiques appliquées.<br>
-          <a href="https://ocrp2.cpierres.dscloud.me/" target="_blank">Application </a><br>
-          <a
-            href="https://github.com/cpierres/Opencr-Projet02-Angular" target="_blank">Dépôt github</a><br>
-          <a
+        <ul>
+          <li><a href="https://ocrp2.cpierres.dscloud.me/" target="_blank">Application </a></li>
+          <li><a
+            href="https://github.com/cpierres/Opencr-Projet02-Angular" target="_blank">Dépôt github</a></li>
+          <li><a
             href="https://cpierres.github.io/Opencr-Projet02-Angular/" target="_blank">Compodoc complète</a>
-          diffusée sur github.
-          <br>
-          <a href="/assets/pdf/P2-pres-15mn.pdf" target="_blank">Slide de soutenance (15 mn)</a>
-        </p>
+            diffusée sur github.
+          </li>
+          <li>Soutenance :
+            <button mat-raised-button color="primary" (click)="openEvaluationDialog(2)">
+              Évaluation
+            </button>
+            |
+            <a href="/assets/pdf/P2-pres-15mn.pdf" target="_blank">Slide</a> |
+            <a href="https://u.pcloud.link/publink/show?code=XZ3o4j5ZWBwjqQYQRG5xrV5OhDSYRzxU6WXk"
+               target="_blank">Vidéo</a></li>
+        </ul>
+
         <p>
           Il s'agissait d'utiliser Angular en partant d'un starter code avec des paradigmes "anciens" (ngModules) mais
           avec une version d'Angular migrée en v18.<br>
@@ -116,11 +125,6 @@
           s'éloigner de la maquette pour la démo de soutenance ! (critère d'évaluation)
         </p>
 
-        <div class="evaluation-button-container">
-          <button mat-raised-button color="primary" (click)="openEvaluationDialog(2)">
-            Évaluation de soutenance
-          </button>
-        </div>
       </div>
     </mat-expansion-panel>
 
@@ -131,10 +135,16 @@
         </mat-panel-title>
       </mat-expansion-panel-header>
       <div>
-        <p>
-          <a href="https://github.com/cpierres/P3-back-spring" target="_blank">Dépôt git</a><br>
-          <a href="/assets/pdf/P3-pres-16mn.pdf" target="_blank">Slide de soutenance (15 mn)</a>
-        </p>
+        <ul>
+          <li><a href="https://github.com/cpierres/P3-back-spring" target="_blank">Dépôt git</a></li>
+          <li>Soutenance :
+            <button mat-raised-button color="primary" (click)="openEvaluationDialog(3)">
+              Évaluation
+            </button>
+            | <a href="/assets/pdf/P3-pres-16mn.pdf" target="_blank">Slide</a> | <a
+              href="https://u.pcloud.link/publink/show?code=XZyy8j5ZlHemqlnqV0YmDkeVgUtzo4yc72iX"
+              target="_blank">Vidéo</a></li>
+        </ul>
         <p>
           Le frontend existant se basait sur une simulation de l'API backend qui nous était fournie via l'outil Mockoon.<br>
           Le projet backend P3 consistait donc à implémenter l'API backend en utilisant SpringBoot et Spring Data
@@ -146,12 +156,6 @@
           swagger, docker, etc...<br>
           J'ai aussi utilisé cloudinary pour les fichiers multi-média.
         </p>
-
-        <div class="evaluation-button-container">
-          <button mat-raised-button color="primary" (click)="openEvaluationDialog(3)">
-            Évaluation de soutenance
-          </button>
-        </div>
       </div>
     </mat-expansion-panel>
 
@@ -180,12 +184,14 @@
         <p>
           J'ai continué à enrichir ce site lors des projets suivants !
         </p>
-
-        <div class="evaluation-button-container">
-          <button mat-raised-button color="primary" (click)="openEvaluationDialog(4)">
-            Évaluation de soutenance
-          </button>
-        </div>
+        <ul>
+          <li>
+            Soutenance :
+            <button mat-raised-button color="primary" (click)="openEvaluationDialog(4)">
+              Évaluation
+            </button>
+          </li>
+        </ul>
       </div>
     </mat-expansion-panel>
     <mat-expansion-panel>
@@ -199,8 +205,17 @@
           Les technologies utilisées et rapports de couverture de tests sont présentés dans le <a
           href="https://github.com/cpierres/P5-Test-full-stack" target="_blank">README du dépôt github</a><br>
           Vous y trouverez bien sûr toutes les indications pour exécuter les tests.<br>
-          <a href="/assets/pdf/P5-pres-15mn.pdf" target="_blank">Slide de soutenance (15 mn)</a>
+
         </p>
+        <ul>
+          <li>Soutenance :
+            <button mat-raised-button color="primary" (click)="openEvaluationDialog(5)">
+              Évaluation
+            </button>
+            | <a href="/assets/pdf/P5-pres-15mn.pdf" target="_blank">Slide</a> |
+            <a href="https://u.pcloud.link/publink/show?code=XZ5y8j5ZnTPTWpEWNmhzrKM7B4XjIbADxJDX"
+               target="_blank">Vidéo</a></li>
+        </ul>
         <p>
           Les techniques de testing étaient un sujet que je connaissais déjà.<br>
           J'ai trouvé qu'Angular et Spring permettent une mise en oeuvre absolument <b>excellente</b> en intégrant
@@ -229,12 +244,6 @@
           parce que les faire
           après le développement c'est un peu fastidieux !
         </p>
-
-        <div class="evaluation-button-container">
-          <button mat-raised-button color="primary" (click)="openEvaluationDialog(5)">
-            Évaluation de soutenance
-          </button>
-        </div>
       </div>
     </mat-expansion-panel>
 
@@ -248,20 +257,31 @@
       <div>
         <p>
           Cela devait être un développement full-stack ... et je l'ai fait en plus <b>full-réactive</b> : de la base de
-          données, au backend et bien sûr jusqu'au frontend.<br>
-          Lire le <a href="/assets/pdf/P6-choix-tech-archi-mvp.pdf" target="_blank">Dossier de choix
-          techniques et d'architecture</a> afin de comprendre rapidement l'intérêt des choix technologiques.<br>
-          Dans le <a href="https://github.com/cpierres/p6mdd" target="_blank">Dépôt git</a>, le README vous indiquera
-          des scénarios d'utilisation (et les bonnes pratiques appliquées).<br>
-          Cette <a href="https://mdd.cpierres.dscloud.me/" target="_blank">application</a> est un MVP (Minimum Viable
-          Product) tenu de respecter des <a
-          href="https://www.figma.com/design/Rflr3TVBog35BNMnn0DF09/Maquettes-MDD--desktop-et-mobile-?node-id=0-1&p=f"
-          target="_blank">
-          maquettes précises responsives (mobile/desktop)</a>.<br>
-          Les fonctionnalités sont limitées mais elle suffisent à définir une architecture top niveau.<br>
-          La <a href="http://apimdd.cpierres.dscloud.me:8068/swagger-ui/" target="_blank">documentation Swagger est
-          disponible</a>.
-        </p>
+          données, au backend et bien sûr jusqu'au frontend.</p>
+        <p>Les fonctionnalités sont limitées mais suffisent à définir une architecture top niveau.</p>
+        <ul>
+          <li>Lire le <a href="/assets/pdf/P6-choix-tech-archi-mvp.pdf" target="_blank">Dossier de choix
+            techniques et d'architecture</a> afin de comprendre rapidement l'intérêt des choix technologiques.
+          </li>
+          <li>Dans le <a href="https://github.com/cpierres/p6mdd" target="_blank">Dépôt git</a>, le README vous
+            indiquera
+            des scénarios d'utilisation (et les bonnes pratiques appliquées).
+          </li>
+          <li>Cette <a href="https://mdd.cpierres.dscloud.me/" target="_blank">application</a> est un MVP (Minimum
+            Viable
+            Product) tenu de respecter des <a
+              href="https://www.figma.com/design/Rflr3TVBog35BNMnn0DF09/Maquettes-MDD--desktop-et-mobile-?node-id=0-1&p=f"
+              target="_blank">maquettes précises responsives (mobile/desktop).</a></li>
+          <li>La <a href="http://apimdd.cpierres.dscloud.me:8068/swagger-ui/" target="_blank">documentation Swagger est
+            disponible</a>.
+          </li>
+          <li>Soutenance :
+            <button mat-raised-button color="primary" (click)="openEvaluationDialog(6)">
+              Évaluation
+            </button>
+            | <a href="https://u.pcloud.link/publink/show?code=XZJy8j5ZvRPdhDEaxEzCEKHvMcLwdb03hxAy" target="_blank">Vidéo</a>
+          </li>
+        </ul>
         <p>
           C'est le projet qui m'a motivé le plus car le besoin étant un réseau social pour les développeurs, cela
           suppose :
@@ -364,12 +384,6 @@
           passées avec JEE.<br>
           Ou encore mieux : pas de migration mais un tout nouveau projet chez un éditeur de logiciels !
         </p>
-
-        <div class="evaluation-button-container">
-          <button mat-raised-button color="primary" (click)="openEvaluationDialog(6)">
-            Évaluation de soutenance
-          </button>
-        </div>
       </div>
     </mat-expansion-panel>
     <mat-expansion-panel>
@@ -379,16 +393,21 @@
         </mat-panel-title>
       </mat-expansion-panel-header>
       <div>
+        <ul>
+        <li>Soutenance :
+          <button mat-raised-button color="primary" (click)="openEvaluationDialog(7)">
+            Évaluation
+          </button> | <a href="https://u.pcloud.link/publink/show?code=XZFy8j5ZVVkBXJJvFshhSFuzkyR3ThaQzUy7" target="_blank">Vidéo (partie 1)</a>
+          | <a href="https://u.pcloud.link/publink/show?code=XZHy8j5Zrpu6p5UACB4HkoeayC0fCYacLOsy" target="_blank">Vidéo (partie 2)</a>
+          | <a href="https://u.pcloud.link/publink/show?code=XZ4y8j5ZlXkw13LcVqBImnftM1PH0kP8J5bX" target="_blank">Vidéo (partie 3)</a>
+        </li>
+        </ul>
         <p>
           Projets passés commentés dans les sections ci-dessus.<br>
           J'ai trouvé la pédagogie bien amenée, de projet en projet.<br>
-          Le projet P5-testing m'avait permis de découvrir certaines techniques dans le back et front existant.
         </p>
         <p>
-          Projets à venir :
-        </p>
-        <p>
-          Question posée : vous semblent-ils difficiles ?
+          Projets à venir : Question posée : vous semblent-ils difficiles ?
         </p>
         <p>
           Réponse : je ne sous-estime pas le temps nécessaire.<br>
@@ -416,11 +435,6 @@
             et le projet 6. Les dossiers d'architecture comprennent déjà les demandes faites dans le projet 13.
           </li>
         </ul>
-        <div class="evaluation-button-container">
-          <button mat-raised-button color="primary" (click)="openEvaluationDialog(7)">
-            Évaluation de soutenance
-          </button>
-        </div>
       </div>
     </mat-expansion-panel>
     <mat-expansion-panel>
