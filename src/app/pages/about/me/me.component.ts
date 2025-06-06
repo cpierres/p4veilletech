@@ -9,7 +9,7 @@ import {
     MatExpansionPanelHeader,
     MatExpansionPanelTitle
 } from "@angular/material/expansion";
-import {MatCard} from "@angular/material/card";
+import {MatCard, MatCardContent} from "@angular/material/card";
 import {MatDivider} from "@angular/material/divider";
 import {MatTab, MatTabGroup} from "@angular/material/tabs";
 import {RouterLink} from "@angular/router";
@@ -21,6 +21,7 @@ import {TrainingComponent} from '../training/training.component';
   selector: 'app-me',
   imports: [
     MatCard,
+    MatCardContent,
     MatTab,
     MatTabGroup,
     RouterLink,
