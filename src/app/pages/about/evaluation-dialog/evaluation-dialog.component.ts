@@ -109,6 +109,38 @@ export class EvaluationDialogComponent {
       '/assets/img/P7-evaluation-1.jpg',
       '/assets/img/P7-evaluation-2.jpg',
       '/assets/img/P7-evaluation-3.jpg'
+    ],
+    8: [
+      '/assets/img/P8-evaluation-CC-1.jpg',
+      '/assets/img/P8-evaluation-CC-2.jpg',
+      '/assets/img/P8-evaluation-CC-3.jpg',
+      '/assets/img/P8-evaluation-CC-4.jpg'
+    ],
+    9: [
+      '/assets/img/P9-evaluation-cadrer-1.jpg',
+      '/assets/img/P9-evaluation-cadrer-2.jpg',
+      '/assets/img/P9-evaluation-cadrer-3.jpg'
+    ],
+    10: [
+      '/assets/img/P10-evaluation-cicd-1.jpg',
+      '/assets/img/P10-evaluation-cicd-2.jpg',
+      '/assets/img/P10-evaluation-cicd-3.jpg',
+      '/assets/img/P10-evaluation-cicd-4.jpg'
+    ],
+    11: [
+      '/assets/img/P11-evaluation-encadrer-1.jpg',
+      '/assets/img/P11-evaluation-encadrer-2.jpg',
+      '/assets/img/P11-evaluation-encadrer-3.jpg'
+    ],
+    12: [
+      '/assets/img/P12-planifier-securiser-1.jpg',
+      '/assets/img/P12-planifier-securiser-2.jpg',
+      '/assets/img/P12-planifier-securiser-3.jpg'
+    ],
+    13: [
+      '/assets/img/P13-soutenance-architecture-1.jpg',
+      '/assets/img/P13-soutenance-architecture-2.jpg',
+      '/assets/img/P13-soutenance-architecture-3.jpg'
     ]
   };
 
