@@ -2,6 +2,11 @@
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.1.5.
 
+## Déploiement
+
+L'application est déployée et accessible à l'adresse suivante :
+**https://veille.cpierres.dscloud.me/**
+
 ## Development server
 
 To start a local development server, run:
