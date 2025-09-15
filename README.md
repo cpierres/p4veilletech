@@ -13,6 +13,11 @@ Contrairement à la préconisation d'OpenClassrooms d'utiliser des outils exista
 - **Faciliter l'organisation des idées et liens** sans contraintes d'outils tiers
 - **Servir d'outil lors d'échanges avec les clients** pour présenter mon expertise technique
 
+### Architecture
+
+Ce projet est une **application frontend pure** sans backend dédié, l'objectif étant la rapidité de développement et la flexibilité. 
+Les données sont organisées et stockées dans des **structures JSON** intégrées à l'application Angular, permettant une gestion efficace du contenu statique et des informations de veille technologique.
+
 ### Fonctionnalités Principales
 
 - **Site de veille technologique** avec sections dédiées :
