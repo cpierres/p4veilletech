@@ -4,7 +4,7 @@
 
 Ce projet est un site de **veille technologique**, dédié aux architectures logicielles et à Angular et Spring, développé dans le cadre du **Projet 4** de la <a href="https://openclassrooms.com/fr/paths/533-developpeur-full-stack-java-et-angular" target="_blank">formation certifiante niveau 7 (BAC+5)</a> "Expertise en développement logiciel - avec spécialité Full-Stack Java et Angular" de chez **OpenClassrooms**.
 
-La certification officielle <a href="https://www.francecompetences.fr/recherche/rncp/36912/" target="_blank">RNCP36912 d'expertise en développement logiciel</a> de France Compétences, est attribuée après une évaluation continue sur chaque projet et l'évaluation finale d'un jury. 
+La certification officielle <a href="https://www.francecompetences.fr/recherche/rncp/36912/" target="_blank">RNCP36912 d'expertise en développement logiciel</a> de France Compétences, est attribuée après une évaluation continue sur chaque projet et décision finale d'un jury. 
 
 J'ai profité de ce site de veille, pour exposer l'ensemble de mes projets OpenClassrooms dans le menu **About me**. 
 
