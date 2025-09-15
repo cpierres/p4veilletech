@@ -2,7 +2,7 @@
 
 ## Description du Projet
 
-Ce projet est un site de **veille technologique** dédié aux architectures logicielles, Angular et Spring, développé dans le cadre du **Projet 4** de la <a href="https://openclassrooms.com/fr/paths/533-developpeur-full-stack-java-et-angular" target="_blank">formation certifiante niveau 7 (BAC+5)</a> "Expertise en développement logiciel - avec spécialité Full-Stack Java et Angular" de chez **OpenClassrooms**.
+Ce projet est un site de **veille technologique**, dédié aux architectures logicielles et à Angular et Spring, développé dans le cadre du **Projet 4** de la <a href="https://openclassrooms.com/fr/paths/533-developpeur-full-stack-java-et-angular" target="_blank">formation certifiante niveau 7 (BAC+5)</a> "Expertise en développement logiciel - avec spécialité Full-Stack Java et Angular" de chez **OpenClassrooms**.
 
 La certification officielle <a href="https://www.francecompetences.fr/recherche/rncp/36912/" target="_blank">RNCP36912 d'expertise en développement logiciel</a> de France Compétences, est attribuée après une évaluation continue sur chaque projet et l'évaluation finale d'un jury. 
 
@@ -66,3 +66,90 @@ Pour démarrer le serveur de développement local, exécuter :
 ```bash
 ng serve
 ```
+
+## Structure Technique
+
+### Architecture Générale
+
+L'application suit une **architecture Angular modulaire** basée sur les **standalone components** d'Angular 19, avec une séparation claire des responsabilités :
+
+- src/app/ 
+  - component/ # Composants réutilisables 
+  - core/ # Services et modèles centraux 
+  - pages/ # Pages/vues de l'application 
+  - directives/ # Directives personnalisées 
+  - app.component.* # Composant racine 
+  - app.config.ts # Configuration globale 
+  - app.routes.ts # Routage de l'application
+
+
+### Services Principaux
+
+#### **RssService** (`src/app/core/services/rssfeed/`)
+- **Responsabilité** : Gestion des flux RSS des sites de veille technologique
+- **Technologies** : HttpClient, RxJS, fast-xml-parser
+- **Fonctionnalités** :
+  - Parsing des flux RSS/XML vers format JSON
+  - Cache intelligent avec BehaviorSubject
+  - Gestion réactive des données avec observables
+
+#### **LinksInfoService** (`src/app/core/services/links-info/`)
+- **Responsabilité** : Gestion centralisée des liens et ressources
+- **Fonctionnalités** :
+  - Fourniture des liens organisés par catégorie
+  - Données statiques structurées (Docker/Kubernetes, architectures, etc.)
+  - Interface de données normalisée
+
+### Modèles de Données
+
+#### **RssData** Interface
+```typescript
+interface RssData {
+  title: string;
+  link: string;
+}
+```
+
+#### Interface **LinkInfo**
+```typescript
+interface LinkInfo {
+  name: string;
+  link: string;
+  title?: string;
+  choice?: string; // Système de classement (médailles)
+}
+```
+### Composants Techniques
+#### **Composants Réutilisables** (`src/app/component/`)
+- **rssfeed** : Affichage et gestion des flux RSS
+- **link-info** : Présentation structurée des liens de veille
+- **classement** : Système de notation et classement des ressources
+
+#### **Pages Principales** (`src/app/pages/`)
+- **home** : Page d'accueil avec présentation générale
+- **front** : Veille technologique Frontend/Angular
+- **back** : Veille technologique Backend/Spring
+- **architecture** : Architectures logicielles et patterns
+- **about** : Présentation personnelle et projets OpenClassrooms
+- **test-overview** : Bonnes pratiques de tests
+
+### Patterns Architecturaux Utilisés
+- **Dependency Injection** : Services injectés via Angular DI
+- **Observer Pattern** : Gestion réactive avec RxJS
+- **Singleton Pattern** : Services providedIn 'root'
+- **Separation of Concerns** : Séparation modèles/services/composants
+- **Facade Pattern** : Services exposant une interface simplifiée
+
+### Gestion des États
+- **BehaviorSubject** : Cache des données RSS avec état persistant
+- **Observables** : Flux de données réactifs
+- **Services singletons** : État partagé entre composants
+
+### Technologies d'Infrastructure
+- **Angular Router** : Navigation SPA
+- **Angular Material** : Composants UI cohérents
+- **TypeScript** : Typage statique et sécurité
+- **RxJS** : Programmation réactive
+- **Fast-XML-Parser** : Parsing optimisé des flux RSS
+
+Cette architecture privilégie la **maintenabilité**, la **réutilisabilité** et les **performances** tout en respectant les bonnes pratiques Angular modernes.
