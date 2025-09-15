@@ -2,7 +2,11 @@
 
 ## Description du Projet
 
-Ce projet est un site de **veille technologique** dédié aux architectures logicielles, Angular et Spring, développé dans le cadre du **Projet 4** de la formation certifiante niveau 7 (BAC+5) "Développeur Full-Stack Java et Angular" chez **OpenClassrooms**.
+Ce projet est un site de **veille technologique** dédié aux architectures logicielles, Angular et Spring, développé dans le cadre du **Projet 4** de la <a href="https://openclassrooms.com/fr/paths/533-developpeur-full-stack-java-et-angular" target="_blank">formation certifiante niveau 7 (BAC+5)</a> "Expertise en développement logiciel - avec spécialité Full-Stack Java et Angular" de chez **OpenClassrooms**.
+
+La certification officielle <a href="https://www.francecompetences.fr/recherche/rncp/36912/" target="_blank">RNCP36912 d'expertise en développement logiciel</a> de France Compétences, est attribuée après une évaluation continue sur chaque projet et l'évaluation finale d'un jury. 
+
+J'ai profité de ce site de veille, pour exposer l'ensemble de mes projets OpenClassrooms dans le menu **About me**. 
 
 ### Contexte et Objectifs
 
@@ -12,6 +16,11 @@ Contrairement à la préconisation d'OpenClassrooms d'utiliser des outils exista
 - **Utiliser librement les composants Angular Material** pour une expérience utilisateur optimale
 - **Faciliter l'organisation des idées et liens** sans contraintes d'outils tiers
 - **Servir d'outil lors d'échanges avec les clients** pour présenter mon expertise technique
+
+### Architecture
+
+Ce projet est une **application frontend pure** sans backend dédié, l'objectif étant la rapidité de développement et la flexibilité. 
+Les données sont organisées et stockées dans des **structures JSON** intégrées à l'application Angular, permettant une gestion efficace du contenu statique et des informations de veille technologique.
 
 ### Fonctionnalités Principales
 
@@ -26,7 +35,7 @@ Contrairement à la préconisation d'OpenClassrooms d'utiliser des outils exista
 - **Intégration de flux RSS** pour les actualités de sites d'intérêt
 - **Interface responsive** adaptée mobile et desktop
 - **Navigation intuitive** avec Angular Material
-- **Présentation des 13 projets** de la formation OpenClassrooms
+- **Présentation des 13 projets** de la formation certifiante OpenClassrooms
 
 ### Technologies Utilisées
 
@@ -47,12 +56,12 @@ Contrairement à la préconisation d'OpenClassrooms d'utiliser des outils exista
 
 ## Déploiement
 
-L'application est déployée et accessible à l'adresse suivante :
+L'application est  accessible à l'adresse suivante :
 **https://veille.cpierres.dscloud.me/**
 
 ## Development server
 
-To start a local development server, run:
+Pour démarrer le serveur de développement local, exécuter :
 
 ```bash
 ng serve
