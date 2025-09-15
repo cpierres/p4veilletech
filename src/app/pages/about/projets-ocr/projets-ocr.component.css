@@ -8,3 +8,489 @@
   margin-bottom: 10px;
   text-align: right;
 }
+
+
+/* Sections de projets */
+.project-section {
+  margin: 20px 0;
+  padding: 16px;
+  border-left: 4px solid var(--primary-color);
+  background: #f8f9fa;
+  border-radius: 0 8px 8px 0;
+}
+
+.project-section h4 {
+  color: var(--primary-color);
+  margin: 0 0 12px 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Badges technologiques */
+.tech-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.tech-badge {
+  background: linear-gradient(45deg, #2196F3, #21CBF3);
+  color: white;
+  padding: 4px 12px;
+  border-radius: 16px;
+  font-size: 0.85em;
+  font-weight: 500;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Badge d'innovation */
+.innovation-badge {
+  background: linear-gradient(45deg, #FF6B35, #FF8E53);
+  color: white;
+  padding: 12px 16px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+  box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
+}
+
+/* Architecture flow */
+.architecture-flow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin: 16px 0;
+  padding: 20px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.arch-layer {
+  text-align: center;
+  flex: 1;
+  min-width: 150px;
+}
+
+.arch-layer strong {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--primary-color);
+}
+
+/* Grille d'exigences */
+.requirements-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.requirement-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  background: white;
+  border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.requirement-item mat-icon {
+  color: var(--accent-color);
+}
+
+/* Liste de fonctionnalités */
+.feature-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.feature-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 16px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.feature-item mat-icon {
+  color: var(--primary-color);
+  margin-top: 2px;
+}
+
+.feature-item strong {
+  display: block;
+  margin-bottom: 4px;
+  color: var(--primary-color);
+}
+
+/* Métriques d'impact */
+.impact-metrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 16px;
+  margin: 16px 0;
+}
+
+.metric {
+  text-align: center;
+  padding: 16px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.metric strong {
+  display: block;
+  color: var(--primary-color);
+  font-size: 1.1em;
+  margin-bottom: 4px;
+}
+
+/* Liens de projet améliorés */
+.project-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid #e0e0e0;
+}
+
+.project-links a,
+.project-links button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.demo-link {
+  background: #4CAF50;
+  color: white;
+}
+
+.code-link {
+  background: #2196F3;
+  color: white;
+}
+
+.doc-link {
+  background: #FF9800;
+  color: white;
+}
+
+.api-link {
+  background: #9C27B0;
+  color: white;
+}
+
+/* Highlight de performance */
+.performance-highlight {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+  padding: 12px;
+  background: #E8F5E8;
+  border-radius: 6px;
+  color: #2E7D2E;
+}
+
+/* Citations */
+blockquote {
+  margin: 16px 0;
+  padding: 16px 20px;
+  border-left: 4px solid var(--accent-color);
+  background: #f0f0f0;
+  border-radius: 0 8px 8px 0;
+  font-style: italic;
+  color: #555;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .architecture-flow {
+    flex-direction: column;
+  }
+
+  .requirements-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .impact-metrics {
+    grid-template-columns: 1fr;
+  }
+
+  .project-links {
+    flex-direction: column;
+  }
+}
+
+/* Section évaluation spécifique */
+.evaluation-section {
+  background: linear-gradient(135deg, #f8f9ff 0%, #e8f4f8 100%);
+  border-left-color: #4CAF50;
+}
+
+.evaluation-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.evaluation-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.evaluation-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 0.9em;
+  width: fit-content;
+}
+
+.evaluation-badge.success {
+  background: #4CAF50;
+  color: white;
+}
+
+.evaluation-badge.warning {
+  background: #FF9800;
+  color: white;
+}
+
+/* Matériaux de soutenance */
+.soutenance-materials {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 16px;
+  margin-top: 16px;
+}
+
+.material-item {
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.material-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+}
+
+/* Classe uniforme pour tous les liens de soutenance */
+.soutenance-link {
+  width: 100%;
+  height: 80px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px;
+  border-radius: 8px;
+  font-weight: 500;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  text-transform: none;
+  letter-spacing: normal;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.soutenance-link:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+}
+
+.soutenance-link.evaluation {
+  background: linear-gradient(135deg, #2196F3, #1976D2);
+  color: white;
+}
+
+.soutenance-link.video {
+  background: linear-gradient(135deg, #E91E63, #C2185B);
+  color: white;
+}
+
+.soutenance-link.slides {
+  background: linear-gradient(135deg, #FF9800, #F57C00);
+  color: white;
+}
+
+/* Suppression des styles Material indésirables pour les boutons */
+.soutenance-link.mat-mdc-raised-button {
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1) !important;
+  flex: 1 !important;
+  min-height: 80px !important;
+  margin: 0 !important;
+}
+
+.soutenance-link.mat-mdc-raised-button:not([disabled]) {
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1) !important;
+}
+
+/* Forcer le bouton à occuper tout l'espace disponible */
+.material-item.evaluation {
+  padding: 0;
+  background: transparent;
+}
+
+.material-item.evaluation .soutenance-link {
+  flex: 1;
+  min-height: 80px;
+  border-radius: 8px;
+  margin: 0;
+}
+
+/* Règle très spécifique pour le bouton d'évaluation */
+.material-item.evaluation button.soutenance-link.evaluation {
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 80px !important;
+  border-radius: 8px !important;
+  margin: 0 !important;
+  padding: 16px !important;
+  background: linear-gradient(135deg, #2196F3, #1976D2) !important;
+  border: none !important;
+  box-sizing: border-box !important;
+}
+
+.link-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.link-content strong {
+  font-size: 1em;
+}
+
+.link-content span {
+  font-size: 0.85em;
+  opacity: 0.9;
+}
+
+/* Points saillants de l'évaluation */
+.evaluation-highlights {
+  margin-top: 24px;
+}
+
+.evaluation-highlights h5 {
+  color: var(--primary-color);
+  margin: 0 0 16px 0;
+  font-size: 1.1em;
+}
+
+.highlights-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 12px;
+}
+
+.highlight-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 16px;
+  border-radius: 8px;
+  background: white;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+}
+
+.highlight-item.positive {
+  border-left: 4px solid #4CAF50;
+}
+
+.highlight-item.improvement {
+  border-left: 4px solid #2196F3;
+}
+
+.highlight-item.negative {
+  border-left: 4px solid #FF5722;
+}
+
+.highlight-item mat-icon {
+  margin-top: 2px;
+}
+
+.highlight-item.positive mat-icon {
+  color: #4CAF50;
+}
+
+.highlight-item.improvement mat-icon {
+  color: #2196F3;
+}
+
+.highlight-item.negative mat-icon {
+  color: #FF5722;
+}
+
+.highlight-item strong {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 0.95em;
+}
+
+.highlight-item p {
+  margin: 0;
+  font-size: 0.9em;
+  line-height: 1.4;
+  color: #666;
+}
+
+/* Responsive pour évaluation */
+@media (max-width: 768px) {
+  .soutenance-materials {
+    grid-template-columns: 1fr;
+  }
+
+  .highlights-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .soutenance-link {
+    height: auto;
+    min-height: 70px;
+    padding: 12px;
+  }
+}
+
+/* Animation pour les badges */
+@keyframes badgeGlow {
+  0% { box-shadow: 0 0 5px rgba(76, 175, 80, 0.3); }
+  50% { box-shadow: 0 0 15px rgba(76, 175, 80, 0.6); }
+  100% { box-shadow: 0 0 5px rgba(76, 175, 80, 0.3); }
+}
+
+.evaluation-badge.success {
+  animation: badgeGlow 2s infinite;
+}

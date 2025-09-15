@@ -1,26 +1,29 @@
 import { Component } from '@angular/core';
 import {
-    MatAccordion,
-    MatExpansionPanel,
-    MatExpansionPanelHeader,
-    MatExpansionPanelTitle
+  MatAccordion,
+  MatExpansionPanel, MatExpansionPanelDescription,
+  MatExpansionPanelHeader,
+  MatExpansionPanelTitle
 } from "@angular/material/expansion";
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { EvaluationDialogComponent } from '../evaluation-dialog/evaluation-dialog.component';
 import { CommonModule } from '@angular/common';
+import {MatIcon} from '@angular/material/icon';
 
 @Component({
   selector: 'app-projets-ocr',
-    imports: [
-        CommonModule,
-        MatAccordion,
-        MatExpansionPanel,
-        MatExpansionPanelHeader,
-        MatExpansionPanelTitle,
-        MatDialogModule,
-        MatButtonModule
-    ],
+  imports: [
+    CommonModule,
+    MatAccordion,
+    MatExpansionPanel,
+    MatExpansionPanelHeader,
+    MatExpansionPanelTitle,
+    MatDialogModule,
+    MatButtonModule,
+    MatIcon,
+    MatExpansionPanelDescription
+  ],
   templateUrl: './projets-ocr.component.html',
   styleUrl: './projets-ocr.component.css'
 })
