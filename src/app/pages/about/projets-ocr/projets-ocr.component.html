@@ -1,26 +1,93 @@
-<div class="home-page">
-  <p>
-    Les sections suivantes décrivent les 12 projets réalisés dans le cadre de la
-    <a href="https://openclassrooms.com/fr/paths/533-developpeur-full-stack-java-et-angular"
-       target="_blank">formation certifiante niveau 7 (BAC+5)</a> chez <strong>OpenClassrooms</strong>. Plus d'informations sur cette certification officielle sur
-    <a href="https://www.francecompetences.fr/recherche/rncp/36912/" target="_blank">France Compétences</a>.</p>
-  <p>
-    Chaque projet a fait l'objet de livrables et d'une soutenance vidéo de 15 minutes accompagnée d'une évaluation écrite.
-  </p>
-  <p>
-    Avant cette formation OpenClassrooms, j'avais déjà :
-  </p>
-  <ul>
-    <li>suivi une formation de 21 jours sur l'éco-système Angular/Spring (onglet <b>Formations/certif en présentiel</b>).
-    </li>
-    <li>étudié 30 formations UDEMY sur Spring/Angular/DevOps/Intelligence Artificielle.</li>
-  </ul>
-  <p>
-    Mon expérience full-stack est donc bien plus large que ces 12 projets OpenClassrooms mais j'avais besoin d'objectifs concrets pour mettre en pratique mes connaissances.<br>
-    Grâce à mon background java, JEE et architecture, j'ai pu démontrer une expertise sérieuse.
-  </p>
+<main class="home-page" role="main">
+  <!-- En-tête de section avec statistiques -->
+  <header class="page-header">
+    <div class="certification-intro">
+      <h3 class="sr-only">Projets de Formation OpenClassrooms</h3>
+      <p class="main-description">
+        Les sections suivantes décrivent les <strong>13 projets</strong> réalisés dans le cadre de la
+        <a href="https://openclassrooms.com/fr/paths/533-developpeur-full-stack-java-et-angular"
+           target="_blank"
+           rel="noopener noreferrer"
+           aria-label="Formation certifiante niveau 7 OpenClassrooms (ouvre dans un nouvel onglet)">
+          formation certifiante niveau 7 (BAC+5)
+        </a> chez <strong>OpenClassrooms</strong>. Plus d'informations sur cette certification officielle sur
+        <a href="https://www.francecompetences.fr/recherche/rncp/36912/"
+           target="_blank"
+           rel="noopener noreferrer"
+           aria-label="Page France Compétences (ouvre dans un nouvel onglet)">France Compétences</a>.
+      </p>
+    </div>
 
-  <mat-accordion>
+    <!-- Métriques de synthèse -->
+    <!-- section class="certification-metrics" aria-labelledby="metrics-heading">
+      <h3 id="metrics-heading" class="sr-only">Statistiques du parcours</h3>
+      <div class="metrics-grid">
+        <div class="metric-card animate-slide-up" style="--delay: 0.1s">
+          <mat-icon aria-hidden="true">assignment_turned_in</mat-icon>
+          <div class="metric-value">13</div>
+          <div class="metric-label">Projets Validés</div>
+        </div>
+        <div class="metric-card animate-slide-up" style="--delay: 0.2s">
+          <mat-icon aria-hidden="true">video_library</mat-icon>
+          <div class="metric-value">13</div>
+          <div class="metric-label">Soutenances</div>
+        </div>
+        <div class="metric-card animate-slide-up" style="--delay: 0.3s">
+          <mat-icon aria-hidden="true">code</mat-icon>
+          <div class="metric-value">8+</div>
+          <div class="metric-label">Technologies</div>
+        </div>
+        <div class="metric-card animate-slide-up" style="--delay: 0.4s">
+          <mat-icon aria-hidden="true">school</mat-icon>
+          <div class="metric-value">100%</div>
+          <div class="metric-label">Réussite</div>
+        </div>
+      </div>
+    </section -->
+
+    <!-- Contexte de formation -->
+    <section class="formation-context" aria-labelledby="context-heading">
+      <h3 id="context-heading" class="sr-only">Contexte de la formation</h3>
+      <div class="context-card">
+        <p>
+          Chaque projet a fait l'objet de <strong>livrables complets</strong> et d'une <strong>soutenance vidéo</strong>
+          de 15 minutes accompagnée d'une évaluation écrite détaillée.
+        </p>
+
+        <div class="preparation-section">
+          <h3>📚 Préparation technique préalable</h3>
+          <p>Avant cette formation OpenClassrooms, j'avais déjà :</p>
+          <ul class="preparation-list">
+            <li>
+              <mat-icon aria-hidden="true">school</mat-icon>
+              Suivi une formation de <strong>21 jours</strong> sur l'éco-système Angular/Spring
+              (onglet <em>Formations/certif en présentiel</em>)
+            </li>
+            <li>
+              <mat-icon aria-hidden="true">video_library</mat-icon>
+              Étudié <strong>30 formations UDEMY</strong> sur Spring/Angular/DevOps/Intelligence Artificielle
+            </li>
+          </ul>
+        </div>
+
+        <div class="expertise-highlight">
+          <p>
+          <mat-icon aria-hidden="true">star</mat-icon>
+
+            Mon expérience full-stack est donc bien plus large que ces 13 projets OpenClassrooms mais
+            j'avais besoin d'<strong>objectifs concrets</strong> pour mettre en pratique mes connaissances.<br>
+            Grâce à mon background Java, JEE et architecture, j'ai pu démontrer une <strong>expertise sérieuse</strong>.
+          </p>
+        </div>
+      </div>
+    </section>
+  </header>
+
+  <!-- Accordéon des projets avec navigation améliorée -->
+  <section class="projects-section" aria-labelledby="projects-heading">
+    <h3 id="projects-heading" class="section-title">Portfolio des Projets</h3>
+
+    <mat-accordion multi="true" class="projects-accordion">
     <mat-expansion-panel>
       <mat-expansion-panel-header>
         <mat-panel-title>
@@ -32,9 +99,14 @@
       </mat-expansion-panel-header>
       <div>
         <!-- Badge Vision Stratégique -->
-        <div class="innovation-badge" style="background: linear-gradient(45deg, #607D8B, #78909C);">
-          <mat-icon>timeline</mat-icon>
-          <strong>VISION STRATÉGIQUE :</strong> Planification d'un parcours d'excellence technique avec objectifs mesurables
+        <div class="innovation-badge strategic-vision"
+             role="banner"
+             aria-label="Badge d'innovation : Vision stratégique">
+          <mat-icon aria-hidden="true" class="badge-icon">timeline</mat-icon>
+          <div class="badge-content">
+            <span class="badge-title">VISION STRATÉGIQUE</span>
+            <span class="badge-description">Planification d'un parcours d'excellence technique avec objectifs mesurables</span>
+          </div>
         </div>
 
         <!-- Contexte & Mission -->
@@ -500,9 +572,14 @@
       </mat-expansion-panel-header>
       <div>
         <!-- Badge Innovation -->
-        <div class="innovation-badge" style="background: linear-gradient(45deg, #4CAF50, #66BB6A);">
-          <mat-icon>web</mat-icon>
-          <strong>INNOVATION PÉDAGOGIQUE :</strong> Premier étudiant à créer un site complet Angular au lieu d'un blog
+        <div class="innovation-badge pedagogical-innovation"
+             role="banner"
+             aria-label="Badge d'innovation : Innovation pédagogique">
+          <mat-icon aria-hidden="true" class="badge-icon">web</mat-icon>
+          <div class="badge-content">
+            <span class="badge-title">INNOVATION PÉDAGOGIQUE</span>
+            <span class="badge-description">Premier étudiant à créer un site complet Angular au lieu d'un blog</span>
+          </div>
         </div>
 
         <!-- Contexte & Choix Stratégique -->
@@ -953,9 +1030,14 @@
       </mat-expansion-panel-header>
       <div>
         <!-- Innovation Badge -->
-        <div class="innovation-badge">
-          <mat-icon>star</mat-icon>
-          <strong>INNOVATION :</strong> Premier étudiant à implémenter une architecture full-réactive end-to-end
+        <div class="innovation-badge technical-innovation"
+             role="banner"
+             aria-label="Badge d'innovation : Innovation technique">
+          <mat-icon aria-hidden="true" class="badge-icon">star</mat-icon>
+          <div class="badge-content">
+            <span class="badge-title">INNOVATION TECHNIQUE</span>
+            <span class="badge-description">Premier étudiant à implémenter une architecture full-réactive end-to-end</span>
+          </div>
         </div>
 
         <!-- Contexte Business -->
@@ -2824,6 +2906,38 @@
         </div>
       </div>
     </mat-expansion-panel>
-  </mat-accordion>
+    </mat-accordion>
+  </section>
 
-</div>
+  <!-- Pied de page de section -->
+  <!-- footer class="projects-footer">
+    <div class="completion-summary">
+      <mat-icon aria-hidden="true" class="success-icon">check_circle</mat-icon>
+      <div class="summary-content">
+        <h3>Parcours Certifiant Terminé avec Succès</h3>
+        <p>
+          Certification <strong>niveau 7 (BAC+5)</strong> obtenue avec validation
+          de tous les projets et soutenances.
+        </p>
+      </div>
+    </div>
+
+    <div class="quick-navigation">
+      <h4>Navigation rapide</h4>
+      <div class="nav-buttons">
+        <a href="/" class="nav-button primary">
+          <mat-icon>home</mat-icon>
+          Accueil
+        </a>
+        <a href="/about/formations" class="nav-button secondary">
+          <mat-icon>school</mat-icon>
+          Autres formations
+        </a>
+        <a href="/about/certifications" class="nav-button secondary">
+          <mat-icon>verified</mat-icon>
+          Certifications
+        </a>
+      </div>
+    </div>
+  </footer -->
+</main>
