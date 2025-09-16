@@ -8,6 +8,7 @@ import { MoreInfoP6Component } from './more-info-p6/more-info-p6.component';
 import { MoreInfoDefaultComponent } from './more-info-default/more-info-default.component';
 import {MoreInfoP3Component} from './more-info-p3/more-info-p3.component';
 import {MoreInfoP5Component} from './more-info-p5/more-info-p5.component';
+import {MoreInfoP10Component} from './more-info-p10/more-info-p10.component';
 
 export interface MoreInfoDialogData {
   projectId: number;
@@ -26,6 +27,7 @@ export interface MoreInfoDialogData {
     MoreInfoP6Component,
     MoreInfoP3Component,
     MoreInfoP5Component,
+    MoreInfoP10Component,
     //MoreInfoDefaultComponent
   ],
   template: `
@@ -55,6 +57,10 @@ export interface MoreInfoDialogData {
           </div>
           <div *ngSwitchCase="6" class="project-details">
             <app-more-info-p6/>
+          </div>
+          <div *ngSwitchCase="10" class="project-details">
+            <app-more-info-p10/>
+          </div>
         </div>
       </div>
     </div>

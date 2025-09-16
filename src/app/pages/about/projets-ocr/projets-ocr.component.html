@@ -866,30 +866,223 @@
     <mat-expansion-panel>
       <mat-expansion-panel-header>
         <mat-panel-title>
-          Projet 10 : Intégration et CI/CD (Github actions, SonarQube, Docker)
+          Projet 10 : Pipeline CI/CD & Qualité de Code
         </mat-panel-title>
+        <mat-panel-description>
+          Intégration continue avec GitHub Actions, analyse SonarQube et déploiement Docker
+        </mat-panel-description>
       </mat-expansion-panel-header>
       <div>
-        <ul>
-          <li>Soutenance :
-            <button mat-raised-button color="primary" (click)="openEvaluationDialog(10)">
-              Évaluation
-            </button> | <a href="https://u.pcloud.link/publink/show?code=XZ1vbD5ZtBvtMnVVQ9yILVy3OPXMBHxSsyQk" target="_blank">Vidéo (partie 1)</a>
-            | <a href="https://u.pcloud.link/publink/show?code=XZnvbD5ZY6mCwviCe3Hij8QthLXJQLJvtqN7s" target="_blank">Vidéo (partie 2)</a>
-          </li>
-          <li>
-            Livrable : <a href="/assets/pdf/P10_explication-cicd-sonar202508.pdf" target="_blank">explication du CI/CD et des métriques SonarQube</a>.
-          </li>
-          <li>
-            Dépôt : <a href="https://github.com/cpierres/P10cicd" target="_blank">github</a>.
-          </li>
-          <li>
-            Dépôt image docker backend : <a href="https://hub.docker.com/repository/docker/cpierres/bobapp-backend/general" target="_blank">dockerhub backend</a>.
-          </li>
-          <li>
-            Dépôt image docker frontend : <a href="https://hub.docker.com/repository/docker/cpierres/bobapp-frontend/general" target="_blank">dockerhub frontend</a>.
-          </li>
-        </ul>
+        <!-- Badge DevOps -->
+        <div class="innovation-badge" style="background: linear-gradient(45deg, #FF9800, #FFB74D);">
+          <mat-icon>build_circle</mat-icon>
+          <strong>DEVOPS :</strong> Pipeline complet d'intégration et déploiement continu
+        </div>
+
+        <!-- Contexte Mission -->
+        <div class="project-section">
+          <h4>🎯 Objectifs DevOps</h4>
+          <p><strong>Mission :</strong> Mettre en place un pipeline CI/CD complet avec analyse qualité de code et déploiement automatisé.</p>
+
+          <div class="requirements-grid">
+            <div class="requirement-item">
+              <mat-icon>integration_instructions</mat-icon>
+              <span>Intégration Continue</span>
+            </div>
+            <div class="requirement-item">
+              <mat-icon>analytics</mat-icon>
+              <span>Analyse SonarQube</span>
+            </div>
+            <div class="requirement-item">
+              <mat-icon>rocket_launch</mat-icon>
+              <span>Déploiement Continu</span>
+            </div>
+            <div class="requirement-item">
+              <mat-icon>docker</mat-icon>
+              <span>Containerisation</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pipeline CI/CD -->
+        <div class="project-section">
+          <h4>🔄 Architecture Pipeline DevOps</h4>
+          <div class="architecture-flow">
+            <div class="arch-layer">
+              <strong>Source</strong><br>
+              <span class="tech-badge">GitHub</span>
+              <span class="tech-badge">Git Flow</span>
+            </div>
+            <mat-icon>arrow_forward</mat-icon>
+            <div class="arch-layer">
+              <strong>CI/CD</strong><br>
+              <span class="tech-badge">GitHub Actions</span>
+              <span class="tech-badge">Maven</span>
+              <span class="tech-badge">Tests Auto</span>
+            </div>
+            <mat-icon>arrow_forward</mat-icon>
+            <div class="arch-layer">
+              <strong>Quality</strong><br>
+              <span class="tech-badge">SonarQube</span>
+              <span class="tech-badge">Code Coverage</span>
+            </div>
+            <mat-icon>arrow_forward</mat-icon>
+            <div class="arch-layer">
+              <strong>Deploy</strong><br>
+              <span class="tech-badge">Docker Hub</span>
+              <span class="tech-badge">Multi-platform</span>
+            </div>
+          </div>
+
+          <div class="performance-highlight">
+            <mat-icon>speed</mat-icon>
+            <strong>Résultat :</strong> Pipeline automatisé complet avec déploiement multi-plateforme
+          </div>
+        </div>
+
+        <!-- Composants Techniques -->
+        <div class="project-section">
+          <h4>🛠️ Outils & Technologies</h4>
+          <div class="feature-list">
+            <div class="feature-item">
+              <mat-icon>github</mat-icon>
+              <div>
+                <strong>GitHub Actions</strong>
+                <p>Workflows automatisés : build, test, analyse qualité, déploiement multi-environnements</p>
+              </div>
+            </div>
+            <div class="feature-item">
+              <mat-icon>assessment</mat-icon>
+              <div>
+                <strong>SonarQube Cloud</strong>
+                <p>Analyse statique du code, détection vulnérabilités, métriques qualité et maintenabilité</p>
+              </div>
+            </div>
+            <div class="feature-item">
+              <mat-icon>inventory_2</mat-icon>
+              <div>
+                <strong>Docker Registry</strong>
+                <p>Images multi-architectures (AMD64/ARM64), versioning automatique, optimisation taille</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Métriques & Qualité -->
+        <div class="project-section">
+          <h4>📊 Métriques de Qualité</h4>
+          <div class="impact-metrics">
+            <div class="metric">
+              <strong>Code Coverage</strong>
+              <p>Tests automatisés intégrés</p>
+            </div>
+            <div class="metric">
+              <strong>Quality Gates</strong>
+              <p>Standards SonarQube</p>
+            </div>
+            <div class="metric">
+              <strong>Security</strong>
+              <p>Scan vulnérabilités</p>
+            </div>
+            <div class="metric">
+              <strong>Performance</strong>
+              <p>Build optimisé</p>
+            </div>
+          </div>
+
+          <blockquote>
+            "L'intégration native des outils DevOps modernes (GitHub Actions + SonarQube + Docker) permet une approche industrielle avec qualité de code garantie et déploiements fiables."
+          </blockquote>
+        </div>
+
+        <!-- Bonnes Pratiques DevOps -->
+        <div class="project-section">
+          <h4>⚡ Pratiques DevOps Appliquées</h4>
+          <div class="tech-grid">
+            <span class="tech-badge">Infrastructure as Code</span>
+            <span class="tech-badge">Continuous Integration</span>
+            <span class="tech-badge">Continuous Deployment</span>
+            <span class="tech-badge">Quality Gates</span>
+            <span class="tech-badge">Container Security</span>
+            <span class="tech-badge">Multi-platform Builds</span>
+          </div>
+        </div>
+
+        <!-- Section Évaluation -->
+        <div class="project-section evaluation-section">
+          <h4>🎓 Évaluation & Soutenance</h4>
+
+          <div class="evaluation-container">
+            <div class="evaluation-summary">
+              <div class="evaluation-badge success">
+                <mat-icon>verified</mat-icon>
+                <span>VALIDÉ</span>
+              </div>
+              <p><strong>Soutenance :</strong> Présentation technique en 2 parties avec démonstration pipeline</p>
+              <p><strong>Focus :</strong> Architecture DevOps, métriques qualité, automatisation complète</p>
+            </div>
+
+            <div class="soutenance-materials">
+              <div class="material-item evaluation">
+                <button (click)="openEvaluationDialog(10)" class="soutenance-link evaluation">
+                  <mat-icon>assessment</mat-icon>
+                  <div class="link-content">
+                    <strong>Évaluation Détaillée</strong>
+                    <span>Grille de notation complète</span>
+                  </div>
+                </button>
+              </div>
+
+              <div class="material-item video">
+                <a href="https://u.pcloud.link/publink/show?code=XZ1vbD5ZtBvtMnVVQ9yILVy3OPXMBHxSsyQk"
+                   target="_blank" class="soutenance-link video">
+                  <mat-icon>play_circle</mat-icon>
+                  <div class="link-content">
+                    <strong>Vidéo Soutenance P1</strong>
+                    <span>Architecture & pipeline</span>
+                  </div>
+                </a>
+              </div>
+
+              <div class="material-item video" style="background: linear-gradient(135deg, #E91E63, #C2185B);">
+                <a href="https://u.pcloud.link/publink/show?code=XZnvbD5ZY6mCwviCe3Hij8QthLXJQLJvtqN7s"
+                   target="_blank" class="soutenance-link video">
+                  <mat-icon>play_circle</mat-icon>
+                  <div class="link-content">
+                    <strong>Vidéo Soutenance P2</strong>
+                    <span>Démonstration live</span>
+                  </div>
+                </a>
+              </div>
+
+              <div class="material-item slides">
+                <a href="/assets/pdf/P10_explication-cicd-sonar202508.pdf" target="_blank" class="soutenance-link slides">
+                  <mat-icon>description</mat-icon>
+                  <div class="link-content">
+                    <strong>Dossier Technique</strong>
+                    <span>CI/CD & métriques SonarQube</span>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Ressources & Déploiements -->
+        <div class="project-links">
+          <a href="https://github.com/cpierres/P10cicd" target="_blank" class="code-link">
+            <mat-icon>code</mat-icon> Repository & Workflows
+          </a>
+          <a href="https://hub.docker.com/repository/docker/cpierres/bobapp-backend/general" target="_blank" class="api-link">
+            <mat-icon>inventory_2</mat-icon> Docker Backend
+          </a>
+          <a href="https://hub.docker.com/repository/docker/cpierres/bobapp-frontend/general" target="_blank" class="demo-link">
+            <mat-icon>web</mat-icon> Docker Frontend
+          </a>
+          <button (click)="openMoreInfoDialog(10, 'Pipeline CI/CD & Qualité de Code')" class="more-info-button">
+            <mat-icon>info</mat-icon> En savoir plus
+          </button>
+        </div>
       </div>
     </mat-expansion-panel>
 
