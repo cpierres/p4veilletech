@@ -200,6 +200,32 @@
   color: white;
 }
 
+.more-info-button {
+  background: #607D8B;
+  color: white;
+  font-family: inherit !important;
+  font-size: inherit !important;
+  font-weight: 500 !important;
+  line-height: inherit !important;
+  text-transform: none !important;
+  letter-spacing: normal !important;
+}
+
+.more-info-button:hover {
+  background: #455A64;
+}
+
+/* Assurer que tous les éléments de project-links ont la même police */
+.project-links a,
+.project-links button {
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: 500;
+  line-height: inherit;
+  text-transform: none;
+  letter-spacing: normal;
+}
+
 /* Highlight de performance */
 .performance-highlight {
   display: flex;
