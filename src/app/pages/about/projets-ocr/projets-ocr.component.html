@@ -61,7 +61,7 @@
           href="https://technology.amis.nl/software-development/performance-and-tuning/spring-blocking-vs-non-blocking-r2dbc-vs-jdbc-and-webflux-vs-web-mvc/"
           target="_blank">excellent
           benchmark comparatif :</a>
-          qui m'a convaincu que c'était la technologie à approfondir.
+          qui m'a convaincu que c'était une technologie à approfondir.
         </p>
       </div>
     </mat-expansion-panel>
@@ -140,30 +140,172 @@
     <mat-expansion-panel>
       <mat-expansion-panel-header>
         <mat-panel-title>
-          Projet 3 : Backend SpringBoot 3.4.1 JPA/MVC pour un frontend Angular v14 existant
+          Projet 3 : API Backend Spring Boot JPA/MVC
         </mat-panel-title>
+        <mat-panel-description>
+          Implémentation complète d'une API REST avec sécurité JWT et bonnes pratiques
+        </mat-panel-description>
       </mat-expansion-panel-header>
       <div>
-        <ul>
-          <li><a href="https://github.com/cpierres/P3-back-spring" target="_blank">Dépôt git</a></li>
-          <li>Soutenance :
-            <button mat-raised-button color="primary" (click)="openEvaluationDialog(3)">
-              Évaluation
-            </button>
-            | <a href="/assets/pdf/P3-pres-16mn.pdf" target="_blank">Slide</a> | <a
-              href="https://u.pcloud.link/publink/show?code=XZyy8j5ZlHemqlnqV0YmDkeVgUtzo4yc72iX"
-              target="_blank">Vidéo</a></li>
-        </ul>
-        <p>
-          Le frontend existant se basait sur une simulation de l'API backend qui nous était fournie via l'outil Mockoon.<br>
-          Le projet backend P3 consistait donc à implémenter l'API backend en utilisant SpringBoot et Spring Data
-          JPA/MVC.<br>
-          J'ai trouvé intéressant la facilité de mise en oeuvre et la productivité de Spring Data JPA/MVC mais j'ai aussi constaté qu'on
-          restait dans les paradigmes bloquant de JEE.<br>
-          J'ai bien apprécié la sécurité JWT et la vue globale des architectures de sécurité.<br>
-          Bien entendu, toutes les bonnes pratiques et bons outils ont été employées : SOLID, lombok, mapstruct, doc, swagger, docker, etc...<br>
-          J'ai aussi utilisé cloudinary pour les fichiers multi-média.
-        </p>
+        <!-- Contexte Projet -->
+        <div class="project-section">
+          <h4>🎯 Mission & Contraintes</h4>
+          <p><strong>Défi :</strong> Développer l'API backend complète pour remplacer les simulations Mockoon du frontend existant.</p>
+
+          <div class="requirements-grid">
+            <div class="requirement-item">
+              <mat-icon>api</mat-icon>
+              <span>API REST complète</span>
+            </div>
+            <div class="requirement-item">
+              <mat-icon>security</mat-icon>
+              <span>Authentification JWT</span>
+            </div>
+            <div class="requirement-item">
+              <mat-icon>storage</mat-icon>
+              <span>Gestion fichiers média</span>
+            </div>
+            <div class="requirement-item">
+              <mat-icon>code</mat-icon>
+              <span>Bonnes pratiques SOLID</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Stack Technique -->
+        <div class="project-section">
+          <h4>🏗️ Architecture Backend Classique</h4>
+          <div class="architecture-flow">
+            <div class="arch-layer">
+              <strong>Frontend</strong><br>
+              <span class="tech-badge">Angular v14</span>
+              <span class="tech-badge">Existant</span>
+            </div>
+            <mat-icon>arrow_forward</mat-icon>
+            <div class="arch-layer">
+              <strong>Backend</strong><br>
+              <span class="tech-badge">Spring Boot 3.4.1</span>
+              <span class="tech-badge">JPA/MVC</span>
+              <span class="tech-badge">JWT</span>
+            </div>
+            <mat-icon>arrow_forward</mat-icon>
+            <div class="arch-layer">
+              <strong>Services</strong><br>
+              <span class="tech-badge">MySQL/PostgreSQL</span>
+              <span class="tech-badge">Cloudinary</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Réalisations Techniques -->
+        <div class="project-section">
+          <h4>🚀 Implémentations Clés</h4>
+          <div class="feature-list">
+            <div class="feature-item">
+              <mat-icon>verified_user</mat-icon>
+              <div>
+                <strong>Sécurité JWT Complète</strong>
+                <p>Authentification stateless, gestion des tokens, protection des endpoints sensibles</p>
+              </div>
+            </div>
+            <div class="feature-item">
+              <mat-icon>cloud_upload</mat-icon>
+              <div>
+                <strong>Gestion Fichiers Média</strong>
+                <p>Intégration Cloudinary pour upload, stockage et optimisation des images/vidéos</p>
+              </div>
+            </div>
+            <div class="feature-item">
+              <mat-icon>build</mat-icon>
+              <div>
+                <strong>Tooling Professionnel</strong>
+                <p>Lombok, MapStruct, Swagger, Docker - Productivité et maintenabilité maximales</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Apprentissages & Observations -->
+        <div class="project-section">
+          <h4>📈 Retour d'Expérience</h4>
+          <div class="impact-metrics">
+            <div class="metric">
+              <strong>Productivité</strong>
+              <p>Spring Data JPA très efficace</p>
+            </div>
+            <div class="metric">
+              <strong>Limitation</strong>
+              <p>Paradigmes bloquants JEE</p>
+            </div>
+            <div class="metric">
+              <strong>Sécurité</strong>
+              <p>JWT bien maîtrisé</p>
+            </div>
+          </div>
+
+          <blockquote>
+            "Excellente introduction aux architectures Spring modernes, mais les limitations des paradigmes bloquants m'ont motivé à explorer Spring WebFlux pour les projets suivants."
+          </blockquote>
+        </div>
+
+        <!-- Section Évaluation -->
+        <div class="project-section evaluation-section">
+          <h4>🎓 Évaluation & Soutenance</h4>
+
+          <div class="evaluation-container">
+            <div class="evaluation-summary">
+              <div class="evaluation-badge success">
+                <mat-icon>verified</mat-icon>
+                <span>VALIDÉ</span>
+              </div>
+              <p><strong>Soutenance :</strong> Présentation technique de 16 minutes avec démonstration API</p>
+              <p><strong>Focus :</strong> Architecture backend, sécurité JWT et bonnes pratiques</p>
+            </div>
+
+            <div class="soutenance-materials">
+              <div class="material-item evaluation">
+                <button (click)="openEvaluationDialog(3)" class="soutenance-link evaluation">
+                  <mat-icon>assessment</mat-icon>
+                  <div class="link-content">
+                    <strong>Évaluation Détaillée</strong>
+                    <span>Grille de notation complète</span>
+                  </div>
+                </button>
+              </div>
+
+              <div class="material-item video">
+                <a href="https://u.pcloud.link/publink/show?code=XZyy8j5ZlHemqlnqV0YmDkeVgUtzo4yc72iX"
+                   target="_blank" class="soutenance-link video">
+                  <mat-icon>play_circle</mat-icon>
+                  <div class="link-content">
+                    <strong>Vidéo de Soutenance</strong>
+                    <span>Démonstration API (16 min)</span>
+                  </div>
+                </a>
+              </div>
+
+              <div class="material-item slides">
+                <a href="/assets/pdf/P3-pres-16mn.pdf" target="_blank" class="soutenance-link slides">
+                  <mat-icon>slideshow</mat-icon>
+                  <div class="link-content">
+                    <strong>Support de Présentation</strong>
+                    <span>Architecture & sécurité</span>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Ressources -->
+        <div class="project-links">
+          <a href="https://github.com/cpierres/P3-back-spring" target="_blank" class="code-link">
+            <mat-icon>code</mat-icon> Repository Backend
+          </a>
+          <button (click)="openMoreInfoDialog(3, 'API Backend Spring Boot JPA/MVC')" class="more-info-button">
+            <mat-icon>info</mat-icon> En savoir plus
+          </button>
+        </div>
       </div>
     </mat-expansion-panel>
 
