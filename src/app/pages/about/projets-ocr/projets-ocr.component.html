@@ -69,62 +69,71 @@
     <mat-expansion-panel>
       <mat-expansion-panel-header>
         <mat-panel-title>
-          Projet 2 : Frontend Angular v18 (avec starter code classique basé sur des ngModules)
+          Projet 2 : Application Angular de Visualisation de Données
         </mat-panel-title>
+        <mat-panel-description>
+          Frontend responsive avec intégration de graphiques dynamiques
+        </mat-panel-description>
       </mat-expansion-panel-header>
       <div>
-        <p>
-          Ce projet est un frontend (avec un backend existant minimaliste) devant respecter scrupuleusement des maquettes d'écran
-          responsive (mobile et desktop) que voici :
-          <a
-            href="https://course.oc-static.com/projects/D%C3%A9v_Full-Stack/D%C3%A9veloppez+le+front-end+en+utilisant+Angular/P2_Wireframes.pdf"
-            target="_blank">maquettes</a>
-        </p>
-        <p>
-          Il fallait avoir une démarche de choix et d'intégration d'une librairie de gestion de graphes.<br>
-        </p>
-        <p>
-          Le dépôt git, son README, ainsi que la compodoc permettent d'apprécier les bonnes pratiques appliquées.<br>
-        <ul>
-          <li><a href="https://ocrp2.cpierres.dscloud.me/" target="_blank">Application </a></li>
-          <li><a
-            href="https://github.com/cpierres/Opencr-Projet02-Angular" target="_blank">Dépôt github</a></li>
-          <li><a
-            href="https://cpierres.github.io/Opencr-Projet02-Angular/" target="_blank">Compodoc complète</a>
-            diffusée sur github.
-          </li>
-          <li>Soutenance :
-            <button mat-raised-button color="primary" (click)="openEvaluationDialog(2)">
-              Évaluation
-            </button>
-            |
-            <a href="/assets/pdf/P2-pres-15mn.pdf" target="_blank">Slide</a> |
-            <a href="https://u.pcloud.link/publink/show?code=XZ3o4j5ZWBwjqQYQRG5xrV5OhDSYRzxU6WXk"
-               target="_blank">Vidéo de soutenance</a></li>
-        </ul>
+        <!-- Section Contexte -->
+        <div class="project-section">
+          <h4>🎯 Objectif & Contraintes</h4>
+          <ul>
+            <li><strong>Mission</strong> : Développer un frontend respectant des maquettes responsive strictes</li>
+            <li><strong>Contrainte</strong> : Migration d'Angular v14 vers v18 avec ngModules legacy</li>
+            <li><strong>Défi technique</strong> : Intégration d'une librairie de graphiques avec architecture évolutive</li>
+          </ul>
+        </div>
 
-        <p>
-          Il s'agissait d'utiliser Angular en partant d'un starter code avec des paradigmes "anciens" (ngModules) mais
-          avec une version d'Angular migrée en v18.<br>
-          Cela m'a permis de me mettre dans le moule d'une organisation de développement habituelle/classique que l'on
-          trouve encore beaucoup dans les développements du marché, tout en goûtant aux apports de la nouvelle version
-          (standalone components).<br>
-          Angular m'a rapidement démontré sa capacité à bien gérer l'asynchronisme et la programmation réactive avec
-          RxJS.<br>
-          Je suis allé plus loin que ce qui était demandé pour ce projet, car mon objectif n'était pas simplement de
-          terminer un projet "fonctionnel",
-          mais de mettre en oeuvre les meilleures pratiques et de structurer le projet de telle manière qu'il soit
-          <u>facilement évolutif</u>.<br>
-          Je me suis permis d'intégrer des fonctions "cachées" (non demandées dans les spécifications) pour démontrer
-          l'évolutivité potentielle permise par mon design :<br>
-          composants qui s'adaptent en cas d'ajout de séries, changement de types de graphes (double clic sur page
-          principal).
-        </p>
-        <p>
-          D'autres fonctionnalités cachées nécessitent la modif du code car on n'avait pas le droit sur ce projet de
-          s'éloigner de la maquette pour la démo de soutenance ! (critère d'évaluation)
-        </p>
+        <!-- Section Technologies -->
+        <div class="project-section">
+          <h4>⚡ Stack Technique</h4>
+          <div class="tech-grid">
+            <span class="tech-badge">Angular 18</span>
+            <span class="tech-badge">TypeScript</span>
+            <span class="tech-badge">RxJS</span>
+            <span class="tech-badge">Angular Material</span>
+            <span class="tech-badge">Responsive Design</span>
+          </div>
+        </div>
 
+        <!-- Section Réalisations -->
+        <div class="project-section">
+          <h4>🚀 Réalisations Clés</h4>
+          <ul>
+            <li><strong>Architecture évolutive</strong> : Composants adaptables à l'ajout de nouvelles séries</li>
+            <li><strong>Fonctionnalités cachées</strong> : Changement de types de graphes (double-clic)</li>
+            <li><strong>Bonnes pratiques</strong> : SOLID, documentation Compodoc complète</li>
+            <li><strong>Innovation</strong> : Transition progressive ngModules → Standalone Components</li>
+          </ul>
+        </div>
+
+        <!-- Section Liens -->
+        <div class="project-links">
+          <a href="https://ocrp2.cpierres.dscloud.me/" target="_blank" class="demo-link">
+            <mat-icon>launch</mat-icon> Démonstration
+          </a>
+          <a href="https://github.com/cpierres/Opencr-Projet02-Angular" target="_blank" class="code-link">
+            <mat-icon>code</mat-icon> Code Source
+          </a>
+          <a href="https://cpierres.github.io/Opencr-Projet02-Angular/" target="_blank" class="doc-link">
+            <mat-icon>description</mat-icon> Documentation
+          </a>
+          <button color="primary" (click)="openEvaluationDialog(2)" class="evaluation-button">
+            <mat-icon>assessment</mat-icon> Évaluation
+          </button>
+          <a href="https://u.pcloud.link/publink/show?code=XZ3o4j5ZWBwjqQYQRG5xrV5OhDSYRzxU6WXk"
+             target="_blank"  class="video-link">
+            <mat-icon>play_circle</mat-icon> Vidéo de soutenance
+          </a>
+          <a href="/assets/pdf/P2-pres-15mn.pdf" target="_blank" class="slide-link">
+            <mat-icon>slideshow</mat-icon> Support de Présentation
+          </a>
+          <button (click)="openMoreInfoDialog(2, 'Projet 2 : Appli. de Visualisation de Données')" class="more-info-button">
+            <mat-icon>info</mat-icon> En savoir plus
+          </button>
+        </div>
       </div>
     </mat-expansion-panel>
 

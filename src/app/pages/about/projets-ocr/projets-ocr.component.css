@@ -195,13 +195,23 @@
   color: white;
 }
 
+.video-link {
+  background: linear-gradient(135deg, #E91E63, #C2185B);
+  color: white;
+}
+
+.slide-link {
+  background: #FF5722;
+  color: white;
+}
+
 .api-link {
   background: #9C27B0;
   color: white;
 }
 
 .more-info-button {
-  background: #607D8B;
+  background: gray;
   color: white;
   font-family: inherit !important;
   font-size: inherit !important;
@@ -209,21 +219,54 @@
   line-height: inherit !important;
   text-transform: none !important;
   letter-spacing: normal !important;
+  border: none !important;
+  outline: none !important;
+}
+
+.more-info-button:focus {
+  outline: none !important;
+  box-shadow: none !important;
 }
 
 .more-info-button:hover {
-  background: #455A64;
+  background: lightgray;
 }
+
+.evaluation-button {
+  background: #1976D2;
+  color: white;
+  font-family: inherit !important;
+  font-size: inherit !important;
+  font-weight: 500 !important;
+  line-height: inherit !important;
+  text-transform: none !important;
+  letter-spacing: normal !important;
+  border: none !important;
+  outline: none !important;
+}
+
+/*.evaluation-button:focus {*/
+/*  outline: none !important;*/
+/*  box-shadow: none !important;*/
+/*}*/
+
+/*.evaluation-button:hover {*/
+/*  background: #2196F3;*/
+/*}*/
+
 
 /* Assurer que tous les éléments de project-links ont la même police */
 .project-links a,
 .project-links button {
-  font-family: inherit;
-  font-size: inherit;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: 6px;
+  text-decoration: none;
   font-weight: 500;
-  line-height: inherit;
-  text-transform: none;
-  letter-spacing: normal;
+  transition: all 0.3s ease;
+  cursor: pointer;
 }
 
 /* Highlight de performance */
