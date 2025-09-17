@@ -5,10 +5,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MoreInfoP2Component } from './more-info-p2/more-info-p2.component';
 import { MoreInfoP6Component } from './more-info-p6/more-info-p6.component';
-import { MoreInfoDefaultComponent } from './more-info-default/more-info-default.component';
 import {MoreInfoP3Component} from './more-info-p3/more-info-p3.component';
 import {MoreInfoP5Component} from './more-info-p5/more-info-p5.component';
 import {MoreInfoP10Component} from './more-info-p10/more-info-p10.component';
+import {MoreInfoP14Component} from './more-info-p14/more-info-p14.component';
 
 export interface MoreInfoDialogData {
   projectId: number;
@@ -28,13 +28,14 @@ export interface MoreInfoDialogData {
     MoreInfoP3Component,
     MoreInfoP5Component,
     MoreInfoP10Component,
+    MoreInfoP14Component,
     //MoreInfoDefaultComponent
   ],
   template: `
     <div class="dialog-header">
       <h2 mat-dialog-title>
         <mat-icon>info</mat-icon>
-        {{ data.projectTitle }} - Détails Techniques
+        {{ data.projectTitle }} - Détails
       </h2>
       <button mat-icon-button (click)="close()" class="close-button">
         <mat-icon>close</mat-icon>
@@ -60,6 +61,9 @@ export interface MoreInfoDialogData {
           </div>
           <div *ngSwitchCase="10" class="project-details">
             <app-more-info-p10/>
+          </div>
+          <div *ngSwitchCase="14" class="project-details">
+            <app-more-info-p14/>
           </div>
         </div>
       </div>
