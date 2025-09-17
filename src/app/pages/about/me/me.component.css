@@ -4,6 +4,93 @@
   padding: 20px;
 }
 
+/* Styles pour l'en-tête principal */
+.profile-header-section {
+  background: linear-gradient(135deg, #1976D2, #42A5F5);
+  color: white;
+  padding: 40px 30px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.title-section h1 {
+  font-size: 2.5rem;
+  margin: 0 0 15px 0;
+  font-weight: bold;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  margin: 0;
+  opacity: 0.95;
+}
+
+/* Section badges */
+.badges-section {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  padding: 0 20px;
+}
+
+.badge-item {
+  background: white;
+  padding: 15px 20px;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  min-width: 160px;
+}
+
+.badge-item strong {
+  display: block;
+  color: #1976D2;
+  font-size: 1.1rem;
+  margin-bottom: 5px;
+  font-weight: 600;
+}
+
+.badge-item span {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+/* Section statistiques */
+.statistics-section {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+  padding: 0 20px;
+}
+
+.stat-box {
+  background: white;
+  padding: 25px 20px;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  min-width: 140px;
+}
+
+.stat-number {
+  font-size: 2.2rem;
+  font-weight: bold;
+  color: #1976D2;
+  margin-bottom: 8px;
+}
+
+.stat-text {
+  color: #666;
+  font-size: 0.9rem;
+  font-weight: 500;
+  line-height: 1.3;
+}
+
 .section-title {
   color: #3f51b5;
   margin-bottom: 16px;
@@ -80,8 +167,185 @@
   margin-top: 24px;
 }
 
+/* Styles pour la section technique */
+.simple-tech-grid {
+  display: flex;
+  gap: 30px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.tech-column {
+  flex: 1;
+  min-width: 250px;
+  background: #f8f9fa;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.tech-column h3 {
+  color: #1976D2;
+  margin-bottom: 15px;
+  font-size: 1.2rem;
+}
+
+.tech-column ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.tech-column li {
+  padding: 8px 0;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.tech-column li:last-child {
+  border-bottom: none;
+}
+
+/* Styles pour la section contact */
+.simple-contact {
+  margin-top: 20px;
+}
+
+.simple-contact p {
+  padding: 15px;
+  background: #f8f9fa;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  border-left: 4px solid #1976D2;
+}
+
+.simple-contact a {
+  color: #1976D2;
+  text-decoration: none;
+}
+
+.simple-contact a:hover {
+  text-decoration: underline;
+}
+
+/* Section excellence */
+.excellence-section {
+  background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+  padding: 25px;
+  border-radius: 8px;
+  margin: 25px 0;
+  border-left: 4px solid #FF9800;
+}
+
+.excellence-section h3 {
+  color: #FF9800;
+  margin-bottom: 15px;
+  font-size: 1.3rem;
+}
+
+.excellence-section p {
+  margin-bottom: 15px;
+  line-height: 1.7;
+}
+
+.excellence-section em {
+  color: #1976D2;
+  font-weight: 600;
+}
+
+/* Amélioration de la conclusion */
+.key-achievements {
+  margin-top: 25px;
+  padding: 20px;
+  background: #f8f9fa;
+  border-radius: 8px;
+}
+
+.key-achievements h3 {
+  color: #1976D2;
+  margin-bottom: 15px;
+}
+
+.achievements-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.achievement-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 15px;
+  background: white;
+  border-radius: 5px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.achievement-icon {
+  font-size: 1.2rem;
+  width: 24px;
+  text-align: center;
+}
+
 @media (max-width: 768px) {
   .two-column-layout {
     flex-direction: column;
+  }
+
+  .badges-section {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .badge-item {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .statistics-section {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .stat-box {
+    width: 100%;
+    max-width: 200px;
+  }
+
+  .profile-header-section {
+    padding: 30px 20px;
+  }
+
+  .title-section h1 {
+    font-size: 2rem;
+  }
+
+  .simple-tech-grid {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 480px) {
+  .presentation-container {
+    padding: 10px;
+  }
+
+  .statistics-section {
+    gap: 15px;
+  }
+
+  .badges-section {
+    gap: 15px;
+  }
+
+  .profile-header-section {
+    padding: 20px 15px;
+  }
+
+  .title-section h1 {
+    font-size: 1.8rem;
+  }
+
+  .subtitle {
+    font-size: 1rem;
   }
 }

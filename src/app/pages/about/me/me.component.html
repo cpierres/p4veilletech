@@ -3,10 +3,57 @@
     <mat-tab label="Qui suis-je ?">
       <mat-card>
         <div class="presentation-container">
+          <!-- En-tête Principal -->
+          <div class="profile-header-section">
+            <div class="title-section">
+              <h1>Christophe Pierres</h1>
+              <p class="subtitle">Développeur Full-Stack • Expert Angular/Spring • Architecte Solutions</p>
+            </div>
+          </div>
+
+          <!-- Badges Certifications -->
+          <div class="badges-section">
+            <div class="badge-item">
+              <strong>Niveau 7 (BAC+5)</strong>
+              <span>OpenClassrooms Certifié</span>
+            </div>
+            <div class="badge-item">
+              <strong>25 ans</strong>
+              <span>Expérience IT</span>
+            </div>
+            <div class="badge-item">
+              <strong>1er Étudiant</strong>
+              <span>Architecture WebFlux</span>
+            </div>
+          </div>
+
+          <!-- Statistiques -->
+          <div class="statistics-section">
+            <div class="stat-box">
+              <div class="stat-number">13</div>
+              <div class="stat-text">Projets Validés</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-number">50+</div>
+              <div class="stat-text">Formations Techniques</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-number">100%</div>
+              <div class="stat-text">Architecture Réactive</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-number">6</div>
+              <div class="stat-text">Apps Déployées</div>
+            </div>
+          </div>
+
           <!-- Présentation section -->
           <mat-card class="content-card">
             <mat-card-content>
-              <h2 class="section-title">Présentation</h2>
+              <h2 class="section-title">
+                <mat-icon>person</mat-icon>
+                Présentation
+              </h2>
               <div class="content-section">
                 <p>
                   Fort de <strong>25 ans d'expérience</strong> en tant que <strong>certifié Java, JEE et JSF</strong>,
@@ -14,22 +61,72 @@
                 </p>
                 <p>
                   Ma maîtrise approfondie de <strong>JEE</strong> me permet d'en comprendre les <strong>forces</strong>
-                  et d'anticiper ses <strong>limitations</strong>, comme celles liées aux threads
-                  bloquants lors des fortes montées en charge par exemple.
+                  et d'anticiper ses <strong>limitations architecturales</strong>, notamment les goulets d'étranglement
+                  liés aux threads bloquants qui compromettent la scalabilité lors des fortes montées en charge.
                 </p>
 
                 <div class="highlight-text">
-                  Depuis 2008, j'ai occupé des <strong>postes stratégiques en architecture et R&D</strong>, où j'étais
-                  chargé de mettre en place des <strong>bonnes pratiques</strong>, de superviser des équipes (<em>team
-                  lead</em>) et de concevoir des <strong>frameworks personnalisés</strong> sur JEE (notamment sur la base d'Oracle ADF).
+                  <div>
+                    Depuis 2008, j'ai occupé des <strong>postes stratégiques en architecture et R&D</strong>, où j'étais
+                    chargé de mettre en place des <strong>bonnes pratiques</strong>, de superviser des équipes (<em>team
+                    lead</em>) et de concevoir des <strong>frameworks personnalisés</strong> sur JEE (notamment sur la base d'Oracle ADF).
+                  </div>
+                </div>
+
+                <div class="excellence-section">
+                  <h3>🎯 Philosophie d'Excellence Technique</h3>
+                  <p>
+                    J'ai développé une <strong>exigence élevée envers l'excellence technique</strong>, tant pour moi-même que pour les équipes que j'encadre.
+                    Cette approche se traduit par une <strong>recherche constante de solutions optimales</strong> et un <strong>refus du compromis sur la qualité</strong>.
+                  </p>
+                  <p>
+                    Mon principe directeur : <em>"Aller toujours jusqu'au bout des objectifs avec un souci d'excellence"</em>.
+                    Cette détermination m'a permis de <strong>dépasser les attentes</strong> dans chacun de mes projets OpenClassrooms
+                    et d'encourager cette même exigence chez mes collaborateurs.
+                  </p>
                 </div>
 
                 <p>
-                  Avec le temps, j'ai constaté que l'éco-système JEE devenait moins dynamique, moins souple et moins performant que celui
-                  de Spring et Angular.<br>
-                  C'est pourquoi, j'ai saisi une opportunité pour réaliser un virage technologique en consacrant une bonne année
-                  en R&amp;D afin d'atteindre un bon niveau d'expertise.
+                  Constatant que l'éco-système JEE devenait moins dynamique et performant que celui de Spring et Angular,
+                  j'ai saisi l'opportunité de réaliser un <strong>virage technologique ambitieux</strong> en consacrant une année
+                  en R&amp;D pour atteindre un niveau d'expertise de référence.
                 </p>
+              </div>
+            </mat-card-content>
+          </mat-card>
+
+          <!-- Section Stack Technique -->
+          <mat-card class="content-card">
+            <mat-card-content>
+              <h2 class="section-title">🛠️ Stack Technique Moderne</h2>
+
+              <div class="simple-tech-grid">
+                <div class="tech-column">
+                  <h3>💻 Frontend</h3>
+                  <ul>
+                    <li><strong>Angular 19 + Signals</strong> - Expert</li>
+                    <li><strong>TypeScript</strong> - Expert</li>
+                    <li><strong>RxJS Reactive</strong> - Avancé</li>
+                  </ul>
+                </div>
+
+                <div class="tech-column">
+                  <h3>⚙️ Backend</h3>
+                  <ul>
+                    <li><strong>Spring WebFlux</strong> - Expert</li>
+                    <li><strong>Spring Boot 3</strong> - Expert</li>
+                    <li><strong>R2DBC Reactive</strong> - Avancé</li>
+                  </ul>
+                </div>
+
+                <div class="tech-column">
+                  <h3>🚀 DevOps & Architecture</h3>
+                  <ul>
+                    <li><strong>Docker</strong> - Expert</li>
+                    <li><strong>CI/CD GitHub Actions</strong> - Avancé</li>
+                    <li><strong>Microservices</strong> - Avancé</li>
+                  </ul>
+                </div>
               </div>
             </mat-card-content>
           </mat-card>
@@ -37,7 +134,10 @@
           <!-- Virage technologique section -->
           <mat-card class="content-card">
             <mat-card-content>
-              <h2 class="section-title">Virage technologique et montée en compétences</h2>
+              <h2 class="section-title">
+                <mat-icon>trending_up</mat-icon>
+                Virage technologique et montée en compétences
+              </h2>
               <div class="two-column-layout">
                 <div class="column">
                   <div class="content-section">
@@ -93,7 +193,10 @@
           <!-- Vision et Objectifs section -->
           <mat-card class="content-card">
             <mat-card-content>
-              <h2 class="section-title">Vision et Objectifs</h2>
+              <h2 class="section-title">
+                <mat-icon>visibility</mat-icon>
+                Vision et Objectifs
+              </h2>
               <div class="two-column-layout">
                 <div class="column">
                   <div class="image-container">
@@ -131,9 +234,24 @@
             </mat-card-content>
           </mat-card>
 
+          <!-- Section Contact -->
+          <mat-card class="content-card">
+            <mat-card-content>
+              <h2 class="section-title">📞 Contact & Réseaux Professionnels</h2>
+
+              <div class="simple-contact">
+                <p>💻 <strong><a href="https://github.com/cpierres" target="_blank">GitHub</a></strong> - Repositories & Code Source</p>
+                <p>💼 <strong><a href="https://www.linkedin.com/in/christophe-pierres" target="_blank">LinkedIn</a></strong> - Profil Professionnel</p>
+                <p>📧 <strong>Contact</strong> - Échanges Techniques</p>
+                <p>✅ <strong>Disponibilité</strong> - Ouvert aux opportunités</p>
+              </div>
+            </mat-card-content>
+          </mat-card>
+
           <!-- Conclusion section -->
           <div class="conclusion-section">
-            <h2 class="section-title">Conclusion</h2>
+            <h2 class="section-title">📋 Conclusion</h2>
+
             <p>
               Que vous soyez curieux d'explorer mes <strong>projets OpenClassrooms</strong> ou de mieux comprendre mon
               <strong>parcours technique</strong>, je vous invite à naviguer à travers ce site de veille technologique.
@@ -141,6 +259,24 @@
             <p>
               Le site sur lequel vous êtes actuellement est d'ailleurs une de mes créations (projet P4 OpenClassrooms).
             </p>
+
+            <div class="key-achievements">
+              <h3>🏆 Accomplissements Clés</h3>
+              <div class="achievements-list">
+                <div class="achievement-item">
+                  <span class="achievement-icon">🎓</span>
+                  <span>Formation certifiante niveau 7 validée</span>
+                </div>
+                <div class="achievement-item">
+                  <span class="achievement-icon">💻</span>
+                  <span>13 projets techniques déployés</span>
+                </div>
+                <div class="achievement-item">
+                  <span class="achievement-icon">⭐</span>
+                  <span>Premier étudiant en architecture réactive</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </mat-card>
