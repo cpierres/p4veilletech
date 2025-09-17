@@ -1221,52 +1221,210 @@
     <mat-expansion-panel>
       <mat-expansion-panel-header>
         <mat-panel-title>
-          Projet 7 : Point d'étapes (projets passés et projet à venir)
+          Projet 7 : Point d'étapes et Projection Stratégique
         </mat-panel-title>
+        <mat-panel-description>
+          Bilan intermédiaire du parcours et planification des projets transversaux à venir
+        </mat-panel-description>
       </mat-expansion-panel-header>
       <div>
-        <ul>
-        <li>Soutenance :
-          <button mat-raised-button color="primary" (click)="openEvaluationDialog(7)">
-            Évaluation
-          </button> | <a href="https://u.pcloud.link/publink/show?code=XZFy8j5ZVVkBXJJvFshhSFuzkyR3ThaQzUy7" target="_blank">Vidéo (partie 1)</a>
-          | <a href="https://u.pcloud.link/publink/show?code=XZHy8j5Zrpu6p5UACB4HkoeayC0fCYacLOsy" target="_blank">Vidéo (partie 2)</a>
-          | <a href="https://u.pcloud.link/publink/show?code=XZ4y8j5ZlXkw13LcVqBImnftM1PH0kP8J5bX" target="_blank">Vidéo (partie 3)</a>
-        </li>
-        </ul>
-        <p>
-          Projets passés commentés dans les sections ci-dessus.<br>
-          J'ai trouvé la pédagogie bien amenée, de projet en projet.<br>
-        </p>
-        <p>
-          Projets à venir : Question posée : vous semblent-ils difficiles ?
-        </p>
-        <p>
-          Réponse : je ne sous-estime pas le temps nécessaire.<br>
-          Sur certains projets, je pense aller vite car ce sont des sujets que je connais (UML, Docker, Git, Github,
-          Docker hub).<br>
-          Mais je vais lire toutes les documentations requises !
-          J'aurai une partie du mois de juin pour me préparer un peu.
-        </p>
-        <ul>
-          <li>Projet 8 Audit et cahier des charges : en cours - facile (je maitrise bien UML)</li>
-          <li>Projet 9 Cadrage : j'ai été également ingénieur commercial dans ma vie passée et je connais ces sujets.
-            J'apprendrai certainement de nouvelles choses !
-          </li>
+        <!-- Badge Point d'étapes -->
+        <div class="innovation-badge" style="background: linear-gradient(45deg, #607D8B, #78909C);">
+          <mat-icon>timeline</mat-icon>
+          <strong>POINT D'ÉTAPES STRATÉGIQUE :</strong> Évaluation à mi-parcours et projection sur les compétences transversales
+        </div>
 
-          <li>Projet 10 Intégration et CI/CD (Maven, Jenkins, Docker) : j'ai déjà montré une bonne maitrise de maven et
-            de Docker dans le projet 6 (ce n'était pas demandé mais c'est pour moi indispensable de l'avoir fait ; j'ai
-            juste omis le passage du maven en jenkins - que je connais également).
-            Les Github Actions son un sujet qui m'intéresse.
-          </li>
-          <li>Projet 11 Encadrer : j'ai été directeur d'un pôle de Business Intelligence de 15 personnes et team lead
-            à plusieurs reprises. Je connais les pratiques Agile. Mais je vais certainement en apprendre davantage !
-          </li>
-          <li>Projet 12 Planification : sujets intéressants. Beaucoup de lecture !</li>
-          <li>Projet 13 Proposition d'architecture et de solutions : j'ai déjà démontré ces capacités dans le projet 4
-            et le projet 6. Les dossiers d'architecture comprennent déjà les demandes faites dans le projet 13.
-          </li>
-        </ul>
+        <!-- Contexte Mission -->
+        <div class="project-section">
+          <h4>🎯 Objectif du Point d'étapes</h4>
+          <p><strong>Mission :</strong> Faire le bilan des 6 premiers projets techniques réalisés et présenter la stratégie d'approche pour les 6 projets transversaux restants du parcours.</p>
+
+          <div class="requirements-grid">
+            <div class="requirement-item">
+              <mat-icon>assessment</mat-icon>
+              <span>Bilan Technique</span>
+            </div>
+            <div class="requirement-item">
+              <mat-icon>trending_up</mat-icon>
+              <span>Acquis Pédagogiques</span>
+            </div>
+            <div class="requirement-item">
+              <mat-icon>schedule</mat-icon>
+              <span>Planification Future</span>
+            </div>
+            <div class="requirement-item">
+              <mat-icon>psychology</mat-icon>
+              <span>Stratégie d'Apprentissage</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bilan des Projets Passés -->
+        <div class="project-section">
+          <h4>📊 Bilan des Projets Techniques (1-6)</h4>
+          <div class="feature-list">
+            <div class="feature-item">
+              <mat-icon>verified</mat-icon>
+              <div>
+                <strong>Objectifs Techniques Atteints</strong>
+                <p>Focus initial sur les technologies modernes parfaitement réussi : Angular 19, Spring WebFlux, R2DBC, architecture réactive</p>
+              </div>
+            </div>
+            <div class="feature-item">
+              <mat-icon>school</mat-icon>
+              <div>
+                <strong>Pédagogie Progressive</strong>
+                <p>Approche pédagogique bien conçue avec montée en complexité graduelle et cohérence inter-projets</p>
+              </div>
+            </div>
+            <div class="feature-item">
+              <mat-icon>star</mat-icon>
+              <div>
+                <strong>Innovations Personnelles</strong>
+                <p>Choix techniques audacieux valorisés : architecture 100% réactive, site Angular complet, déploiements professionnels</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Projection sur les Projets à Venir -->
+        <div class="project-section">
+          <h4>🚀 Stratégie pour les Projets Transversaux (8-13)</h4>
+          <p><strong>Approche :</strong> Transition vers les compétences méthodologiques et managériales avec une approche pragmatique basée sur l'expérience acquise.</p>
+
+          <div class="feature-list">
+            <div class="feature-item">
+              <mat-icon>account_tree</mat-icon>
+              <div>
+                <strong>Projet 8 - UML & Analyse</strong>
+                <p>Facilité attendue grâce à la maîtrise d'UML - Focus sur l'application méthodologique complète</p>
+              </div>
+            </div>
+            <div class="feature-item">
+              <mat-icon>business_center</mat-icon>
+              <div>
+                <strong>Projet 9 - Cadrage Commercial</strong>
+                <p>Valorisation du background d'ingénieur commercial - Découverte de nouvelles méthodologies</p>
+              </div>
+            </div>
+            <div class="feature-item">
+              <mat-icon>build_circle</mat-icon>
+              <div>
+                <strong>Projet 10 - CI/CD DevOps</strong>
+                <p>Approfondissement GitHub Actions - Docker & Maven déjà maîtrisés via le Projet 6</p>
+              </div>
+            </div>
+            <div class="feature-item">
+              <mat-icon>groups</mat-icon>
+              <div>
+                <strong>Projet 11 - Management</strong>
+                <p>Expérience concrète : directeur pôle BI (15 personnes) et team lead - Enrichissement méthodologique Agile</p>
+              </div>
+            </div>
+            <div class="feature-item">
+              <mat-icon>fact_check</mat-icon>
+              <div>
+                <strong>Projet 12 - Planification</strong>
+                <p>Défis intellectuels attendus - Approfondissement par la lecture et la recherche</p>
+              </div>
+            </div>
+            <div class="feature-item">
+              <mat-icon>architecture</mat-icon>
+              <div>
+                <strong>Projet 13 - Architecture</strong>
+                <p>Continuité naturelle des Projets 4 et 6 - Dossiers d'architecture déjà anticipés</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Préparation et Méthodologie -->
+        <div class="project-section">
+          <h4>📚 Approche Méthodologique</h4>
+          <div class="impact-metrics">
+            <div class="metric">
+              <strong>Documentation</strong>
+              <p>Lecture complète requise</p>
+            </div>
+            <div class="metric">
+              <strong>Préparation</strong>
+              <p>Temps de préparation prévu</p>
+            </div>
+            <div class="metric">
+              <strong>Expérience</strong>
+              <p>Valorisation background</p>
+            </div>
+            <div class="metric">
+              <strong>Apprentissage</strong>
+              <p>Découverte méthodologique</p>
+            </div>
+          </div>
+
+          <blockquote>
+            "Je ne sous-estime pas le temps nécessaire pour ces projets transversaux. Même sur les sujets que je connais, je vais lire toutes les documentations requises pour découvrir les nouvelles approches et méthodologies."
+          </blockquote>
+        </div>
+
+        <!-- Section Évaluation avec 3 Vidéos -->
+        <div class="project-section evaluation-section">
+          <h4>🎓 Évaluation Point d'étapes</h4>
+
+          <div class="evaluation-container">
+            <div class="evaluation-summary">
+              <div class="evaluation-badge success">
+                <mat-icon>verified</mat-icon>
+                <span>VALIDÉ</span>
+              </div>
+              <p><strong>Particularité :</strong> Soutenance en 3 parties due aux interruptions d'enregistrement</p>
+              <p><strong>Focus :</strong> Bilan technique des 6 premiers projets et stratégie pour la suite du parcours</p>
+            </div>
+
+            <div class="soutenance-materials">
+              <div class="material-item evaluation">
+                <button (click)="openEvaluationDialog(7)" class="soutenance-link evaluation">
+                  <mat-icon>assessment</mat-icon>
+                  <div class="link-content">
+                    <strong>Évaluation Détaillée</strong>
+                    <span>Grille de notation complète</span>
+                  </div>
+                </button>
+              </div>
+
+              <div class="material-item video">
+                <a href="https://u.pcloud.link/publink/show?code=XZFy8j5ZVVkBXJJvFshhSFuzkyR3ThaQzUy7"
+                   target="_blank" class="soutenance-link video">
+                  <mat-icon>play_circle</mat-icon>
+                  <div class="link-content">
+                    <strong>Vidéo Soutenance - Partie 1</strong>
+                    <span>Bilan projets techniques</span>
+                  </div>
+                </a>
+              </div>
+
+              <div class="material-item video" style="background: linear-gradient(135deg, #E91E63, #C2185B);">
+                <a href="https://u.pcloud.link/publink/show?code=XZHy8j5Zrpu6p5UACB4HkoeayC0fCYacLOsy"
+                   target="_blank" class="soutenance-link video">
+                  <mat-icon>play_circle</mat-icon>
+                  <div class="link-content">
+                    <strong>Vidéo Soutenance - Partie 2</strong>
+                    <span>Stratégie projets transversaux</span>
+                  </div>
+                </a>
+              </div>
+
+              <div class="material-item video" style="background: linear-gradient(135deg, #673AB7, #5E35B1);">
+                <a href="https://u.pcloud.link/publink/show?code=XZ4y8j5ZlXkw13LcVqBImnftM1PH0kP8J5bX"
+                   target="_blank" class="soutenance-link video">
+                  <mat-icon>play_circle</mat-icon>
+                  <div class="link-content">
+                    <strong>Vidéo Soutenance - Partie 3</strong>
+                    <span>Questions & perspectives</span>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </mat-expansion-panel>
     <mat-expansion-panel>
