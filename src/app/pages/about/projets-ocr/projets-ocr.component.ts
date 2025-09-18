@@ -30,7 +30,7 @@ import {MatIcon} from '@angular/material/icon';
 })
 export class ProjetsOcrComponent {
   // Définir quels projets sont vos favoris (vous pouvez modifier cette liste selon vos préférences)
-  favoriteProjects: number[] = [4, 6]; // Projet 4 (Site Angular) et Projet 6 (Architecture réactive)
+  favoriteProjects: number[] = [6]; // Projet 4 (Site Angular) et Projet 6 (Architecture réactive)
 
 constructor(public dialog: MatDialog) {}
 
