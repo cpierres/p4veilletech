@@ -254,7 +254,43 @@
 /*  background: #2196F3;*/
 /*}*/
 
+/* Style pour les titres de page harmonisés */
+h2.page-title {
+  color: #1976d2;
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  text-align: center;
+}
 
+/* Style pour les titres de sections */
+h3.section-title {
+  color: #1976d2;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+/* Style pour harmoniser les titres des projets */
+mat-panel-title {
+  color: #1976d2;
+  font-weight: 600;
+}
+
+/* Style pour les badges d'innovation */
+.innovation-badge .badge-title {
+  color: #1976d2;
+  font-weight: 700;
+}
+
+/* Style général pour maintenir la cohérence visuelle */
+.page-header h2 {
+  color: #1976d2;
+}
+
+/* Styles pour les sections de projets */
+.project-section h4 {
+  color: #1976d2;
+}
 /* Assurer que tous les éléments de project-links ont la même police */
 .project-links a,
 .project-links button {

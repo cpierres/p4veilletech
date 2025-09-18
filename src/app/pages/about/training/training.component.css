@@ -1,0 +1,103 @@
+.training-container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+mat-card {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+mat-card-header {
+  margin-bottom: 20px;
+}
+
+mat-card-title {
+  color: #1976d2;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+/* Style pour les titres de page harmonisés */
+h2.page-title {
+  color: #1976d2;
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+/* Style pour les en-têtes de colonnes de tableaux */
+.formations-table th.mat-header-cell {
+  color: #1976d2 !important;
+  font-weight: 600;
+  background-color: #f5f5f5;
+}
+
+mat-card-subtitle {
+  color: #666;
+  font-size: 14px;
+}
+
+.actions-bar {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+}
+
+.actions-bar button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.table-container {
+  overflow-x: auto;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+}
+
+.formations-table {
+  width: 100%;
+  background: white;
+}
+
+.formations-table th {
+  background-color: #f5f5f5;
+  font-weight: 600;
+  color: #1976D2;
+}
+
+.formations-table td {
+  padding: 12px 8px;
+}
+
+.formations-table tr:hover {
+  background-color: #f9f9f9;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .training-container {
+    padding: 10px;
+  }
+
+  .actions-bar {
+    justify-content: center;
+  }
+
+  .formations-table td,
+  .formations-table th {
+    padding: 8px 4px;
+    font-size: 14px;
+  }
+}
+
+/* Style pour les boutons d'action */
+button[mat-icon-button] {
+  margin: 0 4px;
+}
+
+button[mat-icon-button]:hover {
+  background-color: rgba(0, 0, 0, 0.04);
+}
