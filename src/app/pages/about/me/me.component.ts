@@ -8,6 +8,7 @@ import { MatButton } from "@angular/material/button";
 import { ProjetsOcrComponent } from '../projets-ocr/projets-ocr.component';
 import { UdemyComponent } from '../udemy/udemy.component';
 import { TrainingComponent } from '../training/training.component';
+import { CvComponent } from '../cv/cv.component';
 
 @Component({
   selector: 'app-me',
@@ -19,6 +20,7 @@ import { TrainingComponent } from '../training/training.component';
     MatTabGroup,
     MatIcon,
     RouterLink,
+    CvComponent,
     ProjetsOcrComponent,
     UdemyComponent,
     TrainingComponent

@@ -1,0 +1,229 @@
+<div class="cv-container">
+  <!-- En-tête du CV -->
+  <mat-card class="cv-header">
+    <div class="header-content">
+      <div class="profile-info">
+        <h1 class="name">{{ personalInfo.name }}</h1>
+        <h2 class="title">{{ personalInfo.title }}</h2>
+        <div class="contact-info">
+          <div class="contact-item">
+            <mat-icon>location_on</mat-icon>
+            <span>{{ personalInfo.location }}</span>
+          </div>
+          <div class="contact-item">
+            <mat-icon>phone</mat-icon>
+            <span>{{ personalInfo.phone }}</span>
+          </div>
+          <div class="contact-item">
+            <mat-icon>email</mat-icon>
+            <span>{{ personalInfo.email }}</span>
+          </div>
+          <div class="contact-item">
+            <mat-icon>family_restroom</mat-icon>
+            <span>{{ personalInfo.status }}</span>
+          </div>
+        </div>
+        <div class="social-links">
+          <a [href]="personalInfo.website" target="_blank" class="social-link">
+            <mat-icon>web</mat-icon>
+            Veille Tech - Portfolio
+          </a>
+          <a [href]="personalInfo.github" target="_blank" class="social-link">
+            <mat-icon>code</mat-icon>
+            GitHub
+          </a>
+          <a [href]="personalInfo.linkedin" target="_blank" class="social-link">
+            <mat-icon>business_center</mat-icon>
+            LinkedIn
+          </a>
+        </div>
+      </div>
+      <div class="download-actions">
+        <button mat-raised-button color="primary" (click)="downloadCV('short')">
+          <mat-icon>download</mat-icon>
+          CV Court (2 pages)
+        </button>
+        <button mat-raised-button color="accent" (click)="downloadCV('long')">
+          <mat-icon>download</mat-icon>
+          CV Complet
+        </button>
+      </div>
+    </div>
+  </mat-card>
+
+  <div class="cv-content">
+    <!-- Synthèse professionnelle -->
+    <mat-card class="section-card">
+      <mat-card-header>
+        <mat-card-title>
+          <mat-icon>person</mat-icon>
+          Synthèse Professionnelle
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <ul class="summary-list">
+          <li *ngFor="let point of summary">{{ point }}</li>
+        </ul>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Compétences techniques -->
+    <mat-card class="section-card">
+      <mat-card-header>
+        <mat-card-title>
+          <mat-icon>build</mat-icon>
+          Compétences Techniques
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="skills-grid">
+          <div class="skill-category">
+            <h3>
+              <mat-icon>web</mat-icon>
+              Frontend
+            </h3>
+            <mat-chip-set>
+              <mat-chip *ngFor="let skill of technicalSkills.frontend">{{ skill }}</mat-chip>
+            </mat-chip-set>
+          </div>
+          <div class="skill-category">
+            <h3>
+              <mat-icon>storage</mat-icon>
+              Backend
+            </h3>
+            <mat-chip-set>
+              <mat-chip *ngFor="let skill of technicalSkills.backend">{{ skill }}</mat-chip>
+            </mat-chip-set>
+          </div>
+          <div class="skill-category">
+            <h3>
+              <mat-icon>bug_report</mat-icon>
+              Testing
+            </h3>
+            <mat-chip-set>
+              <mat-chip *ngFor="let skill of technicalSkills.testing">{{ skill }}</mat-chip>
+            </mat-chip-set>
+          </div>
+          <div class="skill-category">
+            <h3>
+              <mat-icon>security</mat-icon>
+              Sécurité
+            </h3>
+            <mat-chip-set>
+              <mat-chip *ngFor="let skill of technicalSkills.security">{{ skill }}</mat-chip>
+            </mat-chip-set>
+          </div>
+          <div class="skill-category">
+            <h3>
+              <mat-icon>cloud</mat-icon>
+              DevOps
+            </h3>
+            <mat-chip-set>
+              <mat-chip *ngFor="let skill of technicalSkills.devops">{{ skill }}</mat-chip>
+            </mat-chip-set>
+          </div>
+          <div class="skill-category">
+            <h3>
+              <mat-icon>architecture</mat-icon>
+              Architecture
+            </h3>
+            <mat-chip-set>
+              <mat-chip *ngFor="let skill of technicalSkills.architecture">{{ skill }}</mat-chip>
+            </mat-chip-set>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <!-- Expérience professionnelle -->
+    <mat-card class="section-card">
+      <mat-card-header>
+        <mat-card-title>
+          <mat-icon>work</mat-icon>
+          Expérience Professionnelle
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <div class="experience-timeline">
+          <div *ngFor="let exp of experiences" class="experience-item">
+            <div class="experience-header">
+              <h3 class="company">{{ exp.company }}</h3>
+              <span class="period">{{ exp.period }}</span>
+            </div>
+            <h4 class="position">{{ exp.position }}</h4>
+            <p class="description">{{ exp.description }}</p>
+            <ul class="achievements">
+              <li *ngFor="let achievement of exp.achievements">{{ achievement }}</li>
+            </ul>
+            <mat-divider></mat-divider>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+
+    <div class="bottom-sections">
+      <!-- Formation -->
+      <mat-card class="section-card half-width">
+        <mat-card-header>
+          <mat-card-title>
+            <mat-icon>school</mat-icon>
+            Formation
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div *ngFor="let edu of education" class="education-item">
+            <h4>{{ edu.degree }}</h4>
+            <p><strong>{{ edu.school }}</strong>  {{ edu.year }}</p>
+            <p class="level">{{ edu.level }}</p>
+            <p class="specialization" *ngIf="edu.specialization">{{ edu.specialization }}</p>
+          </div>
+        </mat-card-content>
+      </mat-card>
+
+      <!-- Certifications -->
+      <mat-card class="section-card half-width">
+        <mat-card-header>
+          <mat-card-title>
+            <mat-icon>verified</mat-icon>
+            Certifications
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <ul class="certifications-list">
+            <li *ngFor="let cert of certifications">{{ cert }}</li>
+          </ul>
+        </mat-card-content>
+      </mat-card>
+
+      <!-- Langues -->
+      <mat-card class="section-card half-width">
+        <mat-card-header>
+          <mat-card-title>
+            <mat-icon>language</mat-icon>
+            Langues
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <div *ngFor="let lang of languages" class="language-item">
+            <strong>{{ lang.name }}</strong> - {{ lang.level }}
+          </div>
+        </mat-card-content>
+      </mat-card>
+
+      <!-- Centres d'intérêt -->
+      <mat-card class="section-card half-width">
+        <mat-card-header>
+          <mat-card-title>
+            <mat-icon>interests</mat-icon>
+            Centres d'Intérêt
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <ul class="interests-list">
+            <li *ngFor="let interest of interests">{{ interest }}</li>
+          </ul>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>
