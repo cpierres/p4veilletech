@@ -536,7 +536,10 @@
     <mat-expansion-panel>
       <mat-expansion-panel-header>
         <mat-panel-title>
-          Projet 4 : Plateforme de Veille Technologique Angular/Spring
+          <div class="panel-title-container">
+            Projet 4 : Plateforme de Veille Technologique Angular/Spring
+            <mat-icon *ngIf="isFavorite(4)" class="favorite-heart" aria-label="Projet préféré">favorite</mat-icon>
+          </div>
         </mat-panel-title>
         <mat-panel-description>
           Site complet Angular 19.1.5 avec flux RSS - Vous consultez actuellement cette réalisation !
@@ -994,7 +997,10 @@
     <mat-expansion-panel>
       <mat-expansion-panel-header>
         <mat-panel-title>
-          Projet 6 : Réseau Social Full-Stack Réactif
+          <div class="panel-title-container">
+            Projet 6 : Réseau Social Full-Stack Réactif
+            <mat-icon *ngIf="isFavorite(6)" class="favorite-heart" aria-label="Projet préféré">favorite</mat-icon>
+          </div>
         </mat-panel-title>
         <mat-panel-description>
           Architecture 100% non-bloquante : Spring WebFlux + PostgreSQL avec driver R2DBC + Angular Signals

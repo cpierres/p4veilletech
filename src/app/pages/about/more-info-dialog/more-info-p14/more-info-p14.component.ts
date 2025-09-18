@@ -84,10 +84,10 @@ import { MatIconModule } from '@angular/material/icon';
           Cette formation constitue une base solide pour :
         </p>
         <ul>
-          <li><strong>Architectures Cloud-Native :</strong> Microservices, conteneurisation, orchestration</li>
-          <li><strong>Technologies Émergentes :</strong> Intelligence artificielle, IoT, blockchain</li>
-          <li><strong>Leadership Technique :</strong> Encadrement d'équipes sur les technologies modernes</li>
+          <li><strong>Leadership Technique :</strong> Développement et Encadrement d'équipes sur les technologies modernes</li>
           <li><strong>Innovation Continue :</strong> Veille technologique et adoption de nouvelles pratiques</li>
+          <li><strong>Technologies Émergentes :</strong> Intelligence artificielle</li>
+          <li><strong>Architectures Cloud-Native :</strong> Microservices, conteneurisation, orchestration</li>
         </ul>
       </div>
     </div>

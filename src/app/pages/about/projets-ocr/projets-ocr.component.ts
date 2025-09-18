@@ -29,7 +29,18 @@ import {MatIcon} from '@angular/material/icon';
   styleUrl: './projets-ocr.component.css'
 })
 export class ProjetsOcrComponent {
-  constructor(public dialog: MatDialog) {}
+  // Définir quels projets sont vos favoris (vous pouvez modifier cette liste selon vos préférences)
+  favoriteProjects: number[] = [4, 6]; // Projet 4 (Site Angular) et Projet 6 (Architecture réactive)
+
+constructor(public dialog: MatDialog) {}
+
+isFavorite(projectId: number): boolean {
+  return this.favoriteProjects.includes(projectId);
+}
+
+  isFavoriteProject(projectId: number): boolean {
+    return this.favoriteProjects.includes(projectId);
+  }
 
   openEvaluationDialog(id: number): void {
     const dialogRef = this.dialog.open(EvaluationDialogComponent, {
