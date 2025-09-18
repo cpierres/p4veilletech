@@ -21,7 +21,31 @@ html, body {
 
 .active {
   font-weight: bold;
-  color: #1976d2;
+  color: #1976d2 !important;
+  background-color: rgba(25, 118, 210, 0.1) !important;
+  border-left: 4px solid #1976d2;
+}
+
+/* S'assurer que l'état actif persiste même lors du focus/hover */
+.mat-mdc-list-item.active {
+  background-color: rgba(25, 118, 210, 0.1) !important;
+  color: #1976d2 !important;
+}
+
+.mat-mdc-list-item.active:hover {
+  background-color: rgba(25, 118, 210, 0.2) !important;
+}
+
+/* Maintenir la surbrillance même quand l'élément perd le focus */
+.mat-mdc-list-item.active:focus,
+.mat-mdc-list-item.active:active {
+  background-color: rgba(25, 118, 210, 0.1) !important;
+  color: #1976d2 !important;
+}
+
+/* Éviter que d'autres états annulent la classe active */
+.mat-mdc-list-item.active .mat-mdc-list-item-content {
+  color: #1976d2 !important;
 }
 
 mat-sidenav {

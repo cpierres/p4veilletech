@@ -7,11 +7,12 @@ import {TestOverviewComponent} from './pages/test-overview/test-overview.compone
 import {MeComponent} from './pages/about/me/me.component';
 
 export const routes: Routes = [
-  {path: '', component: HomeComponent},
+  {path: '', component: MeComponent},
+  {path: 'home', component: HomeComponent},
   {path: 'front', component: FrontComponent},
   {path: 'back', component: BackComponent},
   {path: 'architecture', component: ArchitectureComponent},
   {path: 'test-overview', component: TestOverviewComponent},
-  {path: 'about', component: MeComponent},
+  {path: 'about', redirectTo: '', pathMatch: 'full'},
   {path: '**', redirectTo: '', pathMatch: 'full'}
 ];
