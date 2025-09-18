@@ -61,13 +61,14 @@ export class UdemyComponent implements OnInit {
     { categorie: 'Front', titre: '', lien: 'https://www.udemy.com/course/angular-course/', duree: '12h', commentaire: 'Débutant à avancé (angular 19)', classement: '1' },
     { categorie: 'Front', titre: 'Reactive Angular Course (with RxJs, Angular 19)', lien: 'https://www.udemy.com/course/rxjs-reactive-angular-course/', duree: '6h', commentaire: '', classement: '1' },
     { categorie: 'Front', titre: 'NgRx (with NgRx Data) - The Complete Guide (Angular 19)', lien: 'https://www.udemy.com/course/ngrx-course/', duree: '5h', commentaire: '', classement: '1' },
-    { categorie: 'Front', titre: '', lien: 'https://www.udemy.com/course/angular-material-course', duree: '7h', commentaire: '', classement: '1' },
+    { categorie: 'Front', titre: 'Angum', lien: 'https://www.udemy.com/course/angular-material-course', duree: '7h', commentaire: '', classement: '1' },
     { categorie: 'Front', titre: '', lien: 'https://www.udemy.com/course/angular-forms-course/', duree: '7h', commentaire: '', classement: '1' },
     { categorie: 'Front', titre: '', lien: 'https://www.udemy.com/course/angular-signals/', duree: '7h', commentaire: '', classement: '1' },
     { categorie: 'Front', titre: '', lien: 'https://www.udemy.com/course/angular-security/', duree: '8h', commentaire: '', classement: '1' },
     { categorie: 'Front', titre: '', lien: 'https://www.udemy.com/course/angular-pwa-course/', duree: '4h', commentaire: '', classement: '1' },
     // Catégorie IA
     { categorie: 'IA', titre: '', lien: 'https://www.udemy.com/course/spring-ai-beginner-to-guru/', duree: '6h', commentaire: '', classement: '1' },
+    { categorie: 'Méthodologie', titre: 'Guide ultime de l\'agilité Scrum / XP / Kanban / Lean et certifications PSM / CSM', lien: 'https://www.udemy.com/course/scrum-et-le-best-of-des-methodes-agiles-de-gestion-de-projet/', duree: '5h', commentaire: '', classement: '1' },
   ];
 
   ngOnInit(): void {
