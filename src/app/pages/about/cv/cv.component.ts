@@ -28,7 +28,7 @@ export class CvComponent {
     name: 'Christophe Pierrès',
     title: 'Développeur Full-Stack Expert • Angular/Spring • Architecte Solutions',
     location: 'Tourcoing (59)',
-    phone: '07 81 42 54 06',
+    phone: '+33 (0) 781 425 406',
     email: 'cpierres@hotmail.com',
     linkedin: 'https://www.linkedin.com/in/christophe-pierres',
     github: 'https://github.com/cpierres',
@@ -37,20 +37,20 @@ export class CvComponent {
   };
 
   summary = [
-    'Expert en développement full-stack avec 25 ans d\'expérience en architecture JEE/Spring',
-    'Certification niveau 7 (BAC+5) OpenClassrooms - Expert en Développement Logiciel',
-    'Première maîtrise de l\'architecture réactive complète (Angular + Spring WebFlux + R2DBC)',
+    'Expert en développement full-stack avec 25 ans d\'expérience en architecture JEE',
+    'Certification niveau 7 (BAC+5) OpenClassrooms - Expert en Développement Logiciel, spécialités Spring/Angular',
+    'Maîtrise de l\'architecture réactive complète (Angular + Spring WebFlux + R2DBC avec PostgreSQL)',
     'Leadership technique : management d\'équipes, formation, méthodologies Agile/SCRUM',
     'Expertise DevOps : CI/CD, Docker, intégration continue, déploiement automatisé'
   ];
 
   technicalSkills = {
-    frontend: ['Angular 19', 'TypeScript', 'RxJS', 'Angular Material', 'Signals', 'SSE','ADF JSF'],
+    frontend: ['Angular 14 à 20', 'TypeScript', 'RxJS', 'Angular Material', 'Signals', 'ADF JSF'],
     backend: ['Spring WebFlux', 'Spring Boot 3', 'JPA/Spring Data', 'R2DBC', 'Kafka', 'PostgreSQL','ADF BC'],
     testing: ['JUnit 5', 'Jest', 'Cypress', 'TestBed', 'Mockito', 'TDD/BDD', 'Gherkin/Cucumber', 'Couverture >90%'],
     security: ['JWT', 'Spring Security', 'CORS', 'CSRF', 'OWASP', 'RGPD', 'Audit sécurité'],
     devops: ['Docker', 'GitHub Actions', 'Jenkins', 'Maven', 'Git/GitFlow', 'SonarQube'],
-    architecture: ['Microservices', 'Reactive Programming', 'REST API', 'WebSockets', 'UML']
+    architecture: ['Microservices', 'Reactive Programming', 'REST API', 'SSE', 'WebSockets', 'UML']
   };
 
   experiences = [
@@ -60,8 +60,8 @@ export class CvComponent {
       position: 'Certification Expert en Développement Logiciel',
       description: 'Formation certifiante niveau 7 (BAC+5) - Spécialités Angular et Spring',
       achievements: [
-        '13 projets techniques validés avec innovations pédagogiques',
-        'Premier étudiant à maîtriser l\'architecture réactive full-stack selon évaluateurs',
+        '12 projets techniques validés avec innovations pédagogiques (onglet : Projets OpenClassrooms)',
+        'Premier étudiant à maîtriser l\'architecture réactive full-stack de bout en bout (front/back/db) selon mentor et évaluateur',
         'Développement d\'applications déployées en production avec CI/CD complet',
         'Site de veille technologique Angular 19 : veille.cpierres.dscloud.me'
       ]
@@ -220,7 +220,7 @@ export class CvComponent {
     return `# Christophe Pierrès
 **Développeur Full-Stack Expert • Angular/Spring • Architecte Solutions**
 
-📧 cpierres@hotmail.com | 📞 07 81 42 54 06 | 📍 Tourcoing (59)
+📧 cpierres@hotmail.com | 📞 +33 (0) 781 425 406 | 📍 Tourcoing (59)
 🔗 [LinkedIn](https://www.linkedin.com/in/christophe-pierres) | [GitHub](https://github.com/cpierres) | [Veille Tech](https://veille.cpierres.dscloud.me/)
 
 ---
@@ -233,7 +233,7 @@ Expert en développement full-stack avec **25 ans d'expérience** en architectur
 
 ## Compétences Techniques
 
-**Frontend :** Angular 19, TypeScript, RxJS, Angular Material, Signals
+**Frontend :** Angular 14 à 20, TypeScript, RxJS, Angular Material, Signals
 **Backend :** Spring WebFlux, Spring Boot 3, R2DBC, PostgreSQL, Kafka
 **Testing :** JUnit 5, Jest, Cypress, TestBed, Mockito, TDD/BDD, Gherkin/Cucumber, Couverture >90%
 **Sécurité :** JWT, Spring Security, CORS, CSRF, OWASP, RGPD, Audit sécurité
@@ -247,7 +247,7 @@ Expert en développement full-stack avec **25 ans d'expérience** en architectur
 
 ### OpenClassrooms | Juillet 2024 - Octobre 2025
 **Certification Expert en Développement Logiciel - Niveau 7 (BAC+5)**
-- 13 projets techniques validés avec innovations pédagogiques
+- 12 projets techniques validés avec innovations pédagogiques
 - Développement d'applications en architecture réactive full-stack
 - Site de veille technologique : [veille.cpierres.dscloud.me](https://veille.cpierres.dscloud.me/)
 
@@ -305,7 +305,7 @@ Expert en développement full-stack avec **25 ans d'expérience** en architectur
 - Formation et animation de séminaires techniques
 
 **Spécialisations avancées :**
-- Architecture réactive end-to-end (seule maîtrise complète front/back/db)
+- Architecture réactive end-to-end (maîtrise complète front/back/db)
 - Microservices avec communication temps réel (WebSocket, SSE)
 - DevOps et CI/CD avec GitHub Actions et Docker
 - Migration et modernisation d'applications legacy
@@ -344,7 +344,7 @@ Expert en développement full-stack avec **25 ans d'expérience** en architectur
 
 **Évolution technologique :**
 - Participation au projet SaaS multi-tenants (Spring, Angular, Kafka)
-- Formation intensive de 20 jours sur le nouveau stack
+- Formation intensive de 20 jours sur le nouveau stack par partenaire
 - Acquisition des bonnes pratiques Spring (JPA, Spring Data), Kafka, Angular
 - Architecture hexagonale et patterns modernes
 
@@ -390,7 +390,7 @@ Expert en développement full-stack avec **25 ans d'expérience** en architectur
 - **Expert en Développement Logiciel** - OpenClassrooms (2025) - Niveau 7 (BAC+5)
   - Spécialités Angular et Spring - RNCP 36912
   - 13 projets techniques avec innovations pédagogiques
-- **DUT Techniques de Commercialisation** - IUT de Sceaux
+- **DUT Techniques de Commercialisation** - option marketing - IUT de Sceaux
 
 **Formations techniques spécialisées :**
 - Formation Spring Boot/Spring Data, JavaScript, TypeScript, Angular (21 jours)
