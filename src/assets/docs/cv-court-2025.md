@@ -93,4 +93,4 @@ Veille technologique, Sports nautiques, Vélo, Secourisme (SST)
 
 ---
 
-**Disponibilité :** Octobre/Novembre 2025 | **Mobilité :** France entière | **Remote :** Possible
+**Disponibilité :** Ouvert aux opportunités | **Mobilité :** Totale (France et étranger) | **Remote :** Possible

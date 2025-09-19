@@ -279,7 +279,7 @@ Expert en développement full-stack avec **25 ans d'expérience** en architectur
 
 ---
 
-**Disponibilité :** Immédiate | **Mobilité :** France entière | **Remote :** Possible`;
+**Disponibilité :** Ouvert aux opportunités | **Mobilité :** Totale (France et étranger) | **Remote :** Possible`;
   }
 
   private generateLongCV(): string {
@@ -490,7 +490,7 @@ Expert en développement full-stack avec **25 ans d'expérience** en architectur
 ## Disponibilité & Mobilité
 
 **Disponibilité :** Ouvert aux opportunités
-**Mobilité :** France entière
+**Mobilité :** France entière et étranger
 **Télétravail :** Possible et maîtrisé
 **Permis :** Auto (B), Moto (A3)
 
