@@ -254,19 +254,19 @@ Expert en développement full-stack avec **25 ans d'expérience** en architectur
 ### Acteos (Éditeur SCM) | Novembre 2021 - Mai 2024
 **Expert Oracle ADF et Team Leader Java**
 - Migration technologique ADF et formation équipe sur stack moderne
+- Intégration continue avec Jenkins
 - Participation projet SaaS multi-tenants (Spring, Angular, Kafka)
 
 ### Larco - Setmat | Septembre 2017 - Octobre 2021
 **Architecte Lead Developer**
 - Migration ERP et développement de framework WebSocket
-- Intégration continue avec Jenkins et tests automatisés
 
 ---
 
 ## Formation
 
 **Expert en Développement Logiciel** - OpenClassrooms (2025) - Niveau 7 (BAC+5)
-**DUT Techniques de Commercialisation** - IUT de Sceaux (1984)
+**DUT Techniques de Commercialisation** - Option Marketing - IUT de Sceaux
 
 ---
 
@@ -287,9 +287,9 @@ Expert en développement full-stack avec **25 ans d'expérience** en architectur
 **Développeur Full-Stack Expert • Angular/Spring • Architecte Solutions**
 
 **40 rue de Roncq - 59100 Tourcoing**
-📧 cpierres@hotmail.com | 📞 07 81 42 54 06
+📧 cpierres@hotmail.com | 📞 +33 (0) 781 425 406
 🔗 [LinkedIn](https://www.linkedin.com/in/christophe-pierres) | [GitHub](https://github.com/cpierres)
-🌐 [Veille technologique](https://veille.cpierres.dscloud.me/) | 👨‍👩‍👧‍👦 Marié, 2 enfants
+🌐 [Veille technologique - Portfolio](https://veille.cpierres.dscloud.me/) | 👨‍👩‍👧‍👦 Marié, 2 enfants
 
 ---
 
@@ -298,7 +298,7 @@ Expert en développement full-stack avec **25 ans d'expérience** en architectur
 Expert en développement full-stack avec **25 ans d'expérience** en architecture JEE/Spring. Récemment certifié **niveau 7 (BAC+5)** OpenClassrooms - Expert en Développement Logiciel (RNCP 36912). **Premier étudiant** à maîtriser l'architecture réactive complète (Angular + Spring WebFlux + R2DBC) selon évaluateurs.
 
 **Expertise technique :**
-- Architecture et développement d'applications JEE/Spring modernes
+- Architecture et développement d'applications JEE et Spring modernes
 - Développement full-stack : Angular 19 + Spring WebFlux + PostgreSQL réactif
 - Intégration continue : Maven, Jenkins, Git/GitHub, Docker, SonarQube
 - Management d'équipes techniques et méthodologies Agile/SCRUM
@@ -314,7 +314,7 @@ Expert en développement full-stack avec **25 ans d'expérience** en architectur
 
 ## Expérience Professionnelle
 
-### OpenClassrooms | Juillet 2024 - Octobre 2025
+### OpenClassrooms | Juillet 2024 - Août 2025
 **Certification Expert en Développement Logiciel - Niveau 7 (BAC+5)**
 *Spécialités Angular et Spring - RNCP 36912*
 
@@ -378,7 +378,7 @@ Expert en développement full-stack avec **25 ans d'expérience** en architectur
 - Formation et montée en compétences des équipes
 
 ### Autres Expériences Significatives
-- **Micropole-Univers** (1999-2004) : Consultant senior J2EE/ADF, expertise BI
+- **Cross-Systems/Micropole-Univers** (1999-2004) : Directeur de pôle BI, Consultant senior J2EE/ADF
 - **Metro Cash And Carry France** (2005-2007) : Ingénieur systèmes, intranet J2EE
 - **Diverses missions consulting** : Formation, avant-vente, management d'équipe
 
@@ -481,16 +481,15 @@ Expert en développement full-stack avec **25 ans d'expérience** en architectur
 ## Centres d'Intérêt
 
 - **Veille technologique :** R&D sur les architectures modernes
-- **Sports nautiques :** Jetsurf, voile, bateau (permis côtier)
-- **Sports terrestres :** Vélo, ski, handiski
-- **Secourisme :** SST (valide jusqu'en juillet 2025)
+- **Sports :** Jetsurf, voile, bateau (permis côtier et fluvial), Vélo, ski, handiski
+- **Secourisme :** SST
 - **Voyages et découvertes culturelles**
 
 ---
 
 ## Disponibilité & Mobilité
 
-**Disponibilité :** À partir d'octobre 2025
+**Disponibilité :** Ouvert aux opportunités
 **Mobilité :** France entière
 **Télétravail :** Possible et maîtrisé
 **Permis :** Auto (B), Moto (A3)
