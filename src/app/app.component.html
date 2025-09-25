@@ -1,6 +1,9 @@
 <mat-sidenav-container class="app-container">
   <!-- Menu latéral (sidenav) -->
-  <mat-sidenav #drawer mode="side" opened>
+  <mat-sidenav
+    #drawer
+    [mode]="isMobile ? 'over' : 'side'"
+    [opened]="!isMobile">
     <mat-toolbar color="primary" class="user-toolbar">
       <img
         [src]="profileImage"
@@ -48,7 +51,10 @@
   <!-- Contenu principal -->
   <mat-sidenav-content>
     <mat-toolbar color="primary">
-      <button mat-icon-button (click)="drawer.toggle()">
+      <button
+        mat-icon-button
+        (click)="toggleMenu()"
+        [style.display]="isMobile ? 'block' : 'none'">
         <mat-icon>menu</mat-icon>
       </button>
       <span>Veille Technologique et Portfolio de projets</span>

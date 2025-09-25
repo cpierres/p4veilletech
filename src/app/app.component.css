@@ -80,7 +80,6 @@ mat-sidenav {
 .user-name {
   font-size: 14px;
   font-weight: bold;
-  /*margin-top: 5px;*/
 }
 
 .user-cert {
@@ -91,5 +90,44 @@ mat-sidenav {
 .user-contact {
   font-size: 10px;
   font-style: italic;
-  /*margin-top: 5px;*/
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .content {
+    margin: 10px;
+  }
+
+  mat-sidenav {
+    width: 280px;
+  }
+}
+
+@media (max-width: 480px) {
+  .content {
+    margin: 8px;
+  }
+
+  mat-sidenav {
+    width: 260px;
+  }
+
+  .user-toolbar {
+    height: 180px;
+  }
+
+  .profile-photo {
+    width: 80px;
+    height: 80px;
+  }
+}
+
+/* Animation pour le sidenav en mode over */
+.mat-sidenav.mat-sidenav-over {
+  box-shadow: 3px 0 6px rgba(0,0,0,0.24);
+}
+
+/* Style pour le backdrop */
+.mat-sidenav-backdrop.mat-sidenav-shown {
+  background-color: rgba(0,0,0,0.6);
 }
