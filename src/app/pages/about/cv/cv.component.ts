@@ -51,7 +51,8 @@ export class CvComponent {
     security: ['JWT', 'Spring Security', 'CORS', 'CSRF', 'OWASP', 'RGPD', 'Audit sécurité'],
     devops: ['Docker', 'GitHub Actions', 'Jenkins', 'Maven', 'Git/GitFlow', 'SonarQube'],
     architecture: ['Microservices', 'Reactive Programming', 'REST API', 'SSE', 'WebSockets', 'UML'],
-    ai: ['Spring AI', 'Machine Learning', 'Deep Learning', 'NLP', 'Bases vectorielles', 'RAG', 'MCP', 'MLLs OpenSource', 'AI/ML Ethics']
+    ai: ['Spring AI', 'Machine Learning', 'Deep Learning', 'NLP', 'Bases vectorielles', 'RAG', 'MCP', 'MLLs OpenSource', 'AI/ML Ethics'],
+    reporting: ['Jasper Reports', 'ngx-charts' , 'Apache POI (Excel, Word)', 'XEP / FO']
   };
 
   experiences = [
