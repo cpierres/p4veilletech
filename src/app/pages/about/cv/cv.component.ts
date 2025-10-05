@@ -49,7 +49,7 @@ export class CvComponent {
     backend: ['Spring Boot 3', 'Spring WebFlux', 'JPA/Spring Data', 'R2DBC', 'Kafka', 'PostgreSQL','ADF BC'],
     testing: ['JUnit 5', 'Jest', 'Cypress', 'TestBed', 'Mockito', 'TDD/BDD', 'Gherkin/Cucumber', 'Couverture >90%'],
     security: ['JWT', 'Spring Security', 'CORS', 'CSRF', 'OWASP', 'RGPD', 'Audit sécurité'],
-    devops: ['Docker', 'GitHub Actions', 'Jenkins', 'Maven', 'Git/GitFlow', 'SonarQube'],
+    devops: ['Docker', 'GitHub Actions', 'Jenkins', 'Maven', 'Git/GitFlow', 'SonarQube',`Cloud/NAS Synology`],
     architecture: ['Microservices', 'Reactive Programming', 'REST API', 'SSE', 'WebSockets', 'UML'],
     ai: ['Spring AI', 'Machine Learning', 'Deep Learning', 'NLP', 'Bases vectorielles', 'RAG', 'MCP', 'LLMs OpenSource', 'AI/ML Ethics'],
     reporting: ['Jasper Reports', 'ngx-charts' , 'Apache POI (Excel, Word)', 'XEP / FO'],
