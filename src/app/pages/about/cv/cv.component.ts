@@ -52,7 +52,17 @@ export class CvComponent {
     devops: ['Docker', 'GitHub Actions', 'Jenkins', 'Maven', 'Git/GitFlow', 'SonarQube'],
     architecture: ['Microservices', 'Reactive Programming', 'REST API', 'SSE', 'WebSockets', 'UML'],
     ai: ['Spring AI', 'Machine Learning', 'Deep Learning', 'NLP', 'Bases vectorielles', 'RAG', 'MCP', 'MLLs OpenSource', 'AI/ML Ethics'],
-    reporting: ['Jasper Reports', 'ngx-charts' , 'Apache POI (Excel, Word)', 'XEP / FO']
+    reporting: ['Jasper Reports', 'ngx-charts' , 'Apache POI (Excel, Word)', 'XEP / FO'],
+    legacyMigration: [
+      'Oracle ADF (10g/11g/12c)',
+      'PL/SQL',
+      'Oracle Forms',
+      'Oracle Reports',
+      'Oracle Database',
+      'Weblogic',
+      'PAL/ObjectPAL (Paradox)',
+      'DB2'
+    ]
   };
 
   experiences = [

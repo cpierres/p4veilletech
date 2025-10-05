@@ -149,6 +149,15 @@
               <mat-chip *ngFor="let skill of technicalSkills.reporting">{{ skill }}</mat-chip>
             </mat-chip-set>
           </div>
+          <div class="skill-category">
+            <h3>
+              <mat-icon>history</mat-icon>
+              Legacy / Migration
+            </h3>
+            <mat-chip-set>
+              <mat-chip *ngFor="let skill of technicalSkills.legacyMigration">{{ skill }}</mat-chip>
+            </mat-chip-set>
+          </div>
         </div>
       </mat-card-content>
     </mat-card>
