@@ -40,8 +40,8 @@ export class CvComponent {
     'Expert en développement full-stack avec 25 ans d\'expérience en architecture JEE',
     'Certification niveau 7 (BAC+5) OpenClassrooms - Expert en Développement Logiciel, spécialités Spring/Angular',
     'Maîtrise de l\'architecture réactive complète (Angular + Spring WebFlux + R2DBC avec PostgreSQL)',
-    'Leadership technique : management d\'équipes, formation, méthodologies Agile/SCRUM',
-    'Expertise DevOps : CI/CD, Docker, intégration continue, déploiement automatisé'
+    'Leadership technique : management d\'équipes, formation, méthodologie Agile/SCRUM',
+    'DevOps : CI/CD, Docker, intégration continue, déploiement automatisé'
   ];
 
   technicalSkills = {
@@ -51,7 +51,7 @@ export class CvComponent {
     security: ['JWT', 'Spring Security', 'CORS', 'CSRF', 'OWASP', 'RGPD', 'Audit sécurité'],
     devops: ['Docker', 'GitHub Actions', 'Jenkins', 'Maven', 'Git/GitFlow', 'SonarQube'],
     architecture: ['Microservices', 'Reactive Programming', 'REST API', 'SSE', 'WebSockets', 'UML'],
-    ai: ['Spring AI', 'Machine Learning', 'Deep Learning', 'NLP', 'Bases vectorielles', 'RAG', 'MCP', 'MLLs OpenSource', 'AI/ML Ethics'],
+    ai: ['Spring AI', 'Machine Learning', 'Deep Learning', 'NLP', 'Bases vectorielles', 'RAG', 'MCP', 'LLMs OpenSource', 'AI/ML Ethics'],
     reporting: ['Jasper Reports', 'ngx-charts' , 'Apache POI (Excel, Word)', 'XEP / FO'],
     legacyMigration: [
       'Oracle ADF (10g/11g/12c)',
