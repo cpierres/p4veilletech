@@ -54,7 +54,7 @@ export class CvComponent {
     ai: ['Spring AI', 'Machine Learning', 'Deep Learning', 'NLP', 'Bases vectorielles', 'RAG', 'MCP', 'LLMs OpenSource', 'AI/ML Ethics'],
     reporting: ['Jasper Reports', 'ngx-charts' , 'Apache POI (Excel, Word)', 'XEP / FO'],
     legacyMigration: [
-      'Oracle ADF (10g/11g/12c)',
+      'JDeveloper/Oracle ADF (10g/11g/12c)',
       'PL/SQL',
       'Oracle Forms',
       'Oracle Reports',
