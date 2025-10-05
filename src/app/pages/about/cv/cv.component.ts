@@ -46,11 +46,12 @@ export class CvComponent {
 
   technicalSkills = {
     frontend: ['Angular 14 à 20', 'TypeScript', 'RxJS', 'Angular Material', 'Signals', 'ADF JSF'],
-    backend: ['Spring WebFlux', 'Spring Boot 3', 'JPA/Spring Data', 'R2DBC', 'Kafka', 'PostgreSQL','ADF BC'],
+    backend: ['Spring Boot 3', 'Spring WebFlux', 'JPA/Spring Data', 'R2DBC', 'Kafka', 'PostgreSQL','ADF BC'],
     testing: ['JUnit 5', 'Jest', 'Cypress', 'TestBed', 'Mockito', 'TDD/BDD', 'Gherkin/Cucumber', 'Couverture >90%'],
     security: ['JWT', 'Spring Security', 'CORS', 'CSRF', 'OWASP', 'RGPD', 'Audit sécurité'],
     devops: ['Docker', 'GitHub Actions', 'Jenkins', 'Maven', 'Git/GitFlow', 'SonarQube'],
-    architecture: ['Microservices', 'Reactive Programming', 'REST API', 'SSE', 'WebSockets', 'UML']
+    architecture: ['Microservices', 'Reactive Programming', 'REST API', 'SSE', 'WebSockets', 'UML'],
+    ai: ['Spring AI', 'Machine Learning', 'Deep Learning', 'NLP', 'Bases vectorielles', 'RAG', 'MCP', 'MLLs OpenSource', 'AI/ML Ethics']
   };
 
   experiences = [
@@ -128,11 +129,11 @@ export class CvComponent {
     {
       company: 'Gouvernement Nouvelle-Calédonie',
       period: 'Mai 2008 - Mars 2013',
-      position: 'Architecte J2EE - Directeur Pôle BI',
+      position: 'Architecte JEE',
       description: 'Architecture et management d\'équipe de 15 personnes',
       achievements: [
         'Gestion de 60 applications (50 en ADF 10g, 10 en 11g)',
-        'Mise en place normes développement et framework ADF',
+        'Mise en place normes développement et fonctionnalités transversales dans le framework ADF',
         'Industrialisation avec Confluence, Jira, Bamboo',
         'Formation et encadrement des équipes techniques'
       ]
@@ -143,7 +144,7 @@ export class CvComponent {
       position: 'Consultant Senior J2EE',
       description: 'Metro Cash & Carry, Nouvelles Frontières, Digora, Greta 92',
       achievements: [
-        'Intranet J2EE multi-langues et Self-audit/Self-reporting',
+        'Intranet Self-audit/Self-reporting',
         'Applications Web transactionnelles (200 agences)',
         'Formation et méthodologie pour éditeurs de logiciels',
         'Certification Cisco CCNA1'

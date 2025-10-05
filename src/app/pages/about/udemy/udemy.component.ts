@@ -34,9 +34,9 @@ export class UdemyComponent implements OnInit {
   displayedColumns: string[] = ['categorie', 'titre', 'lien', 'duree', 'commentaire', 'classement'];
   formations = [
     // Catégorie Backend
+    { categorie: 'Back', titre: 'Spring Framework 6: Beginner to Guru w/ Spring Boot 3', lien: 'https://www.udemy.com/course/spring-framework-6-beginner-to-guru/', duree: '46h', commentaire: '', classement: '1' },
     { categorie: 'Back', titre: '', lien: 'https://www.udemy.com/course/api-first-engineering-with-spring-boot/', duree: '13h', commentaire: '', classement: '1' },
     { categorie: 'Back', titre: '', lien: 'https://www.udemy.com/course/openapi-beginner-to-guru/', duree: '5h', commentaire: '', classement: '1' },
-    { categorie: 'Back', titre: 'Spring Framework 6: Beginner to Guru w/ Spring Boot 3', lien: 'https://www.udemy.com/course/spring-framework-6-beginner-to-guru/', duree: '46h', commentaire: '', classement: '1' },
     { categorie: 'Back', titre: '', lien: 'https://www.udemy.com/course/hibernate-and-spring-data-jpa-beginner-to-guru', duree: '31h', commentaire: '', classement: '1' },
     { categorie: 'Back', titre: '', lien: 'https://www.udemy.com/course/testing-spring-boot-beginner-to-guru/', duree: '21h', commentaire: '', classement: '1' },
     { categorie: 'Back', titre: '', lien: 'https://www.udemy.com/course/introduction-to-kafka-with-spring-boot', duree: '6h', commentaire: '', classement: '1' },
@@ -67,7 +67,8 @@ export class UdemyComponent implements OnInit {
     { categorie: 'Front', titre: '', lien: 'https://www.udemy.com/course/angular-security/', duree: '8h', commentaire: '', classement: '1' },
     { categorie: 'Front', titre: '', lien: 'https://www.udemy.com/course/angular-pwa-course/', duree: '4h', commentaire: '', classement: '1' },
     // Catégorie IA
-    { categorie: 'IA', titre: '', lien: 'https://www.udemy.com/course/spring-ai-beginner-to-guru/', duree: '6h', commentaire: '', classement: '1' },
+    { categorie: 'IA', titre: 'Build AI Apps with Spring AI, OpenAI, RAG, MCP, AI Testing, Observability, Speech & Image Generation', lien: 'https://www.udemy.com/course/java-spring-ai/', duree: '14h', commentaire: '', classement: '1' },
+    { categorie: 'IA', titre: '', lien: 'https://www.udemy.com/course/spring-ai-beginner-to-guru/', duree: '6h', commentaire: '', classement: '2' },
     { categorie: 'Méthodologie', titre: 'Guide ultime de l\'agilité Scrum / XP / Kanban / Lean et certifications PSM / CSM', lien: 'https://www.udemy.com/course/scrum-et-le-best-of-des-methodes-agiles-de-gestion-de-projet/', duree: '5h', commentaire: '', classement: '1' },
   ];
 
