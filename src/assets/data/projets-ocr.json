@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2025-10-06T13:48:36.154Z",
+  "generatedAt": "2025-10-06T14:23:08.338Z",
   "sourcePaths": {
     "html": "src/app/pages/about/projets-ocr/projets-ocr.component.html",
     "evaluationsMd": "src/assets/docs/projets-openclassrooms-evaluations.md"
@@ -140,6 +140,9 @@
           "Respect des bonnes pratiques Java / Spring (utilisation de DTO, conf Spring Security, ...).",
           "Gestion des images avec Cloudinary."
         ],
+        "axesAmelioration": [
+          "rien à signaler"
+        ],
         "remarques": "- Temps de parole respecté (17 min).\r\n- Support de présentation très bien.\r\n- Discours très complet et bien structuré pendant la soutenance, rien à redire.\r\n- Très bien pendant les questions / réponses.\r\n\r\n---------",
         "soutenance": [
           "Temps de parole respecté (17 min).",
@@ -206,6 +209,9 @@
           "Première fois sur ce projet que je vois un élève faire son propre site pour restituer la veille effectuée.",
           "La veille effectuée est très complète, les liens proposés sont pertinents.",
           "Chaque choix du document d'architecture est bien justifié."
+        ],
+        "axesAmelioration": [
+          "rien à signaler"
         ],
         "remarques": "- Temps de parole respecté (15 min).\r\n- Se sert de ses livrables comme support de présentation (logique, vu le projet).\r\n- Discours très complet, détaille bien chaque choix, chaque concurrents, c'est très bien.\r\n- Très bien pendant les questions / réponses.\r\n\r\n---------",
         "soutenance": [
@@ -396,7 +402,12 @@
             "title": "Compétence 1. Faire le point d'étape de votre formation",
             "status": "Validé"
           }
-        ]
+        ],
+        "pointsForts": [
+          "Livrable sous forme de site web, tres complet expliquant l'ensemble du travail fait sur le parcours et une évaluation des difficultés sur chacun des projets restant"
+        ],
+        "remarques": "Très bonne présentation, très complète dans le temps imparti",
+        "soutenance": "Très bonne présentation, très complète dans le temps imparti"
       }
     },
     {
@@ -461,6 +472,9 @@
           "Cahier des charges complet et bien argumenté.",
           "Justifications techniques solides et actuelles.",
           "Bonne prise en compte des enjeux réglementaires et sociétaux."
+        ],
+        "axesAmelioration": [
+          "rien à signaler"
         ],
         "remarques": "L’étudiant a fourni un travail de qualité, démontrant une bonne compréhension des enjeux de refonte d’une application métier.\r\nL’ensemble des livrables attendus a été présenté avec rigueur. Malgré quelques points à approfondir, la soutenance est satisfaisante et les critères d’évaluation sont globalement atteints.\r\n\r\n---------",
         "soutenance": "L’étudiant a fourni un travail de qualité, démontrant une bonne compréhension des enjeux de refonte d’une application métier.\r\nL’ensemble des livrables attendus a été présenté avec rigueur. Malgré quelques points à approfondir, la soutenance est satisfaisante et les critères d’évaluation sont globalement atteints.\r\n\r\n---------"
@@ -527,7 +541,8 @@
           "Questionnaire technique précis pour éliminer les incertitudes",
           "Justifications solides pour chaque choix technique et budgétaire",
           "Prise en compte réaliste des contraintes d'intégration"
-        ]
+        ],
+        "soutenance": "Proposition commerciale de très haut niveau démontrant une excellente maîtrise de l'estimation de projet informatique. L'étudiant a su identifier les complexités techniques réelles, proposer des solutions créatives et structurer une négociation commerciale professionnelle. La démarche d'architecture préalable révèle une approche mature du développement logiciel."
       }
     },
     {
@@ -595,7 +610,8 @@
         ],
         "axesAmelioration": [
           "Avec une structure plus fluide et quelques points mieux hiérarchisés, tu pourrais valoriser encore davantage la qualité de son travail lors de la présentation"
-        ]
+        ],
+        "soutenance": "Félicitations pour ce projet et ton travail !\r\nProjet validé :)\r\n\r\n---------"
       }
     },
     {
@@ -667,7 +683,11 @@
           "Les livrables sont complets, bien structurés et démontrent une réelle compréhension des enjeux du projet",
           "Bonne maîtrise des outils agiles et de gestion de projet",
           "Soutenance claire et professionnelle"
-        ]
+        ],
+        "axesAmelioration": [
+          "rien à signaler"
+        ],
+        "soutenance": "Bravo pour ce travail  Christophe !\r\nBonne continuation pour la suite :)\r\n\r\n---------"
       }
     },
     {
@@ -725,7 +745,11 @@
           "Les livrables sont clairs, structurés et en adéquation avec les attentes du projet.",
           "L’étudiant a su garder un niveau de détail suffisant pour assurer la lisibilité, sans entrer dans une complexité excessive.",
           "Les justifications des choix techniques sont pertinentes et démontrent une bonne compréhension des enjeux de disponibilité, de sécurité et de qualité."
-        ]
+        ],
+        "axesAmelioration": [
+          "RAS"
+        ],
+        "soutenance": "La soutenance était claire, bien structurée et respectait la durée attendue. L’étudiant a su justifier ses choix de manière pertinente et répondre aux questions posées avec aisance, montrant une bonne capacité à prendre du recul sur son travail. La présentation reflète une maîtrise des concepts étudiés et une capacité à les mettre en pratique dans un contexte professionnel.\r\n\r\n---------"
       }
     },
     {
@@ -802,7 +826,8 @@
           "Conformité réglementaire intégrée (RGPD, CCPA, post-Brexit)",
           "Plan de migration progressif réaliste",
           "Stack technologique moderne et adaptée"
-        ]
+        ],
+        "soutenance": "Présentation réalisée dans le temps imparti. Christophe a démontré une bonne maîtrise technique de son architecture et a répondu de manière pertinente aux questions posées sur les choix d'implémentation et les défis de scalabilité."
       }
     },
     {

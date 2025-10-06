@@ -160,32 +160,62 @@ function parseEvaluations(md) {
       // Limit to before the next heading (### or ####)
       const nextHeadingIdx = tail.search(/\n###\s|\n####\s/);
       const slice = nextHeadingIdx === -1 ? tail : tail.substring(0, nextHeadingIdx);
+      // 1) Prefer bullet list items
       const list = [];
       const listRe = /^-\s+(.+)$/gmi;
       let lm;
       while ((lm = listRe.exec(slice)) !== null) list.push(lm[1].trim());
-      return list.length ? list : undefined;
+      if (list.length) return list;
+      // 2) Fallback to free text on same line and/or paragraph text
+      const paragraph = slice.trim();
+      const combined = [];
+      if (paragraph) {
+        // Remove any leading labels like "Remarques:" or "Commentaire:"
+        const cleaned = paragraph.replace(/^\s*(Remarques|Commentaire)s?\s*:\s*/i, '').trim();
+        if (cleaned) {
+          const parts = cleaned.split(/\n+/).map(s => s.trim()).filter(Boolean);
+          combined.push(...parts);
+        }
+      }
+      return combined.length ? combined : undefined;
     }
 
     const pointsForts = listAfter(/####\s*Points\s*forts\s*:\s*/i);
     const axesAmelioration = listAfter(/####\s*Axes\s*d'amélioration\s*:\s*/i);
 
-    // Remarques (livrable or soutenance sections)
-    const remarques = find(/####\s*Remarques\s*:\s*([\s\S]*?)(?=\n###|\n####|$)/i);
+    // Remarques (livrable or general remarks sections)
+    let remarques = find(/####\s*Remarques\s*:\s*([\s\S]*?)(?=\n###|\n####|$)/i);
+    if (!remarques) {
+      // Also support inline "Remarques : ..." without heading level
+      const inlineRem = section.match(/^\s*Remarques\s*:\s*([\s\S]*?)(?=\n###|\n####|$)/im);
+      if (inlineRem) {
+        remarques = inlineRem[1].trim();
+      }
+    }
 
     // Soutenance remarks (if a ### Soutenance section exists)
     const soutenanceSectionMatch = section.match(/###\s*Soutenance[\s\S]*$/i);
     let soutenance = undefined;
     if (soutenanceSectionMatch) {
       const ss = soutenanceSectionMatch[0];
-      const sRem = ss.match(/####\s*Remarques\s*:\s*([\s\S]*?)$/i);
-      if (sRem) {
-        const text = sRem[1];
+      // Look for H4 Remarques or any inline Remarques/Commentaire line
+      const sRemBlock = ss.match(/####\s*Remarques\s*:\s*([\s\S]*?)(?=\n###|\n####|$)/i)
+        || ss.match(/^\s*(?:####\s*)?(Remarques|Commentaire)s?\s*:\s*([\s\S]*?)(?=\n###|\n####|$)/im);
+      if (sRemBlock) {
+        const text = sRemBlock[2] ? sRemBlock[2] : sRemBlock[1];
         const list = [];
-        const listRe = /^-\s+(.+)$/gmi;
-        let lm;
-        while ((lm = listRe.exec(text)) !== null) list.push(lm[1].trim());
-        soutenance = list.length ? list : text.trim();
+        const listRe2 = /^-\s+(.+)$/gmi;
+        let lm2;
+        while ((lm2 = listRe2.exec(text)) !== null) list.push(lm2[1].trim());
+        soutenance = list.length ? list : String(text).trim();
+      } else {
+        // Fallback: capture the whole soutenance section content after the header
+        const afterHeader = ss.replace(/^###\s*Soutenance[^\n\r]*\r?\n/i, '');
+        const list = [];
+        const listRe2 = /^-\s+(.+)$/gmi;
+        let lm2;
+        while ((lm2 = listRe2.exec(afterHeader)) !== null) list.push(lm2[1].trim());
+        soutenance = list.length ? list : afterHeader.trim();
       }
     }
 
