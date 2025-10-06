@@ -153,3 +153,26 @@ interface LinkInfo {
 - **Fast-XML-Parser** : Parsing optimisé des flux RSS
 
 Cette architecture privilégie la **maintenabilité**, la **réutilisabilité** et les **performances** tout en respectant les bonnes pratiques Angular modernes.
+
+
+## Extraction JSON des Projets OpenClassrooms
+
+Afin de préparer une future ingestion dans une base vectorielle, les informations texte des projets présents dans `src/app/pages/about/projets-ocr/projets-ocr.component.html` ainsi que les évaluations détaillées dans `src/assets/docs/projets-openclassrooms-evaluations.md` peuvent être rationalisées en un fichier JSON unique.
+
+- Script de génération: `scripts/generate-ocr-json.js`
+- Commande: `npm run gen:ocr-json`
+- Sortie: `src/assets/data/projets-ocr.json`
+
+Ce JSON contient, pour chaque projet, les champs suivants:
+- `id`: numéro du projet (déduit du titre)
+- `title`: titre du panneau de projet
+- `description`: sous-titre du panneau
+- `headings`: liste des sous-sections détectées (h3–h5)
+- `links`: liste des liens (texte + href)
+- `textContent`: contenu texte complet nettoyé du HTML
+- `externalId`: identifiant OpenClassrooms (ex: OC-P6) si applicable
+- `evaluation`: s'il existe dans le markdown, bloc structuré (évaluateur, date, github, titre, lien OCR, compétences, points forts, axes d'amélioration, remarques, soutenance)
+
+Remarques:
+- Le mappage vers `externalId` suit la convention: `Projet N` → `OC-PN` pour N ≥ 2. Les éventuels panneaux hors scope OCR n'ont pas d'`externalId`.
+- Le parser est volontairement simple et sans dépendances externes; il repose sur des heuristiques adaptées au HTML actuel. Si la structure du HTML change fortement, mettez à jour `scripts/generate-ocr-json.js` en conséquence.

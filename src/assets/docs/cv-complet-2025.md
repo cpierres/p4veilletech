@@ -168,7 +168,7 @@ Expert en développement full-stack avec **25 ans d'expérience** en architectur
 **Formation principale :**
 - **Expert en Développement Logiciel** - OpenClassrooms (2025) - Niveau 7 (BAC+5)
   - Spécialités Angular et Spring - RNCP 36912
-  - 13 projets techniques avec innovations pédagogiques
+  - 12 projets avec innovations pédagogiques
 - **DUT Techniques de Commercialisation** - IUT de Sceaux
 
 **Formations techniques spécialisées :**
@@ -178,11 +178,11 @@ Expert en développement full-stack avec **25 ans d'expérience** en architectur
 - 30+ formations UDEMY (Spring, Angular, DevOps, IA)
 
 **Certifications :**
+- Anglais courant (B2, TOEIC 760)
 - Certification Oracle ADF 11g
 - Certification Sun Java Developer (310-025)
 - Certification Sun Web Components (310-080)
 - Certification Cisco CCNA1
-- Anglais courant (B2, TOEIC 760)
 
 ---
 
