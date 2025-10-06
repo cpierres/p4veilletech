@@ -1,5 +1,10 @@
 # P4veilletech - Site de Veille Technologique
 
+## Structure du dépôt
+
+- frontend/ : Application Angular (déplacée depuis la racine)
+- backend/ : à venir (Spring Boot, Spring AI, base vectorielle)
+
 ## Description du Projet
 
 Ce projet est un site de **veille technologique**, dédié aux architectures logicielles et à Angular et Spring, développé dans le cadre du **Projet 4** de la <a href="https://openclassrooms.com/fr/paths/533-developpeur-full-stack-java-et-angular" target="_blank">formation certifiante niveau 7 (BAC+5)</a> "Expertise en développement logiciel - avec spécialité Full-Stack Java et Angular" de chez **OpenClassrooms**.
@@ -61,9 +66,11 @@ L'application est  accessible à l'adresse suivante :
 
 ## Development server
 
-Pour démarrer le serveur de développement local, exécuter :
+Le frontend a été déplacé dans le module `frontend/`.
+Pour démarrer le serveur de développement local, exécuter depuis le dossier `frontend` :
 
 ```bash
+cd frontend
 ng serve
 ```
 
@@ -157,11 +164,11 @@ Cette architecture privilégie la **maintenabilité**, la **réutilisabilité** 
 
 ## Extraction JSON des Projets OpenClassrooms
 
-Afin de préparer une future ingestion dans une base vectorielle, les informations texte des projets présents dans `src/app/pages/about/projets-ocr/projets-ocr.component.html` ainsi que les évaluations détaillées dans `src/assets/docs/projets-openclassrooms-evaluations.md` peuvent être rationalisées en un fichier JSON unique.
+Afin de préparer une future ingestion dans une base vectorielle, les informations texte des projets présents dans `frontend/src/app/pages/about/projets-ocr/projets-ocr.component.html` ainsi que les évaluations détaillées dans `frontend/src/assets/docs/projets-openclassrooms-evaluations.md` peuvent être rationalisées en un fichier JSON unique.
 
-- Script de génération: `scripts/generate-ocr-json.js`
-- Commande: `npm run gen:ocr-json`
-- Sortie: `src/assets/data/projets-ocr.json`
+- Script de génération: `frontend/scripts/generate-ocr-json.js`
+- Commande (à exécuter depuis `frontend/`): `npm run gen:ocr-json`
+- Sortie: `frontend/src/assets/data/projets-ocr.json`
 
 Ce JSON contient, pour chaque projet, les champs suivants:
 - `id`: numéro du projet (déduit du titre)
@@ -175,4 +182,4 @@ Ce JSON contient, pour chaque projet, les champs suivants:
 
 Remarques:
 - Le mappage vers `externalId` suit la convention: `Projet N` → `OC-PN` pour N ≥ 2. Les éventuels panneaux hors scope OCR n'ont pas d'`externalId`.
-- Le parser est volontairement simple et sans dépendances externes; il repose sur des heuristiques adaptées au HTML actuel. Si la structure du HTML change fortement, mettez à jour `scripts/generate-ocr-json.js` en conséquence.
+- Le parser est volontairement simple et sans dépendances externes; il repose sur des heuristiques adaptées au HTML actuel. Si la structure du HTML change fortement, mettez à jour `frontend/scripts/generate-ocr-json.js` en conséquence.
