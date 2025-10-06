@@ -1,0 +1,26 @@
+spring:
+  application:
+    name: backend
+
+  r2dbc:
+    url: r2dbc:postgresql://localhost:5432/veilltech
+    username: ${POSTGRES_USER:veilltech}
+    password: ${POSTGRES_PASSWORD:veilltech}
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/veilltech
+    username: ${POSTGRES_USER:veilltech}
+    password: ${POSTGRES_PASSWORD:veilltech}
+
+  ai:
+    vectorstore:
+      pgvector:
+        schema: public
+        # table-name: ai_documents  # uncomment to override default table name
+        # distance-type: COSINE     # L2, COSINE, or INNER_PRODUCT
+        initialize-schema: true      # create table on startup if needed
+
+logging:
+  level:
+    org.springframework.ai.vectorstore.pgvector: INFO
+    org.springframework.r2dbc.connection: WARN

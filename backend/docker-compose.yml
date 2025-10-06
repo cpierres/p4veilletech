@@ -1,0 +1,27 @@
+version: '3.9'
+
+services:
+  postgres:
+    build:
+      context: ./docker
+      dockerfile: Dockerfile
+    image: postgres:18
+    container_name: p4vt-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: veilltech
+      POSTGRES_USER: veilltech
+      POSTGRES_PASSWORD: veilltech
+    ports:
+      - "5432:5432"
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U veilltech -d veilltech"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  db_data:
+    driver: local
