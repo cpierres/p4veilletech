@@ -19,8 +19,27 @@ spring:
         # table-name: ai_documents  # uncomment to override default table name
         # distance-type: COSINE     # L2, COSINE, or INNER_PRODUCT
         initialize-schema: true      # create table on startup if needed
+    openai:
+      api-key: ${OPENAI_API_KEY}
+      #api-base: ${OPENAI_API_BASE:https://api.openai.com/v1}
 
 logging:
   level:
     org.springframework.ai.vectorstore.pgvector: INFO
     org.springframework.r2dbc.connection: WARN
+
+# Application specific settings
+app:
+  embedding:
+    # provider can be: ollama (default), openai, cohere
+    provider: ${EMBEDDING_PROVIDER:openai}
+    # If using Ollama locally, leave baseUrl as default
+    # baseUrl: ${OLLAMA_BASE_URL:http://localhost:11434}
+    # Model name for embeddings
+    # Recommended lightweight options:
+    # - all-minilm (MiniLM-L6-v2, 384 dims, fast, English-focused)
+    # - paraphrase-multilingual-MiniLM-L12-v2 (384 dims, multilingual FR/EN)
+    # model: ${EMBEDDING_MODEL:all-minilm}
+    # Embedding dimension for the selected model
+    # all-MiniLM-L6-v2 = 384, paraphrase-multilingual-MiniLM-L12-v2 = 384
+    # dimension: ${EMBEDDING_DIMENSION:384}

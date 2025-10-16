@@ -11,7 +11,7 @@
   <groupId>com.cpierres.p4veilletech</groupId>
   <artifactId>backend</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <name>backend</name>
+  <name>backend-p4</name>
   <description>backend</description>
   <url/>
   <licenses>
@@ -27,7 +27,7 @@
     <url/>
   </scm>
   <properties>
-    <java.version>25</java.version>
+    <java.version>21</java.version>
     <spring-ai.version>1.0.3</spring-ai.version>
   </properties>
   <dependencies>
@@ -37,7 +37,37 @@
     </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-data-jdbc</artifactId>
+    </dependency>
+    <!-- dependency>
+      <groupId>org.springframework.ai</groupId>
+      <artifactId>spring-ai-spring-boot-docker-compose</artifactId>
+    </dependency -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-webflux</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.ai</groupId>
+      <artifactId>spring-ai-starter-model-openai</artifactId>
+    </dependency>
+    <!--dependency>
+      <groupId>org.springframework.ai</groupId>
+      <artifactId>spring-ai-starter-model-ollama</artifactId>
+    </dependency -->
+    <dependency>
+      <groupId>org.postgresql</groupId>
+      <artifactId>postgresql</artifactId>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.postgresql</groupId>
+      <artifactId>r2dbc-postgresql</artifactId>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.ai</groupId>
+      <artifactId>spring-ai-starter-vector-store-pgvector</artifactId>
     </dependency>
     <dependency>
       <groupId>org.springframework.ai</groupId>
@@ -49,36 +79,13 @@
     </dependency>
     <dependency>
       <groupId>org.springframework.ai</groupId>
-      <artifactId>spring-ai-starter-model-openai</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework.ai</groupId>
-      <artifactId>spring-ai-starter-model-postgresml-embedding</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework.ai</groupId>
-      <artifactId>spring-ai-starter-vector-store-pgvector</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>org.springframework.ai</groupId>
       <artifactId>spring-ai-tika-document-reader</artifactId>
     </dependency>
-
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-devtools</artifactId>
       <scope>runtime</scope>
       <optional>true</optional>
-    </dependency>
-    <dependency>
-      <groupId>org.postgresql</groupId>
-      <artifactId>postgresql</artifactId>
-      <scope>runtime</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.postgresql</groupId>
-      <artifactId>r2dbc-postgresql</artifactId>
-      <scope>runtime</scope>
     </dependency>
     <dependency>
       <groupId>org.projectlombok</groupId>
