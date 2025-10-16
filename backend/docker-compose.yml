@@ -22,6 +22,27 @@ services:
       timeout: 5s
       retries: 5
 
+#  # Optional: local embeddings server (MiniLM, etc.)
+#  ollama:
+#    image: ollama/ollama:latest
+#    container_name: p4vt-ollama
+#    restart: unless-stopped
+#    ports:
+#      - "11435:11434"
+#    volumes:
+#      - ollama_data:/root/.ollama
+#    healthcheck:
+#      test: ["CMD", "curl", "-f", "http://localhost:11435/api/tags"]
+#      interval: 10s
+#      timeout: 5s
+#      retries: 10
+#    # To preload the model on first run, you can execute:
+#    #   docker exec -it p4vt-ollama ollama pull all-minilm
+#    # Or for multilingual:
+#    #   docker exec -it p4vt-ollama ollama pull paraphrase-multilingual-minilm
+
 volumes:
   db_data:
     driver: local
+#  ollama_data:
+#    driver: local
