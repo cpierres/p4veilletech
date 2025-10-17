@@ -2,26 +2,28 @@ spring:
   application:
     name: backend
 
-  r2dbc:
-    url: r2dbc:postgresql://localhost:5432/veilltech
-    username: ${POSTGRES_USER:veilltech}
-    password: ${POSTGRES_PASSWORD:veilltech}
+  ai:
+    openai:
+      api-key: ${OPENAI_API_KEY}
+    vectorstore:
+      pgvector:
+        schema: public
+        table-name: vector_store # nom de la table pgvector pour les embeddings
+        # table-name: ai_documents  # uncomment to override default table name
+        # distance-type: COSINE     # L2, COSINE, or INNER_PRODUCT
+        initialize-schema: true      # create table on startup if needed
+        remove-existing-vector-store-table: true
 
   datasource:
     url: jdbc:postgresql://localhost:5432/veilltech
     username: ${POSTGRES_USER:veilltech}
     password: ${POSTGRES_PASSWORD:veilltech}
+    driver-class-name: org.postgresql.Driver
 
-  ai:
-    vectorstore:
-      pgvector:
-        schema: public
-        # table-name: ai_documents  # uncomment to override default table name
-        # distance-type: COSINE     # L2, COSINE, or INNER_PRODUCT
-        initialize-schema: true      # create table on startup if needed
-    openai:
-      api-key: ${OPENAI_API_KEY}
-      #api-base: ${OPENAI_API_BASE:https://api.openai.com/v1}
+  r2dbc:
+    url: r2dbc:postgresql://localhost:5432/veilltech
+    username: ${POSTGRES_USER:veilltech}
+    password: ${POSTGRES_PASSWORD:veilltech}
 
 logging:
   level:
