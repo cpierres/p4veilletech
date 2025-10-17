@@ -1,0 +1,28 @@
+<div class="chat-container">
+  <div class="chat-header">
+    <h2>Chatbot CV — RAG</h2>
+    <mat-form-field appearance="outline" class="lang-select">
+      <mat-label>Langue / Language</mat-label>
+      <mat-select [value]="lang()" (valueChange)="lang.set($event)">
+        <mat-option value="fr">Français</mat-option>
+        <mat-option value="en">English</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+  <div class="messages">
+    <div *ngFor="let m of messages()" [class.user]="m.role==='user'" [class.assistant]="m.role==='assistant'" class="message">
+      <div class="bubble">{{m.text}}</div>
+    </div>
+  </div>
+
+  <form (ngSubmit)="send()" class="input-row">
+    <mat-form-field class="input-field" appearance="outline">
+      <mat-label>{{ lang()==='fr' ? 'Votre message' : 'Your message' }}</mat-label>
+      <input matInput [ngModel]="input()" (ngModelChange)="input.set($event)" name="msg" [disabled]="loading()"/>
+    </mat-form-field>
+    <button mat-raised-button color="primary" type="submit" [disabled]="loading() || !input().trim()">
+      {{ lang()==='fr' ? 'Envoyer' : 'Send' }}
+    </button>
+  </form>
+</div>
