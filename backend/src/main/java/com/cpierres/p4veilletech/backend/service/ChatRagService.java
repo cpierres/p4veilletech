@@ -9,6 +9,8 @@ import org.springframework.ai.document.Document;
 import org.springframework.ai.vectorstore.SearchRequest;
 import org.springframework.ai.vectorstore.VectorStore;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Mono;
+import reactor.core.scheduler.Schedulers;
 
 import java.util.List;
 import java.util.Locale;
@@ -21,34 +23,71 @@ public class ChatRagService {
     private final ChatClient.Builder chatClientBuilder;
     private final VectorStore vectorStore;
 
-    public String chat(String userMessage, String lang) {
-        String normalized = (lang == null || lang.isBlank()) ? "fr" : lang.toLowerCase(Locale.ROOT);
-        boolean french = !normalized.startsWith("en");
+//    public String chat(String userMessage, String lang) {
+//        String normalized = (lang == null || lang.isBlank()) ? "fr" : lang.toLowerCase(Locale.ROOT);
+//        boolean french = !normalized.startsWith("en");
+//
+//        String system = french ? buildFrSystemPrompt() : buildEnSystemPrompt();
+//
+//        // Retrieve top documents from vector store
+//        List<Document> docs = vectorStore.similaritySearch(
+//                SearchRequest.builder().query(userMessage).topK(6).build()
+//        );
+//
+//        String context = docs.stream()
+//                .map(d -> "Source: " + d.getMetadata().getOrDefault("source", "unknown") + "\n" + getDocText(d))
+//                .collect(Collectors.joining("\n\n---\n\n"));
+//
+//        String user = french
+//                ? "Question de l'utilisateur: " + userMessage + "\n\nContexte RAG (extraits de mon CV/expériences):\n" + context
+//                : "User question: " + userMessage + "\n\nRAG context (snippets from my CV/experience):\n" + context;
+//
+//        Message sysMsg = new SystemMessage(system);
+//        Message usrMsg = new UserMessage(user);
+//
+//        ChatClient chatClient = chatClientBuilder.build();
+//        return chatClient.prompt()
+//                .messages(sysMsg, usrMsg)
+//                .call()
+//                .content();
+//    }
 
-        String system = french ? buildFrSystemPrompt() : buildEnSystemPrompt();
+  public Mono<String> chat(String userMessage, String lang) {
+    return Mono.fromCallable(() -> {
+      // Tout ce code sera exécuté sur un thread bloquant dédié
+      String normalized = (lang == null || lang.isBlank()) ? "fr" : lang.toLowerCase(Locale.ROOT);
+      boolean french = !normalized.startsWith("en");
+      String system = french ? buildFrSystemPrompt() : buildEnSystemPrompt();
 
-        // Retrieve top documents from vector store
-        List<Document> docs = vectorStore.similaritySearch(
-                SearchRequest.builder().query(userMessage).topK(6).build()
-        );
+      // Appel bloquant à la vector store
+      List<Document> docs = vectorStore.similaritySearch(
+        SearchRequest.builder().query(userMessage).topK(6).build()
+      );
 
-        String context = docs.stream()
-                .map(d -> "Source: " + d.getMetadata().getOrDefault("source", "unknown") + "\n" + getDocText(d))
-                .collect(Collectors.joining("\n\n---\n\n"));
+      System.out.println("Nombre de documents trouvés : " + docs.size());
+      if (docs.isEmpty()) {
+        System.out.println("Aucun document trouvé pour la requête : " + userMessage);
+      } else {
+        docs.forEach(d -> System.out.println("Document : " + d.getFormattedContent()));
+      }
 
-        String user = french
-                ? "Question de l'utilisateur: " + userMessage + "\n\nContexte RAG (extraits de mon CV/expériences):\n" + context
-                : "User question: " + userMessage + "\n\nRAG context (snippets from my CV/experience):\n" + context;
+      String context = docs.stream()
+        .map(d -> "Source: " + d.getMetadata().getOrDefault("source", "unknown") + "\n" + getDocText(d))
+        .collect(Collectors.joining("\n\n---\n\n"));
+      String user = french
+        ? "Question de l'utilisateur: " + userMessage + "\n\nContexte RAG (extraits de mon CV/expériences):\n" + context
+        : "User question: " + userMessage + "\n\nRAG context (snippets from my CV/experience):\n" + context;
+      Message sysMsg = new SystemMessage(system);
+      Message usrMsg = new UserMessage(user);
+      ChatClient chatClient = chatClientBuilder.build();
 
-        Message sysMsg = new SystemMessage(system);
-        Message usrMsg = new UserMessage(user);
-
-        ChatClient chatClient = chatClientBuilder.build();
-        return chatClient.prompt()
-                .messages(sysMsg, usrMsg)
-                .call()
-                .content();
-    }
+      // Appel bloquant au chat client
+      return chatClient.prompt()
+        .messages(sysMsg, usrMsg)
+        .call()
+        .content();
+    }).subscribeOn(Schedulers.boundedElastic());
+  }
 
     private String getDocText(Document d) {
         try {

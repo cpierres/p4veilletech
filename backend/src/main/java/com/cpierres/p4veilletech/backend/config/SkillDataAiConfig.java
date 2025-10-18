@@ -10,6 +10,6 @@ public class SkillDataAiConfig {
 
   @Bean
   public DocumentTransformer textSplitter() {
-    return new TokenTextSplitter(); // Ajustez la taille selon vos besoins
+    return new TokenTextSplitter();
   }
 }
