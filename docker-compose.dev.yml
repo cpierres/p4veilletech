@@ -1,0 +1,40 @@
+version: "3.9"
+services:
+  postgres:
+    image: pgvector/pgvector:pg18
+    container_name: p4vt-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: veilltech
+      POSTGRES_USER: veilltech
+      POSTGRES_PASSWORD: veilltech
+    ports:
+      - "5432:5432"
+    volumes:
+      - p4vt_db_data_pg18:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U veilltech -d veilltech"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Optional: local embeddings server (MiniLM, etc.)
+  # ollama:
+  #   image: ollama/ollama:latest
+  #   container_name: p4vt-ollama
+  #   restart: unless-stopped
+  #   ports:
+  #     - "11435:11434"
+  #   volumes:
+  #     - ollama_data:/root/.ollama
+  #   healthcheck:
+  #     test: ["CMD", "curl", "-f", "http://localhost:11435/api/tags"]
+  #     interval: 10s
+  #     timeout: 5s
+  #     retries: 10
+
+volumes:
+  p4vt_db_data_pg18:
+    driver: local
+  # ollama_data:
+  #   driver: local
