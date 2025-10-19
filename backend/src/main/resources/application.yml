@@ -9,10 +9,9 @@ spring:
       pgvector:
         schema: public
         table-name: vector_store # nom de la table pgvector pour les embeddings
-        # table-name: ai_documents  # uncomment to override default table name
         # distance-type: COSINE     # L2, COSINE, or INNER_PRODUCT
-        initialize-schema: true      # create table on startup if needed
-        remove-existing-vector-store-table: true
+        initialize-schema: false     # géré par Flyway désormais
+        remove-existing-vector-store-table: false
 
   datasource:
     url: jdbc:postgresql://localhost:5432/veilltech
@@ -24,6 +23,10 @@ spring:
     url: r2dbc:postgresql://localhost:5432/veilltech
     username: ${POSTGRES_USER:veilltech}
     password: ${POSTGRES_PASSWORD:veilltech}
+
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
 
 logging:
   level:
