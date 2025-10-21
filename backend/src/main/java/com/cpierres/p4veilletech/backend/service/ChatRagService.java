@@ -1,6 +1,7 @@
 package com.cpierres.p4veilletech.backend.service;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.messages.Message;
 import org.springframework.ai.chat.messages.SystemMessage;
@@ -16,6 +17,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class ChatRagService {
@@ -64,11 +66,11 @@ public class ChatRagService {
         SearchRequest.builder().query(userMessage).topK(6).build()
       );
 
-      System.out.println("Nombre de documents trouvés : " + docs.size());
+      log.debug("Nombre de documents trouvés : " + docs.size());
       if (docs.isEmpty()) {
-        System.out.println("Aucun document trouvé pour la requête : " + userMessage);
+        log.debug("Aucun document trouvé pour la requête : " + userMessage);
       } else {
-        docs.forEach(d -> System.out.println("Document : " + d.getFormattedContent()));
+        docs.forEach(d -> log.debug("Document : " + d.getFormattedContent()));
       }
 
       String context = docs.stream()
