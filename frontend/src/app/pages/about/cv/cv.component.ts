@@ -211,7 +211,7 @@ export class CvComponent {
     'Veille technologique et R&D',
     'Sports nautiques (jetsurf, voile)',
     'Cyclisme et randonnée',
-    'Secourisme (SST valide)',
+    'Secourisme (SST)',
     'Technologies émergentes'
   ];
 
