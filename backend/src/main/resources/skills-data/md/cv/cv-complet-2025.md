@@ -10,7 +10,7 @@
 
 ## Synthèse des Compétences
 
-Expert en développement full-stack avec **25 ans d'expérience** en architecture JEE/Spring. Récemment certifié **niveau 7 (BAC+5)** OpenClassrooms - Expert en Développement Logiciel (RNCP 36912). **Premier étudiant** à maîtriser l'architecture réactive complète (Angular + Spring WebFlux + R2DBC) selon évaluateurs.
+Développement full-stack avec **25 ans d'expérience** en architecture JEE/Spring. Récemment certifié **niveau 7 (BAC+5)** OpenClassrooms - Expert en Développement Logiciel (RNCP 36912). **Premier étudiant** à maîtriser l'architecture réactive complète (Angular + Spring WebFlux + R2DBC) selon évaluateurs.
 
 **Expertise technique :**
 - Architecture et développement d'applications JEE/Spring modernes

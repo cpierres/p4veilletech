@@ -1,14 +1,14 @@
 # Christophe Pierrès
-**Développeur Full-Stack Expert • Angular/Spring • Architecte Solutions**
+**Développeur Full-Stack Expert • Angular/Spring • Intelligence Artificielle • Architecte Solutions**
 
-📧 cpierres@hotmail.com | 📞 07 81 42 54 06 | 📍 Tourcoing (59)  
+📧 cpierres@hotmail.com | 📞 07 81 42 54 06 | 📍 Tourcoing (59)  | 👨‍👩‍👧‍👦 Marié, 2 enfants
 🔗  [Veille Tech et portfolio](https://veille.cpierres.dscloud.me/) | [LinkedIn](https://www.linkedin.com/in/christophe-pierres) | [GitHub](https://github.com/cpierres) 
 
 ---
 
 ## Synthèse Professionnelle
 
-Expert en développement full-stack avec **25 ans d'expérience** en architecture JEE/Spring. Récemment certifié **niveau 7 (BAC+5)** OpenClassrooms avec spécialisation Angular/Spring. **Premier étudiant** à maîtriser l'architecture réactive complète selon évaluateurs. Leadership technique confirmé avec management d'équipes et expertise DevOps.
+Développement java avec **25 ans d'expérience** en architecture JEE/Spring. Récemment certifié **niveau 7 (BAC+5)** OpenClassrooms avec spécialisation Angular/Spring. **Premier étudiant** à maîtriser l'architecture réactive complète selon évaluateurs. Leadership technique confirmé avec management d'équipes et expertise DevOps.
 
 ---
 
@@ -18,7 +18,7 @@ Expert en développement full-stack avec **25 ans d'expérience** en architectur
 **Backend :** Spring Boot 3, Spring Data JPA, Spring WebFlux, R2DBC, PostgreSQL, Kafka  
 **Testing :** JUnit 5, Jest, Cypress, TestBed, Mockito, TDD/BDD, Gherkin/Cucumber, Couverture >90%
 **Sécurité :** JWT, Spring Security, CORS, CSRF, OWASP, RGPD, Audit sécurité  
-**DevOps :** Docker, GitHub Actions, CI/CD, Maven, Git/GitFlow, SonarQube  
+**DevOps :** Docker, GitHub Actions, Jenkins, CI/CD, Maven, Git/GitFlow, SonarQube  
 **Architecture :** Microservices, Reactive Programming, REST API, UML
 
 ---
