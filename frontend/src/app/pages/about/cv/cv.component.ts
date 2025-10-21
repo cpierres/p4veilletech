@@ -26,7 +26,7 @@ export class CvComponent {
 
   personalInfo = {
     name: 'Christophe Pierrès',
-    title: 'Développeur Expert java JEE • Full stack Angular/Spring • Intelligence Artificielle • Architecte Solutions',
+    title: 'Expert java JEE • Full stack Angular/Spring • Intelligence Artificielle • Architecte Solutions',
     location: 'Tourcoing (59)',
     phone: '+33 (0) 781 425 406',
     email: 'cpierres@hotmail.com',
