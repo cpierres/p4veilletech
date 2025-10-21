@@ -26,7 +26,7 @@ export class CvComponent {
 
   personalInfo = {
     name: 'Christophe Pierrès',
-    title: 'Développeur Expert • Angular/Spring • Intelligence Artificielle • Architecte Solutions',
+    title: 'Expert java JEE • Full stack Angular/Spring • Intelligence Artificielle • Architecte Solutions',
     location: 'Tourcoing (59)',
     phone: '+33 (0) 781 425 406',
     email: 'cpierres@hotmail.com',
@@ -38,7 +38,7 @@ export class CvComponent {
 
   summary = [
     'Expert en développement java avec 25 ans d\'expérience en architecture JEE',
-    'Certification niveau 7 (BAC+5) OpenClassrooms - Expert en Développement Logiciel, spécialités Spring/Angular',
+    'Certification niveau 7 (BAC+5) OpenClassrooms - Expert en Développement Logiciel, full stack Spring/Angular',
     'Maîtrise de l\'architecture réactive complète (Angular + Spring WebFlux + R2DBC avec PostgreSQL)',
     'Leadership technique : management d\'équipes, formation, méthodologie Agile/SCRUM',
     'DevOps : CI/CD, Docker, intégration continue, déploiement automatisé'
@@ -211,7 +211,7 @@ export class CvComponent {
     'Veille technologique et R&D',
     'Sports nautiques (jetsurf, voile)',
     'Cyclisme et randonnée',
-    'Secourisme (SST valide)',
+    'Secourisme (SST)',
     'Technologies émergentes'
   ];
 
