@@ -26,7 +26,7 @@ export class CvComponent {
 
   personalInfo = {
     name: 'Christophe Pierrès',
-    title: 'Développeur Full-Stack Expert • Angular/Spring • Architecte Solutions',
+    title: 'Développeur Expert • Angular/Spring • Intelligence Artificielle • Architecte Solutions',
     location: 'Tourcoing (59)',
     phone: '+33 (0) 781 425 406',
     email: 'cpierres@hotmail.com',
@@ -37,7 +37,7 @@ export class CvComponent {
   };
 
   summary = [
-    'Expert en développement full-stack avec 25 ans d\'expérience en architecture JEE',
+    'Expert en développement java avec 25 ans d\'expérience en architecture JEE',
     'Certification niveau 7 (BAC+5) OpenClassrooms - Expert en Développement Logiciel, spécialités Spring/Angular',
     'Maîtrise de l\'architecture réactive complète (Angular + Spring WebFlux + R2DBC avec PostgreSQL)',
     'Leadership technique : management d\'équipes, formation, méthodologie Agile/SCRUM',
@@ -47,7 +47,7 @@ export class CvComponent {
   technicalSkills = {
     frontend: ['Angular 14 à 20', 'TypeScript', 'RxJS', 'Angular Material', 'Signals', 'ADF JSF'],
     backend: ['Spring Boot 3', 'Spring WebFlux', 'JPA/Spring Data', 'R2DBC', 'Kafka', 'PostgreSQL','ADF BC'],
-    testing: ['JUnit 5', 'Jest', 'Cypress', 'TestBed', 'Mockito', 'TDD/BDD', 'Gherkin/Cucumber', 'Couverture >90%'],
+    testing: ['Spring Tests', 'JUnit 5', 'Jest', 'Cypress', 'TestBed', 'Mockito', 'TDD/BDD', 'Gherkin/Cucumber', 'Couverture >90%'],
     security: ['JWT', 'Spring Security', 'CORS', 'CSRF', 'OWASP', 'RGPD', 'Audit sécurité'],
     devops: ['Docker', 'GitHub Actions', 'Jenkins', 'Maven', 'Git/GitFlow', 'SonarQube',`Cloud/NAS Synology`],
     architecture: ['Microservices', 'Reactive Programming', 'REST API', 'SSE', 'WebSockets', 'UML'],
@@ -56,10 +56,10 @@ export class CvComponent {
     legacyMigration: [
       'JDeveloper/Oracle ADF (10g/11g/12c)',
       'PL/SQL',
+      'Weblogic',
       'Oracle Forms',
       'Oracle Reports',
       'Oracle Database',
-      'Weblogic',
       'PAL/ObjectPAL (Paradox)',
       'DB2'
     ]
