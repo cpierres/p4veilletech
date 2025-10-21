@@ -3,19 +3,14 @@ package com.cpierres.p4veilletech.backend.service;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.chat.client.ChatClient;
-import org.springframework.ai.chat.messages.Message;
-import org.springframework.ai.chat.messages.SystemMessage;
-import org.springframework.ai.chat.messages.UserMessage;
-import org.springframework.ai.document.Document;
-import org.springframework.ai.vectorstore.SearchRequest;
+import org.springframework.ai.chat.client.advisor.vectorstore.QuestionAnswerAdvisor;
 import org.springframework.ai.vectorstore.VectorStore;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.core.scheduler.Schedulers;
 
-import java.util.List;
 import java.util.Locale;
-import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -54,55 +49,31 @@ public class ChatRagService {
 //                .content();
 //    }
 
-  public Mono<String> chat(String userMessage, String lang) {
+  public Flux<String> chat(String userMessage, String lang) {
     return Mono.fromCallable(() -> {
-      // Tout ce code sera exécuté sur un thread bloquant dédié
       String normalized = (lang == null || lang.isBlank()) ? "fr" : lang.toLowerCase(Locale.ROOT);
       boolean french = !normalized.startsWith("en");
-      String system = french ? buildFrSystemPrompt() : buildEnSystemPrompt();
+      String systemPrompt = french ? buildFrSystemPrompt() : buildEnSystemPrompt();
 
-      // Appel bloquant à la vector store
-      List<Document> docs = vectorStore.similaritySearch(
-        SearchRequest.builder().query(userMessage).topK(6).build()
-      );
+      return new Object[] { systemPrompt, userMessage, french };
+    })
+    .subscribeOn(Schedulers.boundedElastic())
+    .flatMapMany(data -> {
+      String systemPrompt = (String) data[0];
+      String userMsg = (String) data[1];
+      boolean french = (boolean) data[2];
 
-      log.debug("Nombre de documents trouvés : " + docs.size());
-      if (docs.isEmpty()) {
-        log.debug("Aucun document trouvé pour la requête : " + userMessage);
-      } else {
-        docs.forEach(d -> log.debug("Document : " + d.getFormattedContent()));
-      }
-
-      String context = docs.stream()
-        .map(d -> "Source: " + d.getMetadata().getOrDefault("source", "unknown") + "\n" + getDocText(d))
-        .collect(Collectors.joining("\n\n---\n\n"));
-      String user = french
-        ? "Question de l'utilisateur: " + userMessage + "\n\nContexte RAG (extraits de mon CV/expériences):\n" + context
-        : "User question: " + userMessage + "\n\nRAG context (snippets from my CV/experience):\n" + context;
-      Message sysMsg = new SystemMessage(system);
-      Message usrMsg = new UserMessage(user);
+      // Utilisation de l'API moderne avec QuestionAnswerAdvisor
       ChatClient chatClient = chatClientBuilder.build();
 
-      // Appel bloquant au chat client
       return chatClient.prompt()
-        .messages(sysMsg, usrMsg)
-        .call()
+        .system(systemPrompt)
+        .user(userMsg)
+        .advisors(new QuestionAnswerAdvisor(vectorStore))
+        .stream()
         .content();
-    }).subscribeOn(Schedulers.boundedElastic());
+    });
   }
-
-    private String getDocText(Document d) {
-        try {
-            // Spring AI 1.0.x uses getContent(), older snapshots used getText()
-            return (String) Document.class.getMethod("getContent").invoke(d);
-        } catch (Exception e) {
-            try {
-                return (String) Document.class.getMethod("getText").invoke(d);
-            } catch (Exception ex) {
-                return String.valueOf(d);
-            }
-        }
-    }
 
     private String buildFrSystemPrompt() {
         return String.join("\n",
