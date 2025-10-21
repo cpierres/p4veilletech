@@ -41,7 +41,7 @@ export class MeComponent implements OnInit {
   // Compétences techniques organisées par catégorie
   skills = {
     frontend: [
-      { name: 'Angular 19 + Signals', level: 'advanced' },
+      { name: 'Angular 19 + Signals', level: '' },
       { name: 'TypeScript', level: 'expert' },
       { name: 'RxJS Reactive', level: 'advanced' },
       { name: 'Angular Material', level: 'expert' }
@@ -108,7 +108,7 @@ export class MeComponent implements OnInit {
       type: 'email',
       title: 'Email',
       description: 'Contact Professionnel',
-      url: 'mailto:contact@example.com',
+      url: 'mailto:cpierres@hotmail.com',
       icon: 'email'
     },
     {
