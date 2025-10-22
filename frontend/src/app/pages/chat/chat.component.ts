@@ -64,35 +64,15 @@ export class ChatComponent {
       eventSource = new EventSource(url);
 
       eventSource.onmessage = (event) => {
-        const chunk = event.data;
-
-        // Si le chunk est vide, ignorer
-        if (!chunk || chunk.trim() === '') {
-          return;
-        }
+// Dans onmessage, décode les espaces
+        const chunk = event.data.replace(/\u00A0/g, ' ');
+        //console.log(`Chunk décodé : "${chunk}"`);
+        if (!chunk) return;
 
         hasReceivedData = true;
+        buffer += chunk; // Concaténation directe
 
-        // Ajouter au buffer (avec un espace avant si ce n'est pas le premier chunk et que le buffer n'est pas vide)
-        // La plupart des LLM incluent l'espace dans le token suivant, donc on doit l'ajouter
-        if (buffer === '' && this.messages()[assistantIndex].text === '') {
-          // Premier chunk, pas d'espace avant
-          buffer += chunk;
-        } else {
-          // Ajouter un espace avant le chunk sauf si le chunk commence déjà par un espace ou une ponctuation
-          if (!chunk.startsWith(' ') && !chunk.match(/^[.,!?;:)}\]]/)) {
-            buffer += ' ' + chunk;
-          } else {
-            buffer += chunk;
-          }
-        }
-
-        // Annuler le timeout précédent
-        if (timeoutId) {
-          clearTimeout(timeoutId);
-        }
-
-        // Flush le buffer après 30ms d'inactivité ou si on a accumulé assez de caractères
+        if (timeoutId) clearTimeout(timeoutId);
         if (buffer.length > 15) {
           flushBuffer();
         } else {
