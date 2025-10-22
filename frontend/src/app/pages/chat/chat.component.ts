@@ -10,6 +10,7 @@ import {MatSelectModule} from '@angular/material/select';
 interface ChatMessage {
   role: 'user' | 'assistant';
   text: string;
+  audioUrl?: string | null; // cached TTS URL
 }
 
 @Component({
@@ -23,18 +24,26 @@ export class ChatComponent implements AfterViewChecked {
   lang = signal<'fr' | 'en'>('fr');
   input = signal<string>('');
   loading = signal<boolean>(false);
+  ttsEnabled = signal<boolean>(false);
   messages = signal<ChatMessage[]>([
-    {role: 'assistant', text: "Bonjour ! Posez-moi vos questions sur l'expérience professionnelle de Christophe PIERRES."}
+    {role: 'assistant', text: "Bonjour ! Posez-moi vos questions sur l'expérience professionnelle de Christophe PIERRES.", audioUrl: null}
   ]);
 
   isRecording = false;
   private mediaRecorder: MediaRecorder | null = null;
   private audioChunks: BlobPart[] = [];
+  private currentAudio: HTMLAudioElement | null = null;
 
   @ViewChild('messagesContainer') private messagesContainer!: ElementRef;
   private shouldScroll = true;
 
   constructor(private http: HttpClient) {}
+
+  onTtsToggle(event: Event) {
+    const target = event.target as HTMLInputElement | null;
+    const checked = !!target && !!target.checked;
+    this.ttsEnabled.set(checked);
+  }
 
   ngAfterViewChecked() {
     this.scrollToBottom();
@@ -121,16 +130,21 @@ export class ChatComponent implements AfterViewChecked {
             const emptyMsg = this.lang() === 'fr' ? 'Aucune réponse reçue.' : 'No response received.';
             this.messages.update((m: ChatMessage[]) => {
               const updated = [...m];
-              updated[assistantIndex] = {role: 'assistant', text: emptyMsg};
+              updated[assistantIndex] = {role: 'assistant', text: emptyMsg, audioUrl: null};
               return updated;
             });
+          } else {
+            // Auto TTS si activé
+            if (this.ttsEnabled()) {
+              this.playMessageTts(assistantIndex, true);
+            }
           }
         } else {
           // Erreur réelle - aucune donnée reçue
           const err = this.lang() === 'fr' ? "Une erreur est survenue côté serveur." : "A server error occurred.";
           this.messages.update((m: ChatMessage[]) => {
             const updated = [...m];
-            updated[assistantIndex] = {role: 'assistant', text: err};
+            updated[assistantIndex] = {role: 'assistant', text: err, audioUrl: null};
             return updated;
           });
         }
@@ -186,6 +200,42 @@ export class ChatComponent implements AfterViewChecked {
     } catch (err) {
       console.error(err);
       alert(this.lang() === 'fr' ? 'Impossible de démarrer l\'enregistrement audio.' : 'Unable to start audio recording.');
+    }
+  }
+
+  async playMessageTts(index: number, autoPlay: boolean = false) {
+    const msgs = this.messages();
+    if (!msgs[index] || msgs[index].role !== 'assistant') return;
+    const text = msgs[index].text?.trim();
+    if (!text) return;
+
+    try {
+      // Stop current audio if any
+      if (this.currentAudio) {
+        this.currentAudio.pause();
+        this.currentAudio = null;
+      }
+
+      let audioUrl = msgs[index].audioUrl;
+      if (!audioUrl) {
+        const blob = await this.http.get(`/api/chat/tts?text=${encodeURIComponent(text)}&lang=${this.lang()}&format=mp3`, { responseType: 'blob' }).toPromise();
+        if (!blob) return;
+        audioUrl = URL.createObjectURL(blob);
+        this.messages.update((m: ChatMessage[]) => {
+          const updated = [...m];
+          updated[index] = { ...updated[index], audioUrl };
+          return updated;
+        });
+      }
+
+      const audio = new Audio(audioUrl!);
+      this.currentAudio = audio;
+      await audio.play();
+    } catch (e) {
+      console.error(e);
+      if (!autoPlay) {
+        alert(this.lang() === 'fr' ? 'Lecture TTS impossible.' : 'Unable to play TTS.');
+      }
     }
   }
 

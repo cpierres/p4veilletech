@@ -102,5 +102,77 @@ public class ChatController {
         }).subscribeOn(reactor.core.scheduler.Schedulers.boundedElastic()))
         .onErrorResume(ex -> reactor.core.publisher.Mono.just(ResponseEntity.status(500).body("Transcription failed")));
   }
+  @GetMapping(value = "/chat/tts")
+  public ResponseEntity<byte[]> tts(
+      @RequestParam("text") String text,
+      @RequestParam(value = "voice", required = false, defaultValue = "alloy") String voice,
+      @RequestParam(value = "format", required = false, defaultValue = "mp3") String format,
+      @RequestParam(value = "lang", required = false, defaultValue = "fr") String lang
+  ) {
+    try {
+      if (text == null || text.isBlank()) {
+        return ResponseEntity.badRequest().body(new byte[0]);
+      }
+      // Prefer environment var OPENAI_API_KEY; fallback to system property spring.ai.openai.api-key
+      String apiKey = System.getenv("OPENAI_API_KEY");
+      if (apiKey == null || apiKey.isBlank()) {
+        apiKey = System.getProperty("spring.ai.openai.api-key");
+      }
+      if (apiKey == null || apiKey.isBlank()) {
+        return ResponseEntity.status(500).body(new byte[0]);
+      }
+
+      String model = "gpt-4o-mini-tts"; // OpenAI text-to-speech
+
+      RestTemplate rest = new RestTemplate();
+      HttpHeaders headers = new HttpHeaders();
+      headers.setBearerAuth(apiKey);
+      headers.setContentType(MediaType.APPLICATION_JSON);
+      // Prefer mp3 for wide support
+      if ("mp3".equalsIgnoreCase(format)) {
+        headers.set(HttpHeaders.ACCEPT, "audio/mpeg");
+      }
+
+      String json = String.format("{\n  \"model\": \"%s\",\n  \"input\": %s,\n  \"voice\": %s,\n  \"format\": %s\n}",
+          model,
+          toJson(text),
+          toJson(voice),
+          toJson(format));
+
+      HttpEntity<String> request = new HttpEntity<>(json, headers);
+      ResponseEntity<byte[]> response = rest.postForEntity(
+          "https://api.openai.com/v1/audio/speech",
+          request,
+          byte[].class
+      );
+
+      MediaType contentType = MediaType.APPLICATION_OCTET_STREAM;
+      if ("mp3".equalsIgnoreCase(format)) {
+        contentType = MediaType.parseMediaType("audio/mpeg");
+      } else if ("wav".equalsIgnoreCase(format)) {
+        contentType = MediaType.parseMediaType("audio/wav");
+      } else if ("ogg".equalsIgnoreCase(format) || "opus".equalsIgnoreCase(format)) {
+        contentType = MediaType.parseMediaType("audio/ogg");
+      }
+
+      return ResponseEntity.status(response.getStatusCode())
+          .contentType(contentType)
+          .body(response.getBody());
+
+    } catch (Exception ex) {
+      return ResponseEntity.status(500).body(new byte[0]);
+    }
+  }
+
+  // Minimal JSON escaper for building small payloads without extra deps
+  private static String toJson(String s) {
+    if (s == null) return "null";
+    String escaped = s
+        .replace("\\", "\\\\")
+        .replace("\"", "\\\"")
+        .replace("\n", "\\n")
+        .replace("\r", "\\r");
+    return "\"" + escaped + "\"";
+  }
 }
 

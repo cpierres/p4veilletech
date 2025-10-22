@@ -11,9 +11,21 @@
   </div>
 
   <div class="messages" #messagesContainer>
-    <div *ngFor="let m of messages()" [class.user]="m.role==='user'" [class.assistant]="m.role==='assistant'" class="message">
-      <div class="bubble">{{m.text}}</div>
+    <div *ngFor="let m of messages(); let i = index" [class.user]="m.role==='user'" [class.assistant]="m.role==='assistant'" class="message">
+      <div class="bubble">
+        {{m.text}}
+        <button *ngIf="m.role==='assistant' && m.text && m.text.trim()" type="button" (click)="playMessageTts(i)" style="margin-left:8px;" mat-stroked-button>
+          🔊
+        </button>
+      </div>
     </div>
+  </div>
+
+  <div style="display:flex; align-items:center; gap:12px; margin-top:8px;">
+    <label style="font-size: 13px; display:flex; align-items:center; gap:6px; cursor:pointer;">
+      <input type="checkbox" [checked]="ttsEnabled()" (change)="onTtsToggle($event)" />
+      {{ lang()==='fr' ? 'Lire la réponse (TTS)' : 'Read the answer (TTS)' }}
+    </label>
   </div>
 
   <form (ngSubmit)="send()" class="input-row">
