@@ -26,7 +26,7 @@ export class ChatComponent implements AfterViewChecked {
   loading = signal<boolean>(false);
   ttsEnabled = signal<boolean>(false);
   messages = signal<ChatMessage[]>([
-    {role: 'assistant', text: "Bonjour ! Posez-moi vos questions sur l'expérience professionnelle de Christophe PIERRES.", audioUrl: null}
+    {role: 'assistant', text: "Bonjour ! Posez-moi vos questions sur l'expérience professionnelle de Christophe Pierrès.", audioUrl: null}
   ]);
 
   isRecording = false;

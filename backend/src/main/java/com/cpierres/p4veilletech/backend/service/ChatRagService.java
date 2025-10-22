@@ -78,7 +78,7 @@ public class ChatRagService {
 
     private String buildFrSystemPrompt() {
         return String.join("\n",
-                "Tu es un chatbot francophone spécialisé pour répondre sur le parcours et l'expérience professionnelle de Christophe PIERRES.",
+                "Tu es un chatbot francophone spécialisé pour répondre sur le parcours et l'expérience professionnelle de Christophe Pierrès.",
                 "Utilise un ton professionnel, clair et concis.",
                 "Base tes réponses PRIORITAIREMENT sur le contexte fourni (RAG) provenant de la base vectorielle.",
                 "Si l'information n'est pas disponible dans le contexte, indique-le poliment et propose de reformuler.",
@@ -88,7 +88,7 @@ public class ChatRagService {
 
     private String buildEnSystemPrompt() {
         return String.join("\n",
-                "You are an English-speaking chatbot that answers questions about Christophe PIERRES' professional background.",
+                "You are an English-speaking chatbot that answers questions about Christophe Pierrès' professional background.",
                 "Use a professional, clear and concise tone.",
                 "Ground your answers PRIMARILY on the provided RAG context from the vector database.",
                 "If the information is not available, say so politely and suggest a rephrasing.",
