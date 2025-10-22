@@ -10,7 +10,7 @@
     </mat-form-field>
   </div>
 
-  <div class="messages">
+  <div class="messages" #messagesContainer>
     <div *ngFor="let m of messages()" [class.user]="m.role==='user'" [class.assistant]="m.role==='assistant'" class="message">
       <div class="bubble">{{m.text}}</div>
     </div>

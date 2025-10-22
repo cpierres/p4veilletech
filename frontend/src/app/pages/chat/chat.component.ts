@@ -1,4 +1,4 @@
-import {Component, signal} from '@angular/core';
+import {Component, signal, ViewChild, ElementRef, AfterViewChecked} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {HttpClient} from '@angular/common/http';
 import {NgForOf} from '@angular/common';
@@ -19,7 +19,7 @@ interface ChatMessage {
   templateUrl: './chat.component.html',
   styleUrl: './chat.component.css'
 })
-export class ChatComponent {
+export class ChatComponent implements AfterViewChecked {
   lang = signal<'fr' | 'en'>('fr');
   input = signal<string>('');
   loading = signal<boolean>(false);
@@ -27,7 +27,25 @@ export class ChatComponent {
     {role: 'assistant', text: "Bonjour ! Posez-moi vos questions sur l'expérience professionnelle de Christophe PIERRES."}
   ]);
 
+  @ViewChild('messagesContainer') private messagesContainer!: ElementRef;
+  private shouldScroll = true;
+
   constructor(private http: HttpClient) {}
+
+  ngAfterViewChecked() {
+    this.scrollToBottom();
+  }
+
+  private scrollToBottom(): void {
+    if (this.shouldScroll && this.messagesContainer) {
+      try {
+        this.messagesContainer.nativeElement.scrollTop =
+          this.messagesContainer.nativeElement.scrollHeight;
+      } catch (err) {
+        // Ignorer les erreurs potentielles
+      }
+    }
+  }
 
   async send() {
     const text = this.input().trim();
