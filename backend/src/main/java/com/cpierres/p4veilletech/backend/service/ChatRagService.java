@@ -71,7 +71,8 @@ public class ChatRagService {
         .user(userMsg)
         .advisors(new QuestionAnswerAdvisor(vectorStore))
         .stream()
-        .content();
+        .content()
+        .map(chunk -> chunk.replace(" ", "\u00A0")); // Remplace les espaces par insécable;
     });
   }
 
