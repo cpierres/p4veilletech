@@ -10,7 +10,7 @@
   </parent>
   <groupId>com.cpierres.p4veilletech</groupId>
   <artifactId>backend</artifactId>
-  <version>0.0.2-SNAPSHOT</version>
+  <version>0.0.3-SNAPSHOT</version>
   <name>backend-p4</name>
   <description>backend</description>
   <url/>
