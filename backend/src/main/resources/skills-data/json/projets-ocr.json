@@ -1,10 +1,10 @@
 {
-  "generatedAt": "2025-10-06T14:23:08.338Z",
   "sourcePaths": {
     "html": "src/app/pages/about/projets-ocr/projets-ocr.component.html",
     "evaluationsMd": "src/assets/docs/projets-openclassrooms-evaluations.md"
   },
-  "projectCount": 14,
+  "projectName": "Projets OpenClassrooms",
+  "projectCount": 12,
   "projects": [
     {
       "id": 1,
