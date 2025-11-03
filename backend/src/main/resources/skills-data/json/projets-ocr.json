@@ -1,8 +1,4 @@
 {
-  "sourcePaths": {
-    "html": "src/app/pages/about/projets-ocr/projets-ocr.component.html",
-    "evaluationsMd": "src/assets/docs/projets-openclassrooms-evaluations.md"
-  },
   "projectName": "Projets OpenClassrooms",
   "projectCount": 12,
   "projects": [
@@ -60,7 +56,7 @@
           "text": "Vidéo de soutenance"
         },
         {
-          "href": "/assets/pdf/P2-pres-15mn.pdf",
+          "href": "/skills-data/pdf/ocr-projets-livrables/P2-pres-15mn.pdf",
           "text": "Support de Présentation"
         }
       ],
@@ -111,7 +107,7 @@
           "text": "Vidéo de Soutenance\nDémonstration API (16 min)"
         },
         {
-          "href": "/assets/pdf/P3-pres-16mn.pdf",
+          "href": "/skills-data/pdf/ocr-projets-livrables/P3-pres-16mn.pdf",
           "text": "Support de Présentation\nArchitecture & sécurité"
         },
         {
@@ -240,7 +236,7 @@
           "text": "Vidéo de Soutenance\nDémonstration tests (15 min)"
         },
         {
-          "href": "/assets/pdf/P5-pres-15mn.pdf",
+          "href": "/skills-data/pdf/ocr-projets-livrables/P5-pres-15mn.pdf",
           "text": "Support de Présentation\nStratégies & métriques"
         },
         {
@@ -306,7 +302,7 @@
           "text": "Vidéo de Soutenance\nDémonstration live (15 min)"
         },
         {
-          "href": "/assets/pdf/P6-slide-notshown.pdf",
+          "href": "/skills-data/pdf/ocr-projets-livrables/P6-slide-notshown.pdf",
           "text": "Support de Présentation\nArchitecture & démonstration"
         },
         {
@@ -314,7 +310,7 @@
           "text": "Application Live"
         },
         {
-          "href": "/assets/pdf/P6-choix-tech-archi-mvp.pdf",
+          "href": "/skills-data/pdf/ocr-projets-livrables/P6-choix-tech-archi-mvp.pdf",
           "text": "Dossier Architecture"
         },
         {
@@ -429,11 +425,11 @@
           "text": "Vidéo de Soutenance\nAudit & spécifications"
         },
         {
-          "href": "/assets/pdf/P8-AuditExistant.pdf",
+          "href": "/skills-data/pdf/ocr-projets-livrables/P8-AuditExistant.pdf",
           "text": "Audit de l'Existant"
         },
         {
-          "href": "/assets/pdf/P8-CahierChargesLiVrai-V2.pdf",
+          "href": "/skills-data/pdf/ocr-projets-livrables/P8-CahierChargesLiVrai-V2.pdf",
           "text": "Cahier des Charges"
         }
       ],
@@ -499,7 +495,7 @@
           "text": "Vidéo de Soutenance\nStratégie commerciale"
         },
         {
-          "href": "/assets/pdf/P9_proposition_ccial_072025.pdf",
+          "href": "/skills-data/pdf/ocr-projets-livrables/P9_proposition_ccial_072025.pdf",
           "text": "Proposition Commerciale"
         }
       ],
@@ -568,7 +564,7 @@
           "text": "Vidéo Soutenance P2\nDémonstration live"
         },
         {
-          "href": "/assets/pdf/P10_explication-cicd-sonar202508.pdf",
+          "href": "/skills-data/pdf/ocr-projets-livrables/P10_explication-cicd-sonar202508.pdf",
           "text": "Dossier Technique\nCI/CD & métriques SonarQube"
         },
         {
@@ -633,19 +629,19 @@
           "text": "Vidéo de Soutenance\nManagement & gouvernance"
         },
         {
-          "href": "/assets/pdf/P11_1_backlog_202508.pdf",
+          "href": "/skills-data/pdf/ocr-projets-livrables/P11_1_backlog_202508.pdf",
           "text": "Sprint Backlog"
         },
         {
-          "href": "/assets/pdf/P11_2_RGPD_ITIL_202508.pdf",
+          "href": "/skills-data/pdf/ocr-projets-livrables/P11_2_RGPD_ITIL_202508.pdf",
           "text": "Conformité RGPD & ITIL"
         },
         {
-          "href": "/assets/pdf/P11_3_plan_action_202508.pdf",
+          "href": "/skills-data/pdf/ocr-projets-livrables/P11_3_plan_action_202508.pdf",
           "text": "Plan d'Actions Daily Scrum"
         },
         {
-          "href": "/assets/pdf/P11_4_fiche_de_poste_202508.pdf",
+          "href": "/skills-data/pdf/ocr-projets-livrables/P11_4_fiche_de_poste_202508.pdf",
           "text": "Fiche de Poste QA Engineer"
         }
       ],
@@ -709,15 +705,15 @@
           "text": "Vidéo de Soutenance\nStratégies de planification"
         },
         {
-          "href": "/assets/pdf/P12_1_test_202508.pdf",
+          "href": "/skills-data/pdf/ocr-projets-livrables/P12_1_test_202508.pdf",
           "text": "Plan de Tests (TDD/BDD)"
         },
         {
-          "href": "/assets/pdf/P12_2_securite_202508.pdf",
+          "href": "/skills-data/pdf/ocr-projets-livrables/P12_2_securite_202508.pdf",
           "text": "Plan de Sécurité"
         },
         {
-          "href": "/assets/pdf/P12_3_donnees_202508.pdf",
+          "href": "/skills-data/pdf/ocr-projets-livrables/P12_3_donnees_202508.pdf",
           "text": "Plan de Sauvegarde"
         }
       ],
@@ -771,19 +767,19 @@
           "text": "Vidéo de Soutenance\nArchitecture & démonstration"
         },
         {
-          "href": "/assets/pdf/P13_4_presentation_202508.pdf",
+          "href": "/skills-data/pdf/ocr-projets-livrables/P13_4_presentation_202508.pdf",
           "text": "Support de Présentation\nSynthèse architecture"
         },
         {
-          "href": "/assets/pdf/P13_1_business_requirements_202508.pdf",
+          "href": "/skills-data/pdf/ocr-projets-livrables/P13_1_business_requirements_202508.pdf",
           "text": "Business Requirements"
         },
         {
-          "href": "/assets/pdf/P13_2_architecture_document_202508.pdf",
+          "href": "/skills-data/pdf/ocr-projets-livrables/P13_2_architecture_document_202508.pdf",
           "text": "Architecture Document"
         },
         {
-          "href": "/assets/pdf/P13_3_compliance_assessment_202508.pdf",
+          "href": "/skills-data/pdf/ocr-projets-livrables/P13_3_compliance_assessment_202508.pdf",
           "text": "Compliance Assessment"
         },
         {

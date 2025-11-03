@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.advisor.vectorstore.QuestionAnswerAdvisor;
+import org.springframework.ai.vectorstore.SearchRequest;
 import org.springframework.ai.vectorstore.VectorStore;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
@@ -65,11 +66,14 @@ public class ChatRagService {
 
       // Utilisation de l'API moderne avec QuestionAnswerAdvisor
       ChatClient chatClient = chatClientBuilder.build();
+      var qaAdvisor = QuestionAnswerAdvisor.builder(vectorStore)
+        .searchRequest(SearchRequest.builder().similarityThreshold(0.4d).topK(12).build())
+        .build();
 
       return chatClient.prompt()
         .system(systemPrompt)
         .user(userMsg)
-        .advisors(new QuestionAnswerAdvisor(vectorStore))
+        .advisors(qaAdvisor)
         .stream()
         .content()
         .map(chunk -> chunk.replace(" ", "\u00A0")); // Remplace les espaces par insécable;
@@ -79,8 +83,10 @@ public class ChatRagService {
     private String buildFrSystemPrompt() {
         return String.join("\n",
                 "Tu es un chatbot francophone spécialisé pour répondre sur le parcours et l'expérience professionnelle de Christophe Pierrès.",
-                "Utilise un ton professionnel, clair et concis.",
+                //"Utilise un ton professionnel, clair et concis.",
+                "Utilise un ton professionnel.",
                 "Base tes réponses PRIORITAIREMENT sur le contexte fourni (RAG) provenant de la base vectorielle.",
+                //"Si la question demande une liste complète (par exemple, 'liste tous les projets'), utilise TOUS les documents fournies dans le contexte, même s'ils sont nombreux.",
                 "Si l'information n'est pas disponible dans le contexte, indique-le poliment et propose de reformuler.",
                 "Inclue la source (champ 'source' s'il est présent) quand c'est pertinent.",
                 "Réponds en français par défaut.");
