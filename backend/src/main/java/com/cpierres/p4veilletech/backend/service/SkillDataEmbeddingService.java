@@ -7,10 +7,12 @@ import org.springframework.ai.document.Document;
 import org.springframework.ai.document.DocumentReader;
 import org.springframework.ai.document.DocumentTransformer;
 import org.springframework.ai.embedding.EmbeddingModel;
+import org.springframework.ai.reader.JsonReader;
 import org.springframework.ai.reader.pdf.PagePdfDocumentReader;
 import org.springframework.ai.reader.tika.TikaDocumentReader;
 import org.springframework.ai.transformer.splitter.TokenTextSplitter;
 import org.springframework.ai.vectorstore.VectorStore;
+import com.cpierres.p4veilletech.backend.rag.JsonLoader;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.event.EventListener;
@@ -30,11 +32,9 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class SkillDataEmbeddingService {
-
-    private final EmbeddingModel embeddingModel;
     private final VectorStore vectorStore;
-    private final ResourceLoader resourceLoader;
     private final DocumentTransformer textSplitter;
+    private final JsonLoader jsonLoader;
 
   @Value("classpath:skills-data")
     private Resource skillsDataResource;
@@ -61,6 +61,7 @@ public class SkillDataEmbeddingService {
                 });
         if (!allDocs.isEmpty()) {
             log.info("[Embeddings] Génération des embeddings et stockage dans vectorstore ({} documents)", allDocs.size());
+            allDocs.forEach(doc -> log.info("CPI [Embeddings] Document : {}", doc.getFormattedContent()));
             vectorStore.add(allDocs);
         } else {
             log.warn("[Embeddings] Aucun document trouvé pour vectorisation.");
@@ -71,24 +72,41 @@ public class SkillDataEmbeddingService {
         String ext = getExtension(filePath.getFileName().toString()).toLowerCase();
         // Spring AI 1.0.3 : les readers consomment une Resource, pas un Path
         FileSystemResource fileResource = new FileSystemResource(filePath.toFile());
-        DocumentReader reader;
+
+        Collection<Document> docs;
         switch (ext) {
             case "pdf":
-                reader = new PagePdfDocumentReader(fileResource);
+                docs = new PagePdfDocumentReader(fileResource).get();
                 break;
             case "md":
-            case "json":
+                // Lecture générique des fichiers Markdown via Tika
+                docs = new TikaDocumentReader(fileResource).get();
+                break;
+            case "json": {
+                String filename = filePath.getFileName().toString();
+                if ("projets-ocr.json".equalsIgnoreCase(filename)) {
+                    // Utiliser la logique dédiée pour projets OCR
+                    docs = jsonLoader.parseProjetsOcr(fileResource);
+                } else if ("udemy-training.json".equalsIgnoreCase(filename)) {
+                    // Générer un Document par formation, avec titre auto si vide
+                    docs = jsonLoader.parseUdemyTrainings(fileResource);
+                } else {
+                    // Fallback : lecteur JSON générique
+                    docs = new JsonReader(fileResource).get();
+                }
+                break;
+            }
             default:
-                reader = new TikaDocumentReader(fileResource);
+                docs = new TikaDocumentReader(fileResource).get();
         }
-        Collection<Document> docs = reader.get();
+
+        // Enrichissement + découpage homogène pour tout type de source
         List<Document> splitDocs = new ArrayList<>();
         for (Document doc : docs) {
             doc.getMetadata().put("source", relPath);
             splitDocs.addAll(textSplitter.apply(List.of(doc)));
         }
-        //return docs;
-      return splitDocs;
+        return splitDocs;
     }
 
     private String getExtension(String filename) {
