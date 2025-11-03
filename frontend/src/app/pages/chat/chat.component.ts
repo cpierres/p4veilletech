@@ -6,6 +6,9 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import {MatSelectModule} from '@angular/material/select';
+import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
+import {marked} from 'marked';
+
 
 interface ChatMessage {
   role: 'user' | 'assistant';
@@ -37,7 +40,19 @@ export class ChatComponent implements AfterViewChecked {
   @ViewChild('messagesContainer') private messagesContainer!: ElementRef;
   private shouldScroll = true;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private sanitizer: DomSanitizer) {
+    // Configuration de marked pour plus de sécurité
+    marked.setOptions({
+      breaks: true, // Convertit les sauts de ligne en <br>
+      gfm: true // Markdown
+    });
+  }
+
+  // Méthode pour convertir le Markdown en HTML sécurisé
+  renderMarkdown(text: string): SafeHtml {
+    const html = marked.parse(text);
+    return this.sanitizer.sanitize(1, html) || '';
+  }
 
   onTtsToggle(event: Event) {
     const target = event.target as HTMLInputElement | null;

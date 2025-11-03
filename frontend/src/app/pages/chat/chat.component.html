@@ -13,7 +13,7 @@
   <div class="messages" #messagesContainer>
     <div *ngFor="let m of messages(); let i = index" [class.user]="m.role==='user'" [class.assistant]="m.role==='assistant'" class="message">
       <div class="bubble">
-        {{m.text}}
+        <div [innerHTML]="renderMarkdown(m.text)"></div>
         <button *ngIf="m.role==='assistant' && m.text && m.text.trim()" type="button" (click)="playMessageTts(i)" style="margin-left:8px;" mat-stroked-button>
           🔊
         </button>
