@@ -13,6 +13,7 @@ import org.springframework.ai.reader.tika.TikaDocumentReader;
 import org.springframework.ai.transformer.splitter.TokenTextSplitter;
 import org.springframework.ai.vectorstore.VectorStore;
 import com.cpierres.p4veilletech.backend.rag.JsonLoader;
+import com.cpierres.p4veilletech.backend.rag.JsonLoader;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.event.EventListener;
@@ -70,8 +71,10 @@ public class SkillDataEmbeddingService {
 
     private Collection<Document> readWithAutoReader(Path filePath, String relPath) throws Exception {
         String ext = getExtension(filePath.getFileName().toString()).toLowerCase();
-        // Spring AI 1.0.3 : les readers consomment une Resource, pas un Path
         FileSystemResource fileResource = new FileSystemResource(filePath.toFile());
+
+        String filename = filePath.getFileName().toString();
+        boolean isSpecialJson = "projets-ocr.json".equalsIgnoreCase(filename) || "udemy-training.json".equalsIgnoreCase(filename);
 
         Collection<Document> docs;
         switch (ext) {
@@ -79,34 +82,32 @@ public class SkillDataEmbeddingService {
                 docs = new PagePdfDocumentReader(fileResource).get();
                 break;
             case "md":
-                // Lecture générique des fichiers Markdown via Tika
                 docs = new TikaDocumentReader(fileResource).get();
                 break;
-            case "json": {
-                String filename = filePath.getFileName().toString();
+            case "json":
                 if ("projets-ocr.json".equalsIgnoreCase(filename)) {
-                    // Utiliser la logique dédiée pour projets OCR
                     docs = jsonLoader.parseProjetsOcr(fileResource);
                 } else if ("udemy-training.json".equalsIgnoreCase(filename)) {
-                    // Générer un Document par formation, avec titre auto si vide
                     docs = jsonLoader.parseUdemyTrainings(fileResource);
                 } else {
-                    // Fallback : lecteur JSON générique
                     docs = new JsonReader(fileResource).get();
                 }
                 break;
-            }
             default:
                 docs = new TikaDocumentReader(fileResource).get();
         }
 
-        // Enrichissement + découpage homogène pour tout type de source
-        List<Document> splitDocs = new ArrayList<>();
+        List<Document> outDocs = new ArrayList<>();
         for (Document doc : docs) {
             doc.getMetadata().put("source", relPath);
-            splitDocs.addAll(textSplitter.apply(List.of(doc)));
+            // Pas de split sur les JSON spéciaux (OCR/udemy)
+            if (isSpecialJson) {
+                outDocs.add(doc);
+            } else {
+                outDocs.addAll(textSplitter.apply(List.of(doc)));
+            }
         }
-        return splitDocs;
+        return outDocs;
     }
 
     private String getExtension(String filename) {

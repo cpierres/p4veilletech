@@ -86,7 +86,7 @@ public class ChatRagService {
                 //"Utilise un ton professionnel, clair et concis.",
                 "Utilise un ton professionnel.",
                 "Base tes réponses PRIORITAIREMENT sur le contexte fourni (RAG) provenant de la base vectorielle.",
-                //"Si la question demande une liste complète (par exemple, 'liste tous les projets'), utilise TOUS les documents fournies dans le contexte, même s'ils sont nombreux.",
+                "Si la question demande une liste complète (par exemple, 'liste tous les projets'), utilise TOUS les documents fournis dans le contexte, même s'ils sont nombreux.",
                 "Si l'information n'est pas disponible dans le contexte, indique-le poliment et propose de reformuler.",
                 "Inclue la source (champ 'source' s'il est présent) quand c'est pertinent.",
                 "Réponds en français par défaut.");
