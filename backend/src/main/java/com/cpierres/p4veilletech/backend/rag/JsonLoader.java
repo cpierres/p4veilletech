@@ -132,7 +132,12 @@ public class JsonLoader {
     return documents;
   }
 
-  // 2) API interne pour parser "udemy-training.json" et générer un Document par formation
+  /**
+   * API interne pour parser "udemy-training.json" et générer un Document par formation
+   * @param resource
+   * @return
+   * @throws IOException
+   */
   public List<Document> parseUdemyTrainings(Resource resource) throws IOException {
     List<Map<String, Object>> trainings = objectMapper.readValue(resource.getInputStream(), List.class);
     List<Document> documents = new ArrayList<>();
@@ -148,7 +153,7 @@ public class JsonLoader {
       String finalTitle = (titre == null || titre.isBlank()) ? extractUdemyTitleFromUrl(lien) : titre;
 
       StringBuilder content = new StringBuilder();
-      content.append("### Formation Udemy : ").append(finalTitle).append("\n\n");
+      content.append("### Formation Udemy suivie par Christophe Pierrès : ").append(finalTitle).append("\n\n");
       if (categorie != null) content.append("- Catégorie : ").append(categorie).append("\n");
       if (duree != null) content.append("- Durée : ").append(duree).append("\n");
       if (lien != null) content.append("- Lien : [").append(finalTitle).append("](").append(lien).append(")\n");
