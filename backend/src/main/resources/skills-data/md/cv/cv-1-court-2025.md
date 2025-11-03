@@ -1,7 +1,7 @@
 # Christophe Pierrès
 **Développeur Full-Stack Expert • Angular/Spring • Intelligence Artificielle • Architecte Solutions**
 
-📧 cpierres@hotmail.com | 📞 07 81 42 54 06 | 📍 Tourcoing (59)  | 👨‍👩‍👧‍👦 Marié, 2 enfants
+📧 christophe@pierres.ovh | 📞 07 81 42 54 06 | 📍 Tourcoing (59)  | 👨‍👩‍👧‍👦 Marié, 2 enfants
 🔗  [Veille Tech et portfolio](https://veille.cpierres.dscloud.me/) | [LinkedIn](https://www.linkedin.com/in/christophe-pierres) | [GitHub](https://github.com/cpierres) 
 
 ---

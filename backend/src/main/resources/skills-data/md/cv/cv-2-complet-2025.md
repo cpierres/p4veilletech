@@ -2,7 +2,7 @@
 **Développeur Full-Stack Expert • Angular/Spring • Architecte Solutions**
 
 **40 rue de Roncq - 59100 Tourcoing**
-📧 cpierres@hotmail.com | 📞 07 81 42 54 06
+📧 christophe@pierres.ovh | 📞 07 81 42 54 06
 🔗 [LinkedIn](https://www.linkedin.com/in/christophe-pierres) | [GitHub](https://github.com/cpierres)
 🌐 [Veille technologique / Portfolio](https://veille.cpierres.dscloud.me/) | 👨‍👩‍👧‍👦 Marié, 2 enfants
 
