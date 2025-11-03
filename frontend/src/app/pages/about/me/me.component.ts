@@ -108,7 +108,7 @@ export class MeComponent implements OnInit {
       type: 'email',
       title: 'Email',
       description: 'Contact Professionnel',
-      url: 'mailto:cpierres@hotmail.com',
+      url: 'mailto:christophe@pierres.ovh',
       icon: 'email'
     },
     {

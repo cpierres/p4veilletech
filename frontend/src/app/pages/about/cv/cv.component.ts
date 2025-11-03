@@ -29,7 +29,7 @@ export class CvComponent {
     title: 'Expert java JEE • Full stack Angular/Spring • Intelligence Artificielle • Architecte Solutions',
     location: 'Tourcoing (59)',
     phone: '+33 (0) 781 425 406',
-    email: 'cpierres@hotmail.com',
+    email: 'christophe@pierres.ovh',
     linkedin: 'https://www.linkedin.com/in/christophe-pierres',
     github: 'https://github.com/cpierres',
     website: 'https://veille.cpierres.dscloud.me/',
