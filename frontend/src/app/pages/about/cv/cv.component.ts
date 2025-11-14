@@ -215,10 +215,13 @@ export class CvComponent {
     'Technologies émergentes'
   ];
 
-  downloadCV(format: 'short' | 'long'): void {
-    const filename = format === 'short'
-      ? '2025-Christophe_Pierres_CV_court.pdf'
-      : '2025-Christophe_Pierres_CV.pdf';
+  downloadCV(format: 'short' | 'long' | 'detail'): void {
+    const filename =
+      format === 'short'
+        ? '2025-Christophe_Pierres_CV_court.pdf'
+        : format === 'detail'
+          ? '2025-Christophe_Pierres_CV_detail.pdf'
+          : '2025-Christophe_Pierres_CV.pdf';
 
     const pdfPath = `/assets/pdf/cv/${filename}`;
 
