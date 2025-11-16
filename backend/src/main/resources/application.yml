@@ -48,3 +48,9 @@ app:
     # Embedding dimension for the selected model
     # all-MiniLM-L6-v2 = 384, paraphrase-multilingual-MiniLM-L12-v2 = 384
     # dimension: ${EMBEDDING_DIMENSION:384}
+
+  github:
+    token: ${GITHUB_TOKEN:}
+    default-branch: ${GITHUB_DEFAULT_BRANCH:main}
+    eval-file: classpath:skills-data/md/ocr-projets-descriptions-evaluations/projets-openclassrooms-evaluations.md
+    http-timeout-ms: 15000
