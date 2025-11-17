@@ -18,7 +18,7 @@ services:
       retries: 5
 
   backend:
-    image: cpierres/p4vt-ia-backend:${PROJECT_VERSION:-0.0.11-SNAPSHOT}
+    image: cpierres/p4vt-ia-backend:${PROJECT_VERSION:-0.0.12-SNAPSHOT}
     container_name: p4vt-ia-backend
     depends_on:
       postgres:
@@ -28,6 +28,8 @@ services:
       SPRING_DATASOURCE_USERNAME: veilltech
       SPRING_DATASOURCE_PASSWORD: veilltech
       OPENAI_API_KEY: ${OPENAI_API_KEY}
+      # Évite les erreurs "Cannot reserve ... bytes of direct buffer memory" pour des PDF volumineux
+      JAVA_TOOL_OPTIONS: -XX:MaxDirectMemorySize=256m
       # SPRING_PROFILES_ACTIVE: prod
       # JAVA_OPTS: -Xms256m -Xmx512m
     ports:
@@ -35,7 +37,7 @@ services:
     restart: unless-stopped
 
   frontend:
-    image: cpierres/p4vt-ia-frontend:${PROJECT_VERSION:-0.0.11-SNAPSHOT}
+    image: cpierres/p4vt-ia-frontend:${PROJECT_VERSION:-0.0.12-SNAPSHOT}
     build:
       context: ./frontend
       dockerfile: Dockerfile
