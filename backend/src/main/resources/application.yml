@@ -54,3 +54,5 @@ app:
     default-branch: ${GITHUB_DEFAULT_BRANCH:main}
     eval-file: classpath:skills-data/md/ocr-projets-descriptions-evaluations/projets-openclassrooms-evaluations.md
     http-timeout-ms: 15000
+    webhook:
+      secret: ${GITHUB_WEBHOOK_SECRET}
