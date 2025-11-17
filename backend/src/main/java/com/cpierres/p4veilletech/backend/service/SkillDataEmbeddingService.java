@@ -165,9 +165,15 @@ public class SkillDataEmbeddingService {
 
     private String sha256OfFile(Path path) {
         try {
-            byte[] content = Files.readAllBytes(path);
             MessageDigest md = MessageDigest.getInstance("SHA-256");
-            byte[] digest = md.digest(content);
+            try (var is = Files.newInputStream(path);
+                 var dis = new java.security.DigestInputStream(is, md)) {
+                byte[] buffer = new byte[64 * 1024]; // 64 KiB bufferized read to avoid large direct buffers
+                while (dis.read(buffer) != -1) {
+                    // streaming read; md updated by DigestInputStream
+                }
+            }
+            byte[] digest = md.digest();
             return toHex(digest);
         } catch (Exception e) {
             log.warn("[Embeddings] Impossible de calculer le SHA-256 pour {}", path, e);
