@@ -38,7 +38,7 @@ public class GitHubReadmeUpsertService {
     private final DocumentTransformer textSplitter;
     private final VectorStoreMaintenance maintenance;
     private final ResourceLoader resourceLoader;
-    private final com.cpierres.p4veilletech.backend.util.ContentHashIndex hashIndex = new com.cpierres.p4veilletech.backend.util.ContentHashIndex();
+    private final com.cpierres.p4veilletech.backend.util.ContentHashIndex hashIndex;
 
     @Value("${app.github.token:}")
     private String githubToken;

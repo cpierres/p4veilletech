@@ -36,7 +36,7 @@ public class SkillDataEmbeddingService {
     private final JsonLoader jsonLoader;
     private final VectorStoreMaintenance vectorStoreMaintenance;
     private final GitHubReadmeUpsertService gitHubReadmeUpsertService;
-    private final transient com.cpierres.p4veilletech.backend.util.ContentHashIndex contentHashIndex = new com.cpierres.p4veilletech.backend.util.ContentHashIndex();
+    private final com.cpierres.p4veilletech.backend.util.ContentHashIndex contentHashIndex;
 
   @Value("classpath:skills-data")
     private Resource skillsDataResource;
