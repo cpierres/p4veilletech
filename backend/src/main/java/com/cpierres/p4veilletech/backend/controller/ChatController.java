@@ -32,10 +32,26 @@ public class ChatController {
 //  }
 
   @GetMapping(value = "/chat", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
-  public Flux<String> chat(
+  public ResponseEntity<Flux<String>> chat(
     @RequestParam("message") String message,
+    @RequestParam(value = "conversationId", required = false, defaultValue = "") String conversationId,
     @RequestParam(value = "lang", required = false, defaultValue = "fr") String lang) {
-    return chatRagService.chat(message, lang);
+    // Stratégie d'alimentation du conversationId:
+    // - S'il est fourni par le client (recommandé: un ID par fil de discussion), on le réutilise.
+    // - S'il est absent/vide, on en génère un côté serveur et on le renvoie dans l'entête
+    //   X-Conversation-Id pour que le client le persiste et le renvoie aux appels suivants.
+    String effectiveConversationId = conversationId;
+    if (effectiveConversationId == null || effectiveConversationId.isBlank()) {
+      effectiveConversationId = java.util.UUID.randomUUID().toString();
+    }
+
+    Flux<String> stream = chatRagService.chat(effectiveConversationId, message, lang);
+
+    return ResponseEntity
+      .ok()
+      .contentType(MediaType.TEXT_EVENT_STREAM)
+      .header("X-Conversation-Id", effectiveConversationId)
+      .body(stream);
   }
 
   @PostMapping(value = "/chat/transcribe", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.TEXT_PLAIN_VALUE)

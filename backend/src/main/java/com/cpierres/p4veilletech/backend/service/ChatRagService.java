@@ -20,6 +20,7 @@ public class ChatRagService {
 
     private final ChatClient.Builder chatClientBuilder;
     private final VectorStore vectorStore;
+    private final ChatHistoryService chatHistoryService;
 
 //    public String chat(String userMessage, String lang) {
 //        String normalized = (lang == null || lang.isBlank()) ? "fr" : lang.toLowerCase(Locale.ROOT);
@@ -50,19 +51,26 @@ public class ChatRagService {
 //                .content();
 //    }
 
-  public Flux<String> chat(String userMessage, String lang) {
+  public Flux<String> chat(String conversationId, String userMessage, String lang) {
     return Mono.fromCallable(() -> {
       String normalized = (lang == null || lang.isBlank()) ? "fr" : lang.toLowerCase(Locale.ROOT);
       boolean french = !normalized.startsWith("en");
-      String systemPrompt = french ? buildFrSystemPrompt() : buildEnSystemPrompt();
+      String baseSystem = french ? buildFrSystemPrompt() : buildEnSystemPrompt();
 
-      return new Object[] { systemPrompt, userMessage, french };
+      // Récupérer l'historique existant pour enrichir le contexte du système
+      String historyBlock = formatHistory(conversationId, french);
+      String systemPrompt = historyBlock.isBlank() ? baseSystem : baseSystem + "\n\n" + historyBlock;
+
+      return new Object[] { systemPrompt, userMessage, french, conversationId };
     })
     .subscribeOn(Schedulers.boundedElastic())
     .flatMapMany(data -> {
       String systemPrompt = (String) data[0];
       String userMsg = (String) data[1];
       boolean french = (boolean) data[2];
+      String convId = (String) data[3];
+
+      StringBuilder fullAnswer = new StringBuilder(1024);
 
       // Utilisation de l'API moderne avec QuestionAnswerAdvisor
       ChatClient chatClient = chatClientBuilder.build();
@@ -76,7 +84,17 @@ public class ChatRagService {
         .advisors(qaAdvisor)
         .stream()
         .content()
-        .map(chunk -> chunk.replace(" ", "\u00A0")); // Remplace les espaces par insécable;
+        .map(chunk -> chunk.replace(" ", "\u00A0")) // Remplace les espaces par insécable
+        .doOnNext(ch -> fullAnswer.append(ch))
+        .doOnComplete(() -> {
+          if (convId != null && !convId.isBlank()) {
+            try {
+              chatHistoryService.append(convId, userMsg, fullAnswer.toString());
+            } catch (Exception e) {
+              log.warn("Impossible d'ajouter au ChatHistory: {}", e.getMessage());
+            }
+          }
+        });
     });
   }
 
@@ -100,5 +118,27 @@ public class ChatRagService {
                 "If the information is not available, say so politely and suggest a rephrasing.",
                 "Include the source (the 'source' metadata) when relevant.",
                 "Answer in English.");
+    }
+
+    private String formatHistory(String conversationId, boolean french) {
+        if (conversationId == null || conversationId.isBlank()) return "";
+        var turns = chatHistoryService.getHistory(conversationId);
+        if (turns.isEmpty()) return "";
+        String title = french ? "Historique récent de la conversation (contexte) :" : "Recent conversation history (context):";
+        StringBuilder sb = new StringBuilder(title).append('\n');
+        for (Object o : turns) {
+            // o est de type ChatHistoryService.Turn mais interne; on accède via toString si besoin
+            try {
+                var userField = o.getClass().getDeclaredField("user");
+                userField.setAccessible(true);
+                var assistantField = o.getClass().getDeclaredField("assistant");
+                assistantField.setAccessible(true);
+                String u = (String) userField.get(o);
+                String a = (String) assistantField.get(o);
+                sb.append("- ").append(french ? "Utilisateur: " : "User: ").append(u).append('\n');
+                sb.append("  ").append(french ? "Assistant: " : "Assistant: ").append(a).append('\n');
+            } catch (Exception ignored) {}
+        }
+        return sb.toString();
     }
 }
