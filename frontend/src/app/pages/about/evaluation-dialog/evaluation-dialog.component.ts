@@ -133,9 +133,9 @@ export class EvaluationDialogComponent {
       '/assets/img/P11-evaluation-encadrer-3.jpg'
     ],
     12: [
-      '/assets/img/P12-planifier-securiser-1.jpg',
-      '/assets/img/P12-planifier-securiser-2.jpg',
-      '/assets/img/P12-planifier-securiser-3.jpg'
+      '/assets/img/P12-evaluation-planifier-securiser-1.jpg',
+      '/assets/img/P12-evaluation-planifier-securiser-2.jpg',
+      '/assets/img/P12-evaluation-planifier-securiser-3.jpg'
     ],
     13: [
       '/assets/img/P13-soutenance-architecture-1.jpg',
