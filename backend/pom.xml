@@ -5,7 +5,7 @@
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>3.5.6</version>
+    <version>3.5.8</version>
     <relativePath/> <!-- lookup parent from repository -->
   </parent>
   <groupId>com.cpierres.p4veilletech</groupId>
@@ -29,7 +29,7 @@
 
  <properties>
     <java.version>21</java.version>
-    <spring-ai.version>1.1.0-M3</spring-ai.version>
+    <spring-ai.version>1.1.1</spring-ai.version>
   </properties>
 
   <repositories>
@@ -176,6 +176,10 @@
               <artifactId>lombok</artifactId>
             </exclude>
           </excludes>
+          <docker>
+            <host>npipe:////./pipe/docker_engine</host>
+            <tlsVerify>false</tlsVerify>
+          </docker>
         </configuration>
       </plugin>
     </plugins>
