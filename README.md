@@ -12,8 +12,8 @@ Après l'obtention du diplôme, j'ai réalisé les améliorations suivantes :
 - gérer une API de chat (chatbot) alimentée par intelligence artificielle (openai)
 - stockage de mes documents de référence pour répondre aux questions sur mon expérience (RAG - Retrieval Augmented Generation) dans une base vectorielle pgVector 
   - sources de données : json, markdown, pdf, lecture des README.md des repository github + mise à jour dynamique via Webhook).
-- Réponses gérés via des flux (Spring Webflux).
-- Interaction vocale (transcription audio et lecture)
+- Réponses gérées via des flux (Spring Webflux).
+- Interactions vocales (transcription audio vers texte et lecture)
 
 ### Contexte et Objectifs
 
@@ -141,7 +141,7 @@ Résultat: pas de doublons dans pgVector et aucune consommation de tokens OpenAI
 
 ### Configuration Nginx (rappel)
 
-Ajoutez ces blocs de localisation (extraits) dans votre `nginx.conf`:
+Ajouter blocs de localisation (extraits) dans `nginx.conf`:
 
 ```
 location ^~ /api/ { proxy_pass http://backend:8080/api/; }
@@ -149,14 +149,14 @@ location = /webhook/github { proxy_pass http://backend:8080/webhook/github; }
 location = /admin/github/sync-all { proxy_pass http://backend:8080/admin/github/sync-all; }
 ```
 
-En production, utilisez HTTPS, désactivez le buffering pour SSE si nécessaire (`/api/chat`) et protégez l’endpoint `/admin/**` (auth/IP allowlist).
+En production, utiliser HTTPS, désactiver buffering pour SSE si nécessaire (`/api/chat`) et protéger l'endpoint `/admin/**` (auth/IP allowlist).
 
 ### Webhook GitHub – configuration rapide
 
 - Payload URL en prod: `https://cpierres.dscloud.me/webhook/github` (derrière Nginx qui proxifie vers le backend)
-- Content type: `application/json`
-- Événements: au minimum `push`
-- Secret: recommandé (TODO activer et valider la signature côté backend si configuré)
+- Content type : `application/json`
+- Événements : au minimum `push`
+- Secret : recommandé (TODO activer et valider la signature côté backend si configuré)
 
 Tests locaux possibles via tunnel (ngrok/Cloudflared) ou via un reverse‑proxy local. Pour un test direct: 
 
@@ -275,7 +275,7 @@ Ce JSON contient, pour chaque projet, les champs suivants:
 
 Remarques:
 - Le mappage vers `externalId` suit la convention: `Projet N` → `OC-PN` pour N ≥ 2. Les éventuels panneaux hors scope OCR n'ont pas d'`externalId`.
-- Le parser est volontairement simple et sans dépendances externes; il repose sur des heuristiques adaptées au HTML actuel. Si la structure du HTML change fortement, mettez à jour `frontend/scripts/generate-ocr-json.js` en conséquence.
+- Le parser est volontairement simple et sans dépendances externes; il repose sur des heuristiques adaptées au HTML actuel. Si la structure du HTML change fortement, mettre à jour `frontend/scripts/generate-ocr-json.js` en conséquence.
 
 ---
 
@@ -288,4 +288,4 @@ Remarques:
 - Intégration d’endpoints de démonstration côté chat/IA: SSE `/api/chat`, STT `/api/chat/transcribe`, TTS `/api/chat/tts`
 - Documentation Nginx mise à jour pour exposer proprement `/webhook/github` et `/admin/github/sync-all`
 
-Ces évolutions rendent l’ingestion GitHub dynamique, suppriment les doublons dans la base vectorielle et réduisent les coûts d’embedding.
+Ces évolutions rendent l'ingestion GitHub dynamique, suppriment les doublons dans la base vectorielle et réduisent les coûts d’embedding.
