@@ -119,7 +119,7 @@
           "text": "Repository Backend"
         }
       ],
-      "textContent": "🎯 Mission & Contraintes\nDéfi : Développer l'API backend complète pour remplacer les simulations Mockoon du frontend existant.\nAPI REST complète\nAuthentification JWT\nGestion fichiers média\nBonnes pratiques SOLID\n🏗️ Architecture Backend Classique\nFrontend\nAngular v14\nExistant\nBackend\nSpring Boot 3.4.1\nJPA/MVC\nJWT\nServices\nMySQL/PostgreSQL\nCloudinary\n🚀 Implémentations Clés\nSécurité JWT Complète\nAuthentification stateless, gestion des tokens, protection des endpoints sensibles\nGestion Fichiers Média\nIntégration Cloudinary pour upload, stockage et optimisation des images/vidéos\nTooling Professionnel\nLombok, MapStruct, Swagger, Docker - Productivité et maintenabilité maximales\n📈 Retour d'Expérience\nProductivité\nSpring Data JPA très efficace\nLimitation\nParadigmes bloquants JEE\nSécurité\nJWT bien maîtrisé\n\"Excellente introduction aux architectures Spring modernes, mais les limitations des paradigmes bloquants m'ont motivé à explorer Spring WebFlux pour les projets suivants.\"\n🎓 Évaluation & Soutenance\nVALIDÉ\nSoutenance : Présentation technique de 16 minutes avec démonstration API\nFocus : Architecture backend, sécurité JWT et bonnes pratiques\nÉvaluation Détaillée\nGrille de notation complète\nVidéo de Soutenance\nDémonstration API (16 min)\nSupport de Présentation\nArchitecture & sécurité\nRepository Backend\nEn savoir plus",
+      "textContent": "🎯 Mission & Contraintes\nDéfi : Développer l'API backend complète pour remplacer les simulations Mockoon du frontend existant.\nAPI REST complète\nAuthentification JWT\nGestion fichiers média\nBonnes pratiques SOLID\n🏗️ Architecture Backend Classique\nFrontend\nAngular v14\nExistant\nBackend\nSpring Boot 3.4.1\nJPA/MVC\nJWT\nServices\nPostgreSQL\nCloudinary\n🚀 Implémentations Clés\nSécurité JWT Complète\nAuthentification stateless, gestion des tokens, protection des endpoints sensibles\nGestion Fichiers Média\nIntégration Cloudinary pour upload, stockage et optimisation des images/vidéos\nTooling Professionnel\nLombok, MapStruct, Swagger, Docker - Productivité et maintenabilité maximales\n📈 Retour d'Expérience\nProductivité\nSpring Data JPA très efficace\nLimitation\nParadigmes bloquants JEE\nSécurité\nJWT bien maîtrisé\n\"Excellente introduction aux architectures Spring modernes, mais les limitations des paradigmes bloquants m'ont motivé à explorer Spring WebFlux pour les projets suivants.\"\n🎓 Évaluation & Soutenance\nVALIDÉ\nSoutenance : Présentation technique de 16 minutes avec démonstration API\nFocus : Architecture backend, sécurité JWT et bonnes pratiques\nÉvaluation Détaillée\nGrille de notation complète\nVidéo de Soutenance\nDémonstration API (16 min)\nSupport de Présentation\nArchitecture & sécurité\nRepository Backend\nEn savoir plus",
       "externalId": "OC-P3",
       "evaluation": {
         "project": "OC-P3",
@@ -289,7 +289,7 @@
       "description": "Architecture 100% non-bloquante : Spring WebFlux + PostgreSQL avec driver R2DBC + Angular Signals",
       "headings": [
         "🎯 Vision Produit",
-        "🏗️ Architecture Révolutionnaire",
+        "🏗️ Architecture réactive de bout en bout, fluide et résiliente (sans blocage de thread)",
         "🎪 Fonctionnalités Démontrées",
         "🏷️ Gestion des Releases & CI/CD",
         "📈 Impact & ROI Technique",
