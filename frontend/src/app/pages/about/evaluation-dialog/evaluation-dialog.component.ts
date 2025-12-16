@@ -31,6 +31,10 @@ export interface DialogData {
       </div>
     </div>
     <div mat-dialog-actions align="end">
+      <button mat-button (click)="openEvaluationPdf()">
+        <mat-icon>print</mat-icon>
+        Imprimer
+      </button>
       <button mat-button mat-dialog-close>Fermer</button>
     </div>
   `,
@@ -84,7 +88,7 @@ export interface DialogData {
 })
 export class EvaluationDialogComponent {
   // Mapping of project IDs to evaluation images
-  private projectImages: { [key: number]: string[] } = {
+  private readonly projectImages: { [key: number]: string[] } = {
     2: [
       '/assets/img/P2-evaluation-1.jpg',
       '/assets/img/P2-evaluation-2.jpg'
@@ -172,5 +176,10 @@ export class EvaluationDialogComponent {
 
   getImagesForProject(id: number): string[] {
     return this.projectImages[id] || [];
+  }
+
+  openEvaluationPdf(): void {
+    const pdfUrl = `/assets/pdf/ocr-projets/P${this.data.id}-evaluation.pdf`;
+    window.open(pdfUrl, '_blank', 'noopener,noreferrer');
   }
 }
