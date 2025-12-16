@@ -365,7 +365,7 @@ Bonne continuation pour la suite :)
 # Projet : OC-P12
 ## Evaluateur : Théo Lemoine
 ## Date : 25/08/2025
-## Titre : Planification Stratégique & Gestion des Risques IT. Plans directeurs pour tests, sécurité et sauvegarde avec méthodologies modernes
+## Titre : Planification Stratégique & Gestion des Risques IT. Plans directeurs pour tests, sécurité et sauvegardes
 ## Github :
 ## Evaluation :
 ### Compétences évaluées

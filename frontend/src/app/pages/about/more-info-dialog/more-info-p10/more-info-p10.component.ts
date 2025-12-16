@@ -19,21 +19,19 @@ import { MatIconModule } from '@angular/material/icon';
           <li><strong>Déclencheurs :</strong> Push, Pull Request, Release avec conditions intelligentes</li>
           <li><strong>Parallélisation :</strong> Jobs concurrents pour optimiser les temps de build</li>
         </ul>
-        <!-- TODO: Ajouter détails sur les workflows -->
       </div>
 
       <div class="section">
         <h3><mat-icon>analytics</mat-icon> Analyse Qualité SonarQube</h3>
         <p>
-          Intégration complète de SonarQube Cloud pour la qualité de code :
+          Intégration complète de SonarQube pour la qualité de code :
         </p>
         <ul>
           <li><strong>Métriques Qualité :</strong> Coverage, Duplications, Maintainability Index</li>
           <li><strong>Sécurité :</strong> Détection automatique des vulnérabilités et hotspots</li>
           <li><strong>Quality Gates :</strong> Seuils configurables bloquant les déploiements défaillants</li>
-          <li><strong>Debt Technique :</strong> Évaluation et suivi de la dette technique</li>
+          <li><strong>Dette Technique :</strong> Évaluation et suivi de la dette technique</li>
         </ul>
-        <!-- TODO: Détailler les métriques obtenues -->
       </div>
 
       <div class="section">
@@ -43,11 +41,9 @@ import { MatIconModule } from '@angular/material/icon';
         </p>
         <ul>
           <li><strong>Multi-stage Builds :</strong> Optimisation de la taille des images finales</li>
-          <li><strong>Multi-platform :</strong> Support AMD64 et ARM64 pour compatibilité maximale</li>
           <li><strong>Versioning :</strong> Tags automatiques basés sur Git (latest, develop, vX.Y.Z)</li>
           <li><strong>Security Scanning :</strong> Analyse des vulnérabilités des images Docker</li>
         </ul>
-        <!-- TODO: Ajouter détails sur les optimisations -->
       </div>
 
       <div class="section">
@@ -61,7 +57,6 @@ import { MatIconModule } from '@angular/material/icon';
           <li><strong>Conditional Jobs :</strong> Exécution intelligente selon les changements</li>
           <li><strong>Build Artifacts :</strong> Réutilisation des artefacts entre jobs</li>
         </ul>
-        <!-- TODO: Ajouter métriques de performance -->
       </div>
 
       <div class="section">
