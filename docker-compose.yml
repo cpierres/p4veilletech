@@ -10,7 +10,7 @@ services:
     ports:
       - "5433:5432"  # optional to expose in production
     volumes:
-      - p4vt_db_data_pg18:/var/lib/postgresql/data
+      - p4vt_db_data_pg18:/var/lib/postgresql
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U veilltech -d veilltech"]
       interval: 10s
