@@ -14,7 +14,7 @@ import java.nio.file.Paths;
  *
  * Chemin configurable par propriété / variable d'environnement:
  * - app.content-hash-index.path
- * - ou CONTENT_HASH_INDEX_PATH (priorité équivalente via le placeholder ci-dessous)
+ * - ou RAG_CONTENT_HASH_INDEX_PATH (priorité équivalente via le placeholder ci-dessous)
  *
  * Si aucun chemin n'est fourni, la classe utilise ses fallbacks internes:
  *   backend/data/..., ./data/..., ${user.home}/.p4veilletech/...
@@ -25,7 +25,7 @@ public class HashIndexConfig {
 
     @Bean
     public ContentHashIndex contentHashIndex(
-            @Value("${app.content-hash-index.path:${CONTENT_HASH_INDEX_PATH:}}") String configuredPath
+      @Value("${app.rag.content-hash-index.path:${RAG_CONTENT_HASH_INDEX_PATH:}}") String configuredPath
     ) {
         if (configuredPath != null && !configuredPath.isBlank()) {
             Path target = Paths.get(configuredPath);

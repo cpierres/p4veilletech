@@ -1,0 +1,6 @@
+app:
+  rag:
+    data-path: C:\docker-volumes\p4vt-data\backend\rag
+    #data-path: /mnt/c/docker-volumes/p4vt-data/backend/rag/
+
+

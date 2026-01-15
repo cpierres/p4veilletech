@@ -1,15 +1,13 @@
 package com.cpierres.p4veilletech.backend.rag;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.document.Document;
-import org.springframework.ai.document.DocumentReader;
-import org.springframework.ai.reader.JsonReader;
 import org.springframework.ai.vectorstore.VectorStore;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -23,8 +21,10 @@ public class JsonLoader {
   private final VectorStore vectorStore;
   private final ObjectMapper objectMapper; // Injecté automatiquement par Spring
 
-  @Value("classpath:skills-data/json/projets-ocr.json")
-  Resource jsonFile;
+  @Value("${app.rag.data-path}")
+  private String ragDataPath;
+
+  private final ResourceLoader resourceLoader;
 
   // 1) API interne pour parser le JSON "projets-ocr.json" depuis une Resource et retourner des Documents
   public List<Document> parseProjetsOcr(Resource resource) throws IOException {
@@ -200,8 +200,23 @@ public class JsonLoader {
 
   // 3) Compatibilité avec le chargement initial existant
   public void loadJson() throws IOException {
-    List<Document> documents = parseProjetsOcr(jsonFile);
-    log.info("Loaded {} projects with full content (links + evaluations)", documents.size());
+    // Si ragDataPath ne se termine pas par skills-data mais qu'il contient ce sous-répertoire, on l'ajoute
+    String effectivePath = ragDataPath;
+    if (!effectivePath.endsWith("skills-data") && !effectivePath.endsWith("skills-data/")) {
+        Resource subDir = resourceLoader.getResource(effectivePath + "/skills-data");
+        if (subDir.exists()) {
+            effectivePath = effectivePath + "/skills-data";
+        }
+    }
+
+    String path = effectivePath + "/json/projets-ocr.json";
+    Resource resource = resourceLoader.getResource(path);
+    if (!resource.exists()) {
+      log.warn("Fichier non trouvé pour loadJson initial : {}", path);
+      return;
+    }
+    List<Document> documents = parseProjetsOcr(resource);
+    log.info("Loaded {} projects with full content (links + evaluations) from {}", documents.size(), path);
     this.vectorStore.add(documents);
   }
 }
