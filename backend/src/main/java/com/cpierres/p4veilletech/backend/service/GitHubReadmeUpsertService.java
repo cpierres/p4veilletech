@@ -46,7 +46,7 @@ public class GitHubReadmeUpsertService {
     @Value("${app.github.default-branch:main}")
     private String defaultBranch;
 
-    @Value("${app.github.eval-file:classpath:skills-data/md/ocr-projets-descriptions-evaluations/projets-openclassrooms-evaluations.md}")
+    @Value("${app.github.eval-file}")
     private String evalFileLocation;
 
     private static final Pattern REPO_URL = Pattern.compile("https?://github\\.com/([A-Za-z0-9_.-]+)/([A-Za-z0-9_.-]+)(?:/.*)?");

@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.event.EventListener;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.stereotype.Service;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 
@@ -37,9 +38,10 @@ public class SkillDataEmbeddingService {
     private final VectorStoreMaintenance vectorStoreMaintenance;
     private final GitHubReadmeUpsertService gitHubReadmeUpsertService;
     private final com.cpierres.p4veilletech.backend.util.ContentHashIndex contentHashIndex;
+    private final ResourceLoader resourceLoader;
 
-  @Value("classpath:skills-data")
-    private Resource skillsDataResource;
+    @Value("${app.rag.data-path}")
+    private String skillsDataPathProperty;
 
     @EventListener(ApplicationReadyEvent.class)
     public void indexAllSkillsData() throws IOException {
@@ -51,16 +53,26 @@ public class SkillDataEmbeddingService {
         } catch (Exception e) {
             log.warn("[Embeddings] Bootstrap GitHub README ignoré (erreur non bloquante)", e);
         }
-        Path skillsDataPath = getFilePathFromResource(skillsDataResource);
-        if (skillsDataPath == null || !Files.exists(skillsDataPath)) {
-            log.warn("[Embeddings] Le répertoire skills-data n'existe pas ou n'est pas accessible : {}", skillsDataPath);
+        Path rawPath = getPathFromProperty(skillsDataPathProperty);
+        if (rawPath == null || !Files.exists(rawPath)) {
+            log.warn("[Embeddings] Le répertoire skills-data n'existe pas ou n'est pas accessible : {}", rawPath);
             return;
         }
+
+        // Si le chemin ne contient pas déjà skills-data et qu'un sous-répertoire skills-data existe, on l'utilise
+        // (Sécurité pour l'adressage du sous-répertoire mentionné dans l'issue)
+        Path finalSkillsDataPath = rawPath;
+        if (!rawPath.getFileName().toString().equals("skills-data") && Files.exists(rawPath.resolve("skills-data"))) {
+            finalSkillsDataPath = rawPath.resolve("skills-data");
+            log.info("[Embeddings] Utilisation du sous-répertoire détecté : {}", finalSkillsDataPath);
+        }
+
         int addedDocs = 0;
-        Files.walk(skillsDataPath)
+        final Path finalPathForLambda = finalSkillsDataPath;
+        Files.walk(finalPathForLambda)
             .filter(Files::isRegularFile)
             .forEach(path -> {
-                String relPath = skillsDataPath.relativize(path).toString();
+                String relPath = finalPathForLambda.relativize(path).toString();
                 try {
                     String fileKey = "file:" + relPath.replace('\\', '/');
                     String sha = sha256OfFile(path);
@@ -135,16 +147,21 @@ public class SkillDataEmbeddingService {
         return (idx != -1) ? filename.substring(idx + 1) : "";
     }
 
-    private Path getFilePathFromResource(Resource resource) {
-        try {
-            if (resource.exists()) {
-                return resource.getFile().toPath();
-            }
-        } catch (Exception e) {
-            log.error("[Embeddings] Erreur d’accès à skills-data", e);
+  private Path getPathFromProperty(String pathProperty) {
+    try {
+      if (pathProperty.startsWith("classpath:")) {
+        Resource resource = resourceLoader.getResource(pathProperty);
+        if (resource.exists()) {
+          return resource.getFile().toPath();
         }
-        return null;
+      } else {
+        return Paths.get(pathProperty);
+      }
+    } catch (Exception e) {
+      log.error("[Embeddings] Erreur d’accès au chemin : {}", pathProperty, e);
     }
+    return null;
+  }
 
     // ----------------------------------------------------------------------
     // Déduplication & IDs déterministes

@@ -18,7 +18,7 @@ services:
       retries: 5
 
   backend:
-    image: cpierres/p4vt-ia-backend:${PROJECT_VERSION:-0.0.15-SNAPSHOT}
+    image: cpierres/p4vt-ia-backend:${PROJECT_VERSION:-0.0.16-SNAPSHOT}
     container_name: p4vt-ia-backend
     depends_on:
       postgres:
@@ -30,14 +30,18 @@ services:
       OPENAI_API_KEY: ${OPENAI_API_KEY}
       # Évite les erreurs "Cannot reserve ... bytes of direct buffer memory" pour des PDF volumineux
       JAVA_TOOL_OPTIONS: -XX:MaxDirectMemorySize=256m
-      # SPRING_PROFILES_ACTIVE: prod
-      # JAVA_OPTS: -Xms256m -Xmx512m
+      SPRING_PROFILES_ACTIVE: prod
+      RAG_DATA_PATH: /app/rag-data/skills-data
     ports:
       - "8080:8080"
     restart: unless-stopped
+    volumes:
+      #- /volume1/docker-volumes/p4vt-data/backend/rag:/app/rag-data
+      # si test du déploiement en local
+      - /mnt/c/docker-volumes/p4vt-data/backend/rag:/app/rag-data
 
   frontend:
-    image: cpierres/p4vt-ia-frontend:${PROJECT_VERSION:-0.0.15-SNAPSHOT}
+    image: cpierres/p4vt-ia-frontend:${PROJECT_VERSION:-0.0.16-SNAPSHOT}
     build:
       context: ./frontend
       dockerfile: Dockerfile

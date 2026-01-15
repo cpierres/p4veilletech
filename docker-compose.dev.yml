@@ -8,7 +8,7 @@ services:
       POSTGRES_USER: veilltech
       POSTGRES_PASSWORD: veilltech
     ports:
-      - "5432:5432"
+      - "5434:5432"
     volumes:
       - p4vt_db_data_pg18:/var/lib/postgresql
     healthcheck:

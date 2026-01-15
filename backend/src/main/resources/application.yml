@@ -1,4 +1,6 @@
 spring:
+  profiles:
+    active: ${SPRING_PROFILES_ACTIVE:dev}
   application:
     name: backend
 
@@ -14,13 +16,13 @@ spring:
         remove-existing-vector-store-table: false
 
   datasource:
-    url: jdbc:postgresql://localhost:5432/veilltech
+    url: jdbc:postgresql://localhost:5434/veilltech
     username: ${POSTGRES_USER:veilltech}
     password: ${POSTGRES_PASSWORD:veilltech}
     driver-class-name: org.postgresql.Driver
 
   r2dbc:
-    url: r2dbc:postgresql://localhost:5432/veilltech
+    url: r2dbc:postgresql://localhost:5434/veilltech
     username: ${POSTGRES_USER:veilltech}
     password: ${POSTGRES_PASSWORD:veilltech}
 
@@ -35,6 +37,10 @@ logging:
 
 # Application specific settings
 app:
+  rag:
+    data-path: ${RAG_DATA_PATH}
+    content-hash-index:
+      path: ${app.rag.data-path}/_index/content-hash-index.properties
   embedding:
     # provider can be: ollama (default), openai, cohere
     provider: ${EMBEDDING_PROVIDER:openai}
@@ -52,7 +58,7 @@ app:
   github:
     token: ${GITHUB_TOKEN:}
     default-branch: ${GITHUB_DEFAULT_BRANCH:main}
-    eval-file: classpath:skills-data/md/ocr-projets-descriptions-evaluations/projets-openclassrooms-evaluations.md
+    eval-file: ${app.rag.data-path}/skills-data/md/ocr-projets-descriptions-evaluations/projets-openclassrooms-evaluations.md
     http-timeout-ms: 15000
     webhook:
       secret: ${GITHUB_WEBHOOK_SECRET}
