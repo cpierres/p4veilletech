@@ -45,7 +45,10 @@ public class SkillDataEmbeddingService {
 
     @EventListener(ApplicationReadyEvent.class)
     public void indexAllSkillsData() throws IOException {
-        log.info("[Embeddings] Initialisation : génération des embeddings OpenAI depuis skills-data ...");
+        Path finalPath = getFinalSkillsDataPath();
+        if (finalPath == null) return;
+
+        log.info("[Embeddings] Initialisation : génération des embeddings OpenAI depuis {} ...", finalPath);
         // 0) Bootstrap initial des README GitHub listés dans le fichier d'évaluations (idempotent via hash)
         try {
             int synced = gitHubReadmeUpsertService.syncAllFromEval();
@@ -53,52 +56,69 @@ public class SkillDataEmbeddingService {
         } catch (Exception e) {
             log.warn("[Embeddings] Bootstrap GitHub README ignoré (erreur non bloquante)", e);
         }
+
+        int addedDocs = 0;
+        Files.walk(finalPath)
+            .filter(Files::isRegularFile)
+            .forEach(path -> {
+                indexSingleFile(path, finalPath);
+            });
+        contentHashIndex.persist();
+    }
+
+    public void indexSingleFile(Path path, Path rootPath) {
+        String relPath = rootPath.relativize(path).toString();
+        try {
+            String fileKey = "file:" + relPath.replace('\\', '/');
+            String sha = sha256OfFile(path);
+            String previous = contentHashIndex.get(fileKey);
+            if (sha != null && sha.equals(previous)) {
+                log.info("[Embeddings] SKIP (inchangé, pas de ré-embedding): {}", relPath);
+                return; // évite consommation de tokens OpenAI
+            }
+
+            Collection<Document> docs = readWithAutoReader(path, relPath);
+            // Déduplication: IDs déterministes (si VectorStore les utilise) et skip si hash identique
+            List<Document> toAdd = assignDeterministicIds(docs, fileKey);
+            // Supprime les anciens vecteurs de ce fichier (clé = metadata.source = relPath)
+            removeFileFromIndex(relPath);
+            if (Files.exists(path)) {
+                vectorStore.add(toAdd);
+                contentHashIndex.put(fileKey, sha);
+                log.info("[Embeddings] Upsert effectué pour {} ({} chunks)", relPath, toAdd.size());
+            } else {
+                log.info("[Embeddings] Fichier supprimé entre-temps, skipping add: {}", relPath);
+            }
+            contentHashIndex.persist();
+        } catch (Throwable e) {
+            log.error("[Embeddings] Erreur lors de la lecture/vectorisation : {}", path, e);
+        }
+    }
+
+    public void removeFileFromIndex(String relPath) {
+        String sourceKey = relPath.replace('\\', '/');
+        try {
+            vectorStoreMaintenance.deleteBySource(sourceKey);
+            contentHashIndex.put("file:" + sourceKey, null);
+            contentHashIndex.persist();
+        } catch (Exception ex) {
+            log.warn("[Embeddings] Impossible de supprimer les anciens chunks pour {} (continuation en upsert simple)", relPath, ex);
+        }
+    }
+
+    public Path getFinalSkillsDataPath() {
         Path rawPath = getPathFromProperty(skillsDataPathProperty);
         if (rawPath == null || !Files.exists(rawPath)) {
             log.warn("[Embeddings] Le répertoire skills-data n'existe pas ou n'est pas accessible : {}", rawPath);
-            return;
+            return null;
         }
 
         // Si le chemin ne contient pas déjà skills-data et qu'un sous-répertoire skills-data existe, on l'utilise
         // (Sécurité pour l'adressage du sous-répertoire mentionné dans l'issue)
-        Path finalSkillsDataPath = rawPath;
         if (!rawPath.getFileName().toString().equals("skills-data") && Files.exists(rawPath.resolve("skills-data"))) {
-            finalSkillsDataPath = rawPath.resolve("skills-data");
-            log.info("[Embeddings] Utilisation du sous-répertoire détecté : {}", finalSkillsDataPath);
+            return rawPath.resolve("skills-data");
         }
-
-        int addedDocs = 0;
-        final Path finalPathForLambda = finalSkillsDataPath;
-        Files.walk(finalPathForLambda)
-            .filter(Files::isRegularFile)
-            .forEach(path -> {
-                String relPath = finalPathForLambda.relativize(path).toString();
-                try {
-                    String fileKey = "file:" + relPath.replace('\\', '/');
-                    String sha = sha256OfFile(path);
-                    String previous = contentHashIndex.get(fileKey);
-                    if (sha != null && sha.equals(previous)) {
-                        log.info("[Embeddings] SKIP (inchangé, pas de ré-embedding): {}", relPath);
-                        return; // évite consommation de tokens OpenAI
-                    }
-
-                    Collection<Document> docs = readWithAutoReader(path, relPath);
-                    // Déduplication: IDs déterministes (si VectorStore les utilise) et skip si hash identique
-                    List<Document> toAdd = assignDeterministicIds(docs, fileKey);
-                    // Supprime les anciens vecteurs de ce fichier (clé = metadata.source = relPath)
-                    try {
-                        vectorStoreMaintenance.deleteBySource(relPath.replace('\\', '/'));
-                    } catch (Exception ex) {
-                        log.warn("[Embeddings] Impossible de supprimer les anciens chunks pour {} (continuation en upsert simple)", relPath, ex);
-                    }
-                    vectorStore.add(toAdd);
-                    contentHashIndex.put(fileKey, sha);
-                    log.info("[Embeddings] Upsert effectué pour {} ({} chunks)", relPath, toAdd.size());
-                } catch (Throwable e) {
-                    log.error("[Embeddings] Erreur lors de la lecture/vectorisation : {}", path, e);
-                }
-            });
-        contentHashIndex.persist();
+        return rawPath;
     }
 
     private Collection<Document> readWithAutoReader(Path filePath, String relPath) throws Exception {
@@ -131,7 +151,7 @@ public class SkillDataEmbeddingService {
 
         List<Document> outDocs = new ArrayList<>();
         for (Document doc : docs) {
-            doc.getMetadata().put("source", relPath);
+            doc.getMetadata().put("source", relPath.replace('\\', '/'));
             // Pas de split sur les JSON spéciaux (OCR/udemy)
             if (isSpecialJson) {
                 outDocs.add(doc);
