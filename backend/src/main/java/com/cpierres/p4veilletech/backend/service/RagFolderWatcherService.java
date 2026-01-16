@@ -55,6 +55,10 @@ public class RagFolderWatcherService {
                             Path name = (Path) event.context();
                             Path child = dir.resolve(name);
 
+                            if (child.toString().replace('\\', '/').contains("/_index/") || (child.getFileName() != null && child.getFileName().toString().equals("_index"))) {
+                                continue;
+                            }
+
                             log.info("[RagWatcher] Événement {} détecté pour {}", kind, child);
 
                             if (kind == ENTRY_CREATE || kind == ENTRY_MODIFY) {
@@ -91,6 +95,9 @@ public class RagFolderWatcherService {
         Files.walkFileTree(start, new SimpleFileVisitor<Path>() {
             @Override
             public FileVisitResult preVisitDirectory(Path dir, java.nio.file.attribute.BasicFileAttributes attrs) throws IOException {
+                if (dir.getFileName() != null && dir.getFileName().toString().equals("_index")) {
+                    return FileVisitResult.SKIP_SUBTREE;
+                }
                 dir.register(watchService, ENTRY_CREATE, ENTRY_DELETE, ENTRY_MODIFY);
                 return FileVisitResult.CONTINUE;
             }

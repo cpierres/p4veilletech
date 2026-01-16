@@ -59,6 +59,8 @@ public class SkillDataEmbeddingService {
 
         int addedDocs = 0;
         Files.walk(finalPath)
+            .filter(path -> !path.toString().replace('\\', '/').contains("/_index/"))
+            .filter(path -> !path.getFileName().toString().equals("_index"))
             .filter(Files::isRegularFile)
             .forEach(path -> {
                 indexSingleFile(path, finalPath);
