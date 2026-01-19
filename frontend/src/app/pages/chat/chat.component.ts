@@ -42,7 +42,15 @@ export class ChatComponent implements AfterViewChecked {
 
   constructor(private http: HttpClient, private sanitizer: DomSanitizer) {
     // Configuration de marked pour plus de sécurité
+    const renderer = new marked.Renderer();
+    const linkRenderer = renderer.link.bind(renderer);
+    renderer.link = (token: any) => {
+      const html = linkRenderer(token);
+      return html.replace('<a', '<a target="_blank" rel="noopener noreferrer"');
+    };
+
     marked.setOptions({
+      renderer: renderer,
       breaks: true, // Convertit les sauts de ligne en <br>
       gfm: true // Markdown
     });
@@ -50,8 +58,8 @@ export class ChatComponent implements AfterViewChecked {
 
   // Méthode pour convertir le Markdown en HTML sécurisé
   renderMarkdown(text: string): SafeHtml {
-    const html = marked.parse(text);
-    return this.sanitizer.sanitize(1, html) || '';
+    const html = marked.parse(text) as string;
+    return this.sanitizer.bypassSecurityTrustHtml(html);
   }
 
   onTtsToggle(event: Event) {
