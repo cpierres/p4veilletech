@@ -28,6 +28,18 @@ export class ChatComponent implements AfterViewChecked {
   input = signal<string>('');
   loading = signal<boolean>(false);
   ttsEnabled = signal<boolean>(false);
+  showOptions = signal<boolean>(false);
+  selectedModel = signal<string>('gpt-4.1-mini');
+  temperature = signal<number | null>(0.7);
+  topK = signal<number | null>(null);
+  similarityThreshold = signal<number | null>(null);
+  readonly modelOptions = [
+    { label: 'OpenAI · gpt-4.1-mini (défaut)', value: 'gpt-4.1-mini' },
+    { label: 'OpenAI · gpt-4o-mini', value: 'gpt-4o-mini' },
+    { label: 'Mistral · mistral-small-latest', value: 'mistral-small-latest' },
+    { label: 'Mistral · mistral-medium-latest', value: 'mistral-medium-latest' },
+    { label: 'Mistral · mistral-large-latest', value: 'mistral-large-latest' }
+  ];
   messages = signal<ChatMessage[]>([
     {role: 'assistant', text: "Bonjour ! Posez-moi vos questions sur l'expérience professionnelle de Christophe Pierrès.", audioUrl: null}
   ]);
@@ -114,7 +126,27 @@ export class ChatComponent implements AfterViewChecked {
     };
 
     try {
-      const url = `/api/chat?message=${encodeURIComponent(text)}&lang=${this.lang()}`;
+      const params = new URLSearchParams();
+      params.set('message', text);
+      params.set('lang', this.lang());
+      if (this.selectedModel()) {
+        params.set('model', this.selectedModel());
+      }
+      if (this.showOptions()) {
+        const temperature = this.temperature();
+        const topK = this.topK();
+        const similarityThreshold = this.similarityThreshold();
+        if (temperature !== null && !Number.isNaN(temperature)) {
+          params.set('temperature', String(temperature));
+        }
+        if (topK !== null && !Number.isNaN(topK)) {
+          params.set('topK', String(topK));
+        }
+        if (similarityThreshold !== null && !Number.isNaN(similarityThreshold)) {
+          params.set('similarityThreshold', String(similarityThreshold));
+        }
+      }
+      const url = `/api/chat?${params.toString()}`;
       eventSource = new EventSource(url);
 
       eventSource.onmessage = (event) => {

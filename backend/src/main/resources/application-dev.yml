@@ -3,4 +3,11 @@ app:
     data-path: C:\docker-volumes\p4vt-data\backend\rag
     #data-path: /mnt/c/docker-volumes/p4vt-data/backend/rag/
 
+logging:
+  level:
+    org.springframework.ai.vectorstore.pgvector: INFO
+    org.springframework.r2dbc.connection: WARN
+    org.springframework.beans.factory.support.DefaultListableBeanFactory: DEBUG
+    org.springframework.context.annotation.ClassPathBeanDefinitionScanner: DEBUG
+
 

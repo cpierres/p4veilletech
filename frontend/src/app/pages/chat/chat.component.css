@@ -18,6 +18,23 @@
   width: 220px
 }
 
+.chat-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center
+}
+
+.model-select {
+  width: 320px
+}
+
+.options-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px
+}
+
 .messages {
   display: flex;
   flex-direction: column;

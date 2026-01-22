@@ -1,5 +1,6 @@
 package com.cpierres.p4veilletech.backend.controller;
 
+import com.cpierres.p4veilletech.backend.model.ChatRequestOptions;
 import com.cpierres.p4veilletech.backend.service.ChatRagService;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -34,8 +35,13 @@ public class ChatController {
   @GetMapping(value = "/chat", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
   public Flux<String> chat(
     @RequestParam("message") String message,
-    @RequestParam(value = "lang", required = false, defaultValue = "fr") String lang) {
-    return chatRagService.chat(message, lang);
+    @RequestParam(value = "lang", required = false, defaultValue = "fr") String lang,
+    @RequestParam(value = "model", required = false) String model,
+    @RequestParam(value = "temperature", required = false) Double temperature,
+    @RequestParam(value = "topK", required = false) Integer topK,
+    @RequestParam(value = "similarityThreshold", required = false) Double similarityThreshold) {
+    ChatRequestOptions options = new ChatRequestOptions(model, temperature, topK, similarityThreshold);
+    return chatRagService.chat(message, lang, options);
   }
 
   @PostMapping(value = "/chat/transcribe", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.TEXT_PLAIN_VALUE)
