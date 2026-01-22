@@ -1,89 +1,189 @@
 package com.cpierres.p4veilletech.backend.service;
 
-import lombok.RequiredArgsConstructor;
+import com.cpierres.p4veilletech.backend.advisor.TokenUsageAuditAdvisor;
+import com.cpierres.p4veilletech.backend.dto.AiProvider;
+import com.cpierres.p4veilletech.backend.dto.ChatRequest;
+import com.cpierres.p4veilletech.backend.dto.ChatResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.advisor.vectorstore.QuestionAnswerAdvisor;
+import org.springframework.ai.chat.model.ChatModel;
+import org.springframework.ai.chat.prompt.ChatOptions;
+import org.springframework.ai.mistralai.MistralAiChatOptions;
+import org.springframework.ai.openai.OpenAiChatOptions;
 import org.springframework.ai.vectorstore.SearchRequest;
 import org.springframework.ai.vectorstore.VectorStore;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.core.scheduler.Schedulers;
 
+import java.time.Instant;
 import java.util.Locale;
+import java.util.Map;
+import java.util.concurrent.atomic.AtomicLong;
+import java.util.concurrent.atomic.AtomicReference;
 
 @Slf4j
 @Service
-@RequiredArgsConstructor
 public class ChatRagService {
 
-    private final ChatClient.Builder chatClientBuilder;
+    private final Map<AiProvider, ChatModel> chatModelMap;
+    private final ChatModel defaultChatModel;
     private final VectorStore vectorStore;
+    private final TokenUsageAuditAdvisor tokenUsageAuditAdvisor;
 
-//    public String chat(String userMessage, String lang) {
-//        String normalized = (lang == null || lang.isBlank()) ? "fr" : lang.toLowerCase(Locale.ROOT);
-//        boolean french = !normalized.startsWith("en");
-//
-//        String system = french ? buildFrSystemPrompt() : buildEnSystemPrompt();
-//
-//        // Retrieve top documents from vector store
-//        List<Document> docs = vectorStore.similaritySearch(
-//                SearchRequest.builder().query(userMessage).topK(6).build()
-//        );
-//
-//        String context = docs.stream()
-//                .map(d -> "Source: " + d.getMetadata().getOrDefault("source", "unknown") + "\n" + getDocText(d))
-//                .collect(Collectors.joining("\n\n---\n\n"));
-//
-//        String user = french
-//                ? "Question de l'utilisateur: " + userMessage + "\n\nContexte RAG (extraits de mon CV/expériences):\n" + context
-//                : "User question: " + userMessage + "\n\nRAG context (snippets from my CV/experience):\n" + context;
-//
-//        Message sysMsg = new SystemMessage(system);
-//        Message usrMsg = new UserMessage(user);
-//
-//        ChatClient chatClient = chatClientBuilder.build();
-//        return chatClient.prompt()
-//                .messages(sysMsg, usrMsg)
-//                .call()
-//                .content();
-//    }
+    public ChatRagService(
+            @Qualifier("chatModelMap") Map<AiProvider, ChatModel> chatModelMap,
+            @Qualifier("defaultChatModel") ChatModel defaultChatModel,
+            VectorStore vectorStore,
+            TokenUsageAuditAdvisor tokenUsageAuditAdvisor) {
+        this.chatModelMap = chatModelMap;
+        this.defaultChatModel = defaultChatModel;
+        this.vectorStore = vectorStore;
+        this.tokenUsageAuditAdvisor = tokenUsageAuditAdvisor;
+    }
 
-  public Flux<String> chat(String userMessage, String lang) {
-    return Mono.fromCallable(() -> {
-      String normalized = (lang == null || lang.isBlank()) ? "fr" : lang.toLowerCase(Locale.ROOT);
-      boolean french = !normalized.startsWith("en");
-      String systemPrompt = french ? buildFrSystemPrompt() : buildEnSystemPrompt();
+    /**
+     * Chat simple avec langue (rétrocompatibilité).
+     */
+    public Flux<String> chat(String userMessage, String lang) {
+        ChatRequest request = ChatRequest.builder()
+                .message(userMessage)
+                .lang(lang)
+                .build();
+        return chatWithOptions(request).map(ChatResponse::getContent);
+    }
 
-      return new Object[] { systemPrompt, userMessage, french };
-    })
-    .subscribeOn(Schedulers.boundedElastic())
-    .flatMapMany(data -> {
-      String systemPrompt = (String) data[0];
-      String userMsg = (String) data[1];
-      boolean french = (boolean) data[2];
+    /**
+     * Chat avancé avec tous les paramètres dynamiques.
+     * Retourne un Flux de ChatResponse avec métadonnées.
+     */
+    public Flux<ChatResponse> chatWithOptions(ChatRequest request) {
+        AtomicLong startTime = new AtomicLong();
+        AtomicReference<String> modelUsed = new AtomicReference<>();
+        AtomicReference<AiProvider> providerUsed = new AtomicReference<>();
 
-      // Utilisation de l'API moderne avec QuestionAnswerAdvisor
-      ChatClient chatClient = chatClientBuilder.build();
-      var qaAdvisor = QuestionAnswerAdvisor.builder(vectorStore)
-        .searchRequest(SearchRequest.builder().similarityThreshold(0.4d).topK(12).build())
-        .build();
+        return Mono.fromCallable(() -> {
+            startTime.set(System.currentTimeMillis());
 
-      return chatClient.prompt()
-        .system(systemPrompt)
-        .user(userMsg)
-        .advisors(qaAdvisor)
-        .stream()
-        .content()
-        .map(chunk -> chunk.replace(" ", "\u00A0")); // Remplace les espaces par insécable;
-    });
-  }
+            String normalized = (request.getLang() == null || request.getLang().isBlank())
+                    ? "fr" : request.getLang().toLowerCase(Locale.ROOT);
+            boolean french = !normalized.startsWith("en");
+            String systemPrompt = french ? buildFrSystemPrompt() : buildEnSystemPrompt();
+
+            // Sélection du provider et du modèle
+            AiProvider provider = request.getAiProvider();
+            providerUsed.set(provider);
+
+            ChatModel chatModel = chatModelMap.getOrDefault(provider, defaultChatModel);
+
+            // Construction des options dynamiques
+            ChatOptions chatOptions = buildChatOptions(request, provider);
+            modelUsed.set(extractModelName(chatOptions, provider));
+
+            log.info("Chat request - Provider: {}, Model: {}, Temperature: {}, RAG topK: {}",
+                    provider, modelUsed.get(), request.getTemperature(), request.getRagTopK());
+
+            return new Object[] { systemPrompt, request.getMessage(), chatModel, chatOptions, provider };
+        })
+        .subscribeOn(Schedulers.boundedElastic())
+        .flatMapMany(data -> {
+            String systemPrompt = (String) data[0];
+            String userMsg = (String) data[1];
+            ChatModel chatModel = (ChatModel) data[2];
+            ChatOptions chatOptions = (ChatOptions) data[3];
+            AiProvider provider = (AiProvider) data[4];
+
+            // Construction du ChatClient avec le modèle sélectionné
+            ChatClient chatClient = ChatClient.builder(chatModel).build();
+
+            // Configuration du RAG avec les paramètres dynamiques
+            var qaAdvisor = QuestionAnswerAdvisor.builder(vectorStore)
+                    .searchRequest(SearchRequest.builder()
+                            .similarityThreshold(request.getRagSimilarityThreshold() != null
+                                    ? request.getRagSimilarityThreshold() : 0.4d)
+                            .topK(request.getRagTopK() != null ? request.getRagTopK() : 12)
+                            .build())
+                    .build();
+
+            StringBuilder contentBuilder = new StringBuilder();
+
+            return chatClient.prompt()
+                    .system(systemPrompt)
+                    .user(userMsg)
+                    .options(chatOptions)
+                    .advisors(qaAdvisor, tokenUsageAuditAdvisor)
+                    .stream()
+                    .content()
+                    .map(chunk -> {
+                        String processedChunk = chunk.replace(" ", "\u00A0");
+                        contentBuilder.append(chunk);
+
+                        return ChatResponse.builder()
+                                .content(processedChunk)
+                                .provider(providerUsed.get().getCode())
+                                .model(modelUsed.get())
+                                .temperature(request.getTemperature())
+                                .timestamp(Instant.now())
+                                .processingTimeMs(System.currentTimeMillis() - startTime.get())
+                                .build();
+                    });
+        });
+    }
+
+    /**
+     * Construit les options de chat selon le provider et les paramètres de la requête.
+     */
+    private ChatOptions buildChatOptions(ChatRequest request, AiProvider provider) {
+        if (provider == AiProvider.MISTRAL) {
+            var builder = MistralAiChatOptions.builder();
+            if (request.getModel() != null && !request.getModel().isBlank()) {
+                builder.model(request.getModel());
+            }
+            if (request.getTemperature() != null) {
+                builder.temperature(request.getTemperature());
+            }
+            if (request.getTopP() != null) {
+                builder.topP(request.getTopP());
+            }
+            if (request.getMaxTokens() != null) {
+                builder.maxTokens(request.getMaxTokens());
+            }
+            return builder.build();
+        } else {
+            // OpenAI par défaut
+            var builder = OpenAiChatOptions.builder();
+            if (request.getModel() != null && !request.getModel().isBlank()) {
+                builder.model(request.getModel());
+            }
+            if (request.getTemperature() != null) {
+                builder.temperature(request.getTemperature());
+            }
+            if (request.getTopP() != null) {
+                builder.topP(request.getTopP());
+            }
+            // Note: OpenAI n'a pas de topK, on l'ignore pour ce provider
+            if (request.getMaxTokens() != null) {
+                builder.maxCompletionTokens(request.getMaxTokens());
+            }
+            return builder.build();
+        }
+    }
+
+    private String extractModelName(ChatOptions options, AiProvider provider) {
+        if (options instanceof OpenAiChatOptions openAiOptions) {
+            return openAiOptions.getModel() != null ? openAiOptions.getModel() : "gpt-4o-mini";
+        } else if (options instanceof MistralAiChatOptions mistralOptions) {
+            return mistralOptions.getModel() != null ? mistralOptions.getModel() : "mistral-small-latest";
+        }
+        return provider == AiProvider.MISTRAL ? "mistral-small-latest" : "gpt-4o-mini";
+    }
 
     private String buildFrSystemPrompt() {
         return String.join("\n",
                 "Tu es un chatbot francophone spécialisé pour répondre sur le parcours et l'expérience professionnelle de Christophe Pierrès.",
-                //"Utilise un ton professionnel, clair et concis.",
                 "Utilise un ton professionnel.",
                 "Base tes réponses PRIORITAIREMENT sur le contexte fourni (RAG) provenant de la base vectorielle.",
                 "Si la question demande une liste complète (par exemple, 'liste tous les projets'), utilise TOUS les documents fournis dans le contexte, même s'ils sont nombreux.",

@@ -1,5 +1,7 @@
 package com.cpierres.p4veilletech.backend.controller;
 
+import com.cpierres.p4veilletech.backend.dto.ChatRequest;
+import com.cpierres.p4veilletech.backend.dto.ChatResponse;
 import com.cpierres.p4veilletech.backend.service.ChatRagService;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -25,17 +27,55 @@ public class ChatController {
     this.chatRagService = chatRagService;
   }
 
-//  @GetMapping("/chat")
-//  public String chat(@RequestParam("message") String message,
-//                     @RequestParam(value = "lang", required = false, defaultValue = "fr") String lang) {
-//    return chatRagService.chat(message, lang);
-//  }
-
+  /**
+   * Endpoint simple GET pour rétrocompatibilité.
+   */
   @GetMapping(value = "/chat", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
   public Flux<String> chat(
     @RequestParam("message") String message,
     @RequestParam(value = "lang", required = false, defaultValue = "fr") String lang) {
     return chatRagService.chat(message, lang);
+  }
+
+  /**
+   * Endpoint avancé POST avec tous les paramètres dynamiques.
+   * Permet de choisir le provider (openai/mistral), le modèle, la température, etc.
+   */
+  @PostMapping(value = "/chat/advanced", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+  public Flux<ChatResponse> chatAdvanced(@RequestBody ChatRequest request) {
+    return chatRagService.chatWithOptions(request);
+  }
+
+  /**
+   * Endpoint GET avancé avec paramètres en query string (alternative au POST).
+   */
+  @GetMapping(value = "/chat/advanced", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+  public Flux<ChatResponse> chatAdvancedGet(
+    @RequestParam("message") String message,
+    @RequestParam(value = "lang", required = false, defaultValue = "fr") String lang,
+    @RequestParam(value = "provider", required = false, defaultValue = "openai") String provider,
+    @RequestParam(value = "model", required = false) String model,
+    @RequestParam(value = "temperature", required = false) Double temperature,
+    @RequestParam(value = "topP", required = false) Double topP,
+    @RequestParam(value = "topK", required = false) Integer topK,
+    @RequestParam(value = "maxTokens", required = false) Integer maxTokens,
+    @RequestParam(value = "ragTopK", required = false, defaultValue = "12") Integer ragTopK,
+    @RequestParam(value = "ragSimilarityThreshold", required = false, defaultValue = "0.4") Double ragSimilarityThreshold) {
+
+    ChatRequest request = ChatRequest.builder()
+        .message(message)
+        .lang(lang)
+        .provider(provider)
+        .model(model)
+        .temperature(temperature)
+        .topP(topP)
+        .topK(topK)
+        .maxTokens(maxTokens)
+        .ragTopK(ragTopK)
+        .ragSimilarityThreshold(ragSimilarityThreshold)
+        .build();
+
+    return chatRagService.chatWithOptions(request);
   }
 
   @PostMapping(value = "/chat/transcribe", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.TEXT_PLAIN_VALUE)

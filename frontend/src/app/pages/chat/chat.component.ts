@@ -1,4 +1,4 @@
-import {Component, signal, ViewChild, ElementRef, AfterViewChecked} from '@angular/core';
+import {Component, signal, computed, effect, ViewChild, ElementRef, AfterViewChecked} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {HttpClient} from '@angular/common/http';
 import {NgForOf, NgIf} from '@angular/common';
@@ -6,28 +6,74 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import {MatSelectModule} from '@angular/material/select';
+import {MatIconModule} from '@angular/material/icon';
+import {MatTooltipModule} from '@angular/material/tooltip';
 import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
 import {marked} from 'marked';
-
 
 interface ChatMessage {
   role: 'user' | 'assistant';
   text: string;
-  audioUrl?: string | null; // cached TTS URL
+  audioUrl?: string | null;
+  metadata?: ChatMetadata | null;
+}
+
+interface ChatMetadata {
+  provider?: string;
+  model?: string;
+  temperature?: number;
+  processingTimeMs?: number;
+}
+
+interface ModelOption {
+  value: string;
+  label: string;
 }
 
 @Component({
   selector: 'app-chat',
   standalone: true,
-  imports: [FormsModule, NgForOf, NgIf, MatFormFieldModule, MatInputModule, MatButtonModule, MatSelectModule],
+  imports: [FormsModule, NgForOf, NgIf, MatFormFieldModule, MatInputModule, MatButtonModule, MatSelectModule, MatIconModule, MatTooltipModule],
   templateUrl: './chat.component.html',
   styleUrl: './chat.component.css'
 })
 export class ChatComponent implements AfterViewChecked {
+  // Paramètres de base
   lang = signal<'fr' | 'en'>('fr');
   input = signal<string>('');
   loading = signal<boolean>(false);
   ttsEnabled = signal<boolean>(false);
+
+  // Paramètres AI
+  provider = signal<'openai' | 'mistral'>('openai');
+  model = signal<string>('gpt-4o-mini');
+  showAdvancedSettings = signal<boolean>(false);
+
+  // Paramètres avancés
+  temperature = signal<number | null>(0.7);
+  topP = signal<number | null>(null);
+  maxTokens = signal<number | null>(null);
+  ragTopK = signal<number>(12);
+  ragSimilarityThreshold = signal<number>(0.4);
+
+  // Modèles disponibles selon le provider
+  availableModels = computed<ModelOption[]>(() => {
+    if (this.provider() === 'mistral') {
+      return [
+        { value: 'mistral-small-latest', label: 'Mistral Small' },
+        { value: 'mistral-medium-latest', label: 'Mistral Medium' },
+        { value: 'mistral-large-latest', label: 'Mistral Large' },
+        { value: 'open-mistral-nemo', label: 'Mistral Nemo' },
+      ];
+    }
+    return [
+      { value: 'gpt-4o-mini', label: 'GPT-4o Mini' },
+      { value: 'gpt-4o', label: 'GPT-4o' },
+      { value: 'gpt-4-turbo', label: 'GPT-4 Turbo' },
+      { value: 'gpt-3.5-turbo', label: 'GPT-3.5 Turbo' },
+    ];
+  });
+
   messages = signal<ChatMessage[]>([
     {role: 'assistant', text: "Bonjour ! Posez-moi vos questions sur l'expérience professionnelle de Christophe Pierrès.", audioUrl: null}
   ]);
@@ -53,6 +99,20 @@ export class ChatComponent implements AfterViewChecked {
       renderer: renderer,
       breaks: true, // Convertit les sauts de ligne en <br>
       gfm: true // Markdown
+    });
+
+    // Effet pour changer le modèle par défaut quand le provider change
+    effect(() => {
+      const currentProvider = this.provider();
+      const models = this.availableModels();
+      if (models.length > 0) {
+        // Sélectionner le premier modèle disponible pour ce provider
+        const currentModel = this.model();
+        const modelExists = models.some(m => m.value === currentModel);
+        if (!modelExists) {
+          this.model.set(models[0].value);
+        }
+      }
     });
   }
 
@@ -92,12 +152,13 @@ export class ChatComponent implements AfterViewChecked {
 
     // Ajouter un message assistant vide qui sera rempli progressivement
     const assistantIndex = this.messages().length;
-    this.messages.update((m: ChatMessage[]) => [...m, {role: 'assistant', text: ''}]);
+    this.messages.update((m: ChatMessage[]) => [...m, {role: 'assistant', text: '', metadata: null}]);
 
     let eventSource: EventSource | null = null;
     let hasReceivedData = false;
     let buffer = '';
     let timeoutId: any = null;
+    let lastMetadata: ChatMetadata | null = null;
 
     const flushBuffer = () => {
       if (buffer) {
@@ -105,7 +166,8 @@ export class ChatComponent implements AfterViewChecked {
           const updated = [...m];
           updated[assistantIndex] = {
             role: 'assistant',
-            text: updated[assistantIndex].text + buffer
+            text: updated[assistantIndex].text + buffer,
+            metadata: lastMetadata
           };
           return updated;
         });
@@ -114,28 +176,71 @@ export class ChatComponent implements AfterViewChecked {
     };
 
     try {
-      const url = `/api/chat?message=${encodeURIComponent(text)}&lang=${this.lang()}`;
+      // Construire l'URL avec tous les paramètres avancés
+      const params = new URLSearchParams();
+      params.set('message', text);
+      params.set('lang', this.lang());
+      params.set('provider', this.provider());
+      params.set('model', this.model());
+      params.set('ragTopK', this.ragTopK().toString());
+      params.set('ragSimilarityThreshold', this.ragSimilarityThreshold().toString());
+
+      if (this.temperature() !== null) {
+        params.set('temperature', this.temperature()!.toString());
+      }
+      if (this.topP() !== null) {
+        params.set('topP', this.topP()!.toString());
+      }
+      if (this.maxTokens() !== null) {
+        params.set('maxTokens', this.maxTokens()!.toString());
+      }
+
+      const url = `/api/chat/advanced?${params.toString()}`;
       eventSource = new EventSource(url);
 
       eventSource.onmessage = (event) => {
-// Dans onmessage, décode les espaces
-        const chunk = event.data.replace(/\u00A0/g, ' ');
-        //console.log(`Chunk décodé : "${chunk}"`);
-        if (!chunk) return;
+        try {
+          // Le nouvel endpoint retourne du JSON avec content et metadata
+          const data = JSON.parse(event.data);
+          const chunk = (data.content || '').replace(/\u00A0/g, ' ');
 
-        hasReceivedData = true;
-        buffer += chunk; // Concaténation directe
+          // Stocker les métadonnées
+          if (data.provider || data.model) {
+            lastMetadata = {
+              provider: data.provider,
+              model: data.model,
+              temperature: data.temperature,
+              processingTimeMs: data.processingTimeMs
+            };
+          }
 
-        if (timeoutId) clearTimeout(timeoutId);
-        if (buffer.length > 15) {
-          flushBuffer();
-        } else {
-          timeoutId = setTimeout(flushBuffer, 30);
+          if (!chunk) return;
+
+          hasReceivedData = true;
+          buffer += chunk;
+
+          if (timeoutId) clearTimeout(timeoutId);
+          if (buffer.length > 15) {
+            flushBuffer();
+          } else {
+            timeoutId = setTimeout(flushBuffer, 30);
+          }
+        } catch (e) {
+          // Fallback pour l'ancien format (texte simple)
+          const chunk = event.data.replace(/\u00A0/g, ' ');
+          if (!chunk) return;
+          hasReceivedData = true;
+          buffer += chunk;
+          if (timeoutId) clearTimeout(timeoutId);
+          if (buffer.length > 15) {
+            flushBuffer();
+          } else {
+            timeoutId = setTimeout(flushBuffer, 30);
+          }
         }
       };
 
       eventSource.onerror = (error) => {
-        // Flush le buffer restant avant de fermer
         if (timeoutId) {
           clearTimeout(timeoutId);
         }
@@ -146,28 +251,24 @@ export class ChatComponent implements AfterViewChecked {
         }
         this.loading.set(false);
 
-        // Si on a reçu des données, c'est juste la fin normale du stream
         if (hasReceivedData) {
-          // Si le message est vide après tout, afficher un message par défaut
           if (!this.messages()[assistantIndex].text.trim()) {
             const emptyMsg = this.lang() === 'fr' ? 'Aucune réponse reçue.' : 'No response received.';
             this.messages.update((m: ChatMessage[]) => {
               const updated = [...m];
-              updated[assistantIndex] = {role: 'assistant', text: emptyMsg, audioUrl: null};
+              updated[assistantIndex] = {role: 'assistant', text: emptyMsg, audioUrl: null, metadata: lastMetadata};
               return updated;
             });
           } else {
-            // Auto TTS si activé
             if (this.ttsEnabled()) {
               this.playMessageTts(assistantIndex, true);
             }
           }
         } else {
-          // Erreur réelle - aucune donnée reçue
           const err = this.lang() === 'fr' ? "Une erreur est survenue côté serveur." : "A server error occurred.";
           this.messages.update((m: ChatMessage[]) => {
             const updated = [...m];
-            updated[assistantIndex] = {role: 'assistant', text: err, audioUrl: null};
+            updated[assistantIndex] = {role: 'assistant', text: err, audioUrl: null, metadata: null};
             return updated;
           });
         }
@@ -183,7 +284,7 @@ export class ChatComponent implements AfterViewChecked {
       const err = this.lang() === 'fr' ? "Une erreur est survenue côté serveur." : "A server error occurred.";
       this.messages.update((m: ChatMessage[]) => {
         const updated = [...m];
-        updated[assistantIndex] = {role: 'assistant', text: err};
+        updated[assistantIndex] = {role: 'assistant', text: err, metadata: null};
         return updated;
       });
       this.loading.set(false);
