@@ -49,7 +49,12 @@ public class SkillDataEmbeddingService {
         if (finalPath == null) return;
 
         log.info("[Embeddings] Initialisation : génération des embeddings OpenAI depuis {} ...", finalPath);
-        // 0) Bootstrap initial des README GitHub listés dans le fichier d'évaluations (idempotent via hash)
+
+        // 0) Vérification de cohérence cache/DB : si le cache contient des entrées mais la table vector_store est vide,
+        // on invalide le cache pour forcer la ré-indexation
+        checkAndInvalidateCacheIfInconsistent();
+
+        // 1) Bootstrap initial des README GitHub listés dans le fichier d'évaluations (idempotent via hash)
         try {
             int synced = gitHubReadmeUpsertService.syncAllFromEval();
             log.info("[Embeddings] Bootstrap GitHub README terminé: {} dépôts traités", synced);
@@ -105,6 +110,32 @@ public class SkillDataEmbeddingService {
             contentHashIndex.persist();
         } catch (Exception ex) {
             log.warn("[Embeddings] Impossible de supprimer les anciens chunks pour {} (continuation en upsert simple)", relPath, ex);
+        }
+    }
+
+    /**
+     * Vérifie la cohérence entre le cache de hash et la table vector_store.
+     * Si le cache contient des entrées mais que la table est vide, le cache est invalidé
+     * pour forcer une ré-indexation complète.
+     * Cela évite le problème où le cache indique que les fichiers sont déjà indexés
+     * alors que la base de données a été vidée ou réinitialisée.
+     */
+    private void checkAndInvalidateCacheIfInconsistent() {
+        try {
+            int cacheSize = contentHashIndex.size();
+            long vectorCount = vectorStoreMaintenance.countVectors();
+
+            log.info("[Embeddings] Vérification cohérence: cache={} entrées, vector_store={} vecteurs", cacheSize, vectorCount);
+
+            if (cacheSize > 0 && vectorCount == 0) {
+                log.warn("[Embeddings] INCOHÉRENCE DÉTECTÉE: le cache contient {} entrées mais la table vector_store est vide. " +
+                        "Invalidation du cache pour forcer la ré-indexation.", cacheSize);
+                contentHashIndex.clear();
+                contentHashIndex.persist();
+                log.info("[Embeddings] Cache invalidé avec succès.");
+            }
+        } catch (Exception e) {
+            log.warn("[Embeddings] Impossible de vérifier la cohérence cache/DB (non bloquant): {}", e.getMessage());
         }
     }
 

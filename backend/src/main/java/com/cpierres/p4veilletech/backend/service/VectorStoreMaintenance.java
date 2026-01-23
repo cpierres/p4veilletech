@@ -31,4 +31,14 @@ public class VectorStoreMaintenance {
         log.info("[VectorStoreMaintenance] deleteBySource('{}') = {} lignes supprimées", source, rows);
         return rows;
     }
+
+    /**
+     * Compte le nombre total de vecteurs dans la table.
+     * Utilisé pour vérifier la cohérence entre le cache de hash et la base de données.
+     */
+    public long countVectors() {
+        String sql = "SELECT COUNT(*) FROM " + tableName;
+        Long count = jdbcTemplate.queryForObject(sql, Long.class);
+        return count != null ? count : 0L;
+    }
 }

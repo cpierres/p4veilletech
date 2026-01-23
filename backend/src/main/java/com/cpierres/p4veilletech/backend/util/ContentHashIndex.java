@@ -98,6 +98,21 @@ public class ContentHashIndex {
   }
 
   /**
+   * Retourne le nombre d'entrées dans l'index.
+   */
+  public int size() {
+    return props.size();
+  }
+
+  /**
+   * Vide complètement l'index (en mémoire). Appeler persist() ensuite pour effacer le fichier.
+   */
+  public void clear() {
+    props.clear();
+    log.info("[HashIndex] Index vidé (clear)");
+  }
+
+  /**
    * Persiste l'index si un chemin persistant est disponible; sinon, no-op avec warning.
    */
   public void persist() {
