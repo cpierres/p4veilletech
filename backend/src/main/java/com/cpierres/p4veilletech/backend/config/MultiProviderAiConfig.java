@@ -7,7 +7,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.ai.chat.model.ChatModel;
 import org.springframework.ai.embedding.EmbeddingModel;
-import org.springframework.ai.mistralai.MistralAiChatModel;
 import org.springframework.ai.mistralai.MistralAiEmbeddingModel;
 import org.springframework.ai.openai.OpenAiChatModel;
 import org.springframework.ai.openai.OpenAiEmbeddingModel;
@@ -33,7 +32,8 @@ public class MultiProviderAiConfig {
     private OpenAiChatModel openAiChatModel;
 
     @Autowired(required = false)
-    private MistralAiChatModel mistralAiChatModel;
+    @Qualifier("lmStudioMistralChatModel")
+    private OpenAiChatModel lmStudioMistralChatModel;
 
     @Autowired(required = false)
     private OpenAiEmbeddingModel openAiEmbeddingModel;
@@ -62,9 +62,9 @@ public class MultiProviderAiConfig {
             log.info("OpenAI ChatModel registered");
         }
 
-        if (mistralAiChatModel != null) {
-            builder.put(AiProvider.MISTRAL, mistralAiChatModel);
-            log.info("MistralAI ChatModel registered");
+        if (lmStudioMistralChatModel != null) {
+            builder.put(AiProvider.MISTRAL, lmStudioMistralChatModel);
+            log.info("LM Studio Mistral ChatModel registered");
         }
 
         if (builder.isEmpty()) {
@@ -110,11 +110,11 @@ public class MultiProviderAiConfig {
             log.info("Default ChatModel: OpenAI");
             return openAiChatModel;
         }
-        if (mistralAiChatModel != null) {
-            log.info("Default ChatModel: MistralAI");
-            return mistralAiChatModel;
+        if (lmStudioMistralChatModel != null) {
+            log.info("Default ChatModel: LM Studio Mistral");
+            return lmStudioMistralChatModel;
         }
-        throw new IllegalStateException("No ChatModel available. Please configure OPENAI_API_KEY or MISTRAL_API_KEY.");
+        throw new IllegalStateException("No ChatModel available. Please configure OPENAI_API_KEY or LMStudio settings.");
     }
 
     /**

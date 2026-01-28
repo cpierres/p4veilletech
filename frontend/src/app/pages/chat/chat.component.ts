@@ -53,17 +53,17 @@ export class ChatComponent implements AfterViewChecked {
   temperature = signal<number | null>(0.7);
   topP = signal<number | null>(null);
   maxTokens = signal<number | null>(null);
-  ragTopK = signal<number>(12);
+  ragTopK = signal<number>(30);
   ragSimilarityThreshold = signal<number>(0.4);
 
   // Modèles disponibles selon le provider
   availableModels = computed<ModelOption[]>(() => {
     if (this.provider() === 'mistral') {
       return [
-        { value: 'mistral-small-latest', label: 'Mistral Small' },
-        { value: 'mistral-medium-latest', label: 'Mistral Medium' },
-        { value: 'mistral-large-latest', label: 'Mistral Large' },
-        { value: 'open-mistral-nemo', label: 'Mistral Nemo' },
+        { value: 'http://192.168.10.1:1234/mistralai/ministral-3-3b', label: 'Ministral 3B (local)' },
+        { value: 'http://192.168.10.1:1234/mistralai/mistral-small-3.2', label: 'Mistral Small 3.2 (local)' },
+        { value: 'http://192.168.10.1:1234/mistralai/mistral-nemo-instruct-2407', label: 'Mistral Nemo Instruct 2407 (local)' },
+        { value: 'http://192.168.10.1:1234/mistralai/mistral-7b-instruct-v0.3', label: 'Mistral 7B Instruct v0.3 (local)' },
       ];
     }
     return [

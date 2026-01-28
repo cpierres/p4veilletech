@@ -59,7 +59,7 @@ public class ChatController {
     @RequestParam(value = "topP", required = false) Double topP,
     @RequestParam(value = "topK", required = false) Integer topK,
     @RequestParam(value = "maxTokens", required = false) Integer maxTokens,
-    @RequestParam(value = "ragTopK", required = false, defaultValue = "12") Integer ragTopK,
+    @RequestParam(value = "ragTopK", required = false, defaultValue = "30") Integer ragTopK,
     @RequestParam(value = "ragSimilarityThreshold", required = false, defaultValue = "0.4") Double ragSimilarityThreshold) {
 
     ChatRequest request = ChatRequest.builder()

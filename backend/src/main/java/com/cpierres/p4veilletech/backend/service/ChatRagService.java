@@ -14,11 +14,13 @@ import org.springframework.ai.openai.OpenAiChatOptions;
 import org.springframework.ai.vectorstore.SearchRequest;
 import org.springframework.ai.vectorstore.VectorStore;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.core.scheduler.Schedulers;
 
+import java.net.URI;
 import java.time.Instant;
 import java.util.Locale;
 import java.util.Map;
@@ -31,17 +33,20 @@ public class ChatRagService {
 
     private final Map<AiProvider, ChatModel> chatModelMap;
     private final ChatModel defaultChatModel;
-    private final VectorStore vectorStore;
+    private final Map<AiProvider, VectorStore> vectorStoreMap;
+    private final ObjectProvider<VectorStore> defaultVectorStoreProvider;
     private final TokenUsageAuditAdvisor tokenUsageAuditAdvisor;
 
     public ChatRagService(
             @Qualifier("chatModelMap") Map<AiProvider, ChatModel> chatModelMap,
             @Qualifier("defaultChatModel") ChatModel defaultChatModel,
-            VectorStore vectorStore,
+            @Qualifier("vectorStoreMap") Map<AiProvider, VectorStore> vectorStoreMap,
+            ObjectProvider<VectorStore> defaultVectorStoreProvider,
             TokenUsageAuditAdvisor tokenUsageAuditAdvisor) {
         this.chatModelMap = chatModelMap;
         this.defaultChatModel = defaultChatModel;
-        this.vectorStore = vectorStore;
+        this.vectorStoreMap = vectorStoreMap;
+        this.defaultVectorStoreProvider = defaultVectorStoreProvider;
         this.tokenUsageAuditAdvisor = tokenUsageAuditAdvisor;
     }
 
@@ -74,10 +79,13 @@ public class ChatRagService {
             String systemPrompt = french ? buildFrSystemPrompt() : buildEnSystemPrompt();
 
             // Sélection du provider et du modèle
-            AiProvider provider = request.getAiProvider();
+            AiProvider provider = request.getAiProvider() != null ? request.getAiProvider() : AiProvider.OPENAI;
             providerUsed.set(provider);
 
-            ChatModel chatModel = chatModelMap.getOrDefault(provider, defaultChatModel);
+            ChatModel chatModel = chatModelMap.get(provider);
+            if (chatModel == null && request.getAiProvider() == null) {
+                chatModel = defaultChatModel;
+            }
 
             // Construction des options dynamiques
             ChatOptions chatOptions = buildChatOptions(request, provider);
@@ -96,26 +104,51 @@ public class ChatRagService {
             ChatOptions chatOptions = (ChatOptions) data[3];
             AiProvider provider = (AiProvider) data[4];
 
+            if (chatModel == null) {
+                String msg = "Provider " + provider.getCode().toUpperCase(Locale.ROOT)
+                        + " non configuré. Vérifiez les clés/API et la configuration Spring AI.";
+                log.error(msg);
+                return Flux.just(ChatResponse.builder()
+                        .content(msg)
+                        .provider(providerUsed.get().getCode())
+                        .model(modelUsed.get())
+                        .temperature(request.getTemperature())
+                        .timestamp(Instant.now())
+                        .processingTimeMs(System.currentTimeMillis() - startTime.get())
+                        .build());
+            }
+
             // Construction du ChatClient avec le modèle sélectionné
             ChatClient chatClient = ChatClient.builder(chatModel).build();
 
             // Configuration du RAG avec les paramètres dynamiques
-            var qaAdvisor = QuestionAnswerAdvisor.builder(vectorStore)
-                    .searchRequest(SearchRequest.builder()
-                            .similarityThreshold(request.getRagSimilarityThreshold() != null
-                                    ? request.getRagSimilarityThreshold() : 0.4d)
-                            .topK(request.getRagTopK() != null ? request.getRagTopK() : 12)
-                            .build())
-                    .build();
+            VectorStore vectorStore = vectorStoreMap.get(provider);
+            if (vectorStore == null && request.getAiProvider() == null) {
+                vectorStore = defaultVectorStoreProvider.getIfAvailable();
+            }
 
             StringBuilder contentBuilder = new StringBuilder();
 
-            return chatClient.prompt()
+            var promptBuilder = chatClient.prompt()
                     .system(systemPrompt)
                     .user(userMsg)
-                    .options(chatOptions)
-                    .advisors(qaAdvisor, tokenUsageAuditAdvisor)
-                    .stream()
+                    .options(chatOptions);
+
+            if (vectorStore == null) {
+                log.warn("No VectorStore available; continuing without RAG context.");
+                promptBuilder.advisors(tokenUsageAuditAdvisor);
+            } else {
+                var qaAdvisor = QuestionAnswerAdvisor.builder(vectorStore)
+                        .searchRequest(SearchRequest.builder()
+                                .similarityThreshold(request.getRagSimilarityThreshold() != null
+                                        ? request.getRagSimilarityThreshold() : 0.4d)
+                                .topK(request.getRagTopK() != null ? request.getRagTopK() : 30)
+                                .build())
+                        .build();
+                promptBuilder.advisors(qaAdvisor, tokenUsageAuditAdvisor);
+            }
+
+            return promptBuilder.stream()
                     .content()
                     .map(chunk -> {
                         String processedChunk = chunk.replace(" ", "\u00A0");
@@ -138,9 +171,10 @@ public class ChatRagService {
      */
     private ChatOptions buildChatOptions(ChatRequest request, AiProvider provider) {
         if (provider == AiProvider.MISTRAL) {
-            var builder = MistralAiChatOptions.builder();
-            if (request.getModel() != null && !request.getModel().isBlank()) {
-                builder.model(request.getModel());
+            var builder = OpenAiChatOptions.builder();
+            String model = normalizeModelName(request.getModel());
+            if (model != null) {
+                builder.model(model);
             }
             if (request.getTemperature() != null) {
                 builder.temperature(request.getTemperature());
@@ -174,11 +208,43 @@ public class ChatRagService {
 
     private String extractModelName(ChatOptions options, AiProvider provider) {
         if (options instanceof OpenAiChatOptions openAiOptions) {
-            return openAiOptions.getModel() != null ? openAiOptions.getModel() : "gpt-4o-mini";
+            String model = openAiOptions.getModel();
+            if (provider == AiProvider.MISTRAL) {
+                String normalized = normalizeModelName(model);
+                return normalized != null ? normalized : "LMStudio/mistralai/ministral-3-3b";
+            }
+            return model != null ? model : "gpt-4o-mini";
         } else if (options instanceof MistralAiChatOptions mistralOptions) {
             return mistralOptions.getModel() != null ? mistralOptions.getModel() : "mistral-small-latest";
         }
-        return provider == AiProvider.MISTRAL ? "mistral-small-latest" : "gpt-4o-mini";
+        return provider == AiProvider.MISTRAL ? "LMStudio/mistralai/ministral-3-3b" : "gpt-4o-mini";
+    }
+
+    private String normalizeModelName(String model) {
+        if (model == null) {
+            return null;
+        }
+        String trimmed = model.trim();
+        if (trimmed.isEmpty()) {
+            return null;
+        }
+        if (trimmed.startsWith("http://") || trimmed.startsWith("https://")) {
+            try {
+                URI uri = URI.create(trimmed);
+                String path = uri.getPath();
+                if (path != null && !path.isBlank()) {
+                    if (path.startsWith("/")) {
+                        path = path.substring(1);
+                    }
+                    if (!path.isBlank()) {
+                        return path;
+                    }
+                }
+            } catch (IllegalArgumentException ex) {
+                // Fall through to return the raw model string.
+            }
+        }
+        return trimmed;
     }
 
     private String buildFrSystemPrompt() {

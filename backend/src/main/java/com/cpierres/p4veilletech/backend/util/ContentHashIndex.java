@@ -97,6 +97,11 @@ public class ContentHashIndex {
     props.setProperty(key, hash);
   }
 
+  public void remove(String key) {
+    if (key == null) return;
+    props.remove(key);
+  }
+
   /**
    * Retourne le nombre d'entrées dans l'index.
    */
@@ -105,11 +110,43 @@ public class ContentHashIndex {
   }
 
   /**
+   * Compte les entrées dont la clé commence par un préfixe donné.
+   */
+  public int countKeysWithPrefix(String prefix) {
+    if (prefix == null || prefix.isBlank()) return size();
+    int count = 0;
+    for (String key : props.stringPropertyNames()) {
+      if (key.startsWith(prefix)) count++;
+    }
+    return count;
+  }
+
+  /**
    * Vide complètement l'index (en mémoire). Appeler persist() ensuite pour effacer le fichier.
    */
   public void clear() {
     props.clear();
     log.info("[HashIndex] Index vidé (clear)");
+  }
+
+  /**
+   * Supprime les entrées dont la clé commence par un préfixe donné.
+   */
+  public void clearByPrefix(String prefix) {
+    if (prefix == null || prefix.isBlank()) {
+      clear();
+      return;
+    }
+    boolean removed = false;
+    for (String key : List.copyOf(props.stringPropertyNames())) {
+      if (key.startsWith(prefix)) {
+        props.remove(key);
+        removed = true;
+      }
+    }
+    if (removed) {
+      log.info("[HashIndex] Entrées supprimées pour le préfixe '{}'", prefix);
+    }
   }
 
   /**

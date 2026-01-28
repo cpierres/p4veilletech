@@ -1,24 +1,22 @@
 package com.cpierres.p4veilletech.backend.service;
 
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.stereotype.Component;
 
 /**
  * Opérations de maintenance directes sur la table pgvector
  * pour supprimer les anciens chunks d'un même document (clé: metadata.source).
  */
-@Component
-@RequiredArgsConstructor
 @Slf4j
 public class VectorStoreMaintenance {
 
     private final JdbcTemplate jdbcTemplate;
+    private final String tableName;
 
-    @Value("${spring.ai.vectorstore.pgvector.table-name:vector_store}")
-    private String tableName;
+    public VectorStoreMaintenance(JdbcTemplate jdbcTemplate, String tableName) {
+        this.jdbcTemplate = jdbcTemplate;
+        this.tableName = tableName;
+    }
 
     /**
      * Supprime tous les vecteurs dont metadata.source == source.

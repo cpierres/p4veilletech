@@ -63,7 +63,7 @@ public class ChatRequest {
      * Nombre de documents à récupérer du RAG
      */
     @Builder.Default
-    private Integer ragTopK = 12;
+    private Integer ragTopK = 30;
 
     /**
      * Seuil de similarité pour le RAG (0.0 à 1.0)

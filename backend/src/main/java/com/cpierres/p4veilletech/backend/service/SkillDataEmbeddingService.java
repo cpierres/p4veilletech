@@ -1,7 +1,6 @@
 package com.cpierres.p4veilletech.backend.service;
 
-import jakarta.annotation.PostConstruct;
-import lombok.RequiredArgsConstructor;
+import com.cpierres.p4veilletech.backend.dto.AiProvider;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.document.Document;
 import org.springframework.ai.document.DocumentTransformer;
@@ -27,18 +26,44 @@ import java.util.Collection;
 import java.util.Formatter;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
+import java.util.Optional;
+import java.util.EnumSet;
+import java.util.Set;
 
 @Slf4j
 @Service
-@RequiredArgsConstructor
 public class SkillDataEmbeddingService {
-    private final VectorStore vectorStore;
+    private final Map<AiProvider, VectorStore> vectorStoreMap;
     private final DocumentTransformer textSplitter;
     private final JsonLoader jsonLoader;
-    private final VectorStoreMaintenance vectorStoreMaintenance;
+    private final Map<AiProvider, VectorStoreMaintenance> vectorStoreMaintenanceMap;
     private final GitHubReadmeUpsertService gitHubReadmeUpsertService;
     private final com.cpierres.p4veilletech.backend.util.ContentHashIndex contentHashIndex;
     private final ResourceLoader resourceLoader;
+    private final MistralOcrService mistralOcrService;
+    private final Set<AiProvider> rateLimitedProviders = EnumSet.noneOf(AiProvider.class);
+
+    public SkillDataEmbeddingService(
+            @org.springframework.beans.factory.annotation.Qualifier("vectorStoreMap")
+            Map<AiProvider, VectorStore> vectorStoreMap,
+            DocumentTransformer textSplitter,
+            JsonLoader jsonLoader,
+            @org.springframework.beans.factory.annotation.Qualifier("vectorStoreMaintenanceMap")
+            Map<AiProvider, VectorStoreMaintenance> vectorStoreMaintenanceMap,
+            GitHubReadmeUpsertService gitHubReadmeUpsertService,
+            com.cpierres.p4veilletech.backend.util.ContentHashIndex contentHashIndex,
+            ResourceLoader resourceLoader,
+            MistralOcrService mistralOcrService) {
+        this.vectorStoreMap = vectorStoreMap;
+        this.textSplitter = textSplitter;
+        this.jsonLoader = jsonLoader;
+        this.vectorStoreMaintenanceMap = vectorStoreMaintenanceMap;
+        this.gitHubReadmeUpsertService = gitHubReadmeUpsertService;
+        this.contentHashIndex = contentHashIndex;
+        this.resourceLoader = resourceLoader;
+        this.mistralOcrService = mistralOcrService;
+    }
 
     @Value("${app.rag.data-path}")
     private String skillsDataPathProperty;
@@ -48,68 +73,121 @@ public class SkillDataEmbeddingService {
         Path finalPath = getFinalSkillsDataPath();
         if (finalPath == null) return;
 
-        log.info("[Embeddings] Initialisation : génération des embeddings OpenAI depuis {} ...", finalPath);
-
-        // 0) Vérification de cohérence cache/DB : si le cache contient des entrées mais la table vector_store est vide,
-        // on invalide le cache pour forcer la ré-indexation
-        checkAndInvalidateCacheIfInconsistent();
-
-        // 1) Bootstrap initial des README GitHub listés dans le fichier d'évaluations (idempotent via hash)
-        try {
-            int synced = gitHubReadmeUpsertService.syncAllFromEval();
-            log.info("[Embeddings] Bootstrap GitHub README terminé: {} dépôts traités", synced);
-        } catch (Exception e) {
-            log.warn("[Embeddings] Bootstrap GitHub README ignoré (erreur non bloquante)", e);
+        if (vectorStoreMap.isEmpty()) {
+            log.warn("[Embeddings] Aucun VectorStore disponible, indexation ignorée.");
+            return;
         }
 
-        int addedDocs = 0;
-        Files.walk(finalPath)
-            .filter(path -> !path.toString().replace('\\', '/').contains("/_index/"))
-            .filter(path -> !path.getFileName().toString().equals("_index"))
-            .filter(Files::isRegularFile)
-            .forEach(path -> {
-                indexSingleFile(path, finalPath);
-            });
-        contentHashIndex.persist();
+        for (var entry : vectorStoreMap.entrySet()) {
+            AiProvider provider = entry.getKey();
+            if (rateLimitedProviders.contains(provider)) {
+                log.warn("[Embeddings:{}] Rate limit détecté précédemment, indexation ignorée.", provider.getCode());
+                continue;
+            }
+            VectorStore vectorStore = entry.getValue();
+            VectorStoreMaintenance maintenance = vectorStoreMaintenanceMap.get(provider);
+            if (maintenance == null) {
+                log.warn("[Embeddings] Maintenance indisponible pour {}, indexation ignorée.", provider);
+                continue;
+            }
+
+            log.info("[Embeddings:{}] Initialisation : génération des embeddings depuis {} ...", provider.getCode(), finalPath);
+
+            // 0) Vérification de cohérence cache/DB : si le cache contient des entrées mais la table est vide,
+            // on invalide le cache pour forcer la ré-indexation
+            checkAndInvalidateCacheIfInconsistent(provider, maintenance);
+
+            // 1) Bootstrap initial des README GitHub listés dans le fichier d'évaluations (idempotent via hash)
+            try {
+                int synced = gitHubReadmeUpsertService.syncAllFromEval(provider);
+                log.info("[Embeddings:{}] Bootstrap GitHub README terminé: {} dépôts traités", provider.getCode(), synced);
+            } catch (Exception e) {
+                log.warn("[Embeddings:{}] Bootstrap GitHub README ignoré (erreur non bloquante)", provider.getCode(), e);
+            }
+
+            Files.walk(finalPath)
+                .filter(path -> !path.toString().replace('\\', '/').contains("/_index/"))
+                .filter(path -> !path.getFileName().toString().equals("_index"))
+                .filter(Files::isRegularFile)
+                .forEach(path -> indexSingleFileForProvider(path, finalPath, provider, vectorStore, maintenance));
+            contentHashIndex.persist();
+        }
     }
 
     public void indexSingleFile(Path path, Path rootPath) {
+        if (vectorStoreMap.isEmpty()) {
+            log.warn("[Embeddings] Aucun VectorStore disponible, indexation ignorée.");
+            return;
+        }
+        for (var entry : vectorStoreMap.entrySet()) {
+            AiProvider provider = entry.getKey();
+            if (rateLimitedProviders.contains(provider)) {
+                log.warn("[Embeddings:{}] Rate limit détecté précédemment, indexation ignorée.", provider.getCode());
+                continue;
+            }
+            VectorStore vectorStore = entry.getValue();
+            VectorStoreMaintenance maintenance = vectorStoreMaintenanceMap.get(provider);
+            if (maintenance == null) {
+                log.warn("[Embeddings] Maintenance indisponible pour {}, indexation ignorée.", provider);
+                continue;
+            }
+            indexSingleFileForProvider(path, rootPath, provider, vectorStore, maintenance);
+        }
+    }
+
+    private void indexSingleFileForProvider(Path path, Path rootPath, AiProvider provider,
+            VectorStore vectorStore, VectorStoreMaintenance maintenance) {
         String relPath = rootPath.relativize(path).toString();
         try {
             String fileKey = "file:" + relPath.replace('\\', '/');
+            String hashKey = provider.getCode() + ":" + fileKey;
             String sha = sha256OfFile(path);
-            String previous = contentHashIndex.get(fileKey);
+            String previous = contentHashIndex.get(hashKey);
             if (sha != null && sha.equals(previous)) {
-                log.info("[Embeddings] SKIP (inchangé, pas de ré-embedding): {}", relPath);
+                log.info("[Embeddings:{}] SKIP (inchangé, pas de ré-embedding): {}", provider.getCode(), relPath);
                 return; // évite consommation de tokens OpenAI
             }
 
-            Collection<Document> docs = readWithAutoReader(path, relPath);
+            Collection<Document> docs = readWithAutoReader(path, relPath, provider);
             // Déduplication: IDs déterministes (si VectorStore les utilise) et skip si hash identique
             List<Document> toAdd = assignDeterministicIds(docs, fileKey);
             // Supprime les anciens vecteurs de ce fichier (clé = metadata.source = relPath)
-            removeFileFromIndex(relPath);
+            removeFileFromIndexForProvider(relPath, provider, maintenance);
             if (Files.exists(path)) {
                 vectorStore.add(toAdd);
-                contentHashIndex.put(fileKey, sha);
-                log.info("[Embeddings] Upsert effectué pour {} ({} chunks)", relPath, toAdd.size());
+                contentHashIndex.put(hashKey, sha);
+                log.info("[Embeddings:{}] Upsert effectué pour {} ({} chunks)", provider.getCode(), relPath, toAdd.size());
             } else {
-                log.info("[Embeddings] Fichier supprimé entre-temps, skipping add: {}", relPath);
+                log.info("[Embeddings:{}] Fichier supprimé entre-temps, skipping add: {}", provider.getCode(), relPath);
             }
             contentHashIndex.persist();
         } catch (Throwable e) {
-            log.error("[Embeddings] Erreur lors de la lecture/vectorisation : {}", path, e);
+            if (isRateLimit(e)) {
+                rateLimitedProviders.add(provider);
+                log.warn("[Embeddings:{}] Rate limit détecté, arrêt de l'indexation pour ce provider.", provider.getCode());
+            }
+            log.error("[Embeddings:{}] Erreur lors de la lecture/vectorisation : {}", provider.getCode(), path, e);
         }
     }
 
     public void removeFileFromIndex(String relPath) {
+        if (vectorStoreMaintenanceMap.isEmpty()) {
+            log.warn("[Embeddings] Maintenance indisponible, suppression ignorée.");
+            return;
+        }
+        for (var entry : vectorStoreMaintenanceMap.entrySet()) {
+            removeFileFromIndexForProvider(relPath, entry.getKey(), entry.getValue());
+        }
+    }
+
+    private void removeFileFromIndexForProvider(String relPath, AiProvider provider, VectorStoreMaintenance maintenance) {
         String sourceKey = relPath.replace('\\', '/');
         try {
-            vectorStoreMaintenance.deleteBySource(sourceKey);
-            contentHashIndex.put("file:" + sourceKey, null);
+            maintenance.deleteBySource(sourceKey);
+            contentHashIndex.remove(provider.getCode() + ":file:" + sourceKey);
             contentHashIndex.persist();
         } catch (Exception ex) {
-            log.warn("[Embeddings] Impossible de supprimer les anciens chunks pour {} (continuation en upsert simple)", relPath, ex);
+            log.warn("[Embeddings:{}] Impossible de supprimer les anciens chunks pour {} (continuation en upsert simple)", provider.getCode(), relPath, ex);
         }
     }
 
@@ -120,22 +198,25 @@ public class SkillDataEmbeddingService {
      * Cela évite le problème où le cache indique que les fichiers sont déjà indexés
      * alors que la base de données a été vidée ou réinitialisée.
      */
-    private void checkAndInvalidateCacheIfInconsistent() {
+    private void checkAndInvalidateCacheIfInconsistent(AiProvider provider, VectorStoreMaintenance maintenance) {
         try {
-            int cacheSize = contentHashIndex.size();
-            long vectorCount = vectorStoreMaintenance.countVectors();
+            String prefix = provider.getCode() + ":";
+            int cacheSize = contentHashIndex.countKeysWithPrefix(prefix);
+            long vectorCount = maintenance.countVectors();
 
-            log.info("[Embeddings] Vérification cohérence: cache={} entrées, vector_store={} vecteurs", cacheSize, vectorCount);
+            log.info("[Embeddings:{}] Vérification cohérence: cache={} entrées, table={} vecteurs",
+                    provider.getCode(), cacheSize, vectorCount);
 
             if (cacheSize > 0 && vectorCount == 0) {
-                log.warn("[Embeddings] INCOHÉRENCE DÉTECTÉE: le cache contient {} entrées mais la table vector_store est vide. " +
-                        "Invalidation du cache pour forcer la ré-indexation.", cacheSize);
-                contentHashIndex.clear();
+                log.warn("[Embeddings:{}] INCOHÉRENCE DÉTECTÉE: le cache contient {} entrées mais la table est vide. " +
+                        "Invalidation du cache pour forcer la ré-indexation.", provider.getCode(), cacheSize);
+                contentHashIndex.clearByPrefix(prefix);
                 contentHashIndex.persist();
-                log.info("[Embeddings] Cache invalidé avec succès.");
+                log.info("[Embeddings:{}] Cache invalidé avec succès.", provider.getCode());
             }
         } catch (Exception e) {
-            log.warn("[Embeddings] Impossible de vérifier la cohérence cache/DB (non bloquant): {}", e.getMessage());
+            log.warn("[Embeddings:{}] Impossible de vérifier la cohérence cache/DB (non bloquant): {}",
+                    provider.getCode(), e.getMessage());
         }
     }
 
@@ -154,7 +235,7 @@ public class SkillDataEmbeddingService {
         return rawPath;
     }
 
-    private Collection<Document> readWithAutoReader(Path filePath, String relPath) throws Exception {
+    private Collection<Document> readWithAutoReader(Path filePath, String relPath, AiProvider provider) throws Exception {
         String ext = getExtension(filePath.getFileName().toString()).toLowerCase();
         FileSystemResource fileResource = new FileSystemResource(filePath.toFile());
 
@@ -162,9 +243,17 @@ public class SkillDataEmbeddingService {
         boolean isSpecialJson = "projets-ocr.json".equalsIgnoreCase(filename) || "udemy-training.json".equalsIgnoreCase(filename);
 
         Collection<Document> docs;
+        Optional<String> ocrText = Optional.empty();
+        if (provider == AiProvider.MISTRAL && mistralOcrService != null && mistralOcrService.supports(filePath)) {
+            ocrText = mistralOcrService.extractText(filePath);
+        }
         switch (ext) {
             case "pdf":
-                docs = new PagePdfDocumentReader(fileResource).get();
+                if (ocrText.isPresent()) {
+                    docs = List.of(new Document(ocrText.get()));
+                } else {
+                    docs = new PagePdfDocumentReader(fileResource).get();
+                }
                 break;
             case "md":
                 docs = new TikaDocumentReader(fileResource).get();
@@ -179,7 +268,11 @@ public class SkillDataEmbeddingService {
                 }
                 break;
             default:
-                docs = new TikaDocumentReader(fileResource).get();
+                if (ocrText.isPresent()) {
+                    docs = List.of(new Document(ocrText.get()));
+                } else {
+                    docs = new TikaDocumentReader(fileResource).get();
+                }
         }
 
         List<Document> outDocs = new ArrayList<>();
@@ -264,5 +357,17 @@ public class SkillDataEmbeddingService {
             }
             return formatter.toString();
         }
+    }
+
+    private boolean isRateLimit(Throwable e) {
+        Throwable cur = e;
+        while (cur != null) {
+            String msg = cur.getMessage();
+            if (msg != null && msg.contains("Rate limit exceeded")) {
+                return true;
+            }
+            cur = cur.getCause();
+        }
+        return false;
     }
 }

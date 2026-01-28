@@ -1,9 +1,9 @@
 package com.cpierres.p4veilletech.backend.service;
 
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.document.Document;
 import org.springframework.ai.document.DocumentTransformer;
+import com.cpierres.p4veilletech.backend.dto.AiProvider;
 import org.springframework.ai.vectorstore.VectorStore;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
@@ -30,15 +30,29 @@ import java.util.regex.Pattern;
  * Objectif: éviter les doublons dans pgvector et ne ré-embedder que si le contenu a changé.
  */
 @Service
-@RequiredArgsConstructor
 @Slf4j
 public class GitHubReadmeUpsertService {
 
-    private final VectorStore vectorStore;
+    private final Map<AiProvider, VectorStore> vectorStoreMap;
     private final DocumentTransformer textSplitter;
-    private final VectorStoreMaintenance maintenance;
+    private final Map<AiProvider, VectorStoreMaintenance> maintenanceMap;
     private final ResourceLoader resourceLoader;
     private final com.cpierres.p4veilletech.backend.util.ContentHashIndex hashIndex;
+
+    public GitHubReadmeUpsertService(
+            @org.springframework.beans.factory.annotation.Qualifier("vectorStoreMap")
+            Map<AiProvider, VectorStore> vectorStoreMap,
+            DocumentTransformer textSplitter,
+            @org.springframework.beans.factory.annotation.Qualifier("vectorStoreMaintenanceMap")
+            Map<AiProvider, VectorStoreMaintenance> maintenanceMap,
+            ResourceLoader resourceLoader,
+            com.cpierres.p4veilletech.backend.util.ContentHashIndex hashIndex) {
+        this.vectorStoreMap = vectorStoreMap;
+        this.textSplitter = textSplitter;
+        this.maintenanceMap = maintenanceMap;
+        this.resourceLoader = resourceLoader;
+        this.hashIndex = hashIndex;
+    }
 
     @Value("${app.github.token:}")
     private String githubToken;
@@ -52,6 +66,18 @@ public class GitHubReadmeUpsertService {
     private static final Pattern REPO_URL = Pattern.compile("https?://github\\.com/([A-Za-z0-9_.-]+)/([A-Za-z0-9_.-]+)(?:/.*)?");
 
     public int syncAllFromEval() {
+        if (vectorStoreMap.isEmpty()) {
+            log.warn("[GitHubUpsert] Aucun VectorStore disponible, sync ignorée.");
+            return 0;
+        }
+        int total = 0;
+        for (AiProvider provider : vectorStoreMap.keySet()) {
+            total += syncAllFromEval(provider);
+        }
+        return total;
+    }
+
+    public int syncAllFromEval(AiProvider provider) {
         try {
             Resource res = resourceLoader.getResource(evalFileLocation);
             if (!res.exists()) {
@@ -64,7 +90,7 @@ public class GitHubReadmeUpsertService {
             for (String r : repos) {
                 Optional<RepoRef> ref = parseRepo(r);
                 if (ref.isEmpty()) continue;
-                if (upsertReadme(ref.get())) ok++;
+                if (upsertReadme(provider, ref.get())) ok++;
             }
             hashIndex.persist();
             return ok;
@@ -75,7 +101,26 @@ public class GitHubReadmeUpsertService {
     }
 
     public boolean upsertReadme(RepoRef ref) {
+        if (vectorStoreMap.isEmpty()) {
+            log.warn("[GitHubUpsert] Aucun VectorStore disponible, upsert ignoré.");
+            return false;
+        }
+        boolean anyOk = false;
+        for (AiProvider provider : vectorStoreMap.keySet()) {
+            anyOk |= upsertReadme(provider, ref);
+        }
+        return anyOk;
+    }
+
+    public boolean upsertReadme(AiProvider provider, RepoRef ref) {
         try {
+            VectorStore vectorStore = vectorStoreMap.get(provider);
+            VectorStoreMaintenance maintenance = maintenanceMap.get(provider);
+            if (vectorStore == null || maintenance == null) {
+                log.warn("[GitHubUpsert] VectorStore ou maintenance indisponible pour {}", provider);
+                return false;
+            }
+
             String docKey = docKey(ref);
             String readme = fetchReadmeContent(ref);
             if (readme == null || readme.isBlank()) {
@@ -83,9 +128,10 @@ public class GitHubReadmeUpsertService {
                 return false;
             }
             String sha = sha256(readme);
-            String prev = hashIndex.get(docKey);
+            String hashKey = provider.getCode() + ":" + docKey;
+            String prev = hashIndex.get(hashKey);
             if (sha != null && sha.equals(prev)) {
-                log.info("[GitHubUpsert] SKIP (inchangé): {}", docKey);
+                log.info("[GitHubUpsert:{}] SKIP (inchangé): {}", provider.getCode(), docKey);
                 return true;
             }
 
@@ -93,7 +139,7 @@ public class GitHubReadmeUpsertService {
             try {
                 maintenance.deleteBySource(docKey);
             } catch (Exception ex) {
-                log.warn("[GitHubUpsert] deleteBySource échoué pour {} (continue)", docKey, ex);
+                log.warn("[GitHubUpsert:{}] deleteBySource échoué pour {} (continue)", provider.getCode(), docKey, ex);
             }
 
             // Split + add
@@ -101,11 +147,11 @@ public class GitHubReadmeUpsertService {
             d.getMetadata().put("source", docKey);
             List<Document> chunks = new ArrayList<>(textSplitter.apply(List.of(d)));
             vectorStore.add(chunks);
-            hashIndex.put(docKey, sha);
-            log.info("[GitHubUpsert] Upsert OK pour {} ({} chunks)", docKey, chunks.size());
+            hashIndex.put(hashKey, sha);
+            log.info("[GitHubUpsert:{}] Upsert OK pour {} ({} chunks)", provider.getCode(), docKey, chunks.size());
             return true;
         } catch (Exception e) {
-            log.error("[GitHubUpsert] Échec upsert pour {}", ref, e);
+            log.error("[GitHubUpsert:{}] Échec upsert pour {}", provider.getCode(), ref, e);
             return false;
         }
     }

@@ -14,7 +14,7 @@
         <mat-label>{{ lang()==='fr' ? 'Fournisseur IA' : 'AI Provider' }}</mat-label>
         <mat-select [value]="provider()" (valueChange)="provider.set($event)">
           <mat-option value="openai">OpenAI</mat-option>
-          <mat-option value="mistral">Mistral AI</mat-option>
+          <mat-option value="mistral">Mistral (LM Studio)</mat-option>
         </mat-select>
       </mat-form-field>
 

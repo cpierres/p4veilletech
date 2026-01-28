@@ -1,7 +1,7 @@
 package com.cpierres.p4veilletech.backend.rag;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.RequiredArgsConstructor;
+import com.cpierres.p4veilletech.backend.dto.AiProvider;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.document.Document;
 import org.springframework.ai.vectorstore.VectorStore;
@@ -15,16 +15,25 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @Component
-@RequiredArgsConstructor
 @Slf4j
 public class JsonLoader {
-  private final VectorStore vectorStore;
+  private final Map<AiProvider, VectorStore> vectorStoreMap;
   private final ObjectMapper objectMapper; // Injecté automatiquement par Spring
 
   @Value("${app.rag.data-path}")
   private String ragDataPath;
 
   private final ResourceLoader resourceLoader;
+
+  public JsonLoader(
+      @org.springframework.beans.factory.annotation.Qualifier("vectorStoreMap")
+      Map<AiProvider, VectorStore> vectorStoreMap,
+      ObjectMapper objectMapper,
+      ResourceLoader resourceLoader) {
+    this.vectorStoreMap = vectorStoreMap;
+    this.objectMapper = objectMapper;
+    this.resourceLoader = resourceLoader;
+  }
 
   // 1) API interne pour parser le JSON "projets-ocr.json" depuis une Resource et retourner des Documents
   public List<Document> parseProjetsOcr(Resource resource) throws IOException {
@@ -217,6 +226,12 @@ public class JsonLoader {
     }
     List<Document> documents = parseProjetsOcr(resource);
     log.info("Loaded {} projects with full content (links + evaluations) from {}", documents.size(), path);
-    this.vectorStore.add(documents);
+    if (vectorStoreMap.isEmpty()) {
+      log.warn("Aucun VectorStore disponible, loadJson ignoré.");
+      return;
+    }
+    for (VectorStore vectorStore : vectorStoreMap.values()) {
+      vectorStore.add(documents);
+    }
   }
 }
