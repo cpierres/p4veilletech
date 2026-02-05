@@ -46,7 +46,25 @@
   border-radius: 8px;
   padding: 12px 16px;
   margin-bottom: 8px;
-  width: 100%;
+  width: 97%;
+}
+
+.advanced-settings mat-form-field {
+  width: 150px !important;
+  min-width: 150px !important;
+  max-width: 150px !important;
+}
+
+.settings-row mat-form-field.setting-field {
+  width: 150px !important;
+  min-width: 150px !important;
+  max-width: 150px !important;
+}
+
+mat-form-field.setting-field {
+  width: 150px !important;
+  min-width: 150px !important;
+  max-width: 150px !important;
 }
 
 .settings-row {
@@ -61,9 +79,10 @@
   margin-bottom: 0;
 }
 
-.setting-field {
-  flex: 1 1 160px;
-  min-width: 160px;
+::ng-deep .setting-field {
+  width: 150px !important;
+  min-width: 150px !important;
+  max-width: 150px !important;
 }
 
 .header-controls mat-form-field,
