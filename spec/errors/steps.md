@@ -36,8 +36,8 @@ Solution : ajouter un handler `.onErrorMap(IllegalStateException.class, ...)` qu
 - [x] Afficher un message d'erreur explicite à l'utilisateur dans l'interface
 
 ### 6. Tests
-- [ ] Ajouter des tests unitaires pour les nouveaux cas d'erreur
-- [ ] Tester le comportement avec mock des exceptions
+- [x] Ajouter des tests unitaires pour les nouveaux cas d'erreur
+- [x] Tester le comportement avec mock des exceptions
 
 ## Fichiers concernés
 - `backend/src/main/java/com/cpierres/p4veilletech/backend/service/ChatRagService.java`
