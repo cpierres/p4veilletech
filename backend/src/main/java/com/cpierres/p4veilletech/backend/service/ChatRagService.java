@@ -186,6 +186,27 @@ public class ChatRagService {
                                 message,
                                 ex
                         );
+                    })
+                    .onErrorMap(IllegalStateException.class, ex -> {
+                        // Gérer les erreurs enveloppées (ex: "Stream processing failed")
+                        Throwable cause = ex.getCause();
+                        while (cause != null) {
+                            if (cause instanceof WebClientRequestException wcEx) {
+                                log.error("Erreur de connexion (enveloppée) pour le provider {}: {}", providerUsed.get(), wcEx.getMessage());
+                                String message = wcEx.getMessage() != null && wcEx.getMessage().contains("timed out")
+                                        ? "Le serveur de modèles locaux n'est pas disponible. Vérifiez qu'il est démarré."
+                                        : "Impossible de se connecter au fournisseur d'IA. Vérifiez votre connexion.";
+                                return new AiProviderException(
+                                        AiProviderException.ErrorType.CONNECTION_TIMEOUT,
+                                        providerUsed.get() != null ? providerUsed.get().getCode() : "unknown",
+                                        message,
+                                        wcEx
+                                );
+                            }
+                            cause = cause.getCause();
+                        }
+                        // Si pas de cause connue, relancer l'exception originale
+                        return ex;
                     });
         });
     }

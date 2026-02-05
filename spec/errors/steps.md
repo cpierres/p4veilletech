@@ -5,6 +5,10 @@ Améliorer la gestion des erreurs pour deux cas spécifiques :
 1. **429 Too Many Requests** : Crédit API épuisé (ex: Mistral AI cloud)
 2. **Connection timed out** : Serveur de modèles locaux non disponible
 
+## Problème identifié (2026-02-05)
+L'erreur `WebClientRequestException` (timeout) est parfois enveloppée dans une `IllegalStateException: Stream processing failed` par Spring AI.
+Solution : ajouter un handler `.onErrorMap(IllegalStateException.class, ...)` qui parcourt la chaîne des causes pour détecter `WebClientRequestException`.
+
 ## Liste des tâches
 
 ### 1. Créer une classe d'exception personnalisée
@@ -28,8 +32,8 @@ Améliorer la gestion des erreurs pour deux cas spécifiques :
 - [x] Retourner un flux d'erreur SSE lisible par le client
 
 ### 5. Adapter le frontend (chat.component.ts)
-- [ ] Gérer les erreurs SSE côté Angular
-- [ ] Afficher un message d'erreur explicite à l'utilisateur dans l'interface
+- [x] Gérer les erreurs SSE côté Angular
+- [x] Afficher un message d'erreur explicite à l'utilisateur dans l'interface
 
 ### 6. Tests
 - [ ] Ajouter des tests unitaires pour les nouveaux cas d'erreur

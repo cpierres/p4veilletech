@@ -212,6 +212,26 @@ export class ChatComponent implements AfterViewChecked {
         try {
           // Le nouvel endpoint retourne du JSON avec content et metadata
           const data = JSON.parse(event.data);
+
+          // Gestion des erreurs retournées par le backend
+          if (data.error) {
+            hasReceivedData = true;
+            const errorMessage = data.errorMessage || (this.lang() === 'fr' ? 'Une erreur est survenue.' : 'An error occurred.');
+            this.messages.update((m: ChatMessage[]) => {
+              const updated = [...m];
+              updated[assistantIndex] = {
+                role: 'assistant',
+                text: `⚠️ ${errorMessage}`,
+                audioUrl: null,
+                metadata: { provider: data.provider }
+              };
+              return updated;
+            });
+            if (eventSource) eventSource.close();
+            this.loading.set(false);
+            return;
+          }
+
           const chunk = (data.content || '').replace(/\u00A0/g, ' ');
 
           // Stocker les métadonnées
