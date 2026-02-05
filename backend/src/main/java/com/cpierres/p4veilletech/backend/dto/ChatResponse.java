@@ -67,4 +67,19 @@ public class ChatResponse {
      * Durée de traitement en millisecondes
      */
     private Long processingTimeMs;
+
+    /**
+     * Indique si c'est une erreur
+     */
+    private Boolean error;
+
+    /**
+     * Type d'erreur (RATE_LIMIT_EXCEEDED, CONNECTION_TIMEOUT, etc.)
+     */
+    private String errorType;
+
+    /**
+     * Message d'erreur pour l'utilisateur
+     */
+    private String errorMessage;
 }

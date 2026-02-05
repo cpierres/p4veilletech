@@ -2,6 +2,7 @@ package com.cpierres.p4veilletech.backend.controller;
 
 import com.cpierres.p4veilletech.backend.dto.ChatRequest;
 import com.cpierres.p4veilletech.backend.dto.ChatResponse;
+import com.cpierres.p4veilletech.backend.exception.AiProviderException;
 import com.cpierres.p4veilletech.backend.service.ChatRagService;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -43,7 +44,15 @@ public class ChatController {
    */
   @PostMapping(value = "/chat/advanced", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
   public Flux<ChatResponse> chatAdvanced(@RequestBody ChatRequest request) {
-    return chatRagService.chatWithOptions(request);
+    return chatRagService.chatWithOptions(request)
+        .onErrorResume(AiProviderException.class, ex -> Flux.just(
+            ChatResponse.builder()
+                .error(true)
+                .errorType(ex.getErrorType().name())
+                .errorMessage(ex.getUserMessage())
+                .provider(ex.getProvider())
+                .build()
+        ));
   }
 
   /**
@@ -75,7 +84,15 @@ public class ChatController {
         .ragSimilarityThreshold(ragSimilarityThreshold)
         .build();
 
-    return chatRagService.chatWithOptions(request);
+    return chatRagService.chatWithOptions(request)
+        .onErrorResume(AiProviderException.class, ex -> Flux.just(
+            ChatResponse.builder()
+                .error(true)
+                .errorType(ex.getErrorType().name())
+                .errorMessage(ex.getUserMessage())
+                .provider(ex.getProvider())
+                .build()
+        ));
   }
 
   @PostMapping(value = "/chat/transcribe", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.TEXT_PLAIN_VALUE)

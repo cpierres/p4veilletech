@@ -4,7 +4,10 @@ import com.cpierres.p4veilletech.backend.advisor.TokenUsageAuditAdvisor;
 import com.cpierres.p4veilletech.backend.dto.AiProvider;
 import com.cpierres.p4veilletech.backend.dto.ChatRequest;
 import com.cpierres.p4veilletech.backend.dto.ChatResponse;
+import com.cpierres.p4veilletech.backend.exception.AiProviderException;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.reactive.function.client.WebClientRequestException;
+import org.springframework.web.reactive.function.client.WebClientResponseException;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.advisor.vectorstore.QuestionAnswerAdvisor;
 import org.springframework.ai.chat.model.ChatModel;
@@ -162,6 +165,27 @@ public class ChatRagService {
                                 .timestamp(Instant.now())
                                 .processingTimeMs(System.currentTimeMillis() - startTime.get())
                                 .build();
+                    })
+                    .onErrorMap(WebClientResponseException.TooManyRequests.class, ex -> {
+                        log.error("Erreur 429 Too Many Requests pour le provider {}: {}", providerUsed.get(), ex.getMessage());
+                        return new AiProviderException(
+                                AiProviderException.ErrorType.RATE_LIMIT_EXCEEDED,
+                                providerUsed.get() != null ? providerUsed.get().getCode() : "unknown",
+                                "Crédit API épuisé. Veuillez recharger votre compte chez le fournisseur.",
+                                ex
+                        );
+                    })
+                    .onErrorMap(WebClientRequestException.class, ex -> {
+                        log.error("Erreur de connexion pour le provider {}: {}", providerUsed.get(), ex.getMessage());
+                        String message = ex.getMessage() != null && ex.getMessage().contains("timed out")
+                                ? "Le serveur de modèles locaux n'est pas disponible. Vérifiez qu'il est démarré."
+                                : "Impossible de se connecter au fournisseur d'IA. Vérifiez votre connexion.";
+                        return new AiProviderException(
+                                AiProviderException.ErrorType.CONNECTION_TIMEOUT,
+                                providerUsed.get() != null ? providerUsed.get().getCode() : "unknown",
+                                message,
+                                ex
+                        );
                     });
         });
     }
