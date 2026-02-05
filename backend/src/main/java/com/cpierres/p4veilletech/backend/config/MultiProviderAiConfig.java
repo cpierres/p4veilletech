@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.ai.chat.model.ChatModel;
 import org.springframework.ai.embedding.EmbeddingModel;
+import org.springframework.ai.mistralai.MistralAiChatModel;
 import org.springframework.ai.mistralai.MistralAiEmbeddingModel;
 import org.springframework.ai.openai.OpenAiChatModel;
 import org.springframework.ai.openai.OpenAiEmbeddingModel;
@@ -39,6 +40,9 @@ public class MultiProviderAiConfig {
     private OpenAiEmbeddingModel openAiEmbeddingModel;
 
     @Autowired(required = false)
+    private MistralAiChatModel mistralAiChatModel;
+
+    @Autowired(required = false)
     private MistralAiEmbeddingModel mistralAiEmbeddingModel;
 
     /**
@@ -65,6 +69,11 @@ public class MultiProviderAiConfig {
         if (lmStudioMistralChatModel != null) {
             builder.put(AiProvider.MISTRAL, lmStudioMistralChatModel);
             log.info("LM Studio Mistral ChatModel registered");
+        }
+
+        if (mistralAiChatModel != null) {
+            builder.put(AiProvider.MISTRAL_CLOUD, mistralAiChatModel);
+            log.info("Mistral AI Cloud ChatModel registered");
         }
 
         if (builder.isEmpty()) {

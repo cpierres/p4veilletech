@@ -171,10 +171,27 @@ public class ChatRagService {
      */
     private ChatOptions buildChatOptions(ChatRequest request, AiProvider provider) {
         if (provider == AiProvider.MISTRAL) {
+            // LM Studio local utilise l'API OpenAI-compatible
             var builder = OpenAiChatOptions.builder();
             String model = normalizeModelName(request.getModel());
             if (model != null) {
                 builder.model(model);
+            }
+            if (request.getTemperature() != null) {
+                builder.temperature(request.getTemperature());
+            }
+            if (request.getTopP() != null) {
+                builder.topP(request.getTopP());
+            }
+            if (request.getMaxTokens() != null) {
+                builder.maxTokens(request.getMaxTokens());
+            }
+            return builder.build();
+        } else if (provider == AiProvider.MISTRAL_CLOUD) {
+            // Mistral AI Cloud utilise l'API native Mistral
+            var builder = MistralAiChatOptions.builder();
+            if (request.getModel() != null && !request.getModel().isBlank()) {
+                builder.model(request.getModel());
             }
             if (request.getTemperature() != null) {
                 builder.temperature(request.getTemperature());
@@ -217,7 +234,12 @@ public class ChatRagService {
         } else if (options instanceof MistralAiChatOptions mistralOptions) {
             return mistralOptions.getModel() != null ? mistralOptions.getModel() : "mistral-small-latest";
         }
-        return provider == AiProvider.MISTRAL ? "LMStudio/mistralai/ministral-3-3b" : "gpt-4o-mini";
+        if (provider == AiProvider.MISTRAL) {
+            return "LMStudio/mistralai/ministral-3-3b";
+        } else if (provider == AiProvider.MISTRAL_CLOUD) {
+            return "mistral-small-latest";
+        }
+        return "gpt-4o-mini";
     }
 
     private String normalizeModelName(String model) {

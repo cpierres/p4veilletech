@@ -5,7 +5,8 @@ package com.cpierres.p4veilletech.backend.dto;
  */
 public enum AiProvider {
     OPENAI("openai", "OpenAI"),
-    MISTRAL("mistral", "Mistral AI");
+    MISTRAL("mistral", "Mistral Local (LM Studio)"),
+    MISTRAL_CLOUD("mistral-cloud", "Mistral AI Cloud");
 
     private final String code;
     private final String displayName;

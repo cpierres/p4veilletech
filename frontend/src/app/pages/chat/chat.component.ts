@@ -45,7 +45,7 @@ export class ChatComponent implements AfterViewChecked {
   ttsEnabled = signal<boolean>(false);
 
   // Paramètres AI
-  provider = signal<'openai' | 'mistral'>('openai');
+  provider = signal<'openai' | 'mistral' | 'mistral-cloud'>('openai');
   model = signal<string>('gpt-4o-mini');
   showAdvancedSettings = signal<boolean>(false);
 
@@ -64,6 +64,16 @@ export class ChatComponent implements AfterViewChecked {
         { value: 'http://192.168.10.1:1234/mistralai/mistral-small-3.2', label: 'Mistral Small 3.2 (local)' },
         { value: 'http://192.168.10.1:1234/mistralai/mistral-nemo-instruct-2407', label: 'Mistral Nemo Instruct 2407 (local)' },
         { value: 'http://192.168.10.1:1234/mistralai/mistral-7b-instruct-v0.3', label: 'Mistral 7B Instruct v0.3 (local)' },
+      ];
+    }
+    if (this.provider() === 'mistral-cloud') {
+      return [
+        { value: 'mistral-small-latest', label: 'Mistral Small' },
+        { value: 'mistral-medium-latest', label: 'Mistral Medium' },
+        { value: 'mistral-large-latest', label: 'Mistral Large' },
+        { value: 'open-mistral-7b', label: 'Open Mistral 7B' },
+        { value: 'open-mixtral-8x7b', label: 'Open Mixtral 8x7B' },
+        { value: 'open-mixtral-8x22b', label: 'Open Mixtral 8x22B' },
       ];
     }
     return [

@@ -90,7 +90,8 @@ public class VectorStoreConfig {
         VectorStore mistral = mistralVectorStoreProvider.getIfAvailable();
         if (mistral != null) {
             builder.put(AiProvider.MISTRAL, mistral);
-            log.info("Mistral VectorStore registered");
+            builder.put(AiProvider.MISTRAL_CLOUD, mistral);
+            log.info("Mistral VectorStore registered (MISTRAL and MISTRAL_CLOUD)");
         }
         if (builder.isEmpty()) {
             log.warn("No VectorStore available! Please configure at least one AI provider.");
