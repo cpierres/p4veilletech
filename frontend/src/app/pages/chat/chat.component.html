@@ -53,9 +53,6 @@
         <input matInput type="number" [ngModel]="maxTokens()" (ngModelChange)="maxTokens.set($event)"
                min="100" max="4096" step="100" name="maxTokens"/>
       </mat-form-field>
-    </div>
-
-    <div class="settings-row">
       <mat-form-field appearance="outline" class="setting-field">
         <mat-label>RAG Top K</mat-label>
         <input matInput type="number" [ngModel]="ragTopK()" (ngModelChange)="ragTopK.set($event)"
