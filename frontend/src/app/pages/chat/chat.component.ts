@@ -50,10 +50,10 @@ export class ChatComponent implements AfterViewChecked {
   showAdvancedSettings = signal<boolean>(false);
 
   // Paramètres avancés
-  temperature = signal<number | null>(0.7);
+  temperature = signal<number | null>(0.5);
   topP = signal<number | null>(null);
   maxTokens = signal<number | null>(null);
-  ragTopK = signal<number>(30);
+  ragTopK = signal<number>(50);
   ragSimilarityThreshold = signal<number>(0.4);
 
   // Modèles disponibles selon le provider

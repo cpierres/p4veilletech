@@ -28,7 +28,7 @@ public class LmStudioMistralConfig {
             @Value("${app.lmstudio.base-url:http://192.168.10.1:1234}") String baseUrl,
             @Value("${app.lmstudio.api-key:lmstudio}") String apiKey,
             @Value("${app.lmstudio.mistral.model:LMStudio/mistralai/ministral-3-3b}") String model,
-            @Value("${app.lmstudio.mistral.temperature:0.7}") Double temperature,
+            @Value("${app.lmstudio.mistral.temperature:0.5}") Double temperature,
             ToolCallingManager toolCallingManager,
             RetryTemplate retryTemplate,
             ObjectProvider<ObservationRegistry> observationRegistry,

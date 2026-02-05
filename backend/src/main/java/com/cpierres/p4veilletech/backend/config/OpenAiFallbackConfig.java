@@ -32,7 +32,7 @@ public class OpenAiFallbackConfig {
             @Value("${spring.ai.openai.base-url:https://api.openai.com}") String baseUrl,
             @Value("${spring.ai.openai.api-key}") String apiKey,
             @Value("${spring.ai.openai.chat.options.model:gpt-4o-mini}") String model,
-            @Value("${spring.ai.openai.chat.options.temperature:0.7}") Double temperature,
+            @Value("${spring.ai.openai.chat.options.temperature:0.5}") Double temperature,
             ToolCallingManager toolCallingManager,
             RetryTemplate retryTemplate,
             ObjectProvider<ObservationRegistry> observationRegistry,

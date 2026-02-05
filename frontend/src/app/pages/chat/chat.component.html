@@ -37,9 +37,9 @@
   <div class="advanced-settings" *ngIf="showAdvancedSettings()">
     <div class="settings-row">
       <mat-form-field appearance="outline" class="setting-field">
-        <mat-label>{{ lang()==='fr' ? 'Température' : 'Temperature' }} (0-2)</mat-label>
+        <mat-label>{{ lang()==='fr' ? 'Température' : 'Temperature' }} (0-1)</mat-label>
         <input matInput type="number" [ngModel]="temperature()" (ngModelChange)="temperature.set($event)"
-               min="0" max="2" step="0.1" name="temperature"/>
+               min="0" max="1" step="0.1" name="temperature"/>
       </mat-form-field>
 
       <mat-form-field appearance="outline" class="setting-field">
