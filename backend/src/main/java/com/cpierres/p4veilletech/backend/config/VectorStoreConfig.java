@@ -128,6 +128,8 @@ public class VectorStoreConfig {
         VectorStoreMaintenance mistral = mistralMaintenanceProvider.getIfAvailable();
         if (mistral != null) {
             builder.put(AiProvider.MISTRAL, mistral);
+            builder.put(AiProvider.MISTRAL_CLOUD, mistral);
+            log.info("Mistral VectorStoreMaintenance registered (MISTRAL and MISTRAL_CLOUD)");
         }
         return Map.copyOf(builder);
     }
