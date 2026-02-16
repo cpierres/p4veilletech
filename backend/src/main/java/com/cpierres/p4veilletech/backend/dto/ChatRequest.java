@@ -77,7 +77,19 @@ public class ChatRequest {
     @Builder.Default
     private String ragDomain = "skills-data";
 
+    /**
+     * Identifiant de l'utilisateur (optionnel, null si non authentifié)
+     */
+    private String userId;
+
     public AiProvider getAiProvider() {
         return AiProvider.fromCode(this.provider);
+    }
+
+    /**
+     * Retourne l'ID utilisateur, ou 'anonymous' si null ou vide
+     */
+    public String getUserId() {
+        return (this.userId != null && !this.userId.isBlank()) ? this.userId : "anonymous";
     }
 }

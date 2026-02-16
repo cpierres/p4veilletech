@@ -69,7 +69,8 @@ public class ChatController {
     @RequestParam(value = "topK", required = false) Integer topK,
     @RequestParam(value = "maxTokens", required = false) Integer maxTokens,
     @RequestParam(value = "ragTopK", required = false, defaultValue = "30") Integer ragTopK,
-    @RequestParam(value = "ragSimilarityThreshold", required = false, defaultValue = "0.4") Double ragSimilarityThreshold) {
+    @RequestParam(value = "ragSimilarityThreshold", required = false, defaultValue = "0.4") Double ragSimilarityThreshold,
+    @RequestParam(value = "userId", required = false) String userId) {
 
     ChatRequest request = ChatRequest.builder()
         .message(message)
@@ -82,6 +83,7 @@ public class ChatController {
         .maxTokens(maxTokens)
         .ragTopK(ragTopK)
         .ragSimilarityThreshold(ragSimilarityThreshold)
+        .userId(userId)
         .build();
 
     return chatRagService.chatWithOptions(request)

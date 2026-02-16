@@ -5,6 +5,8 @@ import com.cpierres.p4veilletech.backend.dto.AiProvider;
 import com.cpierres.p4veilletech.backend.dto.ChatRequest;
 import com.cpierres.p4veilletech.backend.dto.ChatResponse;
 import com.cpierres.p4veilletech.backend.exception.AiProviderException;
+import com.cpierres.p4veilletech.backend.model.ChatConversation;
+import com.cpierres.p4veilletech.backend.repository.ChatConversationRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.reactive.function.client.WebClientRequestException;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
@@ -25,8 +27,10 @@ import reactor.core.scheduler.Schedulers;
 
 import java.net.URI;
 import java.time.Instant;
+import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+import java.util.UUID;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -39,18 +43,21 @@ public class ChatRagService {
     private final Map<AiProvider, VectorStore> vectorStoreMap;
     private final ObjectProvider<VectorStore> defaultVectorStoreProvider;
     private final TokenUsageAuditAdvisor tokenUsageAuditAdvisor;
+    private final ChatConversationRepository chatConversationRepository;
 
     public ChatRagService(
             @Qualifier("chatModelMap") Map<AiProvider, ChatModel> chatModelMap,
             @Qualifier("defaultChatModel") ChatModel defaultChatModel,
             @Qualifier("vectorStoreMap") Map<AiProvider, VectorStore> vectorStoreMap,
             ObjectProvider<VectorStore> defaultVectorStoreProvider,
-            TokenUsageAuditAdvisor tokenUsageAuditAdvisor) {
+            TokenUsageAuditAdvisor tokenUsageAuditAdvisor,
+            ChatConversationRepository chatConversationRepository) {
         this.chatModelMap = chatModelMap;
         this.defaultChatModel = defaultChatModel;
         this.vectorStoreMap = vectorStoreMap;
         this.defaultVectorStoreProvider = defaultVectorStoreProvider;
         this.tokenUsageAuditAdvisor = tokenUsageAuditAdvisor;
+        this.chatConversationRepository = chatConversationRepository;
     }
 
     /**
@@ -72,6 +79,7 @@ public class ChatRagService {
         AtomicLong startTime = new AtomicLong();
         AtomicReference<String> modelUsed = new AtomicReference<>();
         AtomicReference<AiProvider> providerUsed = new AtomicReference<>();
+        AtomicReference<String> fullResponse = new AtomicReference<>("");
 
         return Mono.fromCallable(() -> {
             startTime.set(System.currentTimeMillis());
@@ -156,6 +164,7 @@ public class ChatRagService {
                     .map(chunk -> {
                         String processedChunk = chunk.replace(" ", "\u00A0");
                         contentBuilder.append(chunk);
+                        fullResponse.updateAndGet(current -> current + chunk);
 
                         return ChatResponse.builder()
                                 .content(processedChunk)
@@ -165,6 +174,18 @@ public class ChatRagService {
                                 .timestamp(Instant.now())
                                 .processingTimeMs(System.currentTimeMillis() - startTime.get())
                                 .build();
+                    })
+                    .doOnComplete(() -> {
+                        // Sauvegarder la conversation complète dans la base de données
+                        // Capturer les valeurs actuelles pour éviter les problèmes de portée
+                        String finalUserMessage = request.getMessage();
+                        String finalAssistantResponse = contentBuilder.toString();
+                        String finalFullResponse = fullResponse.get();
+                        AiProvider finalProvider = providerUsed.get();
+                        String finalModel = modelUsed.get();
+
+                        saveConversation(request, finalProvider, finalModel,
+                                       finalUserMessage, finalAssistantResponse, finalFullResponse);
                     })
                     .onErrorMap(WebClientResponseException.TooManyRequests.class, ex -> {
                         log.error("Erreur 429 Too Many Requests pour le provider {}: {}", providerUsed.get(), ex.getMessage());
@@ -314,6 +335,75 @@ public class ChatRagService {
         return trimmed;
     }
 
+    /**
+     * Sauvegarde une conversation dans la base de données.
+     */
+    private void saveConversation(ChatRequest request, AiProvider provider, String model,
+                                  String userMessage, String assistantResponse, String fullResponse) {
+        try {
+            log.info("Début de la sauvegarde de la conversation pour le modèle {}", model);
+
+            // Créer une nouvelle conversation
+            ChatConversation conversation = new ChatConversation();
+            // Utiliser la méthode getUserId() qui retourne 'anonymous' par défaut
+            conversation.setUserId(request.getUserId());
+            conversation.setSessionId(UUID.randomUUID().toString()); // Session unique
+            conversation.setUserMessage(userMessage);
+            conversation.setAssistantResponse(fullResponse);
+            conversation.setProvider(provider.getCode());
+            conversation.setModel(model);
+
+            // Paramètres de la requête
+            conversation.setTemperature(request.getTemperature());
+            conversation.setTopP(request.getTopP());
+            conversation.setMaxTokens(request.getMaxTokens());
+            conversation.setRagTopK(request.getRagTopK());
+            conversation.setRagSimilarityThreshold(request.getRagSimilarityThreshold());
+
+            // Métadonnées supplémentaires
+            Map<String, Object> metadata = new HashMap<>();
+            metadata.put("lang", request.getLang());
+            metadata.put("aiProvider", provider.getCode());
+            metadata.put("model", model);
+            metadata.put("timestamp", Instant.now().toString());
+            metadata.put("userMessageLength", userMessage != null ? userMessage.length() : 0);
+            metadata.put("responseLength", fullResponse != null ? fullResponse.length() : 0);
+            conversation.setMetadata(metadata);
+
+            log.debug("Conversation préparée: userId={}, sessionId={}, messageLength={}, responseLength={}",
+                    conversation.getUserId(), conversation.getSessionId(),
+                    userMessage != null ? userMessage.length() : 0,
+                    fullResponse != null ? fullResponse.length() : 0);
+
+            // Sauvegarder de manière réactive avec gestion d'erreur améliorée
+            chatConversationRepository.save(conversation)
+                    .subscribeOn(Schedulers.boundedElastic())
+                    .doOnNext(saved -> {
+                        log.info("Conversation sauvegardée avec succès - ID: {}", saved.getId());
+                        log.debug("Détails de la conversation: userId={}, model={}, provider={}",
+                                saved.getUserId(), saved.getModel(), saved.getProvider());
+                    })
+                    .doOnError(error -> {
+                        log.error("Erreur lors de la sauvegarde de la conversation dans la base de données", error);
+                        // Ajouter des informations contextuelles
+                        log.error("Contexte de l'erreur - userId: {}, model: {}, messageLength: {}",
+                                conversation.getUserId(), model,
+                                userMessage != null ? userMessage.length() : 0);
+                    })
+                    .subscribe(
+                            saved -> {},
+                            error -> {}
+                    );
+
+            log.info("Conversation enregistrée pour l'utilisateur {} avec le modèle {}",
+                    conversation.getUserId(),
+                    model);
+
+        } catch (Exception e) {
+            log.error("Exception inattendue lors de la sauvegarde de la conversation", e);
+        }
+    }
+
     private String buildFrSystemPrompt() {
         return String.join("\n",
                 "Tu es un chatbot francophone spécialisé pour répondre sur le parcours et l'expérience professionnelle de Christophe Pierrès.",
@@ -333,5 +423,48 @@ public class ChatRagService {
                 "If the information is not available, say so politely and suggest a rephrasing.",
                 "Include the source (the 'source' metadata) when relevant.",
                 "Answer in English.");
+    }
+
+    /**
+     * Méthode de test pour vérifier la sauvegarde des conversations
+     * Peut être appelée manuellement pour diagnostiquer les problèmes
+     */
+    public Mono<ChatConversation> testSaveConversation() {
+        try {
+            ChatRequest testRequest = ChatRequest.builder()
+                    .message("Test message for debugging")
+                    .lang("fr")
+                    .userId("test-user")
+                    .build();
+
+            ChatConversation conversation = new ChatConversation();
+            // Utiliser la méthode getUserId() qui retourne 'anonymous' par défaut
+            conversation.setUserId(testRequest.getUserId());
+            conversation.setSessionId(UUID.randomUUID().toString());
+            conversation.setUserMessage("Test user message");
+            conversation.setAssistantResponse("Test assistant response");
+            conversation.setProvider("openai");
+            conversation.setModel("gpt-4o-mini");
+            conversation.setTemperature(0.5);
+
+            Map<String, Object> metadata = new HashMap<>();
+            metadata.put("test", "true");
+            metadata.put("timestamp", Instant.now().toString());
+            conversation.setMetadata(metadata);
+
+            log.info("Test: Tentative de sauvegarde d'une conversation de test...");
+
+            return chatConversationRepository.save(conversation)
+                    .doOnNext(saved -> {
+                        log.info("Test: Conversation de test sauvegardée avec succès - ID: {}", saved.getId());
+                    })
+                    .doOnError(error -> {
+                        log.error("Test: Erreur lors de la sauvegarde de la conversation de test", error);
+                    })
+                    .subscribeOn(Schedulers.boundedElastic());
+        } catch (Exception e) {
+            log.error("Test: Exception lors de la création de la conversation de test", e);
+            return Mono.error(e);
+        }
     }
 }

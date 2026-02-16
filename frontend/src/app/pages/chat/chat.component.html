@@ -1,110 +1,174 @@
 <div class="chat-container">
   <div class="chat-header">
-    <h2>Chatbot CV — RAG</h2>
-    <div class="header-controls">
-      <mat-form-field appearance="outline" class="lang-select">
-        <mat-label>Langue / Language</mat-label>
-        <mat-select [value]="lang()" (valueChange)="lang.set($event)">
-          <mat-option value="fr">Français</mat-option>
-          <mat-option value="en">English</mat-option>
-        </mat-select>
-      </mat-form-field>
-
+    <h2>Chatbot IA - Christophe Pierrès</h2>
+    <div class="chat-controls">
       <mat-form-field appearance="outline" class="provider-select">
-        <mat-label>{{ lang()==='fr' ? 'Fournisseur IA' : 'AI Provider' }}</mat-label>
-        <mat-select [value]="provider()" (valueChange)="provider.set($event)">
+        <mat-label>Fournisseur IA</mat-label>
+        <mat-select [(ngModel)]="provider" (ngModelChange)="provider = $event">
           <mat-option value="openai">OpenAI</mat-option>
+          <mat-option value="mistral">Mistral (Local)</mat-option>
           <mat-option value="mistral-cloud">Mistral AI Cloud</mat-option>
-          <mat-option value="mistral">Mistral (LM Studio)</mat-option>
         </mat-select>
       </mat-form-field>
 
       <mat-form-field appearance="outline" class="model-select">
-        <mat-label>{{ lang()==='fr' ? 'Modèle' : 'Model' }}</mat-label>
-        <mat-select [value]="model()" (valueChange)="model.set($event)">
-          <mat-option *ngFor="let m of availableModels()" [value]="m.value">{{ m.label }}</mat-option>
+        <mat-label>Modèle</mat-label>
+        <mat-select [(ngModel)]="model" (ngModelChange)="model = $event">
+          <mat-option *ngFor="let opt of availableModels()" [value]="opt.value">
+            {{ opt.label }}
+          </mat-option>
         </mat-select>
       </mat-form-field>
 
-      <button mat-icon-button type="button" (click)="showAdvancedSettings.set(!showAdvancedSettings())"
-              [matTooltip]="lang()==='fr' ? 'Paramètres avancés' : 'Advanced settings'">
-        ⚙️
+      <button mat-icon-button (click)="toggleHistory()" [matTooltip]="showHistory() ? 'Masquer l\'historique' : 'Afficher l\'historique'" class="history-toggle">
+        <mat-icon>{{ showHistory() ? 'history_off' : 'history' }}</mat-icon>
       </button>
     </div>
   </div>
 
-  <!-- Paramètres avancés -->
-  <div class="advanced-settings" *ngIf="showAdvancedSettings()">
-    <div class="settings-row">
-      <mat-form-field appearance="outline" class="setting-field">
-        <mat-label>{{ lang()==='fr' ? 'Température' : 'Temperature' }} (0-1)</mat-label>
-        <input matInput type="number" [ngModel]="temperature()" (ngModelChange)="temperature.set($event)"
-               min="0" max="1" step="0.1" name="temperature"/>
-      </mat-form-field>
-
-      <mat-form-field appearance="outline" class="setting-field">
-        <mat-label>Top P (0-1)</mat-label>
-        <input matInput type="number" [ngModel]="topP()" (ngModelChange)="topP.set($event)"
-               min="0" max="1" step="0.1" name="topP"/>
-      </mat-form-field>
-
-      <mat-form-field appearance="outline" class="setting-field">
-        <mat-label>{{ lang()==='fr' ? 'Max Tokens' : 'Max Tokens' }}</mat-label>
-        <input matInput type="number" [ngModel]="maxTokens()" (ngModelChange)="maxTokens.set($event)"
-               min="100" max="4096" step="100" name="maxTokens"/>
-      </mat-form-field>
-      <mat-form-field appearance="outline" class="setting-field">
-        <mat-label>RAG Top K</mat-label>
-        <input matInput type="number" [ngModel]="ragTopK()" (ngModelChange)="ragTopK.set($event)"
-               min="1" max="50" step="1" name="ragTopK"/>
-      </mat-form-field>
-
-      <mat-form-field appearance="outline" class="setting-field">
-        <mat-label>{{ lang()==='fr' ? 'Seuil similarité RAG' : 'RAG Similarity Threshold' }}</mat-label>
-        <input matInput type="number" [ngModel]="ragSimilarityThreshold()" (ngModelChange)="ragSimilarityThreshold.set($event)"
-               min="0" max="1" step="0.05" name="ragSimilarityThreshold"/>
-      </mat-form-field>
+  <div class="chat-main">
+    <!-- Panneau de conversation principal -->
+    <div class="chat-messages" #messagesContainer>
+      <div *ngFor="let message of messages(); let i = index" [class]="'message ' + message.role">
+        <div class="message-header">
+          <span class="message-role">{{ message.role === 'user' ? 'Vous' : 'Assistant' }}</span>
+          <span class="message-time">{{ getProcessingTime(message) }}</span>
+        </div>
+        <div class="message-content" [innerHTML]="renderMarkdown(getMessageText(message))"></div>
+        <div *ngIf="message.metadata" class="message-metadata">
+          <span *ngIf="message.metadata.provider" class="metadata-badge provider-badge">
+            {{ message.metadata.provider }}: {{ message.metadata.model }}
+          </span>
+          <span *ngIf="message.metadata.temperature" class="metadata-badge temp-badge">
+            Temp: {{ message.metadata.temperature }}
+          </span>
+          <span *ngIf="message.conversationId" class="metadata-badge conv-id-badge" matTooltip="ID de conversation enregistré">
+            💾 {{ getShortConversationId(message) }}
+          </span>
+        </div>
+      </div>
     </div>
-  </div>
 
-  <div class="messages" #messagesContainer>
-    <div *ngFor="let m of messages(); let i = index" [class.user]="m.role==='user'" [class.assistant]="m.role==='assistant'" class="message">
-      <div class="bubble">
-        <div [innerHTML]="renderMarkdown(m.text)"></div>
-        <div class="bubble-footer" *ngIf="m.role==='assistant' && m.text && m.text.trim()">
-          <div class="metadata-badge" *ngIf="m.metadata">
-            <span *ngIf="m.metadata.provider">🤖 {{ m.metadata.provider }}</span>
-            <span *ngIf="m.metadata.model">📦 {{ m.metadata.model }}</span>
-            <span *ngIf="m.metadata.processingTimeMs">⏱️ {{ m.metadata.processingTimeMs }}ms</span>
+    <!-- Panneau d'historique -->
+    <div *ngIf="showHistory()" class="history-panel">
+      <div class="history-header">
+        <h3>Historique des conversations</h3>
+        <button mat-icon-button (click)="loadConversationHistory()" [disabled]="loadingHistory()" matTooltip="Rafraîchir l'historique">
+          <mat-icon>{{ loadingHistory() ? 'sync' : 'refresh' }}</mat-icon>
+        </button>
+      </div>
+
+      <div *ngIf="loadingHistory()" class="history-loading">
+        <mat-icon class="spin">sync</mat-icon>
+        <span>Chargement...</span>
+      </div>
+
+      <div *ngIf="!loadingHistory() && conversationHistory().length === 0" class="no-history">
+        Aucun historique de conversation trouvé.
+      </div>
+
+      <div *ngFor="let conv of conversationHistory()" class="history-item">
+        <div class="history-item-header">
+          <span class="history-item-date">{{ conv.createdAt | date:'medium' }}</span>
+          <div class="history-item-actions">
+            <button mat-icon-button (click)="showConversation(conv)" matTooltip="Afficher cette conversation">
+              <mat-icon>visibility</mat-icon>
+            </button>
+            <button mat-icon-button (click)="deleteConversation(conv.id)" matTooltip="Supprimer cette conversation">
+              <mat-icon>delete</mat-icon>
+            </button>
           </div>
-          <button type="button" (click)="playMessageTts(i)" mat-stroked-button class="tts-btn">
-            🔊
-          </button>
+        </div>
+        <div class="history-item-content">
+          <div class="history-item-message user-message">
+            <strong>Vous:</strong> {{ conv.userMessage | slice:0:100 }}{{ conv.userMessage.length > 100 ? '...' : '' }}
+          </div>
+          <div class="history-item-message assistant-message">
+            <strong>Assistant:</strong> {{ conv.assistantResponse | slice:0:150 }}{{ conv.assistantResponse.length > 150 ? '...' : '' }}
+          </div>
+        </div>
+        <div class="history-item-metadata">
+          <span class="metadata-badge provider-badge">
+            {{ conv.provider }}: {{ conv.model }}
+          </span>
+          <span *ngIf="conv.temperature" class="metadata-badge temp-badge">
+            Temp: {{ conv.temperature }}
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Zone d'entrée -->
+    <div class="chat-input">
+      <div class="input-controls">
+        <button mat-icon-button (click)="toggleRecording()" [color]="isRecording ? 'warn' : 'primary'" matTooltip="Enregistrement vocal">
+          <mat-icon>{{ isRecording ? 'stop' : 'mic' }}</mat-icon>
+        </button>
+
+        <mat-form-field appearance="outline" class="chat-input-field">
+          <mat-label>Votre message</mat-label>
+          <input matInput [(ngModel)]="input" (ngModelChange)="input = $event"
+                 (keyup.enter)="send()" [disabled]="loading()">
+        </mat-form-field>
+
+        <button mat-icon-button (click)="send()" [disabled]="loading() || !_input().trim()" matTooltip="Envoyer le message">
+          <mat-icon>send</mat-icon>
+        </button>
+      </div>
+
+      <div class="advanced-settings">
+        <button mat-button (click)="showAdvancedSettings.set(!showAdvancedSettings())">
+          <mat-icon>{{ showAdvancedSettings() ? 'expand_less' : 'expand_more' }}</mat-icon>
+          {{ showAdvancedSettings() ? 'Masquer' : 'Afficher' }} les paramètres avancés
+        </button>
+
+        <div *ngIf="showAdvancedSettings()" class="advanced-settings-content">
+          <div class="settings-row">
+            <mat-form-field appearance="outline" class="setting-field">
+              <mat-label>Température</mat-label>
+              <input matInput type="number" step="0.1" min="0" max="1"
+                     [(ngModel)]="temperature" (ngModelChange)="temperature = $event">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="setting-field">
+              <mat-label>Top P</mat-label>
+              <input matInput type="number" step="0.1" min="0" max="1"
+                     [(ngModel)]="topP" (ngModelChange)="topP = $event">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="setting-field">
+              <mat-label>Max Tokens</mat-label>
+              <input matInput type="number" min="1"
+                     [(ngModel)]="maxTokens" (ngModelChange)="maxTokens = $event">
+            </mat-form-field>
+          </div>
+
+          <div class="settings-row">
+            <mat-form-field appearance="outline" class="setting-field">
+              <mat-label>RAG Top K</mat-label>
+              <input matInput type="number" min="1" max="100"
+                     [(ngModel)]="ragTopK" (ngModelChange)="ragTopK = $event">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="setting-field">
+              <mat-label>Seuil de similarité</mat-label>
+              <input matInput type="number" step="0.01" min="0" max="1"
+                     [(ngModel)]="ragSimilarityThreshold" (ngModelChange)="ragSimilarityThreshold = $event">
+            </mat-form-field>
+          </div>
+
+          <div class="settings-row">
+            <mat-slide-toggle [(ngModel)]="ttsEnabled" (ngModelChange)="onTtsToggle($event)">
+              Lecture vocale automatique (TTS)
+            </mat-slide-toggle>
+          </div>
         </div>
       </div>
     </div>
   </div>
 
-  <div style="display:flex; align-items:center; gap:12px; margin-top:8px;">
-    <label style="font-size: 13px; display:flex; align-items:center; gap:6px; cursor:pointer;">
-      <input type="checkbox" [checked]="ttsEnabled()" (change)="onTtsToggle($event)" />
-      {{ lang()==='fr' ? 'Lire la réponse (TTS)' : 'Read the answer (TTS)' }}
-    </label>
-  </div>
-
-  <form (ngSubmit)="send()" class="input-row">
-    <mat-form-field class="input-field" appearance="outline">
-      <mat-label>{{ lang()==='fr' ? 'Votre message' : 'Your message' }}</mat-label>
-      <input matInput [ngModel]="input()" (ngModelChange)="input.set($event)" name="msg" [disabled]="loading()"/>
-    </mat-form-field>
-    <button mat-stroked-button type="button" (click)="toggleRecording()" [disabled]="loading()" style="margin-right:8px;">
-      {{ isRecording ? (lang()==='fr' ? 'Arrêter' : 'Stop') : (lang()==='fr' ? 'Parler' : 'Speak') }}
-    </button>
-    <button mat-raised-button color="primary" type="submit" [disabled]="loading() || !input().trim()">
-      {{ lang()==='fr' ? 'Envoyer' : 'Send' }}
-    </button>
-  </form>
-  <div *ngIf="isRecording" style="font-size: 12px; color: #e53935; margin-top: 4px;">
-    {{ lang()==='fr' ? 'Enregistrement en cours…' : 'Recording…' }}
+  <div *ngIf="loading()" class="loading-overlay">
+    <mat-icon class="spin">sync</mat-icon>
+    <span>L'assistant est en train de réfléchir...</span>
   </div>
 </div>
