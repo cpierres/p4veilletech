@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 import reactor.core.publisher.Flux;
 import org.springframework.http.codec.multipart.FilePart;
-import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.core.io.buffer.DataBufferUtils;
 
 @RestController
@@ -102,8 +101,8 @@ public class ChatController {
       @RequestPart("file") FilePart file,
       @RequestParam(value = "lang", required = false, defaultValue = "fr") String lang
   ) {
-    // Prefer environment var OPENAI_API_KEY; fallback to system property spring.ai.openai.api-key
-    String apiKey = System.getenv("OPENAI_API_KEY");
+    // Prefer environment var OPENAI_CHATBOT_KEY; fallback to system property spring.ai.openai.api-key
+    String apiKey = System.getenv("OPENAI_CHATBOT_KEY");
     if (apiKey == null || apiKey.isBlank()) {
       apiKey = System.getProperty("spring.ai.openai.api-key");
     }
@@ -172,8 +171,8 @@ public class ChatController {
       if (text == null || text.isBlank()) {
         return ResponseEntity.badRequest().body(new byte[0]);
       }
-      // Prefer environment var OPENAI_API_KEY; fallback to system property spring.ai.openai.api-key
-      String apiKey = System.getenv("OPENAI_API_KEY");
+      // Prefer environment var OPENAI_CHATBOT_KEY; fallback to system property spring.ai.openai.api-key
+      String apiKey = System.getenv("OPENAI_CHATBOT_KEY");
       if (apiKey == null || apiKey.isBlank()) {
         apiKey = System.getProperty("spring.ai.openai.api-key");
       }

@@ -5,9 +5,9 @@
       <mat-form-field appearance="outline" class="provider-select">
         <mat-label>Fournisseur IA</mat-label>
         <mat-select [(ngModel)]="provider" (ngModelChange)="provider = $event">
+          <mat-option value="mistral-cloud">Mistral AI Cloud</mat-option>
           <mat-option value="openai">OpenAI</mat-option>
           <mat-option value="mistral">Mistral (Local)</mat-option>
-          <mat-option value="mistral-cloud">Mistral AI Cloud</mat-option>
         </mat-select>
       </mat-form-field>
 

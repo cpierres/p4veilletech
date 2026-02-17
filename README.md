@@ -133,7 +133,7 @@ Résultat: pas de doublons dans pgVector et aucune consommation de tokens OpenAI
 
 ### Configuration requise
 
-- Variable d’environnement `OPENAI_API_KEY` (ou propriété `spring.ai.openai.api-key`) pour les fonctionnalités LLM/TTS/STT.
+- Variable d’environnement `OPENAI_CHATBOT_KEY` (ou propriété `spring.ai.openai.api-key`) pour les fonctionnalités LLM/TTS/STT.
 - Optionnel mais recommandé: `GITHUB_TOKEN` pour augmenter la limite de taux et lire des dépôts privés.
   - Token possible en deux variantes:
     - PAT classic: cochez `public_repo` (dépôts publics) ou `repo` (accès lecture aux privés).

@@ -69,8 +69,8 @@ export class ChatComponent implements AfterViewChecked {
   loadingHistory = signal<boolean>(false); // Chargement de l'historique
 
   // Paramètres AI
-  _provider = signal<'openai' | 'mistral' | 'mistral-cloud'>('openai');
-  _model = signal<string>('gpt-4o-mini');
+  _provider = signal<'openai' | 'mistral' | 'mistral-cloud'>('mistral-cloud');
+  _model = signal<string>('mistral-medium-latest');
   showAdvancedSettings = signal<boolean>(false);
 
   // Paramètres avancés
@@ -156,8 +156,8 @@ export class ChatComponent implements AfterViewChecked {
     }
     if (this._provider() === 'mistral-cloud') {
       return [
-        { value: 'mistral-small-latest', label: 'Mistral Small' },
         { value: 'mistral-medium-latest', label: 'Mistral Medium' },
+        { value: 'mistral-small-latest', label: 'Mistral Small' },
         { value: 'mistral-large-latest', label: 'Mistral Large' },
         { value: 'open-mistral-7b', label: 'Open Mistral 7B' },
         { value: 'open-mixtral-8x7b', label: 'Open Mixtral 8x7B' },

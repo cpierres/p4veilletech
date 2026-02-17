@@ -123,7 +123,7 @@ public class MultiProviderAiConfig {
             log.info("Default ChatModel: LM Studio Mistral");
             return lmStudioMistralChatModel;
         }
-        throw new IllegalStateException("No ChatModel available. Please configure OPENAI_API_KEY or LMStudio settings.");
+        throw new IllegalStateException("No ChatModel available. Please configure OPENAI_CHATBOT_KEY or LMStudio settings.");
     }
 
     /**
@@ -141,7 +141,7 @@ public class MultiProviderAiConfig {
             log.info("Default EmbeddingModel: MistralAI");
             return mistralAiEmbeddingModel;
         }
-        throw new IllegalStateException("No EmbeddingModel available. Please configure OPENAI_API_KEY or MISTRAL_API_KEY.");
+        throw new IllegalStateException("No EmbeddingModel available. Please configure OPENAI_CHATBOT_KEY or MISTRAL_API_KEY.");
     }
 
     /**
