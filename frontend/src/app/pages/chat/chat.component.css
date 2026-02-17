@@ -50,6 +50,36 @@
   color: white;
 }
 
+::ng-deep .provider-select .mat-mdc-select-value,
+::ng-deep .model-select .mat-mdc-select-value {
+  color: white !important;
+}
+
+::ng-deep .provider-select .mdc-notched-outline__leading,
+::ng-deep .provider-select .mdc-notched-outline__trailing,
+::ng-deep .model-select .mdc-notched-outline__leading,
+::ng-deep .model-select .mdc-notched-outline__trailing {
+  border-color: white !important;
+}
+
+::ng-deep .provider-select .mdc-notched-outline__notch,
+::ng-deep .model-select .mdc-notched-outline__notch {
+  border-color: white !important;
+  border-left: none !important;
+}
+
+::ng-deep .provider-select .mat-mdc-form-field-label,
+::ng-deep .provider-select .mdc-floating-label,
+::ng-deep .model-select .mat-mdc-form-field-label,
+::ng-deep .model-select .mdc-floating-label {
+  color: white !important;
+}
+
+::ng-deep .provider-select .mat-mdc-select-arrow,
+::ng-deep .model-select .mat-mdc-select-arrow {
+  color: white !important;
+}
+
 .history-toggle {
   color: white;
 }
