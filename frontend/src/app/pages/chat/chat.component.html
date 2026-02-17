@@ -7,7 +7,9 @@
         <mat-select [(ngModel)]="provider" (ngModelChange)="provider = $event">
           <mat-option value="mistral-cloud">Mistral AI Cloud</mat-option>
           <mat-option value="openai">OpenAI</mat-option>
-          <mat-option value="mistral">Mistral (Local)</mat-option>
+          <span matTooltip="Contacter Christophe Pierrès pour activer cette option">
+            <mat-option value="mistral" disabled>Mistral (Local)</mat-option>
+          </span>
         </mat-select>
       </mat-form-field>
 
