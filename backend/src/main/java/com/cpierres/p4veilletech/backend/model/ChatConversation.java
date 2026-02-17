@@ -33,6 +33,7 @@ public class ChatConversation {
     private Integer ragTopK;
     private Double ragSimilarityThreshold;
     private Integer tokensUsed;
+    private Integer processingTimeMs;
 
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
@@ -164,6 +165,14 @@ public class ChatConversation {
 
     public void setTokensUsed(Integer tokensUsed) {
         this.tokensUsed = tokensUsed;
+    }
+
+    public Integer getProcessingTimeMs() {
+        return processingTimeMs;
+    }
+
+    public void setProcessingTimeMs(Integer processingTimeMs) {
+        this.processingTimeMs = processingTimeMs;
     }
 
     public LocalDateTime getCreatedAt() {

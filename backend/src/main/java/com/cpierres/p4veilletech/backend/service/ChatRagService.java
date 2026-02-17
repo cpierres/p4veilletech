@@ -183,9 +183,10 @@ public class ChatRagService {
                         String finalFullResponse = fullResponse.get();
                         AiProvider finalProvider = providerUsed.get();
                         String finalModel = modelUsed.get();
+                        long finalProcessingTimeMs = System.currentTimeMillis() - startTime.get();
 
                         saveConversation(request, finalProvider, finalModel,
-                                       finalUserMessage, finalAssistantResponse, finalFullResponse);
+                                       finalUserMessage, finalAssistantResponse, finalFullResponse, finalProcessingTimeMs);
                     })
                     .onErrorMap(WebClientResponseException.TooManyRequests.class, ex -> {
                         log.error("Erreur 429 Too Many Requests pour le provider {}: {}", providerUsed.get(), ex.getMessage());
@@ -339,7 +340,7 @@ public class ChatRagService {
      * Sauvegarde une conversation dans la base de données.
      */
     private void saveConversation(ChatRequest request, AiProvider provider, String model,
-                                  String userMessage, String assistantResponse, String fullResponse) {
+                                  String userMessage, String assistantResponse, String fullResponse, long processingTimeMs) {
         try {
             log.info("Début de la sauvegarde de la conversation pour le modèle {}", model);
 
@@ -359,6 +360,7 @@ public class ChatRagService {
             conversation.setMaxTokens(request.getMaxTokens());
             conversation.setRagTopK(request.getRagTopK());
             conversation.setRagSimilarityThreshold(request.getRagSimilarityThreshold());
+            conversation.setProcessingTimeMs((int) processingTimeMs);
 
             // Métadonnées supplémentaires
             Map<String, Object> metadata = new HashMap<>();

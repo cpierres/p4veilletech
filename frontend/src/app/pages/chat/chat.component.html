@@ -96,6 +96,9 @@
           <span *ngIf="conv.temperature" class="metadata-badge temp-badge">
             Temp: {{ conv.temperature }}
           </span>
+          <span *ngIf="conv.processingTimeMs" class="metadata-badge time-badge">
+            ⏱️ {{ conv.processingTimeMs }}ms
+          </span>
         </div>
       </div>
     </div>

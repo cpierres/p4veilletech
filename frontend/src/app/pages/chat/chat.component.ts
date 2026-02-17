@@ -41,6 +41,7 @@ interface ChatConversation {
   ragTopK?: number;
   ragSimilarityThreshold?: number;
   tokensUsed?: number;
+  processingTimeMs?: number;
   createdAt: string;
   updatedAt: string;
   metadata: any;
