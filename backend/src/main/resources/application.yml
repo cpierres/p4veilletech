@@ -1,0 +1,125 @@
+spring:
+  profiles:
+    active: ${SPRING_PROFILES_ACTIVE:dev}
+  application:
+    name: backend
+
+  ai:
+    openai:
+      base-url: https://api.openai.com
+      api-key: ${OPENAI_CHATBOT_KEY}
+      chat:
+        options:
+          model: ${OPENAI_CHAT_MODEL:gpt-4o-mini}
+          temperature: ${OPENAI_CHAT_TEMPERATURE:0.5}
+      embedding:
+        options:
+          model: ${OPENAI_EMBEDDING_MODEL:text-embedding-3-small}
+    mistralai:
+      api-key: ${MISTRAL_API_CHATBOT_KEY}
+      chat:
+        options:
+          model: ${MISTRAL_CHAT_MODEL:mistral-medium-latest}
+          temperature: ${MISTRAL_CHAT_TEMPERATURE:0.5}
+      embedding:
+        options:
+          model: ${MISTRAL_EMBEDDING_MODEL:mistral-embed}
+    vectorstore:
+      pgvector:
+        schema: public
+        table-name: vector_store # nom de la table pgvector pour les embeddings OpenAI (1536 dims)
+        # distance-type: COSINE     # L2, COSINE, or INNER_PRODUCT
+        initialize-schema: false     # géré par Flyway désormais
+        remove-existing-vector-store-table: false
+    # Observability settings
+    chat:
+      observations:
+        include-input: true
+        include-output: true
+        include-error-logging: true
+
+  datasource:
+    url: jdbc:postgresql://localhost:5434/veilltech
+    username: ${POSTGRES_USER:veilltech}
+    password: ${POSTGRES_PASSWORD:veilltech}
+    driver-class-name: org.postgresql.Driver
+
+  r2dbc:
+    url: r2dbc:postgresql://localhost:5434/veilltech
+    username: ${POSTGRES_USER:veilltech}
+    password: ${POSTGRES_PASSWORD:veilltech}
+
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
+
+# Actuator and observability
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus
+  metrics:
+    tags:
+      application: ${spring.application.name}
+    export:
+      prometheus:
+        enabled: true
+  tracing:
+    sampling:
+      probability: 1.0
+
+logging:
+  level:
+    org.springframework.ai.vectorstore.pgvector: INFO
+    org.springframework.r2dbc.connection: DEBUG
+    org.springframework.ai.chat: DEBUG
+    com.cpierres.p4veilletech.backend.service.ChatRagService: DEBUG
+    com.cpierres.p4veilletech.backend.repository: DEBUG
+
+# Application specific settings
+app:
+  rag:
+    data-path: ${RAG_DATA_PATH}
+    content-hash-index:
+      path: ${app.rag.data-path}/_index/content-hash-index.properties
+  vectorstore:
+    mistral:
+      table-name: vector_store_mistral
+      dimensions: 1024
+  lmstudio:
+    base-url: ${LMSTUDIO_BASE_URL:http://192.168.10.1:1234}
+    api-key: ${LMSTUDIO_API_KEY:lmstudio}
+    mistral:
+      model: ${LMSTUDIO_MISTRAL_CHAT_MODEL:mistralai/mistral-small-3.2}
+      temperature: ${LMSTUDIO_MISTRAL_CHAT_TEMPERATURE:0.5}
+  mistral:
+    ocr:
+      enabled: ${MISTRAL_OCR_ENABLED:true}
+      base-url: ${MISTRAL_OCR_BASE_URL:https://api.mistral.ai}
+      endpoint: ${MISTRAL_OCR_ENDPOINT:/v1/ocr}
+      api-key: ${MISTRAL_OCR_API_KEY:${MISTRAL_API_CHATBOT_KEY:}}
+      model: ${MISTRAL_OCR_MODEL:mistral-ocr-3}
+      file-param: ${MISTRAL_OCR_FILE_PARAM:document}
+      response-format: ${MISTRAL_OCR_RESPONSE_FORMAT:}
+  embedding:
+    # provider can be: ollama (default), openai, cohere
+    provider: ${EMBEDDING_PROVIDER:openai}
+    # If using Ollama locally, leave baseUrl as default
+    # baseUrl: ${OLLAMA_BASE_URL:http://localhost:11434}
+    # Model name for embeddings
+    # Recommended lightweight options:
+    # - all-minilm (MiniLM-L6-v2, 384 dims, fast, English-focused)
+    # - paraphrase-multilingual-MiniLM-L12-v2 (384 dims, multilingual FR/EN)
+    # model: ${EMBEDDING_MODEL:all-minilm}
+    # Embedding dimension for the selected model
+    # all-MiniLM-L6-v2 = 384, paraphrase-multilingual-MiniLM-L12-v2 = 384
+    # dimension: ${EMBEDDING_DIMENSION:384}
+
+  github:
+    token: ${GITHUB_TOKEN:}
+    default-branch: ${GITHUB_DEFAULT_BRANCH:main}
+    eval-file: ${app.rag.data-path}/skills-data/md/ocr-projets-descriptions-evaluations/projets-openclassrooms-evaluations.md
+    http-timeout-ms: 15000
+    webhook:
+      secret: ${GITHUB_WEBHOOK_SECRET}
