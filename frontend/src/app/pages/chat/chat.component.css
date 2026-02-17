@@ -15,11 +15,12 @@
 .chat-header {
   background-color: #1976d2;
   color: white;
-  padding: 16px 24px;
+  padding: 8px 24px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-shrink: 0;
+  gap: 16px;
 }
 
 .chat-header h2 {
@@ -78,6 +79,11 @@
 ::ng-deep .provider-select .mat-mdc-select-arrow,
 ::ng-deep .model-select .mat-mdc-select-arrow {
   color: white !important;
+}
+
+::ng-deep .provider-select,
+::ng-deep .model-select {
+  margin-top: 16px;
 }
 
 .history-toggle {
