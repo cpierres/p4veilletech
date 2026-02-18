@@ -28,6 +28,7 @@ services:
       SPRING_DATASOURCE_USERNAME: veilltech
       SPRING_DATASOURCE_PASSWORD: veilltech
       OPENAI_CHATBOT_KEY: ${OPENAI_CHATBOT_KEY}
+      MISTRAL_API_CHATBOT_KEY: ${MISTRAL_API_CHATBOT_KEY}
       # Évite les erreurs "Cannot reserve ... bytes of direct buffer memory" pour des PDF volumineux
       JAVA_TOOL_OPTIONS: -XX:MaxDirectMemorySize=256m
       SPRING_PROFILES_ACTIVE: prod
