@@ -141,7 +141,7 @@ public class MultiProviderAiConfig {
             log.info("Default EmbeddingModel: MistralAI");
             return mistralAiEmbeddingModel;
         }
-        throw new IllegalStateException("No EmbeddingModel available. Please configure OPENAI_CHATBOT_KEY or MISTRAL_API_KEY.");
+        throw new IllegalStateException("No EmbeddingModel available. Please configure OPENAI_CHATBOT_KEY or MISTRAL_API_CHATBOT_KEY.");
     }
 
     /**
