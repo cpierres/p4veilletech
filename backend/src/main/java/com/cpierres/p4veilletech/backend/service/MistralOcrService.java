@@ -32,7 +32,7 @@ public class MistralOcrService {
     @Value("${app.mistral.ocr.endpoint:/v1/ocr}")
     private String endpoint;
 
-    @Value("${app.mistral.ocr.api-key:${MISTRAL_API_KEY:}}")
+    @Value("${app.mistral.ocr.api-key:${MISTRAL_API_CHATBOT_KEY:}}")
     private String apiKey;
 
     @Value("${app.mistral.ocr.model:mistral-ocr-3}")
