@@ -39,13 +39,13 @@ spring:
         include-error-logging: true
 
   datasource:
-    url: jdbc:postgresql://localhost:5434/veilltech
+    url: jdbc:postgresql://postgres:5432/veilltech
     username: ${POSTGRES_USER:veilltech}
     password: ${POSTGRES_PASSWORD:veilltech}
     driver-class-name: org.postgresql.Driver
 
   r2dbc:
-    url: r2dbc:postgresql://localhost:5434/veilltech
+    url: r2dbc:postgresql://postgres:5432/veilltech
     username: ${POSTGRES_USER:veilltech}
     password: ${POSTGRES_PASSWORD:veilltech}
 
@@ -62,12 +62,13 @@ management:
   metrics:
     tags:
       application: ${spring.application.name}
-    export:
-      prometheus:
-        enabled: true
   tracing:
     sampling:
       probability: 1.0
+  prometheus:
+    metrics:
+      export:
+        enabled: true
 
 logging:
   level:

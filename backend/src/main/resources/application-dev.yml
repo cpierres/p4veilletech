@@ -3,4 +3,14 @@ app:
     data-path: C:\docker-volumes\p4vt-data\backend\rag
     #data-path: /mnt/c/docker-volumes/p4vt-data/backend/rag/
 
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5434/veilltech
+    username: ${POSTGRES_USER:veilltech}
+    password: ${POSTGRES_PASSWORD:veilltech}
+    driver-class-name: org.postgresql.Driver
 
+  r2dbc:
+    url: r2dbc:postgresql://localhost:5434/veilltech
+    username: ${POSTGRES_USER:veilltech}
+    password: ${POSTGRES_PASSWORD:veilltech}

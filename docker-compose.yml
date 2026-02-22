@@ -10,7 +10,7 @@ services:
     ports:
       - "5433:5432"  # optional to expose in production
     volumes:
-      - p4vt_db_data_pg18:/var/lib/postgresql
+      - p4vt_db_data_pg18_0.0.17-SNAPSHOT:/var/lib/postgresql
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U veilltech -d veilltech"]
       interval: 10s
@@ -25,6 +25,7 @@ services:
         condition: service_healthy
     environment:
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/veilltech
+      SPRING_R2DBC_URL: r2dbc:postgresql://postgres:5432/veilltech
       SPRING_DATASOURCE_USERNAME: veilltech
       SPRING_DATASOURCE_PASSWORD: veilltech
       OPENAI_CHATBOT_KEY: ${OPENAI_CHATBOT_KEY}
@@ -37,9 +38,7 @@ services:
       - "8080:8080"
     restart: unless-stopped
     volumes:
-      #- /volume1/docker-volumes/p4vt-data/backend/rag:/app/rag-data
-      # si test du déploiement en local
-      - /mnt/c/docker-volumes/p4vt-data/backend/rag:/app/rag-data
+      - /c/docker-volumes/p4vt-data/backend/rag:/app/rag-data
 
   frontend:
     image: cpierres/p4vt-ia-frontend:${PROJECT_VERSION:-0.0.17-SNAPSHOT}
@@ -54,5 +53,5 @@ services:
     restart: unless-stopped
 
 volumes:
-  p4vt_db_data_pg18:
+  p4vt_db_data_pg18_0.0.17-SNAPSHOT:
     driver: local
