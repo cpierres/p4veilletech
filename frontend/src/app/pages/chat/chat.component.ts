@@ -78,7 +78,7 @@ export class ChatComponent implements AfterViewChecked {
   _temperature = signal<number | null>(0.5);
   _topP = signal<number | null>(null);
   _maxTokens = signal<number | null>(null);
-  _ragTopK = signal<number>(50);
+  _ragTopK = signal<number>(80);
   _ragSimilarityThreshold = signal<number>(0.4);
 
   // Propriétés pour ngModel (compatibilité avec two-way binding)

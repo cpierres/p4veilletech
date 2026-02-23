@@ -153,7 +153,7 @@ public class ChatRagService {
                         .searchRequest(SearchRequest.builder()
                                 .similarityThreshold(request.getRagSimilarityThreshold() != null
                                         ? request.getRagSimilarityThreshold() : 0.4d)
-                                .topK(request.getRagTopK() != null ? request.getRagTopK() : 50)
+                                .topK(request.getRagTopK() != null ? request.getRagTopK() : 80)
                                 .build())
                         .build();
                 promptBuilder.advisors(qaAdvisor, tokenUsageAuditAdvisor);
