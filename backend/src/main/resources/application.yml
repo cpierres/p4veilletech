@@ -107,6 +107,11 @@ app:
       api-key: ${MISTRAL_TRANSCRIPTION_API_KEY:${MISTRAL_API_CHATBOT_KEY:}}
       base-url: ${MISTRAL_TRANSCRIPTION_BASE_URL:https://api.mistral.ai}
       model: ${MISTRAL_TRANSCRIPTION_MODEL:voxtral-mini-transcribe-26-02}
+  openai:
+    transcription:
+      api-key: ${OPENAI_TRANSCRIPTION_API_KEY:${OPENAI_CHATBOT_KEY:}}
+      base-url: ${OPENAI_TRANSCRIPTION_BASE_URL:https://api.openai.com}
+      model: ${OPENAI_TRANSCRIPTION_MODEL:whisper-1}
   embedding:
     # provider can be: ollama (default), openai, cohere
     provider: ${EMBEDDING_PROVIDER:openai}

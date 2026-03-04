@@ -39,11 +39,14 @@ public class ChatController {
   @Value("${app.mistral.transcription.model:voxtral-mini-transcribe-26-02}")
   private String mistralModel;
 
-  @Value("${spring.ai.openai.api-key:}")
+  @Value("${app.openai.transcription.api-key:}")
   private String openAiApiKey;
 
-  @Value("${spring.ai.openai.base-url:https://api.openai.com}")
+  @Value("${app.openai.transcription.base-url:https://api.openai.com}")
   private String openAiBaseUrl;
+
+  @Value("${app.openai.transcription.model:whisper-1}")
+  private String openAiModel;
 
   public ChatController(ChatRagService chatRagService) {
     this.chatRagService = chatRagService;
@@ -215,6 +218,7 @@ public class ChatController {
       @RequestParam(value = "lang", required = false, defaultValue = "fr") String lang,
       @RequestParam(value = "provider", required = false, defaultValue = "openai") String provider
   ) {
+    logger.info("Transcription request received. Provider: {}, Language: {}, Filename: {}", provider, lang, file.filename());
     if ("mistral".equals(provider) || "mistral-cloud".equals(provider)) {
       return transcribeMistral(file, lang);
     } else {
@@ -222,13 +226,24 @@ public class ChatController {
       String apiKey = openAiApiKey;
       if (apiKey == null || apiKey.isBlank()) {
           apiKey = System.getenv("OPENAI_CHATBOT_KEY");
+          logger.debug("Using OpenAI API key from environment variable OPENAI_CHATBOT_KEY");
+      } else {
+          logger.debug("Using OpenAI API key from application properties (app.openai.transcription.api-key)");
       }
 
       if (apiKey == null || apiKey.isBlank()) {
+        logger.error("OpenAI API key is missing. Check OPENAI_CHATBOT_KEY environment variable or app.openai.transcription.api-key property.");
         return reactor.core.publisher.Mono.just(ResponseEntity.status(500).body("Missing OpenAI API key"));
       }
 
-      String model = "whisper-1"; // OpenAI speech-to-text
+      // Log only the first 4 and last 4 characters for security
+      if (apiKey.length() > 8) {
+          logger.info("Using OpenAI API key: {}...{}", apiKey.substring(0, 4), apiKey.substring(apiKey.length() - 4));
+      } else {
+          logger.warn("OpenAI API key is unusually short.");
+      }
+
+      String model = openAiModel;
       String language = (lang == null || lang.isBlank()) ? "fr" : lang;
 
       // Prepare effectively-final copies for lambda usage
@@ -264,20 +279,43 @@ public class ChatController {
 
             body.add("file", fileAsResource);
             body.add("model", fModel);
-            body.add("response_format", "text");
             body.add("language", fLanguage);
+            body.add("response_format", "json");
 
             HttpEntity<MultiValueMap<String, Object>> request = new HttpEntity<>(body, headers);
             String url = openAiBaseUrl + "/v1/audio/transcriptions";
+            logger.info("Sending request to OpenAI API: {}", url);
             ResponseEntity<String> response = rest.postForEntity(
                 url,
                 request,
                 String.class
             );
 
-            return ResponseEntity.status(response.getStatusCode()).body(response.getBody());
+            logger.info("OpenAI API response status: {}, body: {}", response.getStatusCode(), response.getBody());
+
+            if (response.getStatusCode().is2xxSuccessful()) {
+              String bodyStr = response.getBody();
+              if (bodyStr != null && bodyStr.contains("\"text\"")) {
+                try {
+                  Pattern pattern = Pattern.compile("\"text\"\\s*:\\s*\"([^\"]+)\"");
+                  Matcher matcher = pattern.matcher(bodyStr);
+                  if (matcher.find()) {
+                    return ResponseEntity.status(response.getStatusCode()).body(matcher.group(1));
+                  }
+                } catch (Exception e) {
+                  logger.warn("Failed to parse OpenAI JSON response using regex", e);
+                }
+              }
+              return ResponseEntity.status(response.getStatusCode()).body(bodyStr);
+            } else {
+              logger.error("OpenAI API error: Status {}, Response: {}", response.getStatusCode(), response.getBody());
+              return ResponseEntity.status(response.getStatusCode()).body("Error from OpenAI API: " + response.getBody());
+            }
           }).subscribeOn(reactor.core.scheduler.Schedulers.boundedElastic()))
-          .onErrorResume(ex -> reactor.core.publisher.Mono.just(ResponseEntity.status(500).body("Transcription failed")));
+          .onErrorResume(ex -> {
+            logger.error("OpenAI Transcription failed with exception", ex);
+            return reactor.core.publisher.Mono.just(ResponseEntity.status(500).body("Transcription failed: " + ex.getMessage()));
+          });
     }
   }
   @GetMapping(value = "/chat/tts")
