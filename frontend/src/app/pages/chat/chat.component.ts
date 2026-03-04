@@ -523,7 +523,7 @@ export class ChatComponent implements AfterViewChecked {
       const form = new FormData();
       const filename = (blob.type.includes('ogg') ? 'audio.ogg' : blob.type.includes('mp4') ? 'audio.m4a' : 'audio.webm');
       form.append('file', blob, filename);
-      const text = await this.http.post(`/api/chat/transcribe?lang=${this.lang()}`, form, { responseType: 'text' }).toPromise();
+      const text = await this.http.post(`/api/chat/transcribe?lang=${this.lang()}&provider=${this._provider()}`, form, { responseType: 'text' }).toPromise();
       if (text) {
         const current = this._input();
         const sep = current && !current.endsWith(' ') ? ' ' : '';

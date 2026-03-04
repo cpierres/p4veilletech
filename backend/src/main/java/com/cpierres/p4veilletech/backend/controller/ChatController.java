@@ -16,12 +16,34 @@ import org.springframework.web.client.RestTemplate;
 import reactor.core.publisher.Flux;
 import org.springframework.http.codec.multipart.FilePart;
 import org.springframework.core.io.buffer.DataBufferUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @RestController
 @RequestMapping("/api")
 public class ChatController {
 
+  private static final Logger logger = LoggerFactory.getLogger(ChatController.class);
+
   private final ChatRagService chatRagService;
+
+  @Value("${app.mistral.transcription.api-key:}")
+  private String mistralApiKey;
+
+  @Value("${app.mistral.transcription.base-url:https://api.mistral.ai}")
+  private String mistralBaseUrl;
+
+  @Value("${app.mistral.transcription.model:voxtral-mini-transcribe-26-02}")
+  private String mistralModel;
+
+  @Value("${spring.ai.openai.api-key:}")
+  private String openAiApiKey;
+
+  @Value("${spring.ai.openai.base-url:https://api.openai.com}")
+  private String openAiBaseUrl;
 
   public ChatController(ChatRagService chatRagService) {
     this.chatRagService = chatRagService;
@@ -96,30 +118,32 @@ public class ChatController {
         ));
   }
 
-  @PostMapping(value = "/chat/transcribe", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.TEXT_PLAIN_VALUE)
-  public reactor.core.publisher.Mono<ResponseEntity<String>> transcribe(
+  @PostMapping(value = "/chat/transcribe/mistral", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.TEXT_PLAIN_VALUE)
+  public reactor.core.publisher.Mono<ResponseEntity<String>> transcribeMistral(
       @RequestPart("file") FilePart file,
       @RequestParam(value = "lang", required = false, defaultValue = "fr") String lang
   ) {
-    // Prefer environment var OPENAI_CHATBOT_KEY; fallback to system property spring.ai.openai.api-key
-    String apiKey = System.getenv("OPENAI_CHATBOT_KEY");
+    // Récupérer la clé API Mistral
+    String apiKey = mistralApiKey;
     if (apiKey == null || apiKey.isBlank()) {
-      apiKey = System.getProperty("spring.ai.openai.api-key");
-    }
-    if (apiKey == null || apiKey.isBlank()) {
-      return reactor.core.publisher.Mono.just(ResponseEntity.status(500).body("Missing OpenAI API key"));
+        apiKey = System.getenv("MISTRAL_TRANSCRIPTION_API_KEY");
     }
 
-    String model = "gpt-4o-mini-transcribe"; // OpenAI speech-to-text
+    if (apiKey == null || apiKey.isBlank()) {
+      logger.error("Mistral transcription API key is missing");
+      return reactor.core.publisher.Mono.just(ResponseEntity.status(500).body("Missing Mistral API key"));
+    }
+
+    String model = mistralModel;
     String language = (lang == null || lang.isBlank()) ? "fr" : lang;
 
-    // Prepare effectively-final copies for lambda usage
+    // Préparer les variables pour l'utilisation dans les lambdas
     final String fApiKey = apiKey;
     final String fModel = model;
     final String fLanguage = language;
     final String fFileName = file.filename();
 
-    // Read the uploaded file bytes (WebFlux FilePart) reactively
+    // Lire le fichier audio
     return DataBufferUtils.join(file.content())
         .map(joined -> {
           byte[] bytes = new byte[joined.readableByteCount()];
@@ -128,6 +152,8 @@ public class ChatController {
           return bytes;
         })
         .flatMap(bytes -> reactor.core.publisher.Mono.fromCallable(() -> {
+          logger.info("Starting Mistral transcription request. File: {}, Model: {}, Language: {}", fFileName, fModel, fLanguage);
+
           RestTemplate rest = new RestTemplate();
 
           HttpHeaders headers = new HttpHeaders();
@@ -135,7 +161,6 @@ public class ChatController {
           headers.setContentType(MediaType.MULTIPART_FORM_DATA);
 
           MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
-          // Wrap bytes in a ByteArrayResource with filename to ensure boundary has a filename
           ByteArrayResource fileAsResource = new ByteArrayResource(bytes) {
             @Override
             public String getFilename() {
@@ -146,19 +171,114 @@ public class ChatController {
 
           body.add("file", fileAsResource);
           body.add("model", fModel);
-          body.add("response_format", "text");
+          body.add("response_format", "json"); // On garde JSON car l'API Mistral renvoie du JSON
           body.add("language", fLanguage);
 
           HttpEntity<MultiValueMap<String, Object>> request = new HttpEntity<>(body, headers);
-          ResponseEntity<String> response = rest.postForEntity(
-              "https://api.openai.com/v1/audio/transcriptions",
-              request,
-              String.class
-          );
 
-          return ResponseEntity.status(response.getStatusCode()).body(response.getBody());
+          String url = mistralBaseUrl + "/v1/audio/transcriptions";
+          logger.debug("Sending request to Mistral API: {}", url);
+
+          ResponseEntity<String> response = rest.postForEntity(url, request, String.class);
+
+          logger.info("Mistral API response status: {}, body: {}", response.getStatusCode(), response.getBody());
+
+          if (response.getStatusCode().is2xxSuccessful()) {
+            String bodyStr = response.getBody();
+            if (bodyStr != null && bodyStr.contains("\"text\"")) {
+                try {
+                    // Extraction simple sans dépendance JSON lourde
+                    Pattern pattern = Pattern.compile("\"text\"\\s*:\\s*\"([^\"]+)\"");
+                    Matcher matcher = pattern.matcher(bodyStr);
+                    if (matcher.find()) {
+                        return ResponseEntity.status(response.getStatusCode()).body(matcher.group(1));
+                    }
+                } catch (Exception e) {
+                    logger.warn("Failed to parse Mistral JSON response using regex", e);
+                }
+            }
+            return ResponseEntity.status(response.getStatusCode()).body(bodyStr);
+          } else {
+            logger.error("Mistral API error: Status {}, Response: {}", response.getStatusCode(), response.getBody());
+            return ResponseEntity.status(response.getStatusCode()).body("Error from Mistral API: " + response.getBody());
+          }
         }).subscribeOn(reactor.core.scheduler.Schedulers.boundedElastic()))
-        .onErrorResume(ex -> reactor.core.publisher.Mono.just(ResponseEntity.status(500).body("Transcription failed")));
+        .onErrorResume(ex -> {
+          logger.error("Transcription failed with exception", ex);
+          return reactor.core.publisher.Mono.just(ResponseEntity.status(500).body("Transcription failed: " + ex.getMessage()));
+        });
+  }
+
+  @PostMapping(value = "/chat/transcribe", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = MediaType.TEXT_PLAIN_VALUE)
+  public reactor.core.publisher.Mono<ResponseEntity<String>> transcribe(
+      @RequestPart("file") FilePart file,
+      @RequestParam(value = "lang", required = false, defaultValue = "fr") String lang,
+      @RequestParam(value = "provider", required = false, defaultValue = "openai") String provider
+  ) {
+    if ("mistral".equals(provider) || "mistral-cloud".equals(provider)) {
+      return transcribeMistral(file, lang);
+    } else {
+      // Prefer environment var OPENAI_CHATBOT_KEY; fallback to system property spring.ai.openai.api-key
+      String apiKey = openAiApiKey;
+      if (apiKey == null || apiKey.isBlank()) {
+          apiKey = System.getenv("OPENAI_CHATBOT_KEY");
+      }
+
+      if (apiKey == null || apiKey.isBlank()) {
+        return reactor.core.publisher.Mono.just(ResponseEntity.status(500).body("Missing OpenAI API key"));
+      }
+
+      String model = "whisper-1"; // OpenAI speech-to-text
+      String language = (lang == null || lang.isBlank()) ? "fr" : lang;
+
+      // Prepare effectively-final copies for lambda usage
+      final String fApiKey = apiKey;
+      final String fModel = model;
+      final String fLanguage = language;
+      final String fFileName = file.filename();
+
+      // Read the uploaded file bytes (WebFlux FilePart) reactively
+      return DataBufferUtils.join(file.content())
+          .map(joined -> {
+            byte[] bytes = new byte[joined.readableByteCount()];
+            joined.read(bytes);
+            DataBufferUtils.release(joined);
+            return bytes;
+          })
+          .flatMap(bytes -> reactor.core.publisher.Mono.fromCallable(() -> {
+            RestTemplate rest = new RestTemplate();
+
+            HttpHeaders headers = new HttpHeaders();
+            headers.setBearerAuth(fApiKey);
+            headers.setContentType(MediaType.MULTIPART_FORM_DATA);
+
+            MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
+            // Wrap bytes in a ByteArrayResource with filename to ensure boundary has a filename
+            ByteArrayResource fileAsResource = new ByteArrayResource(bytes) {
+              @Override
+              public String getFilename() {
+                String name = fFileName;
+                return (name == null || name.isBlank()) ? "audio.webm" : name;
+              }
+            };
+
+            body.add("file", fileAsResource);
+            body.add("model", fModel);
+            body.add("response_format", "text");
+            body.add("language", fLanguage);
+
+            HttpEntity<MultiValueMap<String, Object>> request = new HttpEntity<>(body, headers);
+            String url = openAiBaseUrl + "/v1/audio/transcriptions";
+            ResponseEntity<String> response = rest.postForEntity(
+                url,
+                request,
+                String.class
+            );
+
+            return ResponseEntity.status(response.getStatusCode()).body(response.getBody());
+          }).subscribeOn(reactor.core.scheduler.Schedulers.boundedElastic()))
+          .onErrorResume(ex -> reactor.core.publisher.Mono.just(ResponseEntity.status(500).body("Transcription failed")));
+    }
   }
   @GetMapping(value = "/chat/tts")
   public ResponseEntity<byte[]> tts(

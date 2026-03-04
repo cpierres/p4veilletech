@@ -103,6 +103,10 @@ app:
       model: ${MISTRAL_OCR_MODEL:mistral-ocr-3}
       file-param: ${MISTRAL_OCR_FILE_PARAM:document}
       response-format: ${MISTRAL_OCR_RESPONSE_FORMAT:}
+    transcription:
+      api-key: ${MISTRAL_TRANSCRIPTION_API_KEY:${MISTRAL_API_CHATBOT_KEY:}}
+      base-url: ${MISTRAL_TRANSCRIPTION_BASE_URL:https://api.mistral.ai}
+      model: ${MISTRAL_TRANSCRIPTION_MODEL:voxtral-mini-transcribe-26-02}
   embedding:
     # provider can be: ollama (default), openai, cohere
     provider: ${EMBEDDING_PROVIDER:openai}
