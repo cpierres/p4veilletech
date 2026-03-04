@@ -106,25 +106,13 @@ app:
     transcription:
       api-key: ${MISTRAL_TRANSCRIPTION_API_KEY:${MISTRAL_API_CHATBOT_KEY:}}
       base-url: ${MISTRAL_TRANSCRIPTION_BASE_URL:https://api.mistral.ai}
-      model: ${MISTRAL_TRANSCRIPTION_MODEL:voxtral-mini-transcribe-26-02}
+      model: ${MISTRAL_TRANSCRIPTION_MODEL:voxtral-mini-latest}
   openai:
+    project-id: ${OPENAI_PROJECT_ID}
     transcription:
       api-key: ${OPENAI_TRANSCRIPTION_API_KEY:${OPENAI_CHATBOT_KEY:}}
       base-url: ${OPENAI_TRANSCRIPTION_BASE_URL:https://api.openai.com}
       model: ${OPENAI_TRANSCRIPTION_MODEL:whisper-1}
-  embedding:
-    # provider can be: ollama (default), openai, cohere
-    provider: ${EMBEDDING_PROVIDER:openai}
-    # If using Ollama locally, leave baseUrl as default
-    # baseUrl: ${OLLAMA_BASE_URL:http://localhost:11434}
-    # Model name for embeddings
-    # Recommended lightweight options:
-    # - all-minilm (MiniLM-L6-v2, 384 dims, fast, English-focused)
-    # - paraphrase-multilingual-MiniLM-L12-v2 (384 dims, multilingual FR/EN)
-    # model: ${EMBEDDING_MODEL:all-minilm}
-    # Embedding dimension for the selected model
-    # all-MiniLM-L6-v2 = 384, paraphrase-multilingual-MiniLM-L12-v2 = 384
-    # dimension: ${EMBEDDING_DIMENSION:384}
 
   github:
     token: ${GITHUB_TOKEN:}

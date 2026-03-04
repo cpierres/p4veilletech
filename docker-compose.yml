@@ -34,6 +34,8 @@ services:
       JAVA_TOOL_OPTIONS: -XX:MaxDirectMemorySize=256m
       SPRING_PROFILES_ACTIVE: prod
       RAG_DATA_PATH: /app/rag-data/skills-data
+      OPENAI_PROJECT_ID: ${OPENAI_PROJECT_ID}
+
     ports:
       - "8080:8080"
     restart: unless-stopped

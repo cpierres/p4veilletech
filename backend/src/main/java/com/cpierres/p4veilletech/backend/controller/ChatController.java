@@ -36,7 +36,7 @@ public class ChatController {
   @Value("${app.mistral.transcription.base-url:https://api.mistral.ai}")
   private String mistralBaseUrl;
 
-  @Value("${app.mistral.transcription.model:voxtral-mini-transcribe-26-02}")
+  @Value("${app.mistral.transcription.model:voxtral-mini-latest}")
   private String mistralModel;
 
   @Value("${app.openai.transcription.api-key:}")
@@ -44,6 +44,9 @@ public class ChatController {
 
   @Value("${app.openai.transcription.base-url:https://api.openai.com}")
   private String openAiBaseUrl;
+
+  @Value("${app.openai.project-id}")
+  private String openAiProjectId;
 
   @Value("${app.openai.transcription.model:whisper-1}")
   private String openAiModel;
@@ -245,6 +248,7 @@ public class ChatController {
 
       String model = openAiModel;
       String language = (lang == null || lang.isBlank()) ? "fr" : lang;
+      final String fProjectId = openAiProjectId;
 
       // Prepare effectively-final copies for lambda usage
       final String fApiKey = apiKey;
@@ -266,6 +270,14 @@ public class ChatController {
             HttpHeaders headers = new HttpHeaders();
             headers.setBearerAuth(fApiKey);
             headers.setContentType(MediaType.MULTIPART_FORM_DATA);
+            if (fProjectId != null && !fProjectId.isBlank()) {
+                logger.info("Setting OpenAI-Project header: '{}'", fProjectId);
+                headers.set("OpenAI-Project", fProjectId);
+            } else {
+                logger.info("No OpenAI-Project header set.");
+            }
+
+            logger.info("Authorization header: Bearer {}...{}", fApiKey.substring(0, Math.min(fApiKey.length(), 4)), fApiKey.substring(Math.max(0, fApiKey.length() - 4)));
 
             MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();
             // Wrap bytes in a ByteArrayResource with filename to ensure boundary has a filename
@@ -285,11 +297,20 @@ public class ChatController {
             HttpEntity<MultiValueMap<String, Object>> request = new HttpEntity<>(body, headers);
             String url = openAiBaseUrl + "/v1/audio/transcriptions";
             logger.info("Sending request to OpenAI API: {}", url);
-            ResponseEntity<String> response = rest.postForEntity(
-                url,
-                request,
-                String.class
-            );
+            ResponseEntity<String> response;
+            try {
+                response = rest.postForEntity(
+                    url,
+                    request,
+                    String.class
+                );
+            } catch (org.springframework.web.client.HttpClientErrorException e) {
+                logger.error("HttpClientErrorException during OpenAI transcription: Status {}, Response: {}", e.getStatusCode(), e.getResponseBodyAsString());
+                return ResponseEntity.status(e.getStatusCode()).body("OpenAI API error: " + e.getResponseBodyAsString());
+            } catch (Exception e) {
+                logger.error("Unexpected error during OpenAI transcription", e);
+                return ResponseEntity.status(500).body("Internal error: " + e.getMessage());
+            }
 
             logger.info("OpenAI API response status: {}, body: {}", response.getStatusCode(), response.getBody());
 
@@ -307,6 +328,13 @@ public class ChatController {
                 }
               }
               return ResponseEntity.status(response.getStatusCode()).body(bodyStr);
+            } else if (response.getStatusCode().value() == 403) {
+              logger.error("OpenAI API Forbidden (403). Error details: {}", response.getBody());
+              String errorMsg = response.getBody();
+              if (errorMsg != null && errorMsg.contains("model_not_found")) {
+                  return ResponseEntity.status(403).body("OpenAI Forbidden: Le projet '" + (fProjectId != null ? fProjectId : "par défaut") + "' n'a pas accès au modèle '" + fModel + "'. Vérifiez vos quotas ou permissions OpenAI. Détails: " + errorMsg);
+              }
+              return ResponseEntity.status(403).body("OpenAI Forbidden: Vérifiez vos permissions de projet ou de clé API pour le modèle '" + fModel + "'. " + errorMsg);
             } else {
               logger.error("OpenAI API error: Status {}, Response: {}", response.getStatusCode(), response.getBody());
               return ResponseEntity.status(response.getStatusCode()).body("Error from OpenAI API: " + response.getBody());
