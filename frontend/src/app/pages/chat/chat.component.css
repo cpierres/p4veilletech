@@ -164,6 +164,12 @@
   margin: 12px 0;
 }
 
+.message-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 4px;
+}
+
 .message-metadata {
   display: flex;
   gap: 8px;
@@ -296,6 +302,8 @@
   border-top: 1px solid #e0e0e0;
   background-color: white;
   flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
 }
 
 .input-controls {

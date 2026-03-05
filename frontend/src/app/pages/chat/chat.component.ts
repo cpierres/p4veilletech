@@ -8,7 +8,6 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatSelectModule} from '@angular/material/select';
 import {MatIconModule} from '@angular/material/icon';
 import {MatTooltipModule} from '@angular/material/tooltip';
-import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
 import {marked} from 'marked';
 
@@ -55,7 +54,7 @@ interface ModelOption {
 @Component({
   selector: 'app-chat',
   standalone: true,
-  imports: [FormsModule, NgForOf, NgIf, DatePipe, SlicePipe, MatFormFieldModule, MatInputModule, MatButtonModule, MatSelectModule, MatIconModule, MatTooltipModule, MatSlideToggleModule],
+  imports: [FormsModule, NgForOf, NgIf, DatePipe, SlicePipe, MatFormFieldModule, MatInputModule, MatButtonModule, MatSelectModule, MatIconModule, MatTooltipModule],
   templateUrl: './chat.component.html',
   styleUrl: './chat.component.css'
 })
@@ -64,7 +63,6 @@ export class ChatComponent implements AfterViewChecked {
   lang = signal<'fr' | 'en'>('fr');
   _input = signal<string>('');
   loading = signal<boolean>(false);
-  _ttsEnabled = signal<boolean>(false);
   showHistory = signal<boolean>(false); // Afficher/masquer l'historique
   conversationHistory = signal<ChatConversation[]>([]); // Historique des conversations
   loadingHistory = signal<boolean>(false); // Chargement de l'historique
@@ -87,13 +85,6 @@ export class ChatComponent implements AfterViewChecked {
   }
   set input(value: string) {
     this._input.set(value);
-  }
-
-  get ttsEnabled(): boolean {
-    return this._ttsEnabled();
-  }
-  set ttsEnabled(value: boolean) {
-    this._ttsEnabled.set(value);
   }
 
   get provider(): 'openai' | 'mistral' | 'mistral-cloud' {
@@ -234,12 +225,6 @@ export class ChatComponent implements AfterViewChecked {
   // Méthode pour obtenir le texte du message en toute sécurité
   getMessageText(message: ChatMessage): string {
     return message.text || '';
-  }
-
-  onTtsToggle(event: Event) {
-    const target = event.target as HTMLInputElement | null;
-    const checked = !!target && !!target.checked;
-    this._ttsEnabled.set(checked);
   }
 
   ngAfterViewChecked() {
@@ -398,9 +383,6 @@ export class ChatComponent implements AfterViewChecked {
           } else {
             // Essayer de récupérer l'ID de la conversation depuis le backend
             this.fetchConversationId(assistantIndex, lastMetadata);
-            if (this._ttsEnabled()) {
-              this.playMessageTts(assistantIndex, true);
-            }
           }
         } else {
           const err = this.lang() === 'fr' ? "Une erreur est survenue côté serveur." : "A server error occurred.";
@@ -480,8 +462,14 @@ export class ChatComponent implements AfterViewChecked {
 
       let audioUrl = msgs[index].audioUrl;
       if (!audioUrl) {
-        const blob = await this.http.get(`/api/chat/tts?text=${encodeURIComponent(text)}&lang=${this.lang()}&format=mp3`, { responseType: 'blob' }).toPromise();
-        if (!blob) return;
+        const url = `/api/chat/tts?text=${encodeURIComponent(text)}&lang=${this.lang()}&format=mp3`;
+        console.log('[TTS] Requesting audio from:', url);
+        const blob = await this.http.get(url, { responseType: 'blob' }).toPromise();
+        if (!blob) {
+          console.error('[TTS] No blob received from server');
+          return;
+        }
+        console.log('[TTS] Blob received:', blob.type, blob.size, 'bytes');
         audioUrl = URL.createObjectURL(blob);
         this.messages.update((m: ChatMessage[]) => {
           const updated = [...m];
@@ -492,11 +480,20 @@ export class ChatComponent implements AfterViewChecked {
 
       const audio = new Audio(audioUrl!);
       this.currentAudio = audio;
+
+      // Handle completion
+      audio.onended = () => {
+        if (this.currentAudio === audio) {
+          this.currentAudio = null;
+        }
+      };
+
+      console.log('[TTS] Playing audio...', autoPlay ? '(Auto)' : '(Manual)');
       await audio.play();
     } catch (e) {
-      console.error(e);
+      console.error('[TTS] Playback error:', e);
       if (!autoPlay) {
-        alert(this.lang() === 'fr' ? 'Lecture TTS impossible.' : 'Unable to play TTS.');
+        alert(this.lang() === 'fr' ? 'Lecture TTS impossible. Vérifiez les permissions de votre navigateur.' : 'Unable to play TTS. Check your browser permissions.');
       }
     }
   }

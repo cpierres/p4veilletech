@@ -37,6 +37,11 @@
           <span class="message-time">{{ getProcessingTime(message) }}</span>
         </div>
         <div class="message-content" [innerHTML]="renderMarkdown(getMessageText(message))"></div>
+        <div class="message-actions" *ngIf="message.role === 'assistant'">
+          <button mat-icon-button (click)="playMessageTts(i)" [disabled]="loading()" matTooltip="Lire à voix haute">
+            <mat-icon>volume_up</mat-icon>
+          </button>
+        </div>
         <div *ngIf="message.metadata" class="message-metadata">
           <span *ngIf="message.metadata.provider" class="metadata-badge provider-badge">
             {{ message.metadata.provider }}: {{ message.metadata.model }}
@@ -160,12 +165,6 @@
               <input matInput type="number" step="0.01" min="0" max="1"
                      [(ngModel)]="ragSimilarityThreshold" (ngModelChange)="ragSimilarityThreshold = $event">
             </mat-form-field>
-          </div>
-
-          <div class="settings-row">
-            <mat-slide-toggle [(ngModel)]="ttsEnabled" (ngModelChange)="onTtsToggle($event)">
-              Lecture vocale automatique (TTS)
-            </mat-slide-toggle>
           </div>
         </div>
       </div>

@@ -30,6 +30,9 @@ public class ChatController {
 
   private final ChatRagService chatRagService;
 
+  @Value("${spring.ai.openai.api-key:}")
+  private String springAiOpenAiApiKey;
+
   @Value("${app.mistral.transcription.api-key:}")
   private String mistralApiKey;
 
@@ -40,7 +43,7 @@ public class ChatController {
   private String mistralModel;
 
   @Value("${app.openai.transcription.api-key:}")
-  private String openAiApiKey;
+  private String transcriptionOpenAiApiKey;
 
   @Value("${app.openai.transcription.base-url:https://api.openai.com}")
   private String openAiBaseUrl;
@@ -225,17 +228,18 @@ public class ChatController {
     if ("mistral".equals(provider) || "mistral-cloud".equals(provider)) {
       return transcribeMistral(file, lang);
     } else {
-      // Prefer environment var OPENAI_CHATBOT_KEY; fallback to system property spring.ai.openai.api-key
-      String apiKey = openAiApiKey;
+      // Priorité à la clé de transcription dédiée, sinon fallback sur la clé Spring AI
+      String apiKey = transcriptionOpenAiApiKey;
+      if (apiKey == null || apiKey.isBlank()) {
+          apiKey = springAiOpenAiApiKey;
+      }
+      // Fallback ultime sur les variables d'environnement si nécessaire (pour compatibilité)
       if (apiKey == null || apiKey.isBlank()) {
           apiKey = System.getenv("OPENAI_CHATBOT_KEY");
-          logger.debug("Using OpenAI API key from environment variable OPENAI_CHATBOT_KEY");
-      } else {
-          logger.debug("Using OpenAI API key from application properties (app.openai.transcription.api-key)");
       }
 
       if (apiKey == null || apiKey.isBlank()) {
-        logger.error("OpenAI API key is missing. Check OPENAI_CHATBOT_KEY environment variable or app.openai.transcription.api-key property.");
+        logger.error("OpenAI API key is missing. Check OPENAI_CHATBOT_KEY environment variable, app.openai.transcription.api-key or spring.ai.openai.api-key property.");
         return reactor.core.publisher.Mono.just(ResponseEntity.status(500).body("Missing OpenAI API key"));
       }
 
@@ -357,38 +361,58 @@ public class ChatController {
       if (text == null || text.isBlank()) {
         return ResponseEntity.badRequest().body(new byte[0]);
       }
-      // Prefer environment var OPENAI_CHATBOT_KEY; fallback to system property spring.ai.openai.api-key
-      String apiKey = System.getenv("OPENAI_CHATBOT_KEY");
+
+      // Priorité à la clé de transcription (souvent la même pour TTS), sinon Spring AI
+      String apiKey = transcriptionOpenAiApiKey;
       if (apiKey == null || apiKey.isBlank()) {
-        apiKey = System.getProperty("spring.ai.openai.api-key");
+          apiKey = springAiOpenAiApiKey;
       }
       if (apiKey == null || apiKey.isBlank()) {
+          apiKey = System.getenv("OPENAI_CHATBOT_KEY");
+      }
+
+      if (apiKey == null || apiKey.isBlank()) {
+        logger.error("TTS failed: OpenAI API key is missing (transcriptionOpenAiApiKey, springAiOpenAiApiKey or OPENAI_CHATBOT_KEY)");
         return ResponseEntity.status(500).body(new byte[0]);
       }
 
-      String model = "gpt-4o-mini-tts"; // OpenAI text-to-speech
+      String model = "tts-1"; // OpenAI text-to-speech
 
       RestTemplate rest = new RestTemplate();
       HttpHeaders headers = new HttpHeaders();
       headers.setBearerAuth(apiKey);
       headers.setContentType(MediaType.APPLICATION_JSON);
+      if (openAiProjectId != null && !openAiProjectId.isBlank()) {
+          headers.set("OpenAI-Project", openAiProjectId);
+      }
       // Prefer mp3 for wide support
       if ("mp3".equalsIgnoreCase(format)) {
         headers.set(HttpHeaders.ACCEPT, "audio/mpeg");
       }
 
-      String json = String.format("{\n  \"model\": \"%s\",\n  \"input\": %s,\n  \"voice\": %s,\n  \"format\": %s\n}",
+      String json = String.format("{\n  \"model\": \"%s\",\n  \"input\": %s,\n  \"voice\": %s,\n  \"response_format\": %s\n}",
           model,
           toJson(text),
           toJson(voice),
           toJson(format));
 
+      logger.info("Sending TTS request to OpenAI: model={}, voice={}, format={}, textLength={}", model, voice, format, text.length());
       HttpEntity<String> request = new HttpEntity<>(json, headers);
-      ResponseEntity<byte[]> response = rest.postForEntity(
-          "https://api.openai.com/v1/audio/speech",
-          request,
-          byte[].class
-      );
+      ResponseEntity<byte[]> response;
+      try {
+          response = rest.postForEntity(
+              "https://api.openai.com/v1/audio/speech",
+              request,
+              byte[].class
+          );
+          logger.info("TTS response received: status={}", response.getStatusCode());
+      } catch (org.springframework.web.client.HttpClientErrorException e) {
+          logger.error("OpenAI TTS error: Status {}, Response: {}", e.getStatusCode(), e.getResponseBodyAsString());
+          return ResponseEntity.status(e.getStatusCode()).body(new byte[0]);
+      } catch (Exception e) {
+          logger.error("Unexpected error during OpenAI TTS", e);
+          return ResponseEntity.status(500).body(new byte[0]);
+      }
 
       MediaType contentType = MediaType.APPLICATION_OCTET_STREAM;
       if ("mp3".equalsIgnoreCase(format)) {
@@ -404,6 +428,7 @@ public class ChatController {
           .body(response.getBody());
 
     } catch (Exception ex) {
+      logger.error("TTS general failure", ex);
       return ResponseEntity.status(500).body(new byte[0]);
     }
   }
