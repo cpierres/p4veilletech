@@ -41,6 +41,31 @@
           <button mat-icon-button (click)="currentTtsIndex() === i ? stopMessageTts() : playMessageTts(i)" [disabled]="loading()" [matTooltip]="currentTtsIndex() === i ? (lang() === 'fr' ? 'Arrêter la lecture' : 'Stop reading') : (lang() === 'fr' ? 'Lire à voix haute' : 'Read aloud')">
             <mat-icon>{{ currentTtsIndex() === i ? 'stop' : 'volume_up' }}</mat-icon>
           </button>
+          <button mat-icon-button (click)="showTtsSettings.set(!showTtsSettings())" [matTooltip]="lang() === 'fr' ? 'Paramètres vocaux' : 'Voice settings'" class="tts-settings-button">
+            <mat-icon>settings</mat-icon>
+          </button>
+
+          <!-- Petit menu de réglage TTS avec backdrop pour centrage -->
+          <div *ngIf="showTtsSettings()" class="tts-settings-overlay" (click)="showTtsSettings.set(false)">
+            <div class="tts-settings-popup" (click)="$event.stopPropagation()">
+              <div class="tts-settings-header">
+                <span>Paramètres vocaux</span>
+                <button mat-icon-button (click)="showTtsSettings.set(false)" class="close-tts">
+                  <mat-icon>close</mat-icon>
+                </button>
+              </div>
+              <div class="tts-settings-body">
+                <mat-form-field appearance="outline">
+                  <mat-label>Voix</mat-label>
+                  <mat-select [(ngModel)]="ttsVoice">
+                    <mat-option *ngFor="let voice of availableTtsVoices()" [value]="voice.value">
+                      {{ voice.label }}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
         </div>
         <div *ngIf="message.metadata" class="message-metadata">
           <span *ngIf="message.metadata.provider" class="metadata-badge provider-badge">

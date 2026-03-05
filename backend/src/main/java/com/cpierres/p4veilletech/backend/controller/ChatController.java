@@ -355,13 +355,22 @@ public class ChatController {
       @RequestParam("text") String text,
       @RequestParam(value = "voice", required = false, defaultValue = "alloy") String voice,
       @RequestParam(value = "format", required = false, defaultValue = "mp3") String format,
-      @RequestParam(value = "lang", required = false, defaultValue = "fr") String lang
+      @RequestParam(value = "lang", required = false, defaultValue = "fr") String lang,
+      @RequestParam(value = "model", required = false) String model
   ) {
     try {
       if (text == null || text.isBlank()) {
         return ResponseEntity.badRequest().body(new byte[0]);
       }
 
+      return ttsOpenAi(text, voice, format, model);
+    } catch (Exception ex) {
+      logger.error("TTS general failure", ex);
+      return ResponseEntity.status(500).body(new byte[0]);
+    }
+  }
+
+  private ResponseEntity<byte[]> ttsOpenAi(String text, String voice, String format, String model) {
       // Priorité à la clé de transcription (souvent la même pour TTS), sinon Spring AI
       String apiKey = transcriptionOpenAiApiKey;
       if (apiKey == null || apiKey.isBlank()) {
@@ -372,11 +381,11 @@ public class ChatController {
       }
 
       if (apiKey == null || apiKey.isBlank()) {
-        logger.error("TTS failed: OpenAI API key is missing (transcriptionOpenAiApiKey, springAiOpenAiApiKey or OPENAI_CHATBOT_KEY)");
-        return ResponseEntity.status(500).body(new byte[0]);
+          logger.error("TTS OpenAI failed: API key is missing");
+          return ResponseEntity.status(500).body(new byte[0]);
       }
 
-      String model = "tts-1"; // OpenAI text-to-speech
+      String ttsModel = (model != null && !model.isBlank()) ? model : "tts-1";
 
       RestTemplate rest = new RestTemplate();
       HttpHeaders headers = new HttpHeaders();
@@ -385,27 +394,26 @@ public class ChatController {
       if (openAiProjectId != null && !openAiProjectId.isBlank()) {
           headers.set("OpenAI-Project", openAiProjectId);
       }
-      // Prefer mp3 for wide support
+
       if ("mp3".equalsIgnoreCase(format)) {
-        headers.set(HttpHeaders.ACCEPT, "audio/mpeg");
+          headers.set(HttpHeaders.ACCEPT, "audio/mpeg");
       }
 
-      String json = String.format("{\n  \"model\": \"%s\",\n  \"input\": %s,\n  \"voice\": %s,\n  \"response_format\": %s\n}",
-          model,
+      String json = String.format("{\n  \"model\": \"%s\",\n  \"input\": %s,\n  \"voice\": %s,\n  \"response_format\": \"%s\"\n}",
+          ttsModel,
           toJson(text),
           toJson(voice),
-          toJson(format));
+          format);
 
-      logger.info("Sending TTS request to OpenAI: model={}, voice={}, format={}, textLength={}", model, voice, format, text.length());
+      logger.info("Sending TTS request to OpenAI: model={}, voice={}, format={}, textLength={}", ttsModel, voice, format, text.length());
       HttpEntity<String> request = new HttpEntity<>(json, headers);
-      ResponseEntity<byte[]> response;
       try {
-          response = rest.postForEntity(
+          ResponseEntity<byte[]> response = rest.postForEntity(
               "https://api.openai.com/v1/audio/speech",
               request,
               byte[].class
           );
-          logger.info("TTS response received: status={}", response.getStatusCode());
+          return createAudioResponse(response, format);
       } catch (org.springframework.web.client.HttpClientErrorException e) {
           logger.error("OpenAI TTS error: Status {}, Response: {}", e.getStatusCode(), e.getResponseBodyAsString());
           return ResponseEntity.status(e.getStatusCode()).body(new byte[0]);
@@ -413,24 +421,22 @@ public class ChatController {
           logger.error("Unexpected error during OpenAI TTS", e);
           return ResponseEntity.status(500).body(new byte[0]);
       }
+  }
 
+
+  private ResponseEntity<byte[]> createAudioResponse(ResponseEntity<byte[]> response, String format) {
       MediaType contentType = MediaType.APPLICATION_OCTET_STREAM;
       if ("mp3".equalsIgnoreCase(format)) {
-        contentType = MediaType.parseMediaType("audio/mpeg");
+          contentType = MediaType.parseMediaType("audio/mpeg");
       } else if ("wav".equalsIgnoreCase(format)) {
-        contentType = MediaType.parseMediaType("audio/wav");
+          contentType = MediaType.parseMediaType("audio/wav");
       } else if ("ogg".equalsIgnoreCase(format) || "opus".equalsIgnoreCase(format)) {
-        contentType = MediaType.parseMediaType("audio/ogg");
+          contentType = MediaType.parseMediaType("audio/ogg");
       }
 
       return ResponseEntity.status(response.getStatusCode())
           .contentType(contentType)
           .body(response.getBody());
-
-    } catch (Exception ex) {
-      logger.error("TTS general failure", ex);
-      return ResponseEntity.status(500).body(new byte[0]);
-    }
   }
 
   // Minimal JSON escaper for building small payloads without extra deps

@@ -168,6 +168,58 @@
   display: flex;
   justify-content: flex-end;
   margin-top: 4px;
+  position: relative;
+}
+
+.tts-settings-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.tts-settings-popup {
+  background-color: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  padding: 24px;
+  min-width: 320px;
+  max-width: 90%;
+}
+
+.tts-settings-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  font-weight: 500;
+  color: #333;
+}
+
+.tts-settings-body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-height: 400px;
+  overflow-y: auto;
+  padding: 4px;
+}
+
+.tts-settings-body .mat-form-field {
+  width: 100%;
+}
+
+.close-tts {
+  width: 32px;
+  height: 32px;
+  line-height: 32px;
 }
 
 .message-metadata {

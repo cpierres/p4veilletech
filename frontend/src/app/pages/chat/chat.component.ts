@@ -173,6 +173,44 @@ export class ChatComponent implements AfterViewChecked {
   private audioChunks: BlobPart[] = [];
   private currentAudio: HTMLAudioElement | null = null;
   currentTtsIndex = signal<number | null>(null);
+  showTtsSettings = signal<boolean>(false);
+
+  // Paramètres TTS
+  _ttsVoice = signal<string>('alloy');
+
+  get ttsVoice(): string {
+    return this._ttsVoice();
+  }
+  set ttsVoice(value: string) {
+    if (this._ttsVoice() !== value) {
+      this.clearMessagesAudioUrls();
+    }
+    this._ttsVoice.set(value);
+  }
+
+  availableTtsVoices = computed<ModelOption[]>(() => {
+    return [
+      { value: 'alloy', label: 'Alloy' },
+      { value: 'echo', label: 'Echo' },
+      { value: 'fable', label: 'Fable' },
+      { value: 'onyx', label: 'Onyx' },
+      { value: 'nova', label: 'Nova' },
+      { value: 'shimmer', label: 'Shimmer' }
+    ];
+  });
+
+  private clearMessagesAudioUrls() {
+    this.messages.update((m: ChatMessage[]) => {
+      return m.map(msg => {
+        if (msg.audioUrl) {
+          URL.revokeObjectURL(msg.audioUrl);
+          return { ...msg, audioUrl: undefined };
+        }
+        return msg;
+      });
+    });
+    console.log('[TTS] Audio URLs cleared due to settings change');
+  }
 
   @ViewChild('messagesContainer') private messagesContainer!: ElementRef;
   private shouldScroll = true;
@@ -464,7 +502,14 @@ export class ChatComponent implements AfterViewChecked {
 
       let audioUrl = msgs[index].audioUrl;
       if (!audioUrl) {
-        const url = `/api/chat/tts?text=${encodeURIComponent(text)}&lang=${this.lang()}&format=mp3`;
+        const params = new URLSearchParams();
+        params.set('text', text);
+        params.set('lang', this.lang());
+        params.set('format', 'mp3');
+        params.set('voice', this.ttsVoice);
+        params.set('model', 'tts-1');
+
+        const url = `/api/chat/tts?${params.toString()}`;
         console.log('[TTS] Requesting audio from:', url);
         const blob = await this.http.get(url, { responseType: 'blob' }).toPromise();
         if (!blob) {
