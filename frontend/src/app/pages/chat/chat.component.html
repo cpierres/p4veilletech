@@ -38,8 +38,8 @@
         </div>
         <div class="message-content" [innerHTML]="renderMarkdown(getMessageText(message))"></div>
         <div class="message-actions" *ngIf="message.role === 'assistant'">
-          <button mat-icon-button (click)="playMessageTts(i)" [disabled]="loading()" matTooltip="Lire à voix haute">
-            <mat-icon>volume_up</mat-icon>
+          <button mat-icon-button (click)="currentTtsIndex() === i ? stopMessageTts() : playMessageTts(i)" [disabled]="loading()" [matTooltip]="currentTtsIndex() === i ? (lang() === 'fr' ? 'Arrêter la lecture' : 'Stop reading') : (lang() === 'fr' ? 'Lire à voix haute' : 'Read aloud')">
+            <mat-icon>{{ currentTtsIndex() === i ? 'stop' : 'volume_up' }}</mat-icon>
           </button>
         </div>
         <div *ngIf="message.metadata" class="message-metadata">

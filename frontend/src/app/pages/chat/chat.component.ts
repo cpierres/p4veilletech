@@ -172,6 +172,7 @@ export class ChatComponent implements AfterViewChecked {
   private mediaRecorder: MediaRecorder | null = null;
   private audioChunks: BlobPart[] = [];
   private currentAudio: HTMLAudioElement | null = null;
+  currentTtsIndex = signal<number | null>(null);
 
   @ViewChild('messagesContainer') private messagesContainer!: ElementRef;
   private shouldScroll = true;
@@ -458,6 +459,7 @@ export class ChatComponent implements AfterViewChecked {
       if (this.currentAudio) {
         this.currentAudio.pause();
         this.currentAudio = null;
+        this.currentTtsIndex.set(null);
       }
 
       let audioUrl = msgs[index].audioUrl;
@@ -480,11 +482,13 @@ export class ChatComponent implements AfterViewChecked {
 
       const audio = new Audio(audioUrl!);
       this.currentAudio = audio;
+      this.currentTtsIndex.set(index);
 
       // Handle completion
       audio.onended = () => {
         if (this.currentAudio === audio) {
           this.currentAudio = null;
+          this.currentTtsIndex.set(null);
         }
       };
 
@@ -495,6 +499,15 @@ export class ChatComponent implements AfterViewChecked {
       if (!autoPlay) {
         alert(this.lang() === 'fr' ? 'Lecture TTS impossible. Vérifiez les permissions de votre navigateur.' : 'Unable to play TTS. Check your browser permissions.');
       }
+    }
+  }
+
+  async stopMessageTts() {
+    if (this.currentAudio) {
+      this.currentAudio.pause();
+      this.currentAudio = null;
+      this.currentTtsIndex.set(null);
+      console.log('[TTS] Audio stopped manually');
     }
   }
 
