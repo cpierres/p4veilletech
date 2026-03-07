@@ -1,4 +1,4 @@
-import {Component, signal, computed, effect, ViewChild, ElementRef, AfterViewChecked} from '@angular/core';
+import {Component, signal, computed, effect, ViewChild, ElementRef, AfterViewChecked, OnInit, OnDestroy} from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import {HttpClient} from '@angular/common/http';
 import {NgForOf, NgIf, DatePipe, SlicePipe} from '@angular/common';
@@ -10,6 +10,8 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
 import {marked} from 'marked';
+import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
+import {Subject, takeUntil} from 'rxjs';
 
 interface ChatMessage {
   role: 'user' | 'assistant';
@@ -58,7 +60,7 @@ interface ModelOption {
   templateUrl: './chat.component.html',
   styleUrl: './chat.component.css'
 })
-export class ChatComponent implements AfterViewChecked {
+export class ChatComponent implements AfterViewChecked, OnInit, OnDestroy {
   // Paramètres de base
   lang = signal<'fr' | 'en'>('fr');
   _input = signal<string>('');
@@ -66,6 +68,8 @@ export class ChatComponent implements AfterViewChecked {
   showHistory = signal<boolean>(false); // Afficher/masquer l'historique
   conversationHistory = signal<ChatConversation[]>([]); // Historique des conversations
   loadingHistory = signal<boolean>(false); // Chargement de l'historique
+  isMobile = signal<boolean>(false);
+  private destroy$ = new Subject<void>();
 
   // Paramètres AI
   _provider = signal<'openai' | 'mistral' | 'mistral-cloud'>('mistral-cloud');
@@ -215,7 +219,7 @@ export class ChatComponent implements AfterViewChecked {
   @ViewChild('messagesContainer') private messagesContainer!: ElementRef;
   private shouldScroll = true;
 
-  constructor(private http: HttpClient, private sanitizer: DomSanitizer) {
+  constructor(private http: HttpClient, private sanitizer: DomSanitizer, private breakpointObserver: BreakpointObserver) {
     // Configuration de marked pour plus de sécurité
     const renderer = new marked.Renderer();
     const linkRenderer = renderer.link.bind(renderer);
@@ -243,6 +247,22 @@ export class ChatComponent implements AfterViewChecked {
         }
       }
     });
+  }
+
+  ngOnInit() {
+    this.breakpointObserver.observe([
+      Breakpoints.XSmall,
+      Breakpoints.Small
+    ])
+    .pipe(takeUntil(this.destroy$))
+    .subscribe(result => {
+      this.isMobile.set(result.matches);
+    });
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   // Méthode pour convertir le Markdown en HTML sécurisé

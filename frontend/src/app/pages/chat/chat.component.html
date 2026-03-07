@@ -1,7 +1,13 @@
 <div class="chat-container">
   <div class="chat-header">
-    <h2>Chatbot IA avec RAG sur mon expérience</h2>
-    <div class="chat-controls">
+    <h2 *ngIf="!isMobile()">Chatbot IA avec RAG sur mon expérience</h2>
+    <h2 *ngIf="isMobile()">Chatbot avec RAG</h2>
+    <span class="header-actions" *ngIf="isMobile()">
+      <button mat-icon-button (click)="toggleHistory()" [matTooltip]="showHistory() ? 'Masquer l\'historique' : 'Afficher l\'historique'" class="history-toggle">
+        <mat-icon>{{ showHistory() ? 'history_off' : 'history' }}</mat-icon>
+      </button>
+    </span>
+    <div *ngIf="!isMobile()" class="chat-controls">
       <mat-form-field appearance="outline" class="provider-select">
         <mat-label>Fournisseur IA</mat-label>
         <mat-select [(ngModel)]="provider" (ngModelChange)="provider = $event">
@@ -151,7 +157,7 @@
         </button>
       </div>
 
-      <div class="advanced-settings">
+      <div *ngIf="!isMobile()" class="advanced-settings">
         <button mat-button (click)="showAdvancedSettings.set(!showAdvancedSettings())">
           <mat-icon>{{ showAdvancedSettings() ? 'expand_less' : 'expand_more' }}</mat-icon>
           {{ showAdvancedSettings() ? 'Masquer' : 'Afficher' }} les paramètres avancés

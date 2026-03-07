@@ -425,15 +425,24 @@
 /* Responsive design */
 @media (max-width: 768px) {
   .chat-header {
-    flex-direction: column;
-    align-items: stretch;
-    padding: 16px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 16px;
   }
 
   .chat-header h2 {
-    font-size: 1.2rem;
-    text-align: center;
-    margin-bottom: 12px;
+    font-size: 1.1rem;
+    text-align: left;
+    margin-bottom: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .header-actions {
+    display: flex;
+    align-items: center;
   }
 
   .chat-controls {
@@ -453,8 +462,7 @@
   }
 
   .history-toggle {
-    align-self: flex-end;
-    margin-top: -40px;
+    margin-top: 0;
     z-index: 10;
   }
 
