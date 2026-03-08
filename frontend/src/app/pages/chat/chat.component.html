@@ -157,8 +157,18 @@
 
         <mat-form-field appearance="outline" class="chat-input-field">
           <mat-label>Votre message</mat-label>
-          <input matInput [(ngModel)]="input" (ngModelChange)="input = $event"
-                 (keyup.enter)="send()" [disabled]="loading()">
+          <textarea matInput
+                    [(ngModel)]="input"
+                    (ngModelChange)="input = $event"
+                    (keydown.enter)="$event.preventDefault(); send()"
+                    [disabled]="loading()"
+                    cdkTextareaAutosize
+                    #autosize="cdkTextareaAutosize"
+                    cdkAutosizeMinRows="1"
+                    cdkAutosizeMaxRows="12"></textarea>
+          <button *ngIf="input" matSuffix mat-icon-button aria-label="Clear" (click)="clearInput()">
+            <mat-icon>clear</mat-icon>
+          </button>
         </mat-form-field>
 
         <button mat-icon-button (click)="send()" [disabled]="loading() || !_input().trim()" matTooltip="Envoyer le message">

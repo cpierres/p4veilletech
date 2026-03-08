@@ -416,8 +416,31 @@
   margin-bottom: 12px;
 }
 
+.input-controls button {
+  margin: 0;
+}
+
 .chat-input-field {
   flex: 1;
+}
+
+.chat-input-field textarea {
+  resize: none;
+  overflow-y: auto !important;
+  min-height: 24px;
+  line-height: 24px;
+  padding-right: 32px; /* Espace pour le bouton d'effacement */
+}
+
+/* Ajustement pour que le mat-form-field ne prenne pas trop de place verticalement par défaut */
+::ng-deep .chat-input-field .mat-mdc-text-field-wrapper {
+  padding-bottom: 0 !important;
+}
+
+::ng-deep .chat-input-field .mat-mdc-form-field-infix {
+  padding-top: 8px !important;
+  padding-bottom: 8px !important;
+  min-height: unset !important;
 }
 
 .advanced-settings {

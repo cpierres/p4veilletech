@@ -8,6 +8,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatSelectModule} from '@angular/material/select';
 import {MatIconModule} from '@angular/material/icon';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import {TextFieldModule} from '@angular/cdk/text-field';
 import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
 import {marked} from 'marked';
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
@@ -56,7 +57,7 @@ interface ModelOption {
 @Component({
   selector: 'app-chat',
   standalone: true,
-  imports: [FormsModule, NgForOf, NgIf, DatePipe, SlicePipe, MatFormFieldModule, MatInputModule, MatButtonModule, MatSelectModule, MatIconModule, MatTooltipModule],
+  imports: [FormsModule, NgForOf, NgIf, DatePipe, SlicePipe, MatFormFieldModule, MatInputModule, MatButtonModule, MatSelectModule, MatIconModule, MatTooltipModule, TextFieldModule],
   templateUrl: './chat.component.html',
   styleUrl: './chat.component.css'
 })
@@ -219,6 +220,7 @@ export class ChatComponent implements AfterViewChecked, OnInit, OnDestroy {
   }
 
   @ViewChild('messagesContainer') private messagesContainer!: ElementRef;
+  @ViewChild('autosize') private autosize!: any;
   private shouldScroll = true;
 
   constructor(private http: HttpClient, private sanitizer: DomSanitizer, private breakpointObserver: BreakpointObserver) {
@@ -286,6 +288,13 @@ export class ChatComponent implements AfterViewChecked, OnInit, OnDestroy {
   // Méthode pour obtenir le texte du message en toute sécurité
   getMessageText(message: ChatMessage): string {
     return message.text || '';
+  }
+
+  clearInput() {
+    this._input.set('');
+    if (this.autosize) {
+      setTimeout(() => this.autosize.resizeToFitContent(true));
+    }
   }
 
   ngAfterViewChecked() {
