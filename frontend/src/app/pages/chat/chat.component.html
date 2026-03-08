@@ -156,7 +156,7 @@
         </button>
 
         <mat-form-field appearance="outline" class="chat-input-field">
-          <mat-label>Votre message</mat-label>
+          <mat-label *ngIf="!isRecording">Votre message</mat-label>
           <textarea matInput
                     [(ngModel)]="input"
                     (ngModelChange)="input = $event"
