@@ -458,17 +458,17 @@
   padding-top: 12px !important;
 }
 
+/* Style pour que le label soit toujours au-dessus (notch) avec un léger décalage à droite */
 ::ng-deep .chat-input-field .mdc-floating-label {
-  top: 50% !important;
-  transform: translateY(-50%) !important;
-}
-
-::ng-deep .chat-input-field .mdc-floating-label--float-above {
   top: 0 !important;
   transform: translateY(-50%) scale(0.75) !important;
   background-color: white !important;
   padding: 0 4px !important;
-  margin-left: -4px !important;
+  margin-left: 2px !important; /* Décalage de 2px vers la droite par rapport au bord du notch */
+}
+
+::ng-deep .chat-input-field .mdc-floating-label--float-above {
+  margin-left: 2px !important; /* Même décalage lorsqu'il est flottant */
 }
 
 .advanced-settings {
