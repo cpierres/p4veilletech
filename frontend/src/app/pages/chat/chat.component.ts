@@ -70,6 +70,7 @@ export class ChatComponent implements AfterViewChecked, OnInit, OnDestroy {
   loadingHistory = signal<boolean>(false); // Chargement de l'historique
   isMobile = signal<boolean>(false);
   private destroy$ = new Subject<void>();
+  private isShowingConversation = 0;
 
   // Paramètres AI
   _provider = signal<'openai' | 'mistral' | 'mistral-cloud'>('mistral-cloud');
@@ -291,6 +292,10 @@ export class ChatComponent implements AfterViewChecked, OnInit, OnDestroy {
   }
 
   private scrollToBottom(): void {
+    if (this.isShowingConversation > 0) {
+      this.isShowingConversation--;
+      return;
+    }
     if (this.shouldScroll && this.messagesContainer) {
       try {
         this.messagesContainer.nativeElement.scrollTop =
@@ -706,6 +711,7 @@ export class ChatComponent implements AfterViewChecked, OnInit, OnDestroy {
    * Afficher une conversation de l'historique
    */
   showConversation(conversation: ChatConversation) {
+    this.isShowingConversation = 2; // On bloque les 2 prochains cycles (un pour le user, un pour l'assistant)
     // Ajouter les messages à la conversation actuelle
     this.messages.update((m: ChatMessage[]) => [
       ...m,
@@ -717,5 +723,27 @@ export class ChatComponent implements AfterViewChecked, OnInit, OnDestroy {
       }, conversationId: conversation.id}
     ]);
     this.showHistory.set(false);
+
+    // Forcer le défilement vers le haut du conteneur pour voir le début du nouveau message
+    setTimeout(() => {
+      if (this.messagesContainer) {
+        const container = this.messagesContainer.nativeElement;
+        // On récupère tous les messages
+        const messageElements = container.querySelectorAll('.message');
+        if (messageElements.length >= 2) {
+          // Le message utilisateur est l'avant-dernier
+          const lastUserMessage = messageElements[messageElements.length - 2];
+
+          // Calculer la position relative du message dans le conteneur
+          const messageTop = (lastUserMessage as HTMLElement).offsetTop;
+
+          // Défiler le conteneur pour que le message soit en haut
+          container.scrollTo({
+            top: messageTop - 20, // Petit offset pour le padding
+            behavior: 'smooth'
+          });
+        }
+      }
+    }, 150);
   }
 }
