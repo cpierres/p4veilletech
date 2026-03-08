@@ -179,6 +179,7 @@ export class ChatComponent implements AfterViewChecked, OnInit, OnDestroy {
   private currentAudio: HTMLAudioElement | null = null;
   currentTtsIndex = signal<number | null>(null);
   showTtsSettings = signal<boolean>(false);
+  showAudioGuidance = signal<boolean>(false);
 
   // Paramètres TTS
   _ttsVoice = signal<string>('alloy');
@@ -307,6 +308,7 @@ export class ChatComponent implements AfterViewChecked, OnInit, OnDestroy {
   }
 
   async send() {
+    this.showAudioGuidance.set(false);
     const text = this._input().trim();
     if (!text || this.loading()) return;
     this.messages.update((m: ChatMessage[]) => [...m, {role: 'user', text}]);
@@ -505,6 +507,7 @@ export class ChatComponent implements AfterViewChecked, OnInit, OnDestroy {
       };
       this.mediaRecorder.start();
       this.isRecording = true;
+      this.showAudioGuidance.set(true);
     } catch (err) {
       console.error(err);
       alert(this.lang() === 'fr' ? 'Impossible de démarrer l\'enregistrement audio.' : 'Unable to start audio recording.');
@@ -585,6 +588,7 @@ export class ChatComponent implements AfterViewChecked, OnInit, OnDestroy {
     if (this.mediaRecorder && this.isRecording) {
       this.isRecording = false;
       this.mediaRecorder.stop();
+      this.showAudioGuidance.set(false);
     }
   }
 

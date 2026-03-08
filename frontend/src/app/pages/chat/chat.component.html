@@ -143,6 +143,13 @@
 
     <!-- Zone d'entrée -->
     <div class="chat-input">
+      <div *ngIf="showAudioGuidance()" class="audio-guidance-bubble">
+        <mat-icon class="guidance-icon">info</mat-icon>
+        <span class="guidance-text">Une fois votre question terminée, cliquer sur l'icône pour l'enregistrer. Après validation textuelle, envoyez la question.</span>
+        <button mat-icon-button (click)="showAudioGuidance.set(false)" class="close-guidance">
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
       <div class="input-controls">
         <button mat-icon-button (click)="toggleRecording()" [color]="isRecording ? 'warn' : 'primary'" matTooltip="Enregistrement vocal">
           <mat-icon>{{ isRecording ? 'stop' : 'mic' }}</mat-icon>
