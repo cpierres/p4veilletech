@@ -194,19 +194,31 @@ public class ChatController {
 
           if (response.getStatusCode().is2xxSuccessful()) {
             String bodyStr = response.getBody();
-            if (bodyStr != null && bodyStr.contains("\"text\"")) {
-                try {
-                    // Extraction simple sans dépendance JSON lourde
-                    Pattern pattern = Pattern.compile("\"text\"\\s*:\\s*\"([^\"]+)\"");
-                    Matcher matcher = pattern.matcher(bodyStr);
-                    if (matcher.find()) {
-                        return ResponseEntity.status(response.getStatusCode()).body(matcher.group(1));
+            if (bodyStr != null) {
+                // Si on a du texte, on l'extrait
+                if (bodyStr.contains("\"text\"")) {
+                    try {
+                        // Extraction simple du texte via regex
+                        Pattern pattern = Pattern.compile("\"text\"\\s*:\\s*\"([^\"]*)\"");
+                        Matcher matcher = pattern.matcher(bodyStr);
+                        if (matcher.find()) {
+                            String extracted = matcher.group(1);
+                            // Si le texte est vide, on renvoie une chaîne vide au lieu du JSON technique
+                            return ResponseEntity.status(response.getStatusCode()).body(extracted != null ? extracted : "");
+                        }
+                    } catch (Exception e) {
+                        logger.warn("Failed to parse Mistral JSON response using regex", e);
                     }
-                } catch (Exception e) {
-                    logger.warn("Failed to parse Mistral JSON response using regex", e);
+                }
+
+                // Si on n'a pas réussi à extraire le texte ou si le format est inattendu,
+                // mais qu'on a un corps JSON complet qui semble technique (cas décrit par l'utilisateur),
+                // on renvoie une chaîne vide si ça ressemble à un objet JSON sans texte utile.
+                if (bodyStr.trim().startsWith("{") && !bodyStr.contains("\"text\":\"")) {
+                    return ResponseEntity.status(response.getStatusCode()).body("");
                 }
             }
-            return ResponseEntity.status(response.getStatusCode()).body(bodyStr);
+            return ResponseEntity.status(response.getStatusCode()).body(bodyStr != null ? bodyStr : "");
           } else {
             logger.error("Mistral API error: Status {}, Response: {}", response.getStatusCode(), response.getBody());
             return ResponseEntity.status(response.getStatusCode()).body("Error from Mistral API: " + response.getBody());

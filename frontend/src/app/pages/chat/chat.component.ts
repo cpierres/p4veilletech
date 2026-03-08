@@ -623,10 +623,15 @@ export class ChatComponent implements AfterViewChecked, OnInit, OnDestroy {
         },
         responseType: 'text'
       }).toPromise();
-      if (text) {
+      if (text && text.trim()) {
+        // Ignorer si le texte retourné ressemble à un objet JSON (sécurité supplémentaire côté client)
+        if (text.trim().startsWith('{') && text.trim().endsWith('}')) {
+          console.warn('[Transcription] Received technical JSON instead of text, ignoring:', text);
+          return;
+        }
         const current = this._input();
         const sep = current && !current.endsWith(' ') ? ' ' : '';
-        this._input.set((current || '') + sep + text);
+        this._input.set((current || '') + sep + text.trim());
       }
     } catch (e) {
       console.error(e);
