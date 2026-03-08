@@ -258,6 +258,14 @@
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  height: 100%;
+}
+
+.history-items-container {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
 }
 
 .history-header {
@@ -472,13 +480,19 @@
 
   .history-panel {
     width: 100%;
-    height: 300px;
+    height: 60%;
+    max-height: 450px;
     border-left: none;
     border-top: 1px solid #e0e0e0;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 100;
+    box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.15);
   }
 
   .chat-messages {
-    height: calc(100% - 300px);
+    height: 100%;
   }
 
   .message {

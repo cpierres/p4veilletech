@@ -101,40 +101,42 @@
         <span>Chargement...</span>
       </div>
 
-      <div *ngIf="!loadingHistory() && conversationHistory().length === 0" class="no-history">
-        Aucun historique de conversation trouvé.
-      </div>
+      <div class="history-items-container">
+        <div *ngIf="!loadingHistory() && conversationHistory().length === 0" class="no-history">
+          Aucun historique de conversation trouvé.
+        </div>
 
-      <div *ngFor="let conv of conversationHistory()" class="history-item">
-        <div class="history-item-header">
-          <span class="history-item-date">{{ conv.createdAt | date:'medium' }}</span>
-          <div class="history-item-actions">
-            <button mat-icon-button (click)="showConversation(conv)" matTooltip="Afficher cette conversation">
-              <mat-icon>visibility</mat-icon>
-            </button>
-            <button mat-icon-button (click)="deleteConversation(conv.id)" matTooltip="Supprimer cette conversation">
-              <mat-icon>delete</mat-icon>
-            </button>
+        <div *ngFor="let conv of conversationHistory()" class="history-item">
+          <div class="history-item-header">
+            <span class="history-item-date">{{ conv.createdAt | date:'medium' }}</span>
+            <div class="history-item-actions">
+              <button mat-icon-button (click)="showConversation(conv)" matTooltip="Afficher cette conversation">
+                <mat-icon>visibility</mat-icon>
+              </button>
+              <button mat-icon-button (click)="deleteConversation(conv.id)" matTooltip="Supprimer cette conversation">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </div>
           </div>
-        </div>
-        <div class="history-item-content">
-          <div class="history-item-message user-message">
-            <strong>Vous:</strong> {{ conv.userMessage | slice:0:100 }}{{ conv.userMessage.length > 100 ? '...' : '' }}
+          <div class="history-item-content">
+            <div class="history-item-message user-message">
+              <strong>Vous:</strong> {{ conv.userMessage | slice:0:100 }}{{ conv.userMessage.length > 100 ? '...' : '' }}
+            </div>
+            <div class="history-item-message assistant-message">
+              <strong>Assistant:</strong> {{ conv.assistantResponse | slice:0:150 }}{{ conv.assistantResponse.length > 150 ? '...' : '' }}
+            </div>
           </div>
-          <div class="history-item-message assistant-message">
-            <strong>Assistant:</strong> {{ conv.assistantResponse | slice:0:150 }}{{ conv.assistantResponse.length > 150 ? '...' : '' }}
+          <div class="history-item-metadata">
+            <span class="metadata-badge provider-badge">
+              {{ conv.provider }}: {{ conv.model }}
+            </span>
+            <span *ngIf="conv.temperature" class="metadata-badge temp-badge">
+              Temp: {{ conv.temperature }}
+            </span>
+            <span *ngIf="conv.processingTimeMs" class="metadata-badge time-badge">
+              ⏱️ {{ conv.processingTimeMs }}ms
+            </span>
           </div>
-        </div>
-        <div class="history-item-metadata">
-          <span class="metadata-badge provider-badge">
-            {{ conv.provider }}: {{ conv.model }}
-          </span>
-          <span *ngIf="conv.temperature" class="metadata-badge temp-badge">
-            Temp: {{ conv.temperature }}
-          </span>
-          <span *ngIf="conv.processingTimeMs" class="metadata-badge time-badge">
-            ⏱️ {{ conv.processingTimeMs }}ms
-          </span>
         </div>
       </div>
     </div>
