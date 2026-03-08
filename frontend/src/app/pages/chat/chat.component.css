@@ -435,12 +435,37 @@
 /* Ajustement pour que le mat-form-field ne prenne pas trop de place verticalement par défaut */
 ::ng-deep .chat-input-field .mat-mdc-text-field-wrapper {
   padding-bottom: 0 !important;
+  display: flex !important;
+  align-items: center !important;
 }
 
 ::ng-deep .chat-input-field .mat-mdc-form-field-infix {
-  padding-top: 8px !important;
-  padding-bottom: 8px !important;
+  padding-top: 12px !important;
+  padding-bottom: 12px !important;
   min-height: unset !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+::ng-deep .chat-input-field .mat-mdc-form-field-icon-suffix {
+  padding: 0 !important;
+  align-self: center !important;
+}
+
+/* Centrage du label (placeholder) lorsque le textarea est vide et non focalisé */
+::ng-deep .chat-input-field .mat-mdc-form-field-label-wrapper {
+  top: 0 !important;
+  padding-top: 12px !important;
+}
+
+::ng-deep .chat-input-field .mdc-floating-label {
+  top: 50% !important;
+  transform: translateY(-50%) !important;
+}
+
+::ng-deep .chat-input-field .mdc-floating-label--float-above {
+  top: 28px !important;
+  transform: translateY(-50%) scale(0.75) !important;
 }
 
 .advanced-settings {
